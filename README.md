@@ -2,8 +2,8 @@
 
 Ceci est le repos du projet d'intégration de la HEIG-VD pour le groupe Sixième Sens.
 Le groupe est composé de :
-* Sarah Furrer : Scrum Master & responsable gestion de projet
-* Marike Platen : Product Owner & responsable UX
+* Sarah Furrer : Responsable gestion de projet & Scrum Master
+* Marike Platen : Responsable UX & Product Owner
 * Sacha Loskov : Responsable UI
 * Ella Maiburg : Responsable Marketing
 * Steve Benjamin : Responsable dev Frontend
@@ -29,7 +29,7 @@ Ce projet comporte :
 * Une présentation finale (15 min) du projet
 
 Ce projet sera réalisé via :
-* [Jira]"https://sixieme-sens.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog" comme outil de gestion de projet et de sprint
+* [Jira](https://sixieme-sens.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog) comme outil de gestion de projet et de sprint
 * Figma pour :
     * L'idéation
     * La création des UserFlow
