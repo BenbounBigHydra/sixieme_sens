@@ -56,6 +56,21 @@ Pour chaque modification du code sur le dépôt GitHub, les étapes suivantes do
 
 **Ne jamais modifier directement la branche `main`.**
 
+## Pré-requis
+
+Afin de lancer ce projet, une stack compatible avec Laravel, est requise.
+
+Voici les pré-requis nécessaires :
+
+- PHP >= 8.0.
+- Composer.
+- Node.js et npm.
+- Une base de données (MySQL, PostgreSQL, SQLite, etc.).
+- Un serveur web (Apache, Nginx, etc.).
+
+[Laravel Herd](https://helm.sh/docs/charts/laravel/) est recommandé pour une installation facile de Laravel et de ses dépendances.
+[XAMPP](https://www.apachefriends.org/) est recommandé pour gèrer la db MySQL
+
 ### Installation
 
 > TODO
