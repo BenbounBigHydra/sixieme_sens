@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class VitrinController extends Controller
 {
     public function index()
-{
-    // Données à passer à Vue.js
+    {
+        // Données à passer à Vue.js
         $data = [
             'nb_collections' => $this->getNbCollections(),
             'nb_companies'   => $this->getNbCompanies(),
@@ -22,10 +22,10 @@ class VitrinController extends Controller
             ],
         ];
 
-    return view('vitrin.home', ['initialData' => json_encode($data)]);
-}
+        return view('vitrin.home', ['initialData' => json_encode($data)]);
+    }
 
-// Somme de toutes les collectes passées
+    // Somme de toutes les collectes passées
     private function getNbCollections(): int
     {
         return Collection::where('end', '<', now())->count();
@@ -44,8 +44,8 @@ class VitrinController extends Controller
 
         $companies = Company::with(['collections' => function ($query) use ($lastYear) {
             $query->whereYear('start', $lastYear)
-                  ->where('end', '<', now())
-                  ->where('nb_employee', '>', 0);
+                ->where('end', '<', now())
+                ->where('nb_employee', '>', 0);
         }])->get();
 
         $scores = $companies->map(function ($company) {
@@ -60,8 +60,8 @@ class VitrinController extends Controller
         })->filter(fn($s) => $s['ratio'] > 0);
 
         return $scores->sortByDesc('ratio')
-                      ->sortByDesc(fn($s, $key) => [$s['ratio'], $s['nb_blood_pouch']])
-                      ->first()['name'] ?? null;
+            ->sortByDesc(fn($s, $key) => [$s['ratio'], $s['nb_blood_pouch']])
+            ->first()['name'] ?? null;
     }
 
     // Entreprise ayant organisé au moins une collecte le plus d'années consécutives (min 2 ans)
@@ -91,7 +91,7 @@ class VitrinController extends Controller
             }
 
             $avgRatio       = $company->collections->where('nb_employee', '>', 0)
-                                ->avg(fn($c) => $c->nb_blood_pouch / $c->nb_employee) ?? 0;
+                ->avg(fn($c) => $c->nb_blood_pouch / $c->nb_employee) ?? 0;
             $totalBloodPouch = $company->collections->sum('nb_blood_pouch');
 
             return [
@@ -103,9 +103,9 @@ class VitrinController extends Controller
         })->filter(fn($s) => $s['consecutive'] >= 2);
 
         return $scores->sortByDesc('consecutive')
-                      ->sortByDesc('avg_ratio')
-                      ->sortByDesc('nb_blood_pouch')
-                      ->first()['name'] ?? null;
+            ->sortByDesc('avg_ratio')
+            ->sortByDesc('nb_blood_pouch')
+            ->first()['name'] ?? null;
     }
 
     // Entreprise avec le meilleur ratio nb_blood_pouch/nb_registered sur une collecte l'année dernière
@@ -113,11 +113,18 @@ class VitrinController extends Controller
     {
         $lastYear = Carbon::now()->subYear()->year;
 
-        $best = Collection::with('company')
+        $collections = Collection::with('company')
             ->whereYear('start', $lastYear)
-            ->where('end', '<', now())
+            // ->where('end', '<', now())
             ->where('nb_registered', '>', 0)
-            ->get()
+            // ->whereNotNull('nb_blood_pouch')
+            ->get();
+
+        if ($collections->isEmpty()) {
+            return null;
+        }
+
+        $best = $collections
             ->map(fn($c) => [
                 'name'  => $c->company->name,
                 'ratio' => $c->nb_blood_pouch / $c->nb_registered,
@@ -128,4 +135,3 @@ class VitrinController extends Controller
         return $best['name'] ?? null;
     }
 }
-
