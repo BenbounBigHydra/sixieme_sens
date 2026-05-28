@@ -38,12 +38,12 @@ class VitrinController extends Controller
     }
 
     // Entreprise avec le meilleur ratio nb_blood_pouch/nb_employee sur l'année précédente
-    private function getGoldWinner(): ?string
+    private function getGoldWinner(int $year = null): ?string
     {
-        $lastYear = Carbon::now()->subYear()->year;
+        $year = $year ?? Carbon::now()->subYear()->year;
 
-        $companies = Company::with(['collections' => function ($query) use ($lastYear) {
-            $query->whereYear('start', $lastYear)
+        $companies = Company::with(['collections' => function ($query) use ($year) {
+            $query->whereYear('start', $year)
                 ->where('end', '<', now())
                 ->where('nb_employee', '>', 0);
         }])->get();
@@ -109,12 +109,12 @@ class VitrinController extends Controller
     }
 
     // Entreprise avec le meilleur ratio nb_blood_pouch/nb_registered sur une collecte l'année dernière
-    private function getConviction(): ?string
+    private function getConviction(int $year = null): ?string
     {
-        $lastYear = Carbon::now()->subYear()->year;
+        $year = $year ?? Carbon::now()->subYear()->year;
 
         $collections = Collection::with('company')
-            ->whereYear('start', $lastYear)
+            ->whereYear('start', $year)
             // ->where('end', '<', now())
             ->where('nb_registered', '>', 0)
             // ->whereNotNull('nb_blood_pouch')
