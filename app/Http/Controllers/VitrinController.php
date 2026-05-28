@@ -43,14 +43,28 @@ class VitrinController extends Controller
     {
         $companies = CompanyStatsService::getLabelledCompanies();
 
-        return view('vitrin.label', ['initialData' => json_encode($companies)]);
+        $data = $companies->map(fn($company) => [
+            'name'   => $company->name,
+            'logo'   => $company->logo,
+            // 'color'  => $company->color,
+            'awards' => CompanyStatsService::getCompanyAwards($company),
+        ]);
+
+        return view('vitrin.label', ['initialData' => json_encode($data)]);
     }
 
     public function companies()
     {
         $companies = CompanyStatsService::getLabelledCompanies();
 
-        return view('vitrin.companies', ['initialData' => json_encode($companies)]);
+        $data = $companies->map(fn($company) => [
+            'name'   => $company->name,
+            'logo'   => $company->logo,
+            // 'color'  => $company->color,
+            'awards' => CompanyStatsService::getCompanyAwards($company),
+        ]);
+
+        return view('vitrin.companies', ['initialData' => json_encode($data)]);
     }
 
     public function contact()

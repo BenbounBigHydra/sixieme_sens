@@ -24,6 +24,13 @@ class ApiRewardsController extends Controller
     {
         $companies = CompanyStatsService::getLabelledCompanies($year);
 
-        return response()->json($companies);
+        $data = $companies->map(fn($company) => [
+            'name'   => $company->name,
+            'logo'   => $company->logo,
+            // 'color'  => $company->color,
+            'awards' => CompanyStatsService::getCompanyAwards($company),
+        ]);
+
+        return response()->json($data);
     }
 }
