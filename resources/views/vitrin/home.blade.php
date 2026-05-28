@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Donnons</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    <div id="app" data-initial="{{ $initialData }}"></div>
-</body>
-</html>
+<!-- Héritage du layout global -->
+@extends('layout')
+
+<!-- Définition de la section de contenu -->
+@section('content')
+    <!-- Affichage du composant Vue pour la page d'accueil -->
+    <home-vitrine></home-vitrine>
+@endsection
