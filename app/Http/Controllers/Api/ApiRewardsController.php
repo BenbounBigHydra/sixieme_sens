@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\CompanyStatsService;
 
-class ApiTrophiesController extends Controller
+class ApiRewardsController extends Controller
 {
     public function winner($year = null)
     {
