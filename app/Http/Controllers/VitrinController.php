@@ -53,8 +53,8 @@ class VitrinController extends Controller
         return view('vitrin.companies', ['initialData' => json_encode($companies)]);
     }
 
-    public function contact()
+    public function collecte()
     {
-        return view('vitrin.contact');
+        return view('vitrin.collecte');
     }
 }

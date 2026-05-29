@@ -5,7 +5,7 @@ use App\Http\Controllers\VitrinController;
 
 // Site vitrine
 Route::get('/', [VitrinController::class, 'home']);
-Route::get('/trophies', [VitrinController::class, 'trophies']);
+Route::get('/trophees', [VitrinController::class, 'trophies']);
 Route::get('/label', [VitrinController::class, 'label']);
 Route::get('/companies', [VitrinController::class, 'companies']);
-Route::get('/contact', [VitrinController::class, 'contact']); // TODO: contact page
+Route::get('/collecte', [VitrinController::class, 'collecte']);

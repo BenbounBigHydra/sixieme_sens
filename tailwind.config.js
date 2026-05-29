@@ -21,7 +21,7 @@ export default {
       },
       maxWidth: {
         // Largeur maximale pour le conteneur principal
-        desktop: '1120px',
+        desktop: '1536px',
       }
     },
   },
