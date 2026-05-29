@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Donnons chez {{ $companyName }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    <div id="app" data-initial="{{ $initialData }}"></div>
+    <h1>Collecte passée</h1>
+</body>
+</html>
