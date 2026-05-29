@@ -9,12 +9,16 @@ use App\Services\CompanyStatsService;
 
 class CoBrandController extends Controller
 {
-    public function home($company_name, $collection_id)
+    public function home(string $company_name, int $collection_id)
     {
         $company = Company::where('slug', $company_name)->firstOrFail();
-        $collection = Collection::findOrFail($collection_id);
+        $collection = Collection::where('id', $collection_id)
+            ->where('company_id', $company->id)
+            ->firstOrFail();
 
-        $this->checkOpenCollection($collection);
+        if ($this->checkOpenCollection($collection)) {
+            return redirect()->route('cobrand.closed', ['company_name' => $company->slug]);
+        }
 
         $initialData = json_encode(['collection' => $collection, 'company' =>  $company]);
 
@@ -24,12 +28,16 @@ class CoBrandController extends Controller
         ]);
     }
 
-    public function infos($company_name, $collection_id)
+    public function infos(string $company_name, int $collection_id)
     {
         $company = Company::where('slug', $company_name)->firstOrFail();
-        $collection = Collection::findOrFail($collection_id);
+        $collection = Collection::where('id', $collection_id)
+            ->where('company_id', $company->id)
+            ->firstOrFail();
 
-        $this->checkOpenCollection($collection);
+        if ($this->checkOpenCollection($collection)) {
+            return redirect()->route('cobrand.closed', ['company_name' => $company->slug]);
+        }
 
         $initialData = json_encode(['collection' => $collection, 'company' =>  $company]);
 
@@ -39,26 +47,51 @@ class CoBrandController extends Controller
         ]);
     }
 
-    public function quizz($company_name, $collection_id)
+    public function quizz(string $company_name, int $collection_id)
     {
         $company = Company::where('slug', $company_name)->firstOrFail();
+        $collection = Collection::where('id', $collection_id)
+            ->where('company_id', $company->id)
+            ->firstOrFail();
 
-        $collection = Collection::findOrFail($collection_id);
-
-        $this->checkOpenCollection($collection);
+        if ($this->checkOpenCollection($collection)) {
+            return redirect()->route('cobrand.closed', ['company_name' => $company->slug]);
+        }
 
         $initialData = json_encode(['onedoc_link' => $collection->onedoc_link]);
 
-        return view('cobrand.home', [
+        return view('cobrand.quizz', [
             'companyName' => $company['name'],
             'initialData' => $initialData,
         ]);
     }
 
-    private function checkOpenCollection(Collection $collection)
+    public function closed(string $company_name)
     {
-        if ($collection->end < now()) {
-            abort(404);
-        }
+        $company = Company::where('slug', $company_name)->firstOrFail();
+
+        $initialData = json_encode(['company' =>  $company]);
+
+        return view('cobrand.closed', [
+            'companyName' => $company['name'],
+            'initialData' => $initialData,
+        ]);
+    }
+
+    public function missing(string $company_name)
+    {
+        $company = Company::where('slug', $company_name)->firstOrFail();
+
+        $initialData = json_encode(['company' =>  $company]);
+
+        return view('cobrand.missing', [
+            'companyName' => $company['name'],
+            'initialData' => $initialData,
+        ]);
+    }
+
+    private function checkOpenCollection(Collection $collection): bool
+    {
+        return $collection->end < now();
     }
 }
