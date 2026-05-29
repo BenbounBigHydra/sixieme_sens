@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
 
         // ─── Companies ──────────────────────────────────────
         $companies = [
-            ['name' => 'EPFL', 'color' => "000000"],
-            ['name' => 'Heig-VD', 'color' => "ffffff"],
-            ['name' => 'Unil',  'color' => "666666"],
+            ['name' => 'EPFL', 'color' => "000000", 'logo' => "img/companies/epfl.png"],
+            ['name' => 'Heig-VD', 'color' => "ffffff", 'logo' => "img/companies/heig-vd.png"],
+            ['name' => 'Unil',  'color' => "666666", 'logo' => "img/companies/unil.png"],
         ];
 
         foreach ($companies as $company) {
