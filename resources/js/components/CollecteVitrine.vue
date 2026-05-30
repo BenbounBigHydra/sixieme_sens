@@ -16,11 +16,8 @@
 
       <!-- Success Message -->
       <div v-if="isSubmitted" class="bg-[#caefb2] text-black font-['Inter'] px-6 py-4 flex items-center gap-4 mb-8 w-full">
-        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10" fill="black"/>
-          <path d="M8 12L11 15L16 9" stroke="#caefb2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="text-base md:text-lg">Merci ! Votre demande a bien été transmise.</span>
+        <img src="/images/BlackCheck.svg" alt="Check" class="w-6 h-6 flex-shrink-0" />
+        <span class="text-base md:text-lg font-bold">Merci pour votre demande ! Nous vous contacterons au plus vite.</span>
       </div>
 
       <!-- Form -->

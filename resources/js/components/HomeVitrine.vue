@@ -38,7 +38,7 @@
           
           <!-- Arrow (Desktop Only) -->
           <div class="mt-8 hidden lg:block">
-            <span class="text-black text-4xl font-bold font-['Inter']">↓</span>
+            <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
           </div>
         </div>
 
@@ -117,7 +117,7 @@
             Organiser une collecte
           </a>
           <div class="mt-8">
-            <span class="text-black text-4xl font-bold font-['Inter']">↓</span>
+            <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
           </div>
         </div>
         

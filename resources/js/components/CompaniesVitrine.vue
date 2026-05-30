@@ -11,12 +11,12 @@
       </div>
 
       <!-- Filtres -->
-      <div class="flex flex-col sm:flex-row gap-6 mb-12 relative z-20">
+      <div class="flex flex-col sm:flex-row gap-6 mb-12 relative z-20" ref="filtersContainer">
         <!-- Filtre Année -->
         <div class="relative w-full sm:w-auto">
-          <button @click="isYearOpen = !isYearOpen" class="w-full bg-[#0073e6] text-white font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+          <button @click="toggleYear" class="w-full bg-[#0073e6] text-white font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
             <span class="mt-1">{{ selectedYear || '2025' }}</span>
-            <span class="ml-4 mt-1">↓</span>
+            <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-5 h-5 ml-4 mt-1" />
           </button>
           <div v-show="isYearOpen" class="absolute top-full left-0 mt-2 w-full min-w-max bg-[#fffbf1] border-2 border-[#0073e6] z-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-h-[200px] overflow-y-auto">
             <div v-for="year in years" :key="year" @click="selectedYear = year; isYearOpen = false" class="px-4 py-3 hover:bg-[#0073e6] hover:text-white cursor-pointer font-['Jersey_20'] text-[24px] text-[#0073e6] hover:text-white border-b border-gray-200 transition-colors whitespace-nowrap">
@@ -27,9 +27,9 @@
 
         <!-- Filtre Prix -->
         <div class="relative w-full sm:w-auto">
-          <button @click="isPrizeOpen = !isPrizeOpen" class="w-full bg-[#fffbf1] text-[#0073e6] font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+          <button @click="togglePrize" class="w-full bg-[#fffbf1] text-[#0073e6] font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
             <span class="mt-1">{{ selectedPrize || 'Prix' }}</span>
-            <span class="text-[#0073e6] ml-4 mt-1">↓</span>
+            <img src="/images/BlueChevron%20Down.svg" alt="Chevron Down" class="w-5 h-5 ml-4 mt-1" />
           </button>
           <div v-show="isPrizeOpen" class="absolute top-full left-0 mt-2 w-full min-w-max bg-[#fffbf1] border-2 border-[#0073e6] z-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <div v-for="prize in prizes" :key="prize" @click="selectedPrize = prize; isPrizeOpen = false" class="px-4 py-3 hover:bg-[#0073e6] hover:text-white cursor-pointer font-['Jersey_20'] text-[24px] text-[#0073e6] border-b border-gray-200 transition-colors whitespace-nowrap">
@@ -42,22 +42,7 @@
           </div>
         </div>
 
-        <!-- Filtre Industrie -->
-        <div class="relative w-full sm:w-auto">
-          <button @click="isIndustryOpen = !isIndustryOpen" class="w-full bg-[#fffbf1] text-[#0073e6] font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
-            <span class="mt-1">{{ selectedIndustry || 'Industrie' }}</span>
-            <span class="text-[#0073e6] ml-4 mt-1">↓</span>
-          </button>
-          <div v-show="isIndustryOpen" class="absolute top-full left-0 mt-2 w-full min-w-max bg-[#fffbf1] border-2 border-[#0073e6] z-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-h-[200px] overflow-y-auto">
-            <div v-for="industry in industries" :key="industry" @click="selectedIndustry = industry; isIndustryOpen = false" class="px-4 py-3 hover:bg-[#0073e6] hover:text-white cursor-pointer font-['Jersey_20'] text-[24px] text-[#0073e6] border-b border-gray-200 transition-colors whitespace-nowrap">
-              {{ industry }}
-            </div>
-            <!-- Option to reset industry filter -->
-            <div @click="selectedIndustry = null; isIndustryOpen = false" class="px-4 py-3 hover:bg-[#0073e6] hover:text-white cursor-pointer font-['Jersey_20'] text-[24px] text-[#0073e6] italic transition-colors whitespace-nowrap">
-              Toutes les industries
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <!-- Grille des entreprises -->
@@ -112,12 +97,24 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 
 // Responsive Grid
 const windowWidth = ref(1024);
+const filtersContainer = ref(null);
+
+const handleClickOutside = (event) => {
+  if (filtersContainer.value && !filtersContainer.value.contains(event.target)) {
+    isYearOpen.value = false;
+    isPrizeOpen.value = false;
+  }
+};
 
 onMounted(() => {
   windowWidth.value = window.innerWidth;
   const handleResize = () => { windowWidth.value = window.innerWidth; };
   window.addEventListener('resize', handleResize);
-  onUnmounted(() => window.removeEventListener('resize', handleResize));
+  document.addEventListener('click', handleClickOutside);
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+    document.removeEventListener('click', handleClickOutside);
+  });
 });
 
 const itemsPerPage = computed(() => {
@@ -127,15 +124,22 @@ const itemsPerPage = computed(() => {
 // Filtres
 const years = ref(['2026', '2025', '2024', '2023', '2022', '2021', '2020']);
 const prizes = ref(['Or', 'Ambassadeur', 'Conviction']);
-const industries = ref(['Banque / Finance', 'Horlogerie', 'Médical', 'Services', 'Tech']);
 
 const selectedYear = ref('2025');
 const selectedPrize = ref(null);
-const selectedIndustry = ref(null);
 
 const isYearOpen = ref(false);
 const isPrizeOpen = ref(false);
-const isIndustryOpen = ref(false);
+
+const toggleYear = () => {
+  isYearOpen.value = !isYearOpen.value;
+  isPrizeOpen.value = false;
+};
+
+const togglePrize = () => {
+  isPrizeOpen.value = !isPrizeOpen.value;
+  isYearOpen.value = false;
+};
 
 // Pagination
 const currentPage = ref(1);

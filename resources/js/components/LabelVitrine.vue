@@ -27,8 +27,8 @@
           </a>
         </div>
 
-        <div class="text-black text-4xl font-bold font-['Inter']">
-          ↓
+        <div class="text-black font-bold flex justify-center w-full lg:w-auto lg:justify-start">
+          <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
         </div>
       </div>
 
