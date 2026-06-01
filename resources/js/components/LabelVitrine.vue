@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10 w-full sm:w-auto">
-          <a href="/collecte" class="inline-block bg-[#0073e6] text-white font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-[#0073e6]/90 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-[#0073e6]/90 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
             Organiser une collecte
           </a>
           <a href="/companies" class="inline-block bg-[#fffbf1] text-[#0073e6] font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-gray-50 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
