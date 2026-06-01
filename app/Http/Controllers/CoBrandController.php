@@ -41,7 +41,7 @@ class CoBrandController extends Controller
 
         $initialData = json_encode(['collection' => $collection, 'company' =>  $company]);
 
-        return view('cobrand.home', [
+        return view('cobrand.infos', [
             'companyName' => $company['name'],
             'initialData' => $initialData,
         ]);

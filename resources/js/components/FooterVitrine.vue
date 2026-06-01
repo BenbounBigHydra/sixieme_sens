@@ -1,13 +1,13 @@
 <template>
   <footer class="relative w-full pt-[350px] pb-16 mt-20" style="background-image: url('/images/Motif_cubique_degradeFooter.png'); background-size: cover; background-position: top;">
     
-    <div class="max-w-desktop mx-auto px-4 md:px-8">
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8">
       
       <div class="bg-[#fffbf1] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-6 md:px-20 py-12 flex flex-col">
         
         <div class="flex flex-col md:flex-row justify-between items-center md:items-start mb-10 text-center md:text-left gap-6 md:gap-0">
           <h2 class="text-4xl text-black font-['Jersey_20'] mb-2 md:mb-0 leading-tight">
-            Votre entreprise peut<br class="hidden md:block" />faire la différence.
+            Votre entreprise peut <br class="hidden md:block" />faire la différence.
           </h2>
           <a href="/contact" class="inline-block bg-[#0073E6] text-white font-['Jersey_20'] tracking-wide px-8 py-3 text-2xl border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073E6]/90 transition-colors whitespace-nowrap">
             Organiser une collecte

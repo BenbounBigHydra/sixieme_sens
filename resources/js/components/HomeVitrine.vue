@@ -3,7 +3,7 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
     
     <!-- Section principale (Hero) -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
 
       <div class="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
         
@@ -125,7 +125,7 @@
     </section>
 
     <!-- Section Classement 2025 -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
       
       <!-- Conteneur style fenêtre rétro -->
       <div class="border-[4px] border-black bg-[#fffbf1] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -188,7 +188,7 @@
     </section>
 
     <!-- Section Avantages du Label -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 py-20 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-20 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Une reconnaissance officielle pour votre engagement.</h2>
       <p class="font-['Inter'] text-base md:text-lg text-black mb-12 max-w-3xl text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement.<br class="hidden md:block"/> Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden md:block"/> et vous positionne sur le leaderboard public.</p>
