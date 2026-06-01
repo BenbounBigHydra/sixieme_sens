@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Trophées</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-</body>
-</html>
+<!-- Héritage du layout global -->
+@extends('layout')
+
+<!-- Définition de la section de contenu -->
+@section('content')
+    <!-- Affichage du composant Vue pour la page Organiser une collecte -->
+    <collecte-vitrine></collecte-vitrine>
+@endsection

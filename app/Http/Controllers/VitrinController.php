@@ -11,13 +11,16 @@ class VitrinController extends Controller
 {
     public function home()
     {
+        $year = \Illuminate\Support\Carbon::now()->subYear()->year;
+
         $data = [
+            'year'           => $year,
             'nb_collections' => CompanyStatsService::getNbCollections(),
             'nb_companies'   => CompanyStatsService::getNbCompanies(),
             'winner'         => [
-                'gold'       => CompanyStatsService::getGoldWinner(),
-                'ambassador' => CompanyStatsService::getAmbassador(),
-                'conviction' => CompanyStatsService::getConviction(),
+                'gold'       => CompanyStatsService::getGoldWinner($year),
+                'ambassador' => CompanyStatsService::getAmbassador($year),
+                'conviction' => CompanyStatsService::getConviction($year),
             ],
         ];
 
@@ -26,14 +29,19 @@ class VitrinController extends Controller
 
     public function trophies()
     {
+        $years = range(2025, 2020);
+        $palmares = [];
+
+        foreach ($years as $y) {
+            $palmares[$y] = [
+                'gold' => CompanyStatsService::getGoldWinnerData($y),
+                'ambassador' => CompanyStatsService::getAmbassadorData($y),
+                'conviction' => CompanyStatsService::getConvictionData($y),
+            ];
+        }
+
         $data = [
-            // 'nb_collections' => CompanyStatsService::getNbCollections(),
-            // 'nb_companies'   => CompanyStatsService::getNbCompanies(),
-            'winner'         => [
-                'gold'       => CompanyStatsService::getGoldWinner(),
-                'ambassador' => CompanyStatsService::getAmbassador(),
-                'conviction' => CompanyStatsService::getConviction(),
-            ],
+            'palmares' => $palmares,
         ];
 
         return view('vitrin.trophies', ['initialData' => json_encode($data)]);
@@ -55,7 +63,7 @@ class VitrinController extends Controller
 
     public function companies()
     {
-        $companies = CompanyStatsService::getLabelledCompanies();
+        $companies = \App\Models\Company::all();
 
         $data = $companies->map(fn($company) => [
             'name'   => $company->name,
@@ -67,8 +75,8 @@ class VitrinController extends Controller
         return view('vitrin.companies', ['initialData' => json_encode($data)]);
     }
 
-    public function collecte()
+    public function contact()
     {
-        return view('vitrin.collecte');
+        return view('vitrin.contact');
     }
 }

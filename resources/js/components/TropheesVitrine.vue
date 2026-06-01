@@ -20,6 +20,10 @@
           <a href="/collecte" class="hidden lg:inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
             Rejoindre le mouvement
           </a>
+          
+          <div class="hidden lg:flex mt-8 w-full justify-start">
+            <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
+          </div>
         </div>
 
         <!-- Right Column -->
@@ -35,8 +39,8 @@
           <a href="/collecte" class="inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
             Rejoindre le mouvement
           </a>
-          <div class="mt-8 text-black text-4xl font-bold font-['Inter']">
-            ↓
+          <div class="mt-8">
+            <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
           </div>
         </div>
 
@@ -95,18 +99,40 @@
       </div>
     </section>
 
-    <!-- Part 3: Palmarès 2025 -->
+    <!-- Part 3: Palmarès -->
     <section class="max-w-desktop mx-auto px-4 md:px-8 py-16">
-      <div class="flex flex-col items-center md:items-start mb-10">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black leading-none">Palmarès 2025</h2>
+      <div class="flex flex-col mb-10 w-full relative">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left self-center md:self-start" />
+        
+        <div class="flex flex-col md:flex-row md:justify-between w-full items-center md:items-end">
+          <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black leading-none">Palmarès {{ selectedYear }}</h2>
+          
+          <!-- Desktop Filter Button (Above Score) -->
+          <div class="hidden md:block relative">
+            <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+              Filtres
+              <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-4 h-4" />
+            </button>
+            <!-- Dropdown -->
+            <div v-if="isFilterOpen" class="absolute right-0 top-full mt-2 w-full min-w-[120px] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10 flex flex-col">
+              <button v-for="year in availableYears" :key="year" @click="selectYear(year)" class="px-4 py-2 text-left text-black font-['Inter'] font-bold hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
+                {{ year }}
+              </button>
+            </div>
+          </div>
+        </div>
         
         <!-- Mobile Filter Button -->
-        <div class="mt-6 md:hidden">
-          <button class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2">
+        <div class="mt-6 md:hidden relative w-full flex justify-center">
+          <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black">
             Filtres
             <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-4 h-4" />
           </button>
+          <div v-if="isFilterOpen" class="absolute top-full mt-2 w-auto min-w-[120px] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10 flex flex-col">
+            <button v-for="year in availableYears" :key="year" @click="selectYear(year)" class="px-4 py-2 text-center text-black font-['Inter'] font-bold hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
+              {{ year }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -123,34 +149,38 @@
           </thead>
           <tbody>
             <!-- Or -->
-            <tr class="border-b-[3px] border-[#B3D9FF]">
+            <tr v-if="goldWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
                 <img src="/images/trophy_gold.png" alt="Or" class="w-12 h-12 object-contain">
               </td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">Pictet & Cie</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">8'000</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">1'722</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">?</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">{{ goldWinner.name }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_employee) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_blood_pouch) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ (goldWinner.ratio * 100).toFixed(1) }}%</td>
             </tr>
             <!-- Ambassadeur -->
-            <tr class="border-b-[3px] border-[#B3D9FF]">
+            <tr v-if="ambassadorWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
                 <img src="/images/trophy_conviction (1).png" alt="Ambassadeur" class="w-12 h-12 object-contain">
               </td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">Rolex SA</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">10'000</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">2'212</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">?</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">{{ ambassadorWinner.name }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_employee) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_blood_pouch) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ ambassadorWinner.consecutive }} ans</td>
             </tr>
             <!-- Conviction -->
-            <tr class="border-b-[3px] border-[#B3D9FF]">
+            <tr v-if="convictionWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
                 <img src="/images/trophy_conviction.png" alt="Conviction" class="w-12 h-12 object-contain">
               </td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">BCG</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">6'000</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">1'783</td>
-              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">?</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black">{{ convictionWinner.name }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_employee) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_blood_pouch) }}</td>
+              <td class="py-4 px-2 font-['Jersey_20'] text-[28px] text-black text-center">{{ (convictionWinner.ratio * 100).toFixed(1) }}%</td>
+            </tr>
+            
+            <tr v-if="!goldWinner && !ambassadorWinner && !convictionWinner" class="border-b-[3px] border-[#B3D9FF]">
+              <td colspan="5" class="py-8 px-2 font-['Jersey_20'] text-[28px] text-center text-gray-500">Aucun lauréat pour cette année.</td>
             </tr>
           </tbody>
         </table>
@@ -213,4 +243,43 @@
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
+
+const props = defineProps({
+  initialData: {
+    type: [Object, String],
+    default: () => ({})
+  }
+});
+
+const pageData = computed(() => {
+  if (typeof props.initialData === 'string') {
+    try {
+      return JSON.parse(props.initialData);
+    } catch (e) {
+      return {};
+    }
+  }
+  return props.initialData || {};
+});
+
+const palmares = computed(() => pageData.value?.palmares || {});
+
+const isFilterOpen = ref(false);
+const availableYears = ref([2025, 2024, 2023, 2022, 2021, 2020]);
+const selectedYear = ref(2025);
+
+const selectYear = (year) => {
+  selectedYear.value = year;
+  isFilterOpen.value = false;
+};
+
+const goldWinner = computed(() => palmares.value[selectedYear.value]?.gold || null);
+const ambassadorWinner = computed(() => palmares.value[selectedYear.value]?.ambassador || null);
+const convictionWinner = computed(() => palmares.value[selectedYear.value]?.conviction || null);
+
+const formatNumber = (num) => {
+  if (!num && num !== 0) return '-';
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+};
 </script>

@@ -143,7 +143,7 @@
             <!-- Title block on the left -->
             <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
               <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-              <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none m-0">Classement 2025</h2>
+              <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none m-0">Classement {{ currentYear }}</h2>
             </div>
             
             <!-- Text block on the right -->
@@ -158,16 +158,16 @@
           <!-- Conteneur flexible pour aligner les trophées -->
           <div class="flex flex-row justify-between md:justify-center items-end gap-2 md:gap-24 w-full">
             
-            <!-- Trophée 2 : Rolex -->
+            <!-- Trophée 2 : Ambassadeur -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">Rolex</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ ambassadorWinner }}</p>
               <img src="/images/trophy_conviction (1).png" alt="Trophée Ambassadeur" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
               <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur*</p>
             </div>
 
-            <!-- Trophée 1 : Pictet & Cie (Hover effect) -->
+            <!-- Trophée 1 : Or -->
             <div class="flex flex-col items-center mb-0 md:-mt-8 w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center leading-tight">Pictet & Cie</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center leading-tight">{{ goldWinner }}</p>
               <div class="relative w-[80px] h-[80px] md:w-[260px] md:h-[260px] mb-2 md:mb-4 group cursor-pointer">
                 <img src="/images/trophy_gold.png" alt="Trophée Or" class="absolute inset-0 w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-300">
                 <img src="/images/trophy_gold_sparks.png" alt="Trophée Or Sparks" class="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -175,9 +175,9 @@
               <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or*</p>
             </div>
 
-            <!-- Trophée 3 : BCGE -->
+            <!-- Trophée 3 : Conviction -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">BCGE</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ convictionWinner }}</p>
               <img src="/images/trophy_conviction.png" alt="Trophée Conviction" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
               <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction*</p>
             </div>
@@ -231,7 +231,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+
+const props = defineProps({
+  initialData: {
+    type: [Object, String],
+    default: () => ({})
+  }
+});
+
+const pageData = computed(() => {
+  if (typeof props.initialData === 'string') {
+    try {
+      return JSON.parse(props.initialData);
+    } catch (e) {
+      return {};
+    }
+  }
+  return props.initialData || {};
+});
+
+const currentYear = computed(() => pageData.value?.year || '2025');
+const ambassadorWinner = computed(() => pageData.value?.winner?.ambassador || 'Rolex');
+const goldWinner = computed(() => pageData.value?.winner?.gold || 'Pictet & Cie');
+const convictionWinner = computed(() => pageData.value?.winner?.conviction || 'BCGE');
 
 const isHovered = ref(false);
 const isClicked = ref(false);

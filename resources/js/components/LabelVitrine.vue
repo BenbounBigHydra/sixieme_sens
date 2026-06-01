@@ -62,8 +62,7 @@
         <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
           <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
             <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
-              <!-- Using a static image as requested -->
-              <img src="/images/BCGE.png" alt="Company Logo" class="max-w-[80%] max-h-[80%] object-contain" />
+              <img :src="'/' + item.logo" :alt="item.name" class="max-w-[80%] max-h-[80%] object-contain" />
             </div>
           </div>
         </div>
@@ -167,8 +166,31 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
+const props = defineProps({
+  initialData: {
+    type: [Array, String],
+    default: () => []
+  }
+});
+
+const companiesList = computed(() => {
+  let list = [];
+  if (typeof props.initialData === 'string') {
+    try {
+      list = JSON.parse(props.initialData);
+    } catch (e) {
+      list = [];
+    }
+  } else {
+    list = props.initialData || [];
+  }
+  
+  // Duplique la liste pour avoir plus d'éléments dans le carrousel (pour l'effet de défilement)
+  return [...list, ...list, ...list];
+});
+
 // Configuration du carousel
-const carouselItems = ref([1, 2, 3, 4, 5, 6, 7, 8, 9]); // Dummy data pour l'instant
+const carouselItems = computed(() => companiesList.value);
 const currentSlide = ref(0);
 let autoSlideInterval = null;
 
@@ -184,7 +206,7 @@ onMounted(() => {
     window.addEventListener('resize', updateWidth);
   }
 
-  // Slide toutes les 5 secondes
+  // Slide toutes les 2 secondes
   autoSlideInterval = setInterval(() => {
     currentSlide.value = (currentSlide.value + 1) % (carouselItems.value.length - itemsPerView.value + 1);
 
@@ -192,7 +214,7 @@ onMounted(() => {
     if (currentSlide.value >= carouselItems.value.length - itemsPerView.value + 1) {
       currentSlide.value = 0;
     }
-  }, 5000);
+  }, 2000);
 });
 
 onUnmounted(() => {
