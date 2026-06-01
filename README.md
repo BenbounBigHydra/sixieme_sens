@@ -124,9 +124,9 @@ Pour développer et tester le mini-projet en local, voici les étapes à suivre 
 
 _S'il est nécessaire de réinitialiser la base de données durant le développement_
 
-    ```bash
-    php artisan migrate:reset --seed
-    ```
+```bash
+php artisan migrate:fresh --seed
+```
 
 9. Démarrer le serveur de développement Laravel :
 

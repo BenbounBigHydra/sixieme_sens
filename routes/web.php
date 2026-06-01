@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoBrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VitrinController;
 
@@ -8,4 +9,10 @@ Route::get('/', [VitrinController::class, 'home']);
 Route::get('/trophees', [VitrinController::class, 'trophies']);
 Route::get('/label', [VitrinController::class, 'label']);
 Route::get('/companies', [VitrinController::class, 'companies']);
-Route::get('/collecte', [VitrinController::class, 'collecte']);
+Route::get('/contact', [VitrinController::class, 'contact']);
+
+// Site co-branding
+Route::get('/collection/{company_name}/closed', [CoBrandController::class, 'closed'])->name('cobrand.closed');
+Route::get('/collection/{company_name}/{collection_id}', [CoBrandController::class, 'home']);
+Route::get('/collection/{company_name}/{collection_id}/infos', [CoBrandController::class, 'infos']);
+Route::get('/collection/{company_name}/{collection_id}/quizz', [CoBrandController::class, 'quizz']);

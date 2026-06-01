@@ -53,8 +53,14 @@ class CompanyStatsService
         $year = $year ?? Carbon::now()->subYear()->year;
 
         $companies = Company::with(['collections' => function ($query) use ($year) {
-            $query->where('end', '<', now())->whereYear('start', '<=', $year);
-        }])->get();
+            $query->where('end', '<', now())
+                ->whereYear('start', '<=', $year);
+        }])
+            ->whereHas('collections', function ($query) use ($year) {
+                $query->where('end', '<', now())
+                    ->whereYear('start', $year);
+            })
+            ->get();
 
         $scores = $companies->map(function ($company) {
             $years = $company->collections
@@ -130,5 +136,30 @@ class CompanyStatsService
                 ->whereNotNull('nb_registered')
                 ->whereNotNull('nb_blood_pouch');
         })->get();
+    }
+
+    public static function getCompanyAwards(Company $company): array
+    {
+        // Récupère toutes les années où l'entreprise a eu une collecte clôturée
+        $years = $company->collections()
+            ->where('end', '<', now())
+            ->get()
+            ->map(fn($c) => Carbon::parse($c->start)->year)
+            ->unique()
+            ->sort()
+            ->values();
+
+        $awards = [];
+
+        foreach ($years as $year) {
+            $awards[$year] = [
+                'gold'       => self::getGoldWinner($year) === $company->name,
+                'conviction' => self::getConviction($year) === $company->name,
+                'ambassador' => self::getAmbassador($year) === $company->name,
+                'label'      => self::getLabelledCompanies($year)->contains('name', $company->name),
+            ];
+        }
+
+        return $awards;
     }
 }
