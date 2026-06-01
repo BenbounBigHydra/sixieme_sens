@@ -61,7 +61,7 @@
           </svg>
         </div>
       </a>
-      <a href="/collecte" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
+      <a href="/contact" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5 border-b border-white">
           <span>Organiser une collecte</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

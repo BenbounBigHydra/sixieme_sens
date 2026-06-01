@@ -49,12 +49,18 @@
       <div class="relative z-10 overflow-hidden" style="min-height: 400px;">
         <transition :name="transitionName" mode="out-in">
           <div :key="currentPage" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-6 w-full px-4 md:px-0">
-            <div v-for="company in paginatedCompanies" :key="company.name" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[#0073e6]">
+            <div v-for="company in paginatedCompanies" :key="company.name" 
+                 @click="toggleCompanyInfo(company.name)"
+                 class="relative border-[4px] border-[#0073e6] aspect-square flex items-center justify-center p-4 cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6] group"
+                 :class="activeCompany === company.name ? 'bg-[#0073e6]' : 'bg-[#fffbf1]'">
               <!-- Default image -->
-              <img :src="'/' + company.logo" :alt="company.name" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 group-hover:opacity-0" />
+              <img :src="'/' + company.logo" :alt="company.name" 
+                   class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300"
+                   :class="activeCompany === company.name ? 'opacity-0' : 'md:group-hover:opacity-0'" />
               
               <!-- Hover content -->
-              <div class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2 pointer-events-none">
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
+                   :class="activeCompany === company.name ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
                 <h3 class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">{{ company.name }}</h3>
                 <p class="font-['Inter'] text-white text-xs md:text-sm">
                   <span v-if="company.awards[selectedYear]?.gold">Prix Or</span>
@@ -65,12 +71,12 @@
               </div>
             </div>
             <!-- Empty placeholders to maintain grid structure -->
-            <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-'+i" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[#0073e6]">
+            <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-'+i" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6]">
               <!-- Default image -->
-              <img src="/images/BCGE.png" alt="Company placeholder" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 group-hover:opacity-0" />
+              <img src="/images/BCGE.png" alt="Company placeholder" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 md:group-hover:opacity-0" />
               
               <!-- Hover content -->
-              <div class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2 pointer-events-none">
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 p-2 pointer-events-none">
                 <h3 class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">Company name</h3>
                 <p class="font-['Inter'] text-white text-xs md:text-sm">Company infos</p>
               </div>
@@ -203,8 +209,22 @@ const totalPages = computed(() => {
   return Math.ceil(filteredCompanies.value.length / itemsPerPage.value) || 1;
 });
 
+const activeCompany = ref(null);
+
+const toggleCompanyInfo = (name) => {
+  if (activeCompany.value === name) {
+    activeCompany.value = null;
+  } else {
+    activeCompany.value = name;
+  }
+};
+
 watch([selectedYear, selectedPrize], () => {
   currentPage.value = 1;
+});
+
+watch(currentPage, () => {
+  activeCompany.value = null;
 });
 
 const paginatedCompanies = computed(() => {

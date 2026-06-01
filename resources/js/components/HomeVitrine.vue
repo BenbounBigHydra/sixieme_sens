@@ -31,7 +31,7 @@
 
           <!-- Action Button (Desktop Only) -->
           <div class="hidden lg:block">
-            <a href="/collecte" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+            <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
               Organiser une collecte
             </a>
           </div>
@@ -113,7 +113,7 @@
 
         <!-- Action Button & Arrow (Mobile Only) -->
         <div class="w-full flex flex-col items-center justify-center order-3 lg:hidden mt-8">
-          <a href="/collecte" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
             Organiser une collecte
           </a>
           <div class="mt-8">
