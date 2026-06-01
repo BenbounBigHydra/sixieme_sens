@@ -92,6 +92,6 @@ class CoBrandController extends Controller
 
     private function checkOpenCollection(Collection $collection): bool
     {
-        return $collection->end < now();
+        return $collection->day_end < now();
     }
 }

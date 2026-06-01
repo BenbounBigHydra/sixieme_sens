@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('logo')->nullable();
-            $table->integer('color')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }
