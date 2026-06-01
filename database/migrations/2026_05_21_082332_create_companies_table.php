@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('color')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
