@@ -49,9 +49,25 @@
       <div class="relative z-10 overflow-hidden" style="min-height: 400px;">
         <transition :name="transitionName" mode="out-in">
           <div :key="currentPage" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-6 w-full px-4 md:px-0">
-            <div v-for="i in itemsPerPage" :key="i" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[#0073e6]">
+            <div v-for="company in paginatedCompanies" :key="company.name" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[#0073e6]">
               <!-- Default image -->
-              <img src="/images/BCGE.png" alt="Company" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 group-hover:opacity-0" />
+              <img :src="'/' + company.logo" :alt="company.name" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 group-hover:opacity-0" />
+              
+              <!-- Hover content -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2 pointer-events-none">
+                <h3 class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">{{ company.name }}</h3>
+                <p class="font-['Inter'] text-white text-xs md:text-sm">
+                  <span v-if="company.awards[selectedYear]?.gold">Prix Or</span>
+                  <span v-else-if="company.awards[selectedYear]?.ambassador">Prix Ambassadeur</span>
+                  <span v-else-if="company.awards[selectedYear]?.conviction">Prix Conviction</span>
+                  <span v-else-if="company.awards[selectedYear]?.label">Partenaire du Don</span>
+                </p>
+              </div>
+            </div>
+            <!-- Empty placeholders to maintain grid structure -->
+            <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-'+i" class="relative border-[4px] border-[#0073e6] bg-[#fffbf1] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[#0073e6]">
+              <!-- Default image -->
+              <img src="/images/BCGE.png" alt="Company placeholder" class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300 group-hover:opacity-0" />
               
               <!-- Hover content -->
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2 pointer-events-none">
@@ -94,6 +110,24 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+
+const props = defineProps({
+  initialData: {
+    type: [Array, String],
+    default: () => []
+  }
+});
+
+const companiesList = computed(() => {
+  if (typeof props.initialData === 'string') {
+    try {
+      return JSON.parse(props.initialData);
+    } catch (e) {
+      return [];
+    }
+  }
+  return props.initialData || [];
+});
 
 // Responsive Grid
 const windowWidth = ref(1024);
@@ -141,9 +175,43 @@ const togglePrize = () => {
   isYearOpen.value = false;
 };
 
+const filteredCompanies = computed(() => {
+  const year = selectedYear.value;
+  let list = companiesList.value;
+
+  if (selectedPrize.value) {
+    list = list.filter(c => {
+      const a = c.awards[year];
+      if (!a) return false;
+      if (selectedPrize.value === 'Or') return a.gold;
+      if (selectedPrize.value === 'Ambassadeur') return a.ambassador;
+      if (selectedPrize.value === 'Conviction') return a.conviction;
+      return false;
+    });
+  } else {
+    // Show all companies that have "label" for this year.
+    list = list.filter(c => c.awards[year] && c.awards[year].label);
+  }
+
+  return list;
+});
+
 // Pagination
 const currentPage = ref(1);
-const totalPages = ref(10);
+
+const totalPages = computed(() => {
+  return Math.ceil(filteredCompanies.value.length / itemsPerPage.value) || 1;
+});
+
+watch([selectedYear, selectedPrize], () => {
+  currentPage.value = 1;
+});
+
+const paginatedCompanies = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredCompanies.value.slice(start, end);
+});
 
 const visiblePages = computed(() => {
   if (totalPages.value <= 3) {

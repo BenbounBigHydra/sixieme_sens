@@ -20,8 +20,7 @@ class CompanyStatsService
         return Company::count();
     }
 
-    // Entreprise avec le meilleur ratio nb_blood_pouch/nb_employee sur l'année précédente
-    public static function getGoldWinner(int $year = null): ?string
+    public static function getGoldWinnerData(int $year = null): ?array
     {
         $year = $year ?? Carbon::now()->subYear()->year;
 
@@ -33,22 +32,29 @@ class CompanyStatsService
 
         $scores = $companies->map(function ($company) {
             $totalRatio     = $company->collections->sum(fn($c) => $c->nb_blood_pouch / $c->nb_employee);
-            $totalBlodPouch = $company->collections->sum('nb_blood_pouch');
+            $totalBloodPouch = $company->collections->sum('nb_blood_pouch');
+            $totalEmployee  = $company->collections->sum('nb_employee');
 
             return [
                 'name'             => $company->name,
                 'ratio'            => $totalRatio,
-                'nb_blood_pouch'   => $totalBlodPouch,
+                'nb_blood_pouch'   => $totalBloodPouch,
+                'nb_employee'      => $totalEmployee,
             ];
         })->filter(fn($s) => $s['ratio'] > 0);
 
         return $scores->sortByDesc('ratio')
             ->sortByDesc(fn($s, $key) => [$s['ratio'], $s['nb_blood_pouch']])
-            ->first()['name'] ?? null;
+            ->first() ?? null;
+    }
+
+    public static function getGoldWinner(int $year = null): ?string
+    {
+        return self::getGoldWinnerData($year)['name'] ?? null;
     }
 
     // Entreprise ayant organisé au moins une collecte le plus d'années consécutives (min 2 ans)
-    public static function getAmbassador(int $year = null): ?string
+    public static function getAmbassadorData(int $year = null): ?array
     {
         $year = $year ?? Carbon::now()->subYear()->year;
 
@@ -90,25 +96,29 @@ class CompanyStatsService
                 'consecutive'      => $maxConsecutive >= 2 ? $maxConsecutive : 0,
                 'avg_ratio'        => $avgRatio,
                 'nb_blood_pouch'   => $totalBloodPouch,
+                'nb_employee'      => $company->collections->sum('nb_employee'),
             ];
         })->filter(fn($s) => $s['consecutive'] >= 2);
 
         return $scores->sortByDesc('consecutive')
             ->sortByDesc('avg_ratio')
             ->sortByDesc('nb_blood_pouch')
-            ->first()['name'] ?? null;
+            ->first() ?? null;
+    }
+
+    public static function getAmbassador(int $year = null): ?string
+    {
+        return self::getAmbassadorData($year)['name'] ?? null;
     }
 
     // Entreprise avec le meilleur ratio nb_blood_pouch/nb_registered sur une collecte l'année dernière
-    public static function getConviction(int $year = null): ?string
+    public static function getConvictionData(int $year = null): ?array
     {
         $year = $year ?? Carbon::now()->subYear()->year;
 
         $collections = Collection::with('company')
             ->whereYear('start', $year)
-            // ->where('end', '<', now())
             ->where('nb_registered', '>', 0)
-            // ->whereNotNull('nb_blood_pouch')
             ->get();
 
         if ($collections->isEmpty()) {
@@ -119,11 +129,18 @@ class CompanyStatsService
             ->map(fn($c) => [
                 'name'  => $c->company->name,
                 'ratio' => $c->nb_blood_pouch / $c->nb_registered,
+                'nb_blood_pouch' => $c->nb_blood_pouch,
+                'nb_employee' => $c->nb_employee,
             ])
             ->sortByDesc('ratio')
             ->first();
 
-        return $best['name'] ?? null;
+        return $best ?? null;
+    }
+
+    public static function getConviction(int $year = null): ?string
+    {
+        return self::getConvictionData($year)['name'] ?? null;
     }
 
     // Entreprises labellisées sur l'année choisie (par défaut l'année en cours)
