@@ -9,11 +9,11 @@ class Collection extends Model
 {
     protected $fillable = [
         'id_company',
-        'start',
-        'end',
+        'day_start',
+        'day_end',
         'location',
-        'time_start',
-        'time_end',
+        'hour_start',
+        'hour_end',
         'nb_employee',
         'nb_registered',
         'nb_blood_pouch',
@@ -21,8 +21,8 @@ class Collection extends Model
     ];
 
     protected $casts = [
-        'start' => 'datetime',
-        'end'   => 'datetime',
+        'day_start' => 'datetime',
+        'day_end'   => 'datetime',
     ];
 
     // Une collecte appartient à une company
@@ -34,8 +34,8 @@ class Collection extends Model
     protected static function booted()
     {
         static::creating(function ($collection) {
-            $collection->start = Carbon::parse($collection->start)->startOfDay();
-            $collection->end   = Carbon::parse($collection->end)->endOfDay();
+            $collection->day_start = Carbon::parse($collection->day_start)->startOfDay();
+            $collection->day_end   = Carbon::parse($collection->day_end)->endOfDay();
         });
     }
 }

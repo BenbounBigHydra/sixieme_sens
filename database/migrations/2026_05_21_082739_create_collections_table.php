@@ -17,10 +17,10 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->string('location')->nullable();
-            $table->dateTime('start')->nullable();
-            $table->dateTime('end')->nullable();
-            $table->time('time_start')->nullable();
-            $table->time('time_end')->nullable();
+            $table->dateTime('day_start')->nullable();
+            $table->dateTime('day_end')->nullable();
+            $table->time('hour_start')->nullable();
+            $table->time('hour_end')->nullable();
             $table->integer('nb_employee')->nullable();
             $table->integer('nb_registered')->nullable();
             $table->integer('nb_blood_pouch')->nullable();

@@ -11,7 +11,7 @@ class CompanyStatsService
     // Somme de toutes les collectes passées
     public static function getNbCollections(): int
     {
-        return Collection::where('end', '<', now())->count();
+        return Collection::where('day_end', '<', now())->count();
     }
 
     // Somme de toutes les entreprises partenaires
@@ -25,8 +25,8 @@ class CompanyStatsService
         $year = $year ?? Carbon::now()->subYear()->year;
 
         $companies = Company::with(['collections' => function ($query) use ($year) {
-            $query->whereYear('start', $year)
-                ->where('end', '<', now())
+            $query->whereYear('day_start', $year)
+                ->where('day_end', '<', now())
                 ->where('nb_employee', '>', 0);
         }])->get();
 
@@ -59,18 +59,18 @@ class CompanyStatsService
         $year = $year ?? Carbon::now()->subYear()->year;
 
         $companies = Company::with(['collections' => function ($query) use ($year) {
-            $query->where('end', '<', now())
-                ->whereYear('start', '<=', $year);
+            $query->where('day_end', '<', now())
+                ->whereYear('day_start', '<=', $year);
         }])
             ->whereHas('collections', function ($query) use ($year) {
-                $query->where('end', '<', now())
-                    ->whereYear('start', $year);
+                $query->where('day_end', '<', now())
+                    ->whereYear('day_start', $year);
             })
             ->get();
 
         $scores = $companies->map(function ($company) {
             $years = $company->collections
-                ->map(fn($c) => Carbon::parse($c->start)->year)
+                ->map(fn($c) => Carbon::parse($c->day_start)->year)
                 ->unique()
                 ->sort()
                 ->values();
@@ -117,7 +117,7 @@ class CompanyStatsService
         $year = $year ?? Carbon::now()->subYear()->year;
 
         $collections = Collection::with('company')
-            ->whereYear('start', $year)
+            ->whereYear('day_start', $year)
             ->where('nb_registered', '>', 0)
             ->get();
 
@@ -149,7 +149,7 @@ class CompanyStatsService
         $year = $year ?? Carbon::now()->year;
 
         return Company::whereHas('collections', function ($query) use ($year) {
-            $query->whereYear('start', $year)
+            $query->whereYear('day_start', $year)
                 ->whereNotNull('nb_registered')
                 ->whereNotNull('nb_blood_pouch');
         })->get();
@@ -159,9 +159,9 @@ class CompanyStatsService
     {
         // Récupère toutes les années où l'entreprise a eu une collecte clôturée
         $years = $company->collections()
-            ->where('end', '<', now())
+            ->where('day_end', '<', now())
             ->get()
-            ->map(fn($c) => Carbon::parse($c->start)->year)
+            ->map(fn($c) => Carbon::parse($c->day_start)->year)
             ->unique()
             ->sort()
             ->values();
