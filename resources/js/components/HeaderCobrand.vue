@@ -18,7 +18,7 @@
         <a :href="`/collection/${companySlug}/${collectionId}/infos`" 
            class="hover:text-[#0073E6]/80 transition-colors font-bold text-xl"
            :class="isInfosPage ? 'text-[#0073E6]' : 'text-black'">Informations</a>
-        <a :href="`/collection/${companySlug}/${collectionId}`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 rounded hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 rounded hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           Donner mon sang
         </a>
       </nav>
@@ -42,7 +42,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
         </div>
       </a>
-      <a :href="`/collection/${companySlug}/${collectionId}`" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
+      <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5 border-b border-white">
           <span>Donner mon sang</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>

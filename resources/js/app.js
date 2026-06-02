@@ -15,6 +15,7 @@ import CollecteVitrine from './components/CollecteVitrine.vue';
 import HeaderCobrand from './components/HeaderCobrand.vue';
 import HomeCobrand from './components/HomeCobrand.vue';
 import InfosCobrand from './components/InfosCobrand.vue';
+import QuizzCobrand from './components/QuizzCobrand.vue';
 
 // Initialisation de l'application Vue
 const app = createApp({});
@@ -32,6 +33,7 @@ app.component('collecte-vitrine', CollecteVitrine);
 app.component('header-cobrand', HeaderCobrand);
 app.component('home-cobrand', HomeCobrand);
 app.component('infos-cobrand', InfosCobrand);
+app.component('quizz-cobrand', QuizzCobrand);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');

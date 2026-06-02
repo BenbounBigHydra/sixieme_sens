@@ -24,9 +24,9 @@
             </span>
           </div>
           <div class="flex">
-            <button class="bg-[#0073e6] text-white px-6 py-3 font-['Inter'] text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
+            <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-3 font-['Inter'] text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors text-center">
               Je souhaite donner
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -48,9 +48,9 @@
             <p>Les besoins sont constants. Les stocks, eux, ne durent pas — certains composants sanguins se périment en quelques jours. C'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
           </div>
           <div class="flex justify-center lg:justify-start">
-             <button class="bg-[#0073e6] text-white px-8 py-3 font-['Inter'] text-lg font-bold border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
+             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Inter'] text-lg font-bold border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors text-center">
                Donner mon sang
-             </button>
+             </a>
           </div>
         </div>
 
