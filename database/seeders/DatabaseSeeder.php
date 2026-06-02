@@ -6,11 +6,19 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::table('users')->insert([
+            'email'      => 'admin@hug.ch',
+            'password'   => Hash::make('password'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
         // =====================================================================
         // EPFL
         // - Ambassador jusqu'en 2023 : gagnant (2020→2023 = 4 ans consécutifs)
