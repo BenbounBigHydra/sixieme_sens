@@ -2,7 +2,7 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
     
     <!-- Part 1: Hero Section -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
       <div class="flex flex-col lg:flex-row justify-between items-center gap-2 lg:gap-20">
         
         <!-- Left Column -->
@@ -48,7 +48,7 @@
     </section>
 
     <!-- Part 2: 3 Trophies -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Or -->
@@ -100,7 +100,7 @@
     </section>
 
     <!-- Part 3: Palmarès -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
       <div class="flex flex-col mb-10 w-full relative">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left self-center md:self-start" />
         
@@ -188,7 +188,7 @@
     </section>
 
     <!-- Part 4: Section avantages -->
-    <section class="max-w-desktop mx-auto px-4 md:px-8 py-16 pb-32">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 pb-32">
       <div class="flex flex-col items-center md:items-start mb-12">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
         <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black leading-none">Ce que le Trophée distingue.</h2>
