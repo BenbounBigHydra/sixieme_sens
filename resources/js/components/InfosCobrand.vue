@@ -1,0 +1,225 @@
+<template>
+  <div class="w-full bg-[#fffbf1] min-h-screen font-['Inter']">
+    <!-- Hero Banner -->
+    <div class="w-full bg-[#cbe4ff] py-24 mb-12">
+      <h1 class="text-center font-['Jersey_20'] text-5xl md:text-6xl text-black">
+        Tout savoir avant de donner
+      </h1>
+    </div>
+
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 flex flex-col md:flex-row gap-12 pb-24">
+
+      <!-- Sidebar -->
+      <aside class="w-full md:w-1/4 md:border-r-[3px] md:border-black md:pr-12 lg:pr-16 shrink-0">
+        <nav class="flex flex-col font-['Jersey_20'] text-[28px] tracking-wide space-y-4">
+          <button @click="activeTab = 'processus'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'processus', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'processus'}">Le processus</button>
+          <button @click="activeTab = 'types'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'types', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'types'}">Types de don</button>
+          <button @click="activeTab = 'faq'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'faq', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'faq'}">FAQ</button>
+          <button @click="activeTab = 'eligibility'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'eligibility', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'eligibility'}">Puis-je donner ?</button>
+        </nav>
+
+        <div class="mt-12 bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <h3 class="font-['Inter'] font-bold text-lg bg-white px-4 py-2 block text-center border-2 border-black mb-4">Prêt à donner ?</h3>
+          <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quizz. Moins de 5min.</p>
+          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="w-full md:w-3/4">
+
+        <!-- Processus Tab -->
+        <div v-show="activeTab === 'processus'" class="space-y-6">
+          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Comment se déroule un don</h2>
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <h3 class="bg-[#ffcc00] font-['Inter'] font-bold text-xl px-4 py-3 border-b-2 border-black">01 Accueil et vérification d'identité</h3>
+            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">À votre arrivée, présentez votre pièce d'identité. Un formulaire médical vous est remis, vous pouvez le remplir à l'avance en ligne.</p>
+          </div>
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <h3 class="bg-[#ffcc00] font-['Inter'] font-bold text-xl px-4 py-3 border-b-2 border-black">02 Entretien médical confidentiel</h3>
+            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Un médecin ou infirmier évalue votre état de santé et vérifie votre hémoglobine. Votre éligibilité du jour est confirmée en quelques minutes.</p>
+          </div>
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <h3 class="bg-[#ffcc00] font-['Inter'] font-bold text-xl px-4 py-3 border-b-2 border-black">03 Le don</h3>
+            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Allongé confortablement, une infirmière effectue le prélèvement. La sensation est comparable à une prise de sang ordinaire. Environ 450 ml sont collectés.</p>
+          </div>
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <h3 class="bg-[#ffcc00] font-['Inter'] font-bold text-xl px-4 py-3 border-b-2 border-black">04 Collation et repos</h3>
+            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Après le don, une collation vous est offerte. Reposez-vous quelques minutes avant de reprendre vos activités et hydratez-vous bien.</p>
+          </div>
+        </div>
+
+        <!-- Types de don Tab -->
+        <div v-show="activeTab === 'types'" class="space-y-6">
+          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Types de don</h2>
+
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div class="bg-[#ffcc00] px-4 py-3 border-b-2 border-black flex justify-between items-center font-bold font-['Inter'] text-lg">
+              <span>Don de sang total</span>
+              <span>~45 min</span>
+            </div>
+            <div class="p-4 flex flex-col md:flex-row gap-6 bg-[#ffcc00]">
+               <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                  <img src="/images/Drop.svg" alt="Drop" class="w-full h-full object-contain" onerror="this.style.display='none'" />
+               </div>
+               <div class="flex-grow font-['Inter'] text-sm text-black flex flex-col justify-between">
+                 <p class="mb-4 pr-0 md:pr-12">Le plus courant. Le sang complet est prélevé puis séparé en composants, globules rouges, plasma, plaquettes, qui bénéficient à plusieurs patients.</p>
+                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-auto">
+                    <span class="font-bold text-xs text-[#0073e6]">Don proposé lors de cette collecte</span>
+                    <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-2 font-bold hover:bg-[#0073e6]/90 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">Faire le quiz</a>
+                 </div>
+               </div>
+            </div>
+            <div class="bg-[#ffcc00] p-4 border-t-2 border-black text-xs font-['Inter'] flex justify-between items-center">
+              <div>Volume<br/>Fréquence max.</div>
+              <div class="text-right font-bold">450 ml<br/>4x/an</div>
+            </div>
+          </div>
+
+          <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col opacity-75">
+            <div class="bg-[#fffbf1] px-4 py-3 border-b-2 border-black flex justify-between items-center font-bold font-['Inter'] text-lg">
+              <span>Don de plaquettes</span>
+              <span>~90 min</span>
+            </div>
+            <div class="p-4 flex flex-col md:flex-row gap-6 bg-[#fffbf1]">
+               <div class="w-16 h-16 flex items-center justify-center flex-shrink-0 opacity-50">
+                  <img src="/images/splash.svg" alt="Splash" class="w-full h-full object-contain" onerror="this.style.display='none'" />
+               </div>
+               <div class="flex-grow font-['Inter'] text-sm text-black flex flex-col justify-between">
+                 <p class="mb-4 pr-0 md:pr-12">Les plaquettes sont essentielles pour les patients atteints de leucémie ou en chimiothérapie. Prélevées par aphérèse, les globules rouges sont restitués.</p>
+                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-auto">
+                    <span class="font-bold text-xs text-red-600">Non disponible lors de cette collecte. Pour donner vos plaquettes, contactez directement le CTS.</span>
+                    <img src="/images/HUGLOGO.svg" alt="HUG Logo" class="h-8 object-contain shrink-0" onerror="this.style.display='none'" />
+                 </div>
+               </div>
+            </div>
+            <div class="bg-[#fffbf1] p-4 border-t-2 border-black text-xs font-['Inter'] flex justify-between items-center">
+              <div>Volume<br/>Fréquence max.</div>
+              <div class="text-right font-bold">450 ml<br/>4x/an</div>
+            </div>
+          </div>
+
+           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col opacity-75">
+            <div class="bg-[#fffbf1] px-4 py-3 border-b-2 border-black flex justify-between items-center font-bold font-['Inter'] text-lg">
+              <span>Don de moelle</span>
+              <span>Sur demande</span>
+            </div>
+            <div class="p-4 flex flex-col md:flex-row gap-6 bg-[#fffbf1]">
+               <div class="w-16 h-16 flex items-center justify-center flex-shrink-0 opacity-50">
+                  <img src="/images/Hand.svg" alt="Hand" class="w-full h-full object-contain" onerror="this.style.display='none'" />
+               </div>
+               <div class="flex-grow font-['Inter'] text-sm text-black flex flex-col justify-between">
+                 <p class="mb-4 pr-0 md:pr-12">Le don de cellules souches permet de traiter des maladies du sang graves. L'inscription au registre est ouverte aux 18-60 ans en bonne santé.</p>
+                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-auto">
+                    <span class="font-bold text-xs text-red-600">Non disponible lors de cette collecte. Pour vous inscrire au registre, rendez-vous sur le site de la Croix-Rouge suisse.</span>
+                    <img src="/images/CroixRouge.svg" alt="Croix Rouge Logo" class="h-8 object-contain shrink-0" onerror="this.style.display='none'" />
+                 </div>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Tab -->
+        <div v-show="activeTab === 'faq'" class="space-y-0">
+          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Questions fréquentes</h2>
+          <div class="bg-[#fffbf1]">
+             <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
+                <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                   <span class="font-['Inter'] text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
+                   <img src="/images/BlackChevronDown.svg" alt="Toggle" class="w-6 h-6 transform transition-transform duration-300 shrink-0" :class="{'rotate-180': openFaq === index}" onerror="this.style.display='none'" />
+                </button>
+                <div v-show="openFaq === index" class="pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#fffbf1]">
+                   <p>{{ item.a }}</p>
+                   <div v-if="item.button" class="mt-6">
+                      <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
+                         {{ item.button }}
+                      </a>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- Puis-je donner Tab -->
+        <div v-show="activeTab === 'eligibility'">
+          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Puis-je donner ?</h2>
+          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Vous voulez vérifier votre éligibilité avant le jour J ? Consultez l'ensemble des critères officiels du Centre de Transfusion Sanguine.</p>
+          <button class="bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 mb-12 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Consulter les critères</button>
+
+          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Ou répondez à notre quiz en moins de 5 minutes.</p>
+          <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Faire le quiz</a>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+
+const props = defineProps({
+  initialData: {
+    type: [Object, String],
+    default: () => ({})
+  }
+});
+
+const activeTab = ref('processus');
+
+const openFaq = ref(null);
+const toggleFaq = (index) => {
+  openFaq.value = openFaq.value === index ? null : index;
+};
+
+const faqList = [
+  {
+    q: "J'ai peur des aiguilles, est-ce que ça fait mal ?",
+    a: "La sensation est brève et comparable à une prise de sang. La plupart des donneurs sont surpris par la simplicité du geste."
+  },
+  {
+    q: "Je ne sais pas si je peux donner, comment le savoir ?",
+    a: "C'est normal de ne pas savoir. Notre quiz d'éligibilité vous répond en moins de 5 minutes.",
+    button: "Faire le quiz"
+  },
+  {
+    q: "Est-ce que ça prend beaucoup de temps ?",
+    a: "Le don dure 45 minutes en tout, pause collation comprise. Vous pouvez reprendre vos activités immédiatement après."
+  },
+  {
+    q: "Puis-je donner si je prends des médicaments ?",
+    a: "Cela dépend du médicament. Certains traitements sont compatibles avec le don, d'autres non. Le médecin présent le jour de la collecte peut vous renseigner. En cas de doute, contactez le CTS avant."
+  },
+  {
+    q: "Combien de fois par an puis-je donner ?",
+    a: "Pour le don de sang total, vous pouvez donner jusqu'à 4 fois par an, avec un intervalle minimum de 8 semaines entre chaque don."
+  },
+  {
+    q: "Est-ce que je peux manger avant de donner ?",
+    a: "Oui, et c'est même recommandé. Mangez normalement avant votre don et hydratez-vous bien. Évitez les repas trop gras dans les heures qui précèdent."
+  },
+  {
+    q: "Que se passe-t-il si je ne suis pas éligible le jour J ?",
+    a: "Aucun souci. L'éligibilité est évaluée le jour même par un médecin. Si vous ne pouvez pas donner ce jour-là, vous recevrez des informations sur les prochaines opportunités."
+  },
+  {
+    q: "Mes données médicales sont-elles confidentielles ?",
+    a: "Oui, entièrement. L'entretien médical est confidentiel et vos données sont traitées selon la législation suisse sur la protection des données."
+  }
+];
+
+const companySlug = ref('');
+const collectionId = ref('');
+
+onMounted(() => {
+  const parts = window.location.pathname.split('/');
+  companySlug.value = parts[2] || '';
+  collectionId.value = parts[3] || '';
+});
+
+const quizzUrl = computed(() => {
+  if (!companySlug.value) return '#';
+  return `/collection/${companySlug.value}/${collectionId.value}/quizz`;
+});
+
+</script>

@@ -41,7 +41,7 @@ class CoBrandController extends Controller
 
         $initialData = json_encode(['collection' => $collection, 'company' =>  $company]);
 
-        return view('cobrand.home', [
+        return view('cobrand.infos', [
             'companyName' => $company['name'],
             'initialData' => $initialData,
         ]);
@@ -58,7 +58,11 @@ class CoBrandController extends Controller
             return redirect()->route('cobrand.closed', ['company_name' => $company->slug]);
         }
 
-        $initialData = json_encode(['onedoc_link' => $collection->onedoc_link]);
+        $initialData = json_encode([
+            'onedoc_link' => $collection->onedoc_link,
+            'company' => $company,
+            'collection' => $collection
+        ]);
 
         return view('cobrand.quizz', [
             'companyName' => $company['name'],

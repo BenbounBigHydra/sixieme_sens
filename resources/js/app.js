@@ -11,6 +11,12 @@ import LabelVitrine from './components/LabelVitrine.vue';
 import CompaniesVitrine from './components/CompaniesVitrine.vue';
 import CollecteVitrine from './components/CollecteVitrine.vue';
 
+// Importation des composants Vue du co-branding
+import HeaderCobrand from './components/HeaderCobrand.vue';
+import HomeCobrand from './components/HomeCobrand.vue';
+import InfosCobrand from './components/InfosCobrand.vue';
+import QuizzCobrand from './components/QuizzCobrand.vue';
+
 // Initialisation de l'application Vue
 const app = createApp({});
 
@@ -22,6 +28,12 @@ app.component('trophees-vitrine', TropheesVitrine);
 app.component('label-vitrine', LabelVitrine);
 app.component('companies-vitrine', CompaniesVitrine);
 app.component('collecte-vitrine', CollecteVitrine);
+
+// Enregistrement global des composants co-branding
+app.component('header-cobrand', HeaderCobrand);
+app.component('home-cobrand', HomeCobrand);
+app.component('infos-cobrand', InfosCobrand);
+app.component('quizz-cobrand', QuizzCobrand);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');

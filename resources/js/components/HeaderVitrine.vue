@@ -1,6 +1,6 @@
 <template>
   <header class="w-full h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-4 md:px-8 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
 
       <a href="/" class="flex items-center h-full cursor-pointer hover:opacity-90 transition-opacity">
         <!-- Desktop Logo -->
