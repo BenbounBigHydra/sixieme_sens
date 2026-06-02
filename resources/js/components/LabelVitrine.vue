@@ -2,11 +2,11 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Part 1: Hero Section -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
       <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto lg:mx-0 h-6 w-auto object-contain mb-6 origin-center lg:origin-left" />
 
-        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] text-black leading-[1.1] mb-6 tracking-wide">
+        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
           Le Label Partenaire du<br class="hidden md:block"/> Don, c’est quoi ?
         </h1>
 
@@ -38,7 +38,7 @@
     </section>
 
     <!-- Part 2: Carousel -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16">
       <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-6 text-center md:text-left">
         <div class="w-full md:w-2/3 flex flex-col items-center md:items-start">
           <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
@@ -70,7 +70,7 @@
     </section>
 
     <!-- Part 3: Avantages -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] font-bold text-[40px] md:text-[56px] text-black mb-12 leading-none text-center md:text-left">Ce que le Label vous<br class="hidden md:block"> apporte.</h2>
 
@@ -112,7 +112,7 @@
     </section>
 
     <!-- Part 4: Comment l'obtenir -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Comment l’obtenir ?</h2>
       <p class="font-['Inter'] text-sm md:text-base text-black mb-12">Quatre étapes, pas plus.</p>
@@ -184,7 +184,7 @@ const companiesList = computed(() => {
   } else {
     list = props.initialData || [];
   }
-  
+
   // Duplique la liste pour avoir plus d'éléments dans le carrousel (pour l'effet de défilement)
   return [...list, ...list, ...list];
 });

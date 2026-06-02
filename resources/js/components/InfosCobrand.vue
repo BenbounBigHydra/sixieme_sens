@@ -7,8 +7,8 @@
       </h1>
     </div>
 
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 flex flex-col md:flex-row gap-12 pb-24">
-      
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 flex flex-col md:flex-row gap-12 pb-24">
+
       <!-- Sidebar -->
       <aside class="w-full md:w-1/4 md:border-r-[3px] md:border-black md:pr-12 lg:pr-16 shrink-0">
         <nav class="flex flex-col font-['Jersey_20'] text-[28px] tracking-wide space-y-4">
@@ -27,7 +27,7 @@
 
       <!-- Main Content -->
       <main class="w-full md:w-3/4">
-        
+
         <!-- Processus Tab -->
         <div v-show="activeTab === 'processus'" class="space-y-6">
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Comment se déroule un don</h2>
@@ -52,7 +52,7 @@
         <!-- Types de don Tab -->
         <div v-show="activeTab === 'types'" class="space-y-6">
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Types de don</h2>
-          
+
           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
             <div class="bg-[#ffcc00] px-4 py-3 border-b-2 border-black flex justify-between items-center font-bold font-['Inter'] text-lg">
               <span>Don de sang total</span>
@@ -122,13 +122,13 @@
         <!-- FAQ Tab -->
         <div v-show="activeTab === 'faq'" class="space-y-0">
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Questions fréquentes</h2>
-          <div class="bg-[#b3d9ff] border-[3px] border-[#0073e6] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-             <div v-for="(item, index) in faqList" :key="index" class="border-b-[3px] border-[#86c0f9] last:border-b-0">
-                <button @click="toggleFaq(index)" class="w-full flex items-center justify-between p-6 md:px-8 text-left hover:bg-[#a3cfff] transition-colors focus:outline-none">
-                   <span class="font-['Inter'] font-bold text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
+          <div class="bg-[#fffbf1]">
+             <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
+                <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                   <span class="font-['Inter'] text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
                    <img src="/images/BlackChevronDown.svg" alt="Toggle" class="w-6 h-6 transform transition-transform duration-300 shrink-0" :class="{'rotate-180': openFaq === index}" onerror="this.style.display='none'" />
                 </button>
-                <div v-show="openFaq === index" class="px-6 md:px-8 pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#a3cfff]">
+                <div v-show="openFaq === index" class="pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#fffbf1]">
                    <p>{{ item.a }}</p>
                    <div v-if="item.button" class="mt-6">
                       <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
@@ -145,7 +145,7 @@
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Puis-je donner ?</h2>
           <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Vous voulez vérifier votre éligibilité avant le jour J ? Consultez l'ensemble des critères officiels du Centre de Transfusion Sanguine.</p>
           <button class="bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 mb-12 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Consulter les critères</button>
-          
+
           <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Ou répondez à notre quiz en moins de 5 minutes.</p>
           <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Faire le quiz</a>
         </div>

@@ -1,14 +1,14 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-hidden">
-    
+
     <!-- Part 1 -->
-    <section class="relative w-full pt-12 md:pt-32 pb-16">
+    <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
       <!-- Background Union.png -->
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img src="/images/Union.png" alt="Union Background" class="w-full h-full object-cover object-right transform scale-90 md:scale-[0.85] origin-right" onerror="this.style.display='none'" />
       </div>
 
-      <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 relative z-10 flex flex-col md:flex-row">
+      <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 relative z-10 flex flex-col md:flex-row">
         <div class="w-full md:w-1/2 lg:w-5/12 bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-col justify-center">
           <!-- Collecte HEIG-VD -->
           <h1 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
@@ -33,9 +33,9 @@
     </section>
 
     <!-- Part 2: Pourquoi donner son sang -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 relative z-10">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
-        
+
         <!-- Left Column -->
         <div class="w-full lg:w-1/2 flex flex-col">
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
@@ -61,7 +61,7 @@
              <div class="text-right mb-6">
                 <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
              </div>
-             
+
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
                <template v-for="i in 150" :key="i">
@@ -76,7 +76,7 @@
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
                </template>
              </div>
-             
+
              <!-- Foreground Overlay Grid (Center White Square) -->
              <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
@@ -106,7 +106,7 @@
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
                </template>
              </div>
-             
+
              <!-- Foreground Overlay Grid Mobile -->
              <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
@@ -117,7 +117,7 @@
                </div>
              </div>
           </div>
-          
+
           <div class="w-full lg:w-auto text-center lg:text-right text-xs text-black font-['Inter'] mt-4">
             Chiffres renseignés sur la base du nombre d’employés de HEIG-VD.
           </div>
@@ -127,7 +127,7 @@
     </section>
 
     <!-- Part 3: Ils témoignent -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
@@ -136,7 +136,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
+
         <!-- Block 1 -->
         <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
@@ -177,7 +177,7 @@
     </section>
 
     <!-- Part 4: Questions fréquentes -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 mb-20 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 mb-20 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
@@ -185,13 +185,13 @@
         </h2>
       </div>
 
-      <div class="bg-[#b3d9ff] border-[3px] border-[#0073e6] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-         <div v-for="(item, index) in faqList" :key="index" class="border-b-[3px] border-[#86c0f9] last:border-b-0">
-            <button @click="toggleFaq(index)" class="w-full flex items-center justify-between p-6 md:px-8 text-left hover:bg-[#a3cfff] transition-colors focus:outline-none">
-               <span class="font-['Inter'] font-bold text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
+      <div class="bg-[#fffbf1]">
+         <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
+            <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+               <span class="font-['Inter'] text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
                <img src="/images/BlackChevronDown.svg" alt="Toggle" class="w-6 h-6 transform transition-transform duration-300 shrink-0" :class="{'rotate-180': openFaq === index}" onerror="this.style.display='none'" />
             </button>
-            <div v-show="openFaq === index" class="px-6 md:px-8 pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#a3cfff]">
+            <div v-show="openFaq === index" class="pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#fffbf1]">
                <p>{{ item.a }}</p>
                <div v-if="item.button" class="mt-6">
                   <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
