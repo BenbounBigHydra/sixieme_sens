@@ -1,11 +1,11 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
       
       <!-- Header text -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] text-black leading-none tracking-wide mb-4">
+        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-4 tracking-wide">
           Organiser une collecte
         </h1>
         <p class="font-['Inter'] text-sm md:text-base text-black w-full">

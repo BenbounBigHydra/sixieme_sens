@@ -1,11 +1,11 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-8">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-8">
       
       <!-- Titre de la page -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] text-black leading-[1.1] mb-6 tracking-wide">
+        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
           Entreprises partenaires
         </h1>
       </div>
