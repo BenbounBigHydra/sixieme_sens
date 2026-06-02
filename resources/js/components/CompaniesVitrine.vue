@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
     <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-8">
-      
+
       <!-- Titre de la page -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
@@ -49,15 +49,15 @@
       <div class="relative z-10 overflow-hidden" style="min-height: 400px;">
         <transition :name="transitionName" mode="out-in">
           <div :key="currentPage" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-6 w-full px-4 md:px-0">
-            <div v-for="company in paginatedCompanies" :key="company.name" 
+            <div v-for="company in paginatedCompanies" :key="company.name"
                  @click="toggleCompanyInfo(company.name)"
                  class="relative border-[4px] border-[#0073e6] aspect-square flex items-center justify-center p-4 cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6] group"
                  :class="activeCompany === company.name ? 'bg-[#0073e6]' : 'bg-[#fffbf1]'">
               <!-- Default image -->
-              <img :src="'/' + company.logo" :alt="company.name" 
+              <img :src="'/' + company.logo" :alt="company.name"
                    class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300"
                    :class="activeCompany === company.name ? 'opacity-0' : 'md:group-hover:opacity-0'" />
-              
+
               <!-- Hover content -->
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
                    :class="activeCompany === company.name ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
@@ -71,15 +71,15 @@
               </div>
             </div>
             <!-- Empty placeholders to maintain grid structure -->
-            <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-'+i" 
+            <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-'+i"
                  @click="toggleCompanyInfo('empty-'+i)"
                  class="relative border-[4px] border-[#0073e6] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6]"
                  :class="activeCompany === 'empty-'+i ? 'bg-[#0073e6]' : 'bg-[#fffbf1]'">
               <!-- Default image -->
-              <img src="/images/BCGE.png" alt="Company placeholder" 
+              <img src="/images/BCGE.png" alt="Company placeholder"
                    class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300"
                    :class="activeCompany === 'empty-'+i ? 'opacity-0' : 'md:group-hover:opacity-0'" />
-              
+
               <!-- Hover content -->
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
                    :class="activeCompany === 'empty-'+i ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
@@ -99,15 +99,15 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        
+
         <div class="flex items-center gap-6 font-['Jersey_20'] text-4xl">
-          <button v-for="p in visiblePages" :key="p" @click="currentPage = p" 
-            class="transition-colors px-2" 
+          <button v-for="p in visiblePages" :key="p" @click="currentPage = p"
+            class="transition-colors px-2"
             :class="p === currentPage ? 'text-[#0073e6]' : 'text-black hover:text-[#0073e6]'">
             {{ p }}
           </button>
         </div>
-        
+
         <button @click="nextPage" class="text-[#0073e6] hover:opacity-70 transition-opacity" :disabled="currentPage === totalPages" :class="{'opacity-30 cursor-not-allowed': currentPage === totalPages}">
           <!-- right arrow SVG -->
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">

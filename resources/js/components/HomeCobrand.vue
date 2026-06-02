@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-hidden">
-    
+
     <!-- Part 1 -->
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
       <!-- Background Union.png -->
@@ -35,7 +35,7 @@
     <!-- Part 2: Pourquoi donner son sang -->
     <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 relative z-10">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
-        
+
         <!-- Left Column -->
         <div class="w-full lg:w-1/2 flex flex-col">
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
@@ -61,7 +61,7 @@
              <div class="text-right mb-6">
                 <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
              </div>
-             
+
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
                <template v-for="i in 150" :key="i">
@@ -76,7 +76,7 @@
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
                </template>
              </div>
-             
+
              <!-- Foreground Overlay Grid (Center White Square) -->
              <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
@@ -106,7 +106,7 @@
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
                </template>
              </div>
-             
+
              <!-- Foreground Overlay Grid Mobile -->
              <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
@@ -117,7 +117,7 @@
                </div>
              </div>
           </div>
-          
+
           <div class="w-full lg:w-auto text-center lg:text-right text-xs text-black font-['Inter'] mt-4">
             Chiffres renseignés sur la base du nombre d’employés de HEIG-VD.
           </div>
@@ -136,7 +136,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
+
         <!-- Block 1 -->
         <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">

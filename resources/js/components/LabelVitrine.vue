@@ -184,7 +184,7 @@ const companiesList = computed(() => {
   } else {
     list = props.initialData || [];
   }
-  
+
   // Duplique la liste pour avoir plus d'éléments dans le carrousel (pour l'effet de défilement)
   return [...list, ...list, ...list];
 });

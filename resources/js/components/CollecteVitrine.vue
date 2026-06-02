@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
     <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
-      
+
       <!-- Header text -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
@@ -23,7 +23,7 @@
       <!-- Form -->
       <!-- Form -->
       <form v-else @submit.prevent="submitForm" class="w-full font-['Inter'] text-black flex flex-col gap-6">
-        
+
         <!-- Row 1 -->
         <div class="flex flex-col md:flex-row gap-6 md:gap-12">
           <!-- Nom de l'entreprise -->
@@ -34,7 +34,7 @@
               <span class="text-red-500 font-bold ml-2 flex-shrink-0">*</span>
             </div>
           </div>
-          
+
           <!-- Nombre d'employés -->
           <div class="flex-1 flex flex-col gap-2">
             <label class="text-sm md:text-base text-left">Nombre d'employés</label>
@@ -51,7 +51,7 @@
           <!-- Mail -->
           <div class="flex-1 flex flex-col gap-2">
             <label class="text-sm md:text-base text-left">Mail</label>
-            <div :class="['w-full border-[2px] px-4 shadow-[8px_8px_0px_0px_#0073e6] flex justify-between items-center h-[60px] transition-colors', 
+            <div :class="['w-full border-[2px] px-4 shadow-[8px_8px_0px_0px_#0073e6] flex justify-between items-center h-[60px] transition-colors',
                          showEmailError ? 'border-[#e62b1d] bg-[#fad7d5] text-[#e62b1d]' : 'border-black bg-[#fffbf1] text-black focus-within:ring-2 focus-within:ring-[#0073e6]']">
               <input type="email" v-model="form.mail" @input="validateEmail" class="flex-1 bg-transparent focus:outline-none w-full" />
               <span class="font-bold ml-2 flex-shrink-0" :class="showEmailError ? 'text-[#e62b1d]' : 'text-red-500'">*</span>
@@ -79,14 +79,14 @@
 
         <!-- Submit Button -->
         <div>
-          <button type="submit" 
+          <button type="submit"
             :disabled="!isFormValid"
-            :class="['font-[\'Jersey_20\'] tracking-wide px-20 py-4 transition-colors text-black text-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto min-w-[350px]', 
+            :class="['font-[\'Jersey_20\'] tracking-wide px-20 py-4 transition-colors text-black text-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto min-w-[350px]',
                      isFormValid ? 'bg-[#0073e6] hover:bg-[#0073e6]/90' : 'bg-[#e5e7eb] cursor-not-allowed']">
             Envoyer ma demande
           </button>
         </div>
-        
+
       </form>
 
     </section>
@@ -120,9 +120,9 @@ const showEmailError = computed(() => {
 
 const isFormValid = computed(() => {
   const isEmployesValid = form.value.employes.trim() !== '' && !isNaN(form.value.employes) && parseInt(form.value.employes) >= 1000;
-  return form.value.nom.trim() !== '' && 
+  return form.value.nom.trim() !== '' &&
          isEmployesValid &&
-         form.value.mail.trim() !== '' && 
+         form.value.mail.trim() !== '' &&
          isEmailValid.value;
 });
 
