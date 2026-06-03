@@ -17,7 +17,7 @@
             Chaque année, les Trophées HUG récompensent les entreprises genevoises selon trois critères distincts : mobilisation, fidélité et rigueur.
           </p>
           
-          <a href="/contact" class="hidden lg:inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+          <a href="/contact" class="hidden lg:inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all">
             Rejoindre le mouvement
           </a>
           
@@ -36,7 +36,7 @@
 
         <!-- Mobile Button & Arrow -->
         <div class="w-full flex flex-col items-center justify-center order-3 lg:hidden mt-2">
-          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Inter'] text-base md:text-xl font-bold tracking-wide px-8 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all">
             Rejoindre le mouvement
           </a>
           <div class="mt-8">
@@ -109,7 +109,7 @@
           
           <!-- Desktop Filter Button (Above Score) -->
           <div class="hidden md:block relative">
-            <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+            <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all">
               Filtres
               <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-4 h-4" />
             </button>
@@ -124,7 +124,7 @@
         
         <!-- Mobile Filter Button -->
         <div class="mt-6 md:hidden relative w-full flex justify-center">
-          <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black">
+          <button @click="isFilterOpen = !isFilterOpen" class="bg-[#0073e6] text-white font-['Inter'] px-6 py-2 flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border-2 border-black transition-all">
             Filtres
             <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-4 h-4" />
           </button>
@@ -197,41 +197,41 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Block 1 -->
-        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left">La distinction publique</h3>
+        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left w-full">La distinction publique</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Vos collaborateurs, vos partenaires et les médias genevois voient votre nom en tête du palmarès.</p>
           </div>
         </div>
 
         <!-- Block 2 -->
-        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left">Un symbole fort</h3>
+        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left w-full">Un symbole fort</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Un trophée physique remis par le Directeur Général des HUG lors d'une cérémonie officielle.</p>
           </div>
         </div>
 
         <!-- Block 3 -->
-        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left">Une caisse de résonance</h3>
+        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left w-full">Une caisse de résonance</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Un communiqué de presse co-signé HUG diffusé auprès des médias genevois.</p>
           </div>
         </div>
 
         <!-- Block 4 -->
-        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left">Une présence permanente</h3>
+        <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] text-black leading-tight text-center md:text-left w-full">Une présence permanente</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Votre entreprise en première page du site pendant un an.</p>
           </div>
         </div>

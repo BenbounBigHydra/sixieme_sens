@@ -76,35 +76,35 @@
 
       <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left">Une reconnaissance officielle</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève — l'institution de référence en matière de santé publique dans le canton.</p>
           </div>
         </div>
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left">Un actif RSE concret</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Le label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse — une preuve.</p>
           </div>
         </div>
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left">De la visibilité</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
           </div>
         </div>
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left">Un kit de comm' prêt à l'emploi</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de comm' prêt à l'emploi</h3>
           </div>
-          <div class="p-6 text-center md:text-left">
+          <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Dès l'obtention du label, vous recevez un kit de communication complet, visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux, tout adapté à votre identité.</p>
           </div>
         </div>

@@ -18,7 +18,7 @@
         <a :href="`/collection/${companySlug}/${collectionId}/infos`" 
            class="hover:text-[#0073E6]/80 transition-colors font-bold text-xl"
            :class="isInfosPage ? 'text-[#0073E6]' : 'text-black'">Informations</a>
-        <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 rounded hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           Donner mon sang
         </a>
       </nav>
