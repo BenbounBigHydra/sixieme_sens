@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Admin - HUG</title>
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Jersey+20&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-
+<body class="bg-[#fffbf1] m-0 p-0 text-black">
     <div id="app">
-        <login-component csrf-token="{{ csrf_token() }}"></login-component>
+        @php
+            $errorsArray = $errors->all();
+        @endphp
+        <login-admin 
+            csrf-token="{{ csrf_token() }}" 
+            login-route="{{ route('login') }}"
+            :errors='@json($errorsArray)'
+        ></login-admin>
     </div>
-
-    <form action="/login" method="POST">
-        @csrf <label>Email :</label>
-        <input type="email" name="email" value="admin@hug.ch" required><br><br>
-
-        <label>Mot de passe :</label>
-        <input type="password" name="password" value="password" required><br><br>
-
-        <button type="submit">Tester la connexion</button>
-    </form>
-
-    @vite(['resources/js/app.js'])
 </body>
 </html>

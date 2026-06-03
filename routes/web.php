@@ -25,4 +25,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     // Toutes ces routes nécessitent d'être connecté
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/collections', [AdminController::class, 'collections'])->name('collections');
+    Route::get('/companies', [AdminController::class, 'companies'])->name('companies');
+    Route::get('/leaderboard', [AdminController::class, 'leaderboard'])->name('leaderboard');
+    Route::get('/editorial-content', [AdminController::class, 'editorialContent'])->name('editorialContent');
+
 });
