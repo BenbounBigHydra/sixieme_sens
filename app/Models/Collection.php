@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 class Collection extends Model
 {
     protected $fillable = [
-        'id_company',
+        'company_id',
         'day_start',
         'day_end',
         'location',

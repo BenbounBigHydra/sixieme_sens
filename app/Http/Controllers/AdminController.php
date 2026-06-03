@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Collection;
 use App\services\CompanyStatsService;
 use App\services\AdminService;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
@@ -27,7 +28,7 @@ class AdminController extends Controller
     public function collections()
     {
         $data = [
-            //Todo : Récupérer les données nécessaires pour la page des collectes
+            'collections' => AdminService::getCollectionsByStatus(),
         ];
 
         return view('admin.collections', ['initialData' => json_encode($data)]);
@@ -36,7 +37,7 @@ class AdminController extends Controller
     public function companies()
     {
         $data = [
-            //Todo : Récupérer les données nécessaires pour la page des entreprises
+            'companies' => AdminService::getCompaniesListing(),
         ];
 
         return view('admin.companies', ['initialData' => json_encode($data)]);
@@ -44,8 +45,12 @@ class AdminController extends Controller
 
     public function leaderboard()
     {
+        $year = request()->query('year', Carbon::now()->year);
+
         $data = [
-            //Todo : Récupérer les données nécessaires pour la page du leaderboard
+            'gold' => CompanyStatsService::getGoldWinnerData($year),
+            'ambassador' => CompanyStatsService::getAmbassadorData($year),
+            'conviction' => CompanyStatsService::getConvictionData($year),
         ];
 
         return view('admin.leaderboard', ['initialData' => json_encode($data)]);
