@@ -16,15 +16,15 @@ return new class extends Migration
             $table->foreignId('company_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('location')->nullable();
-            $table->dateTime('day_start')->nullable();
-            $table->dateTime('day_end')->nullable();
-            $table->time('hour_start')->nullable();
-            $table->time('hour_end')->nullable();
-            $table->integer('nb_employee')->nullable();
+            $table->string('location');
+            $table->dateTime('day_start');
+            $table->dateTime('day_end');
+            $table->time('hour_start');
+            $table->time('hour_end');
+            $table->integer('nb_employee');
             $table->integer('nb_registered')->nullable();
             $table->integer('nb_blood_pouch')->nullable();
-            $table->string('onedoc_link')->nullable();
+            $table->string('onedoc_link');
             $table->timestamps();
         });
     }

@@ -161,7 +161,7 @@ class CompanyStatsService
         $years = $company->collections()
             ->where('day_end', '<', now())
             ->get()
-            ->map(fn($c) => Carbon::parse($c->day_start)->year)
+            ->map(fn($c) => Carbon::parse($c->day_end)->year)
             ->unique()
             ->sort()
             ->values();
