@@ -7,7 +7,7 @@
         <img src="/images/hug_icon.png" alt="Logo HUG Desktop" class="hidden md:block h-12 w-auto object-contain" />
         <!-- Mobile Logo HUG -->
         <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-12 w-auto object-contain" />
-        
+
         <span class="text-xl font-bold mx-2 font-['Inter'] text-black font-light">x</span>
 
         <!-- Company Logo -->
@@ -15,14 +15,14 @@
       </a>
 
       <nav class="hidden md:flex items-center space-x-8 text-2xl">
-        <a :href="`/collection/${companySlug}/${collectionId}/infos`" 
+        <a :href="`/collection/${companySlug}/${collectionId}/infos`"
            class="hover:text-[#0073E6]/80 transition-colors font-bold text-xl"
            :class="isInfosPage ? 'text-[#0073E6]' : 'text-black'">Informations</a>
-        <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 rounded hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <a :href="`/collection/${companySlug}/${collectionId}/quizz`" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           Donner mon sang
         </a>
       </nav>
-      
+
       <!-- Mobile menu button -->
       <div class="md:hidden flex items-center">
         <button @click="isMenuOpen = !isMenuOpen" class="text-[#0073E6] focus:outline-none">
@@ -33,7 +33,7 @@
       </div>
 
     </div>
-    
+
     <!-- Mobile Menu -->
     <div v-show="isMenuOpen" class="absolute top-24 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg">
       <a :href="`/collection/${companySlug}/${collectionId}/infos`" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">

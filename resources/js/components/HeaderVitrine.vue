@@ -13,7 +13,7 @@
         <a href="/" :class="currentPath === '/' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Accueil</a>
         <a href="/trophees" :class="currentPath === '/trophees' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Trophées</a>
         <a href="/label" :class="currentPath === '/label' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Label</a>
-        <a href="/contact" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 rounded hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <a href="/contact" class="bg-[#0073E6] text-[#FFFFFF] px-6 py-2 hover:bg-[#0073E6]/90 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           Organiser une collecte
         </a>
       </nav>
