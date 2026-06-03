@@ -151,7 +151,7 @@
                 <!-- Arrow for desktop (pointing right towards Roby) -->
                 <div class="hidden md:block absolute top-10 -right-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-l-[15px] border-l-black"></div>
                 <div class="hidden md:block absolute top-[43px] -right-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-l-[12px] border-l-[#1a81e7] z-10"></div>
-                
+
                 <!-- Arrow for mobile (pointing down towards Roby) -->
                 <div class="block md:hidden absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
                 <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>

@@ -10,7 +10,7 @@
 
       <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 relative z-10 flex flex-col md:flex-row">
         <div class="w-full lg:w-7/12 bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-col md:flex-row items-center justify-start gap-8 md:gap-16 min-h-[350px]">
-          
+
           <!-- Text Content -->
           <div class="flex flex-col justify-center h-full">
             <h1 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
@@ -34,13 +34,13 @@
 
           <!-- Roby Mascot -->
           <div class="relative flex items-center justify-center shrink-0 h-full mt-8 md:mt-0"
-               @mouseenter="handleRobyHeroHover(true)" 
-               @mouseleave="handleRobyHeroHover(false)" 
+               @mouseenter="handleRobyHeroHover(true)"
+               @mouseleave="handleRobyHeroHover(false)"
                @click="handleRobyHeroClick">
             <img src="/images/dono_smiling.png" alt="Roby" class="h-48 md:h-64 object-contain cursor-pointer transition-transform hover:scale-105 origin-bottom" />
-            
+
             <!-- Speech Bubble -->
-            <div v-show="isRobyHeroHovered || isRobyHeroClicked" 
+            <div v-show="isRobyHeroHovered || isRobyHeroClicked"
                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 md:mb-0 md:right-auto md:left-[90%] md:bottom-auto md:top-1/4 md:-translate-x-0 md:ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[280px] z-50 pointer-events-none">
               <p class="font-['Jersey_20'] tracking-wide text-xl leading-tight text-left">
                 Salut ! Je suis Roby, bienvenue sur le<br/>
@@ -48,17 +48,17 @@
                 donner mon sang, tout comme toi. On<br/>
                 part en voyage ?
               </p>
-              
+
               <!-- Arrow for desktop (left) -->
               <div class="hidden md:block absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
               <div class="hidden md:block absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
-              
+
               <!-- Arrow for mobile (bottom) -->
               <div class="block md:hidden absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
               <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -245,7 +245,7 @@
             <!-- Arrow for desktop (pointing right towards Roby) -->
             <div class="hidden md:block absolute top-10 -right-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-l-[15px] border-l-black"></div>
             <div class="hidden md:block absolute top-[43px] -right-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-l-[12px] border-l-[#1a81e7] z-10"></div>
-            
+
             <!-- Arrow for mobile (pointing down towards Roby) -->
             <div class="block md:hidden absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
             <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>

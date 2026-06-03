@@ -186,7 +186,7 @@
           <div class="absolute -left-6 bottom-[70%] text-xs font-bold font-inter">8</div>
           <div class="absolute -left-8 bottom-[90%] text-xs font-bold font-inter">10</div>
           <div class="absolute -left-6 -bottom-2 text-xs font-bold font-inter">0</div>
-          
+
           <!-- Bars -->
           <div class="absolute inset-0 flex items-end justify-around px-4">
             <div v-for="(month, i) in monthsData" :key="i" class="w-16 flex flex-col items-center cursor-pointer" @mouseenter="hoveredMonthIndex = i" @mouseleave="hoveredMonthIndex = null">
@@ -196,7 +196,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Hover Tooltip -->
           <div v-if="hoveredMonthIndex !== null && monthsData[hoveredMonthIndex].label === 'Juin'" class="absolute top-[105%] left-0 w-full bg-[#fffbf1] border border-black z-40 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <div class="p-4">
@@ -207,7 +207,7 @@
                    <!-- Arrow end -->
                    <div class="absolute -right-[1px] -top-[4px] w-0 h-0 border-y-[4px] border-y-transparent border-l-[8px] border-l-black"></div>
                 </div>
-                
+
                 <!-- Events -->
                 <!-- HEIG -->
                 <div class="absolute left-[15%] bottom-[20px] flex flex-col items-center -translate-x-1/2">
@@ -226,7 +226,7 @@
                    </div>
                    <div class="w-[1px] h-[55px] bg-black absolute bottom-0"></div>
                 </div>
-                
+
                 <!-- Unil -->
                 <div class="absolute left-[85%] bottom-[20px] flex flex-col items-center -translate-x-1/2">
                    <span class="text-[10px] font-inter text-black absolute bottom-[55px] whitespace-nowrap">27.06.2026</span>
@@ -238,7 +238,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
         <div class="h-16"></div> <!-- Spacer for labels -->
       </section>
@@ -254,7 +254,7 @@
           <div class="p-8 flex flex-col items-center flex-grow">
             <div class="font-jersey text-6xl text-black">{{ participationRatio.main || '21%' }}</div>
             <div class="font-jersey text-sm text-black mb-8">De participation moyenne</div>
-            
+
             <div class="w-full space-y-4 font-inter text-sm">
               <div v-for="(item, i) in participationRatio.companies || mockParticipationCompanies" :key="i" class="flex justify-between items-center border-b border-gray-300 pb-2">
                 <div class="flex items-center space-x-3">
@@ -277,7 +277,7 @@
           <div class="p-8 flex flex-col items-center flex-grow">
             <div class="font-jersey text-6xl text-black">{{ rigorRatio.main || '80%' }}</div>
             <div class="font-jersey text-sm text-black mb-8">De participation moyenne</div>
-            
+
             <div class="w-full space-y-4 font-inter text-sm">
               <div v-for="(item, i) in rigorRatio.companies || mockRigorCompanies" :key="i" class="flex justify-between items-center border-b border-gray-300 pb-2">
                 <div class="flex items-center space-x-3">
@@ -296,7 +296,7 @@
 
     <!-- Modals -->
     <div v-if="activeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="closeModal">
-      
+
       <!-- Clôture Modal -->
       <div v-if="activeModal === 'cloture'" class="bg-[#fffbf1] border-[10px] border-[#5C629E] w-full max-w-[600px] p-8 relative">
         <button @click="closeModal" class="absolute top-6 right-6 flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
@@ -304,7 +304,7 @@
         </button>
         <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte?.company_name || 'HEIG-VD' }}</h2>
         <p class="font-['Jersey_20'] text-2xl text-black mb-8 tracking-wide">Collecte du {{ selectedCollecte?.date || '02.03.2026' }}</p>
-        
+
         <div class="space-y-6 mb-8">
           <div>
             <label class="block font-inter text-base mb-2">Nombre d'inscrits</label>
@@ -321,7 +321,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="flex space-x-4">
           <button @click="closeModal" class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-6 py-2.5 font-inter font-medium w-32 hover:bg-gray-50">Annuler</button>
           <button @click="closeModal" class="bg-[#5bb124] text-white px-6 py-2.5 flex items-center justify-center font-inter font-medium w-32 hover:bg-green-600">
@@ -337,7 +337,7 @@
         </button>
         <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte?.company_name || 'HEIG-VD' }}</h2>
         <p class="font-['Jersey_20'] text-2xl text-black mb-8 tracking-wide">Collecte du {{ selectedCollecte?.date || '02.07.2026' }}</p>
-        
+
         <div class="grid grid-cols-2 gap-8 mb-6">
           <div>
             <label class="block font-inter text-base mb-2">Nombre d'employés</label>
@@ -354,7 +354,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="flex items-end gap-6 mb-12">
           <div class="bg-[#f2faf2] px-6 py-3 flex justify-center items-center space-x-3 w-[160px] h-[46px]">
             <span class="text-[#3b803b] font-inter font-medium">One-doc</span>
@@ -382,7 +382,7 @@
           Vous êtes sur le point de supprimer la collecte de {{ selectedCollecte?.company_name || 'HEIG-VD' }} du {{ selectedCollecte?.date || '02.03.2026' }}.<br/>
           Êtes-vous sur de vouloir procéder ?
         </p>
-        
+
         <div class="mb-10">
           <label class="block font-inter text-lg mb-2">Inscrire "supprimer" pour procéder</label>
           <div class="relative">
@@ -390,12 +390,12 @@
             <span class="absolute right-3 top-1/2 -translate-y-1/2">*</span>
           </div>
         </div>
-        
+
         <div class="flex justify-end mt-4">
           <button @click="closeModal" class="bg-[#E4534B] text-white px-8 py-3 font-inter text-lg font-medium hover:bg-red-600 transition-colors">Supprimer</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 </template>
