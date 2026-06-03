@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Collection;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
+use App\Services\CompanyStatsService;
+use App\Models\Company;
 
 class AdminService
 {
@@ -20,7 +22,7 @@ class AdminService
             ->where(function ($query) {
                 // Filtre si l'un des deux (ou les deux) champs est resté NULL en BDD
                 $query->whereNull('nb_registered')
-                      ->orWhereNull('nb_blood_pouch');
+                    ->orWhereNull('nb_blood_pouch');
             })
             ->get();
 
@@ -100,10 +102,10 @@ class AdminService
                 'ratio'   => round($averageRatio, 4),
             ];
         })
-        ->sortBy('ratio')
-        ->take(5)
-        ->values()
-        ->all();
+            ->sortBy('ratio')
+            ->take(5)
+            ->values()
+            ->all();
 
         // 4. On retourne le tout dans le tableau final 'participationRatio'
         return [
@@ -153,15 +155,136 @@ class AdminService
                 'ratio'   => round($averageRatio, 4),
             ];
         })
-        ->sortBy('ratio')
-        ->take(5)
-        ->values()
-        ->all();
+            ->sortBy('ratio')
+            ->take(5)
+            ->values()
+            ->all();
 
         // 4. Retourne la structure identique à participationRatio
         return [
             'globalAverage'   => round($globalAverage, 4), // Taux de rigueur global annuel
             'lowestCompanies' => $lowestCompanies          // Les 5 ratios les plus faibles
+        ];
+    }
+
+    /**
+     * Récupère la liste de toutes les entreprises avec leurs compteurs de collectes
+     * ainsi que la liste de leurs trophées et labels obtenus.
+     *
+     * @return array
+     */
+    public static function getCompaniesListing(): array
+    {
+        $now = Carbon::now();
+
+        // 1. Récupération de toutes les entreprises avec le compte ciblé des collectes
+        $companies = Company::withCount([
+            'collections as to_come_count' => function ($query) use ($now) {
+                $query->where('day_end', '>', $now);
+            },
+            'collections as to_close_count' => function ($query) use ($now) {
+                $query->where('day_end', '<', $now)
+                    ->where(function ($q) {
+                        $q->whereNull('nb_registered')->orWhereNull('nb_blood_pouch');
+                    });
+            },
+            'collections as past_count' => function ($query) use ($now) {
+                $query->where('day_end', '<', $now)
+                    ->whereNotNull('nb_registered')
+                    ->whereNotNull('nb_blood_pouch');
+            }
+        ])
+            ->orderBy('name', 'asc')
+            ->get();
+
+        // 2. Transformation des données selon le format optimal demandé
+        return $companies->map(function (Company $company) {
+
+            $awardsData = CompanyStatsService::getCompanyAwards($company);
+
+            $trophies = [];
+            $labels = [];
+
+            if (is_array($awardsData)) {
+                foreach ($awardsData as $year => $rewards) {
+                    // 1. Structure Trophées : Groupés par année [Année => ['type1', 'type2']]
+                    if (!empty($rewards['gold'])) {
+                        $trophies[$year][] = 'gold';
+                    }
+                    if (!empty($rewards['conviction'])) {
+                        $trophies[$year][] = 'conviction';
+                    }
+                    if (!empty($rewards['ambassador'])) {
+                        $trophies[$year][] = 'ambassador';
+                    }
+
+                    // 2. Structure Labels : Tableau plat d'années [2020, 2021, ...]
+                    if (!empty($rewards['label'])) {
+                        $labels[] = (int) $year;
+                    }
+                }
+            }
+
+            // Retour du tableau final nettoyé
+            return [
+                'id'          => $company->id,
+                'name'        => $company->name,
+                'slug'        => $company->slug,
+                'logo'        => $company->logo,
+                'color'       => $company->color,
+                'collections' => [ // Renommé 'stats' en 'collections'
+                    'to_come'  => $company->to_come_count,
+                    'to_close' => $company->to_close_count,
+                    'past'     => $company->past_count,
+                ],
+                'trophies'    => $trophies, // Objet associatif { "2023": ["gold", "conviction"] }
+                'labels'      => $labels,   // Tableau plat [2020, 2021, 2022]
+            ];
+        })->toArray();
+    }
+
+    public static function getCollectionsByStatus(int $year = null): ?array
+    {
+        $now = Carbon::now();
+        $year = $year ?? Carbon::now()->year;
+
+        $collections = Collection::with('company')
+            ->whereYear('day_start', $year)
+            ->orderBy('day_start', 'asc')
+            ->get();
+
+        // Collectes à clore (passées + incomplètes)
+        $toClose = $collections->filter(function ($collection) use ($now) {
+            $isPast = Carbon::parse($collection->day_end)->isPast();
+            $isIncomplete = is_null($collection->nb_registered) || is_null($collection->nb_blood_pouch);
+
+            return $isPast && $isIncomplete;
+        })->values()->toArray();
+
+        // Collectes en cours (day_start <= aujourd'hui <= day_end)
+        $ongoing = $collections->filter(function ($collection) use ($now) {
+            return Carbon::parse($collection->day_start)->isPast()
+                && Carbon::parse($collection->day_end)->isFuture();
+        })->values()->toArray();
+
+        // Collectes à venir (day_start dans le futur)
+        $toCome = $collections->filter(function ($collection) use ($now) {
+            return Carbon::parse($collection->day_start)->isFuture();
+        })->values()->toArray();
+
+        // Collectes passées (passées + complètes)
+        $past = $collections->filter(function ($collection) use ($now) {
+            $isPast = Carbon::parse($collection->day_end)->isPast();
+            $isComplete = !is_null($collection->nb_registered) && !is_null($collection->nb_blood_pouch);
+
+            return $isPast && $isComplete;
+        })->values()->toArray();
+
+        return [
+            'to_close' => $toClose,
+            'ongoing'  => $ongoing,
+            'to_come'  => $toCome,
+            'past'     => $past,
         ];
     }
 }
