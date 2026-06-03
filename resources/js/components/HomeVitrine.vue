@@ -1,24 +1,24 @@
 <template>
   <!-- Composant principal pour la page d'accueil -->
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    
+
     <!-- Section principale (Hero) -->
     <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
 
       <div class="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
-        
+
         <!-- Left Column (Titles & Stats) -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left order-1 lg:order-none">
           <!-- Yellow Squares Image -->
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-8 origin-center lg:origin-left" />
-          
+
           <!-- Main Title -->
           <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-10 tracking-wide">
             Mobilisez votre équipe<br />
             pour le don<br />
             du sang&nbsp;!
           </h1>
-          
+
           <!-- Stats -->
           <div class="flex flex-row justify-center lg:justify-start gap-4 lg:gap-12 mb-10 w-full">
             <div class="flex items-center justify-center gap-2 lg:gap-4 flex-col text-center md:flex-row md:text-left">
@@ -33,11 +33,11 @@
 
           <!-- Action Button (Desktop Only) -->
           <div class="hidden lg:block">
-            <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+            <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all">
               Organiser une collecte
             </a>
           </div>
-          
+
           <!-- Arrow (Desktop Only) -->
           <div class="mt-8 hidden lg:block">
             <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
@@ -50,7 +50,7 @@
           <div class="hidden lg:block text-left md:text-right mb-6">
             <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
           </div>
-          
+
           <!-- Desktop Grid Container (Hidden on mobile) -->
           <div class="hidden lg:block relative w-full lg:w-[65%] ml-auto mb-4">
             <!-- Background Grid (Icons) -->
@@ -68,7 +68,7 @@
                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
               </template>
             </div>
-            
+
             <!-- Foreground Overlay Grid (Center White Square) -->
             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
               <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
@@ -95,7 +95,7 @@
                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
               </template>
             </div>
-            
+
             <!-- Foreground Overlay Grid Mobile (Center White Square) -->
             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
               <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
@@ -106,7 +106,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Bottom Text -->
           <div class="w-[320px] lg:w-[65%] mx-auto lg:ml-auto text-right text-xs text-black font-['Inter'] mt-4 lg:mt-0">
             Chiffres renseignés sur la base d’une société de 1’000 employés.
@@ -115,20 +115,20 @@
 
         <!-- Action Button & Arrow (Mobile Only) -->
         <div class="w-full flex flex-col items-center justify-center order-3 lg:hidden mt-8">
-          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-colors">
+          <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all">
             Organiser une collecte
           </a>
           <div class="mt-8">
             <img src="/images/BlackArrowDown.svg" alt="Arrow Down" class="w-8 h-auto" />
           </div>
         </div>
-        
+
       </div>
     </section>
 
     <!-- Section Classement 2025 -->
     <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16">
-      
+
       <!-- Conteneur style fenêtre rétro -->
       <div class="border-[4px] border-black bg-[#fffbf1] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <!-- Barre de titre de la fenêtre -->
@@ -137,17 +137,17 @@
           <span class="w-3 h-3 bg-hugCream"></span>
           <span class="w-3 h-3 bg-red-500"></span>
         </div>
-        
+
         <!-- Contenu du classement -->
         <div class="p-8 md:p-12 md:py-24">
-          
+
           <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 md:mb-24 gap-4 md:gap-8">
             <!-- Title block on the left -->
             <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
               <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
               <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none m-0">Classement {{ currentYear }}</h2>
             </div>
-            
+
             <!-- Text block on the right -->
             <div class="w-full md:w-1/2 flex justify-center md:justify-end pb-1 text-center md:text-right">
               <p class="font-['Inter'] text-sm md:text-lg font-bold text-black leading-snug mt-4 md:mt-0 px-4 md:px-0">
@@ -156,10 +156,10 @@
               </p>
             </div>
           </div>
-          
+
           <!-- Conteneur flexible pour aligner les trophées -->
           <div class="flex flex-row justify-between md:justify-center items-end gap-2 md:gap-24 w-full">
-            
+
             <!-- Trophée 2 : Ambassadeur -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ ambassadorWinner }}</p>
@@ -194,17 +194,17 @@
       <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Une reconnaissance officielle pour votre engagement.</h2>
       <p class="font-['Inter'] text-base md:text-lg text-black mb-12 max-w-3xl text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement.<br class="hidden md:block"/> Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden md:block"/> et vous positionne sur le leaderboard public.</p>
-      
+
       <!-- Grille responsive : 1 colonne sur mobile, 2 sur bureau -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        
+
         <!-- Carte Avantage 1 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
             <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">01 — S'inscrire au programme</h3>
           </div>
         </div>
-        
+
         <!-- Carte Avantage 2 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">

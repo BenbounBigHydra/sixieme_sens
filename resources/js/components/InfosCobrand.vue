@@ -21,7 +21,7 @@
         <div class="mt-12 bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <h3 class="font-['Inter'] font-bold text-lg bg-white px-4 py-2 block text-center border-2 border-black mb-4">Prêt à donner ?</h3>
           <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quizz. Moins de 5min.</p>
-          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
+          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
         </div>
       </aside>
 
@@ -66,7 +66,7 @@
                  <p class="mb-4 pr-0 md:pr-12">Le plus courant. Le sang complet est prélevé puis séparé en composants, globules rouges, plasma, plaquettes, qui bénéficient à plusieurs patients.</p>
                  <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-auto">
                     <span class="font-bold text-xs text-[#0073e6]">Don proposé lors de cette collecte</span>
-                    <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-2 font-bold hover:bg-[#0073e6]/90 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">Faire le quiz</a>
+                    <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-2 font-bold hover:bg-[#0073e6]/90 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Faire le quiz</a>
                  </div>
                </div>
             </div>
@@ -122,21 +122,44 @@
         <!-- FAQ Tab -->
         <div v-show="activeTab === 'faq'" class="space-y-0">
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Questions fréquentes</h2>
-          <div class="bg-[#fffbf1]">
-             <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
-                <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
-                   <span class="font-['Inter'] text-lg md:text-xl text-black pr-4">{{ item.q }}</span>
-                   <img src="/images/BlackChevronDown.svg" alt="Toggle" class="w-6 h-6 transform transition-transform duration-300 shrink-0" :class="{'rotate-180': openFaq === index}" onerror="this.style.display='none'" />
-                </button>
-                <div v-show="openFaq === index" class="pb-8 pt-2 font-['Inter'] text-base md:text-lg leading-relaxed text-black bg-[#fffbf1]">
-                   <p>{{ item.a }}</p>
-                   <div v-if="item.button" class="mt-6">
-                      <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-colors">
-                         {{ item.button }}
-                      </a>
-                   </div>
+          <div class="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+            <!-- FAQ List (Left) -->
+            <div class="w-full lg:w-6/12">
+               <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
+                  <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                     <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
+                  </button>
+               </div>
+            </div>
+
+            <!-- Roby & Speech Bubble (Right) -->
+            <div class="w-full lg:w-6/12 flex flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32">
+              <!-- Speech Bubble -->
+              <div class="relative bg-[#1a81e7] text-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-[300px] z-20">
+                <div v-if="openFaq === null" class="font-['Jersey_20'] tracking-wide text-[28px] leading-tight text-left">
+                  Qu'aimerais-tu savoir ?
                 </div>
-             </div>
+                <div v-else class="font-['Inter'] text-sm md:text-base leading-relaxed">
+                  <p>{{ faqList[openFaq].a }}</p>
+                  <div v-if="faqList[openFaq].button" class="mt-4">
+                    <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
+                       {{ faqList[openFaq].button }}
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Arrow for desktop (pointing right towards Roby) -->
+                <div class="hidden md:block absolute top-10 -right-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-l-[15px] border-l-black"></div>
+                <div class="hidden md:block absolute top-[43px] -right-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-l-[12px] border-l-[#1a81e7] z-10"></div>
+
+                <!-- Arrow for mobile (pointing down towards Roby) -->
+                <div class="block md:hidden absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
+                <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
+              </div>
+
+              <!-- Roby -->
+              <img src="/images/dono_smiling.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
+            </div>
           </div>
         </div>
 
@@ -144,10 +167,10 @@
         <div v-show="activeTab === 'eligibility'">
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Puis-je donner ?</h2>
           <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Vous voulez vérifier votre éligibilité avant le jour J ? Consultez l'ensemble des critères officiels du Centre de Transfusion Sanguine.</p>
-          <button class="bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 mb-12 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Consulter les critères</button>
+          <button class="bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 mb-12 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Consulter les critères</button>
 
           <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Ou répondez à notre quiz en moins de 5 minutes.</p>
-          <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-colors">Faire le quiz</a>
+          <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Faire le quiz</a>
         </div>
 
       </main>
