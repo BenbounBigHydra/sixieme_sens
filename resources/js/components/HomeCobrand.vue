@@ -9,53 +9,49 @@
       </div>
 
       <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 relative z-10 flex flex-col md:flex-row">
-        <div class="w-full lg:w-7/12 bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-col md:flex-row items-center justify-start gap-8 md:gap-16 min-h-[350px]">
+        <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
-          <div class="flex flex-col justify-center h-full">
-            <h1 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
+          <div class="flex flex-col justify-center h-full shrink">
+            <h1 class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
               Collecte {{ company?.name || 'HEIG-VD' }}
             </h1>
-            <p class="font-['Jersey_20'] text-[48px] md:text-[56px] text-[#0073e6] mb-8 leading-none tracking-wide">
-              {{ collection?.date || '15 juin 2026' }}
+            <p class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-[#0073e6] mb-4 md:mb-8 leading-none tracking-wide">
+              {{ formattedDate }}
             </p>
-            <div class="flex items-center gap-3 mb-10">
+            <div class="flex items-center gap-3 mb-6 md:mb-10">
               <img src="/images/locationBlack.svg" alt="Location" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
-              <span class="font-['Inter'] text-sm text-black font-medium">
+              <span class="font-['Inter'] text-sm md:text-base text-black font-medium leading-tight">
                 {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
               </span>
             </div>
             <div class="flex mt-auto">
-              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-3 font-['Inter'] text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-4 md:px-6 py-2 md:py-3 font-['Inter'] text-xs sm:text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
                 Je souhaite donner
               </a>
             </div>
           </div>
 
           <!-- Roby Mascot -->
-          <div class="relative flex items-center justify-center shrink-0 h-full mt-8 md:mt-0"
+          <div class="relative flex items-center justify-center shrink-0 h-full"
                @mouseenter="handleRobyHeroHover(true)"
                @mouseleave="handleRobyHeroHover(false)"
                @click="handleRobyHeroClick">
-            <img src="/images/dono_smiling.png" alt="Roby" class="h-48 md:h-64 object-contain cursor-pointer transition-transform hover:scale-105 origin-bottom" />
+            <img src="/images/dono_smiling.png" alt="Roby" class="h-28 sm:h-32 md:h-64 object-contain cursor-pointer transition-transform hover:scale-105 origin-bottom" />
 
             <!-- Speech Bubble -->
             <div v-show="isRobyHeroHovered || isRobyHeroClicked"
-                 class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 md:mb-0 md:right-auto md:left-[90%] md:bottom-auto md:top-1/4 md:-translate-x-0 md:ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[280px] z-50 pointer-events-none">
-              <p class="font-['Jersey_20'] tracking-wide text-xl leading-tight text-left">
+                 class="absolute left-[90%] top-0 md:top-1/4 ml-2 md:ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[200px] md:max-w-[280px] z-50 pointer-events-none">
+              <p class="font-['Jersey_20'] tracking-wide text-lg md:text-xl leading-tight text-left">
                 Salut ! Je suis Roby, bienvenue sur le<br/>
                 site {{ company?.name || 'HEIG-VD' }}. J'essaye de<br/>
                 donner mon sang, tout comme toi. On<br/>
                 part en voyage ?
               </p>
 
-              <!-- Arrow for desktop (left) -->
-              <div class="hidden md:block absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
-              <div class="hidden md:block absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
-
-              <!-- Arrow for mobile (bottom) -->
-              <div class="block md:hidden absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
-              <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
+              <!-- Arrow pointing left (for all sizes) -->
+              <div class="absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
+              <div class="absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
             </div>
           </div>
 
@@ -78,6 +74,28 @@
             <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient d'accoucher, un accidenté en salle d'opération.</p>
             <p>Les besoins sont constants. Les stocks, eux, ne durent pas — certains composants sanguins se périment en quelques jours. C'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
           </div>
+
+          <!-- Stats Replacement -->
+          <div class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-10 w-full relative">
+            <div class="font-['Jersey_20'] text-[60px] md:text-[80px] text-[#0073e6] leading-none tracking-wide -mt-1">
+              {{ participationRate }}%
+            </div>
+            <div class="flex flex-col justify-center text-left mt-1">
+              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
+              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
+                <span><span class="text-[#0073e6]">{{ livesSaved }}</span> vies sauvées.</span>
+                <div class="relative group inline-flex ml-1 -mt-3">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
+                    <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
+                  </svg>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
+                    Chiffres renseignés sur la base du nombre d’employés de la société.
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+
           <div class="flex justify-center lg:justify-start">
              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Inter'] text-lg font-bold border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
                Donner mon sang
@@ -89,29 +107,26 @@
         <div class="w-full lg:w-1/2 flex flex-col pt-8 lg:pt-0">
           <!-- Desktop Grid Container -->
           <div class="hidden lg:block relative w-full mb-4">
-             <div class="text-right mb-6">
-                <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
-             </div>
+             <!-- Top text removed -->
 
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
                <template v-for="i in 150" :key="i">
-                 <img v-if="i <= 72" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
-                 <div v-else-if="i === 73" class="relative w-full h-full flex items-center justify-center cursor-pointer z-40" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                 <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
                    <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
                      Tu m'as trouvé !
                    </div>
                  </div>
-                 <img v-else-if="i <= 75" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
+                 <img v-else-if="i <= blueCountDesktop" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
                </template>
              </div>
 
              <!-- Foreground Overlay Grid (Center White Square) -->
-             <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
-               <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
-                 <span class="text-[#0073e6] font-['Jersey_20'] text-[60px] lg:text-[64px] leading-[0.8] mb-0">130</span>
+             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
+               <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[60px] lg:text-[64px] leading-[0.8] mb-0">{{ livesSaved }}</span>
                  <span class="text-[#0073e6] font-['Jersey_20'] text-base leading-tight text-center tracking-wide -mt-1 lg:-mt-1">
                    Potentielles vies<br/>sauvées
                  </span>
@@ -121,27 +136,25 @@
 
           <!-- Mobile Grid Container -->
           <div class="block lg:hidden relative w-[320px] mx-auto mb-4 mt-4">
-             <div class="text-center mb-6">
-                <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
-             </div>
+             <!-- Mobile top text removed -->
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
                <template v-for="i in 32" :key="'mobile-'+i">
-                 <img v-if="i <= 22" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
-                 <div v-else-if="i === 23" class="relative w-full h-full flex items-center justify-center cursor-pointer z-40" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                 <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
                    <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
                      Tu m'as trouvé !
                    </div>
                  </div>
+                 <img v-else-if="i <= blueCountMobile" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
                </template>
              </div>
 
              <!-- Foreground Overlay Grid Mobile -->
-             <div class="absolute inset-0 pointer-events-none mt-[60px]" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
-               <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
-                 <span class="text-[#0073e6] font-['Jersey_20'] text-[40px] leading-[0.8] mb-0 mt-1">130</span>
+             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
+               <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[40px] leading-[0.8] mb-0 mt-1">{{ livesSaved }}</span>
                  <span class="text-[#0073e6] font-['Jersey_20'] text-[14px] leading-tight text-center tracking-wide mt-1">
                    Potentielles vies<br/>sauvées
                  </span>
@@ -149,9 +162,7 @@
              </div>
           </div>
 
-          <div class="w-full lg:w-auto text-center lg:text-right text-xs text-black font-['Inter'] mt-4">
-            Chiffres renseignés sur la base du nombre d’employés de HEIG-VD.
-          </div>
+          <!-- Bottom text removed -->
         </div>
 
       </div>
@@ -227,7 +238,7 @@
         </div>
 
         <!-- Roby & Speech Bubble (Right) -->
-        <div class="w-full lg:w-5/12 flex flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32">
+        <div class="w-full lg:w-5/12 flex flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32" ref="robyFaqContainer">
           <!-- Speech Bubble -->
           <div class="relative bg-[#1a81e7] text-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-[300px] z-20">
             <div v-if="openFaq === null" class="font-['Jersey_20'] tracking-wide text-[28px] leading-tight text-left">
@@ -261,7 +272,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
   initialData: {
@@ -280,13 +291,60 @@ const parsedData = computed(() => {
 const collection = computed(() => parsedData.value.collection);
 const company = computed(() => parsedData.value.company);
 
+const formattedDate = computed(() => {
+  if (collection.value?.day_start) {
+    const d = new Date(collection.value.day_start);
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return d.toLocaleDateString('fr-CH', options);
+  }
+  return '15 juin 2026';
+});
+
 const companySlug = ref('');
 const collectionId = ref('');
+
+const desktopRobyIndex = ref(73);
+const mobileRobyIndex = ref(23);
+let robyInterval = null;
 
 onMounted(() => {
   const parts = window.location.pathname.split('/');
   companySlug.value = parts[2] || '';
   collectionId.value = parts[3] || '';
+
+  robyInterval = setInterval(() => {
+    desktopRobyIndex.value = Math.floor(Math.random() * 150) + 1;
+    mobileRobyIndex.value = Math.floor(Math.random() * 32) + 1;
+  }, 5000);
+});
+
+onUnmounted(() => {
+  if (robyInterval) clearInterval(robyInterval);
+});
+
+const participationRate = computed(() => {
+  const emp = collection.value?.nb_employee || company.value?.employee_count;
+  const reg = collection.value?.nb_registered;
+  if (emp && reg) {
+    return Math.round((reg / emp) * 100);
+  }
+  return 50; // fallback
+});
+
+const blueCountDesktop = computed(() => {
+  return Math.round((participationRate.value / 100) * 150);
+});
+
+const blueCountMobile = computed(() => {
+  return Math.round((participationRate.value / 100) * 32);
+});
+
+const livesSaved = computed(() => {
+  const reg = collection.value?.nb_registered;
+  if (reg) {
+    return reg * 3;
+  }
+  return 130; // fallback
 });
 
 const quizzUrl = computed(() => {
@@ -330,8 +388,17 @@ const handleRobyHeroClick = () => {
 
 // FAQ Logic
 const openFaq = ref(null);
+const robyFaqContainer = ref(null);
+
 const toggleFaq = (index) => {
   openFaq.value = openFaq.value === index ? null : index;
+  if (openFaq.value !== null && window.innerWidth < 1024) {
+    setTimeout(() => {
+      if (robyFaqContainer.value) {
+        robyFaqContainer.value.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  }
 };
 
 const faqList = [

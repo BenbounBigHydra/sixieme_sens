@@ -4,7 +4,7 @@
 
     <main class="max-w-[1200px] mx-auto py-10 px-4 space-y-12">
       <!-- FirstPart: Action Buttons -->
-      <section class="grid grid-cols-2 gap-6">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <a href="/admin/companies" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
           <div class="h-6 w-6 mr-3 bg-[#fffbf1]" style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
           <span class="font-inter text-lg">Ajouter une entreprise</span>
@@ -17,8 +17,8 @@
 
       <!-- SecondPart: Collectes à clore -->
       <section>
-        <div class="flex justify-between items-end mb-4">
-          <h2 class="font-jersey text-[40px] text-[#393939] leading-none">Collectes à clore</h2>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 md:gap-0">
+          <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à clore</h2>
           <div class="bg-[#ffb699] flex items-center px-4 py-2 rounded-sm space-x-2">
             <img src="/images/important.svg" alt="Important" class="h-5" />
             <span class="font-inter text-sm text-[#393939] font-medium">Vous avez {{ toClose.length }} collectes à clore.</span>
@@ -26,8 +26,8 @@
         </div>
 
         <div class="w-full">
-          <!-- Table Header -->
-          <div class="grid grid-cols-4 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
+          <!-- Table Header (Desktop Only) -->
+          <div class="hidden md:grid grid-cols-4 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
             <div class="font-inter font-medium text-[#393939]">Entreprise</div>
             <div class="font-inter font-medium text-[#393939]">Date(s)</div>
             <div class="font-inter font-medium text-[#393939]">Nb employés</div>
@@ -35,23 +35,23 @@
           </div>
 
           <!-- Table Rows -->
-          <div class="border border-blue-200 rounded-b-sm bg-[#fffbf1]">
+          <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
             <template v-if="toClose.length > 0">
-              <div v-for="(item, index) in toClose" :key="index" class="grid grid-cols-4 items-center py-3 px-4 border-b border-blue-200 last:border-0">
+              <div v-for="(item, index) in toClose" :key="index" class="flex flex-col md:grid md:grid-cols-4 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                 <div class="flex flex-col items-start justify-center">
                   <div class="h-8 w-16 flex items-center justify-start mb-1">
                     <img :src="item.company?.logo || '/images/BCGE.png'" alt="Logo" class="max-h-full max-w-full object-contain" />
                   </div>
-                  <span class="font-inter font-bold text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
+                  <span class="font-inter font-bold text-sm md:text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
                 </div>
-                <div class="font-inter text-[#393939]">{{ formatDate(item.day_start) || '02.07.2026' }}</div>
-                <div class="font-inter text-[#393939]">{{ item.nb_employee || '0' }}</div>
-                <div class="flex items-center justify-end space-x-3">
-                  <button @click="openModal('cloture', item)" class="bg-[#5bb124] text-white flex items-center px-4 py-1.5 rounded-sm hover:bg-green-600 transition-colors">
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Date(s): </span><span>{{ formatDate(item.day_start) || '02.07.2026' }}</span></div>
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Nb employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
+                <div class="flex items-center justify-start md:justify-end space-x-3 w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100">
+                  <button @click="openModal('cloture', item)" class="bg-[#5bb124] text-white flex items-center px-4 py-2 md:py-1.5 rounded-sm hover:bg-green-600 transition-colors w-full md:w-auto justify-center">
                     <img src="/images/whiteCheck.svg" alt="Check" class="h-4 mr-2" />
                     <span class="font-inter text-sm">Clore</span>
                   </button>
-                  <button @click="openModal('detail', item)" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
+                  <button @click="openModal('detail', item)" class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0">
                     <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                   </button>
                 </div>
@@ -59,26 +59,7 @@
             </template>
             <template v-else>
               <div class="py-6 text-center text-gray-500 font-inter">
-                <!-- Fallback Mock Row -->
-                <div class="grid grid-cols-4 items-center py-3 px-4">
-                  <div class="flex flex-col items-start justify-center">
-                    <div class="h-8 w-16 flex items-center justify-start mb-1">
-                      <img src="/images/BCGE.png" alt="Logo" class="max-h-full max-w-full object-contain" />
-                    </div>
-                    <span class="font-inter font-bold text-xs text-[#393939]">BCGE</span>
-                  </div>
-                  <div class="font-inter text-[#393939]">02.07.2026</div>
-                  <div class="font-inter text-[#393939]">5000</div>
-                  <div class="flex items-center justify-end space-x-3">
-                    <button @click="openModal('cloture', { company_name: 'BCGE', date: '02.07.2026', employees: '5000' })" class="bg-[#5bb124] text-white flex items-center px-4 py-1.5 rounded-sm hover:bg-green-600 transition-colors">
-                      <img src="/images/whiteCheck.svg" alt="Check" class="h-4 mr-2" />
-                      <span class="font-inter text-sm">Clore</span>
-                    </button>
-                    <button @click="openModal('detail', { company_name: 'BCGE', date: '02.07.2026', employees: '5000' })" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
-                      <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
+                Aucune collecte à clore
               </div>
             </template>
           </div>
@@ -87,17 +68,17 @@
 
       <!-- ThirdPart: Collectes à venir -->
       <section>
-        <div class="flex justify-between items-end mb-4">
-          <h2 class="font-jersey text-[40px] text-[#393939] leading-none">Collectes à venir</h2>
-          <a href="/admin/collections" class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 rounded-sm hover:bg-blue-600 transition-colors">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 md:gap-0">
+          <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à venir</h2>
+          <a href="/admin/collections" class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 md:py-2 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
             <div class="h-4 w-4 mr-2 bg-[#fffbf1]" style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
             <span class="font-inter text-sm">Nouvelle collecte</span>
           </a>
         </div>
 
         <div class="w-full">
-          <!-- Table Header -->
-          <div class="grid grid-cols-6 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
+          <!-- Table Header (Desktop) -->
+          <div class="hidden md:grid grid-cols-6 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
             <div class="font-inter font-medium text-[#393939]">Entreprise</div>
             <div class="font-inter font-medium text-[#393939]">Dates</div>
             <div class="font-inter font-medium text-[#393939]">Nb employés</div>
@@ -107,67 +88,50 @@
           </div>
 
           <!-- Table Rows -->
-          <div class="border border-blue-200 rounded-b-sm bg-[#fffbf1]">
+          <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
             <template v-if="toCome.length > 0">
-              <div v-for="(item, index) in toCome" :key="index" class="grid grid-cols-6 items-center py-3 px-4 border-b border-blue-200 last:border-0">
+              <div v-for="(item, index) in toCome" :key="index" class="flex flex-col md:grid md:grid-cols-6 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                 <div class="flex flex-col items-start justify-center">
                   <div class="h-8 w-16 flex items-center justify-start mb-1">
                     <img :src="item.company?.logo || '/images/BCGE.png'" alt="Logo" class="max-h-full max-w-full object-contain" />
                   </div>
-                  <span class="font-inter font-bold text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
+                  <span class="font-inter font-bold text-sm md:text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
                 </div>
-                <div class="font-inter text-[#393939]">{{ formatDate(item.day_start) || '02.07.2026' }}</div>
-                <div class="font-inter text-[#393939]">{{ item.nb_employee || '0' }}</div>
-                <div class="flex items-center space-x-2">
-                  <button @click="copyToClipboard(getCoBrandLink(item))" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0">
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Date(s): </span><span>{{ formatDate(item.day_start) || '02.07.2026' }}</span></div>
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Nb employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
+                
+                <div class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0 rounded-sm overflow-hidden">
+                  <span class="md:hidden font-bold text-sm text-[#393939] mr-2 shrink-0">Site:</span>
+                  <button @click="copyToClipboard(getCoBrandLink(item))" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0 bg-white">
                     <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                   </button>
-                  <a :href="getCoBrandLink(item)" target="_blank" class="text-[10px] font-inter text-[#0073e6] truncate max-w-[120px] hover:underline" :title="getCoBrandLink(item)">
+                  <a :href="getCoBrandLink(item)" target="_blank" class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline" :title="getCoBrandLink(item)">
                     {{ getCoBrandLink(item) }}
                   </a>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <button @click="copyToClipboard(item.onedoc_link)" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0">
+
+                <div class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0 rounded-sm overflow-hidden mt-2 md:mt-0">
+                  <span class="md:hidden font-bold text-sm text-[#393939] mr-2 shrink-0">OneDoc:</span>
+                  <button @click="copyToClipboard(item.onedoc_link)" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0 bg-white">
                     <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                   </button>
-                  <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank" class="text-[10px] font-inter text-[#0073e6] truncate max-w-[120px] hover:underline" :title="item.onedoc_link">
+                  <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank" class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline" :title="item.onedoc_link">
                     {{ item.onedoc_link }}
                   </a>
-                  <span v-else class="text-[10px] font-inter text-gray-400 italic">Aucun lien</span>
+                  <span v-else class="text-xs md:text-[10px] font-inter text-gray-400 italic">Aucun lien</span>
                 </div>
-                <div class="flex items-center justify-end">
-                  <button @click="openModal('detail', item)" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
+
+                <div class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
+                  <button @click="openModal('detail', item)" class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                     <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
+                    <span class="md:hidden ml-2 text-sm text-[#0073e6]">Modifier</span>
                   </button>
                 </div>
               </div>
             </template>
             <template v-else>
-              <!-- Fallback Mock Rows -->
-              <div v-for="i in 3" :key="i" class="grid grid-cols-6 items-center py-3 px-4 border-b border-blue-200 last:border-0">
-                <div class="flex flex-col items-start justify-center">
-                  <div class="h-8 w-16 flex items-center justify-start mb-1">
-                    <img src="/images/BCGE.png" alt="Logo" class="max-h-full max-w-full object-contain" />
-                  </div>
-                  <span class="font-inter font-bold text-xs text-[#393939]">BCGE</span>
-                </div>
-                <div class="font-inter text-[#393939]">02.07.2026</div>
-                <div class="font-inter text-[#393939]">5000</div>
-                <div class="flex items-center">
-                  <button class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
-                    <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
-                  </button>
-                </div>
-                <div class="flex items-center">
-                  <button class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
-                    <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
-                  </button>
-                </div>
-                <div class="flex items-center justify-end">
-                  <button @click="openModal('detail', { company_name: 'BCGE', date: '02.07.2026', employees: '5000' })" class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors">
-                    <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
-                  </button>
-                </div>
+              <div class="py-6 text-center text-gray-500 font-inter">
+                Aucune collecte à venir
               </div>
             </template>
           </div>
@@ -201,8 +165,8 @@
           <div class="absolute -left-8 -bottom-2 text-xs font-bold font-inter text-right w-6">0</div>
 
           <!-- Bars -->
-          <div class="absolute inset-0 flex items-end justify-around px-4">
-            <div v-for="(month, i) in computedMonthsData" :key="i" class="w-16 h-full flex flex-col justify-end items-center relative">
+          <div class="absolute inset-0 flex items-end justify-around px-2 md:px-4">
+            <div v-for="(month, i) in computedMonthsData" :key="i" class="w-6 md:w-16 h-full flex flex-col justify-end items-center relative">
               <div :class="[month.color, 'w-full cursor-pointer']" 
                    :style="{ height: `${(month.value / maxChartValue) * 100}%`, minHeight: month.value > 0 ? '4px' : '0' }"
                    @mouseenter="hoveredMonthIndex = i" 
@@ -214,7 +178,7 @@
           </div>
 
           <!-- Hover Tooltip -->
-          <div v-if="hoveredMonthIndex !== null" class="absolute top-[105%] left-0 w-full bg-[#fffbf1] border border-black z-40 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div v-if="hoveredMonthIndex !== null" class="absolute top-0 left-0 w-full bg-[#fffbf1] border border-black z-40 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
             <div class="p-4">
               <h4 class="font-inter text-xl font-bold text-black mb-2">{{ computedMonthsData[hoveredMonthIndex].label }}</h4>
               
@@ -238,8 +202,8 @@
                      {{ formatDate(col.day_start) }}
                    </span>
                    
-                   <div class="border border-black bg-white flex items-center justify-center z-10 w-[60px] h-[28px] absolute" :class="index % 2 === 0 ? 'bottom-[25px]' : 'bottom-[55px]'">
-                     <span class="font-bold text-[12px] truncate px-1" :style="{ color: col.company?.color || '#0073e6' }">
+                   <div class="border border-black bg-white flex items-center justify-center z-10 min-w-[60px] w-max px-2 h-[28px] absolute left-1/2 -translate-x-1/2" :class="index % 2 === 0 ? 'bottom-[25px]' : 'bottom-[55px]'">
+                     <span class="font-bold text-[12px] whitespace-nowrap" :style="{ color: col.company?.color || '#0073e6' }">
                        {{ col.company?.name || '...' }}
                      </span>
                    </div>
@@ -254,14 +218,14 @@
       </section>
 
       <!-- FifthPart: Statistics -->
-      <section class="grid grid-cols-2 gap-12 mt-8">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
         <!-- Taux de participation -->
         <div class="border border-black flex flex-col">
           <div class="bg-[#ffda45] flex justify-between items-center p-4 border-b border-black relative">
             <h3 class="font-jersey text-2xl text-[#393939]">Taux de participation</h3>
             <div class="relative group cursor-pointer flex items-center">
               <img src="/images/info.svg" alt="Info" class="h-6 w-6" style="filter: brightness(0);" />
-              <div class="absolute right-0 top-full mt-2 w-[300px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+              <div class="absolute right-0 top-full mt-2 w-[260px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
                 <p class="font-jersey text-[20px] text-black leading-tight">Taux calculé sur l'année en cours.</p>
                 <p class="font-inter text-[14px] text-black mt-2">Ce taux correspond au ratio entre le nombre de poches de sang récoltées et le nombre total d'employés.</p>
               </div>
@@ -290,7 +254,7 @@
             <h3 class="font-jersey text-2xl text-[#393939]">Taux de rigueur</h3>
             <div class="relative group cursor-pointer flex items-center">
               <img src="/images/info.svg" alt="Info" class="h-6 w-6" style="filter: brightness(0);" />
-              <div class="absolute right-0 top-full mt-2 w-[300px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+              <div class="absolute right-0 top-full mt-2 w-[260px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
                 <p class="font-jersey text-[20px] text-black leading-tight">Taux calculé sur l'année en cours.</p>
                 <p class="font-inter text-[14px] text-black mt-2">Ce taux correspond au ratio entre le nombre de poches de sang récoltées et le nombre de personnes inscrites à la collecte.</p>
               </div>

@@ -6,6 +6,7 @@ import { createApp } from 'vue';
 import HeaderVitrine from './components/HeaderVitrine.vue';
 import HomeVitrine from './components/HomeVitrine.vue';
 import FooterVitrine from './components/FooterVitrine.vue';
+import FooterCobrand from './components/FooterCobrand.vue';
 import TropheesVitrine from './components/TropheesVitrine.vue';
 import LabelVitrine from './components/LabelVitrine.vue';
 import CompaniesVitrine from './components/CompaniesVitrine.vue';
@@ -22,6 +23,7 @@ import LoginAdmin from './components/LoginAdmin.vue';
 import DashboardAdmin from './components/DashboardAdmin.vue';
 import CompaniesAdmin from './components/CompaniesAdmin.vue';
 import CollectionsAdmin from './components/CollectionsAdmin.vue';
+import LeaderboardAdmin from './components/LeaderboardAdmin.vue';
 
 // Initialisation de l'application Vue
 const app = createApp({});
@@ -30,6 +32,7 @@ const app = createApp({});
 app.component('HeaderVitrine', HeaderVitrine);
 app.component('HomeVitrine', HomeVitrine);
 app.component('FooterVitrine', FooterVitrine);
+app.component('FooterCobrand', FooterCobrand);
 app.component('trophees-vitrine', TropheesVitrine);
 app.component('label-vitrine', LabelVitrine);
 app.component('companies-vitrine', CompaniesVitrine);
@@ -46,6 +49,7 @@ app.component('login-admin', LoginAdmin);
 app.component('dashboard-admin', DashboardAdmin);
 app.component('companies-admin', CompaniesAdmin);
 app.component('collections-admin', CollectionsAdmin);
+app.component('leaderboard-admin', LeaderboardAdmin);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');

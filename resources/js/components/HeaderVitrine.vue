@@ -9,7 +9,7 @@
         <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-12 w-auto object-contain" />
       </a>
 
-      <nav class="hidden md:flex items-center space-x-8 text-2xl">
+      <nav class="hidden md:flex items-center space-x-8 text-[28px]">
         <a href="/" :class="currentPath === '/' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Accueil</a>
         <a href="/trophees" :class="currentPath === '/trophees' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Trophées</a>
         <a href="/label" :class="currentPath === '/label' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Label</a>

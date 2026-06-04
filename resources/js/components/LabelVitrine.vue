@@ -15,7 +15,7 @@
         </p>
 
         <div class="flex lg:hidden w-full justify-center mb-8">
-          <img src="/images/Don.png" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
+          <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
         </div>
 
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10 w-full sm:w-auto">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="hidden lg:flex lg:w-1/2 justify-center lg:justify-end mt-8 lg:mt-0">
-        <img src="/images/Don.png" alt="Label Partenaire du Don" class="w-full max-w-[500px] h-auto object-contain drop-shadow-xl" />
+        <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[500px] h-auto object-contain drop-shadow-xl" />
       </div>
     </section>
 

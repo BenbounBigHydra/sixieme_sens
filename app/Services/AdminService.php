@@ -199,7 +199,7 @@ class AdminService
             ->get();
 
         // 2. Transformation des données selon le format optimal demandé
-        return $companies->map(function (Company $company) {
+        return $companies->map(function (Company $company) use ($now) {
 
             $awardsData = CompanyStatsService::getCompanyAwards($company);
 
@@ -242,6 +242,8 @@ class AdminService
                 });
             }
 
+            $lastCollection = $company->collections->where('day_start', '<', $now)->sortByDesc('day_start')->first();
+
             // Retour du tableau final nettoyé
             return [
                 'id'          => $company->id,
@@ -249,6 +251,15 @@ class AdminService
                 'slug'        => $company->slug,
                 'logo'        => $company->logo,
                 'color'       => $company->color,
+                'sector'      => $company->sector,
+                'employee_count' => $company->employee_count,
+                'contact_name' => $company->contact_name,
+                'contact_phone' => $company->contact_phone,
+                'contact_email' => $company->contact_email,
+                'is_labelled' => $company->is_labelled,
+                'trophies_count' => $company->trophies_count,
+                'last_collection_date' => $lastCollection ? $lastCollection->day_start->format('d.m.Y') : null,
+                'collections_total' => $company->collections->count(),
                 'collections' => [ // Renommé 'stats' en 'collections'
                     'to_come'  => $company->to_come_count,
                     'to_close' => $company->to_close_count,
