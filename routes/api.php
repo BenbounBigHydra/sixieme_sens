@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\ApiCompanyController;
 Route::get('/trophies/{year?}', [ApiRewardsController::class, 'winner']);
 Route::get('/labels/{year?}', [ApiRewardsController::class, 'labelledCompanies']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['web', 'auth'])->group(function () {
 Route::get('/collection/{id}', [ApiCollectionController::class, 'show']);
 Route::post('/collection', [ApiCollectionController::class, 'store']);
 Route::put('/collection/{id}', [ApiCollectionController::class, 'update']);

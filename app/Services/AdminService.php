@@ -178,7 +178,8 @@ class AdminService
         $now = Carbon::now();
 
         // 1. Récupération de toutes les entreprises avec le compte ciblé des collectes
-        $companies = Company::withCount([
+        $companies = Company::with('collections')
+            ->withCount([
             'collections as to_come_count' => function ($query) use ($now) {
                 $query->where('day_end', '>', $now);
             },
@@ -225,6 +226,22 @@ class AdminService
                 }
             }
 
+            $participation = 0;
+            $rigueur = 0;
+
+            $pastCollections = $company->collections->filter(function($c) {
+                return !is_null($c->nb_registered) && !is_null($c->nb_blood_pouch) && $c->nb_employee > 0;
+            });
+
+            if ($pastCollections->count() > 0) {
+                $participation = $pastCollections->avg(function($c) {
+                    return $c->nb_blood_pouch / $c->nb_employee;
+                });
+                $rigueur = $pastCollections->avg(function($c) {
+                    return $c->nb_registered > 0 ? ($c->nb_blood_pouch / $c->nb_registered) : 0;
+                });
+            }
+
             // Retour du tableau final nettoyé
             return [
                 'id'          => $company->id,
@@ -237,6 +254,8 @@ class AdminService
                     'to_close' => $company->to_close_count,
                     'past'     => $company->past_count,
                 ],
+                'participation' => round($participation, 4),
+                'rigueur'       => round($rigueur, 4),
                 'trophies'    => $trophies, // Objet associatif { "2023": ["gold", "conviction"] }
                 'labels'      => $labels,   // Tableau plat [2020, 2021, 2022]
             ];

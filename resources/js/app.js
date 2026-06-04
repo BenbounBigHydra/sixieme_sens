@@ -20,6 +20,8 @@ import QuizzCobrand from './components/QuizzCobrand.vue';
 // Importation des composants Vue de l'admin
 import LoginAdmin from './components/LoginAdmin.vue';
 import DashboardAdmin from './components/DashboardAdmin.vue';
+import CompaniesAdmin from './components/CompaniesAdmin.vue';
+import CollectionsAdmin from './components/CollectionsAdmin.vue';
 
 // Initialisation de l'application Vue
 const app = createApp({});
@@ -42,6 +44,8 @@ app.component('quizz-cobrand', QuizzCobrand);
 // Enregistrement global des composants admin
 app.component('login-admin', LoginAdmin);
 app.component('dashboard-admin', DashboardAdmin);
+app.component('companies-admin', CompaniesAdmin);
+app.component('collections-admin', CollectionsAdmin);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');
