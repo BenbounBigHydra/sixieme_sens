@@ -179,4 +179,52 @@ class CompanyStatsService
 
         return $awards;
     }
+
+    // KPI 1 : Taux d'occupation = nb_registered / capacity
+    public static function getOccupancyRate(Collection $collection): ?float
+    {
+        return $collection->nb_registered / $collection->capacity;
+    }
+
+    // KPI 2 : Taux d'inscription non éligible = 1 - (nb_blood_pouch / nb_registered)
+    public static function getNonEligibleRate(Collection $collection): ?float
+    {
+        if (!$collection->nb_registered || $collection->nb_registered === 0) {
+            return null;
+        }
+
+        return 1 - ($collection->nb_blood_pouch / $collection->nb_registered);
+    }
+
+    // KPI 3 : Taux de visite cobrandé = visitor_count / nb_employee
+    public static function getCobrandVisitRate(Collection $collection): ?float
+    {
+        return $collection->visitor_count / $collection->nb_employee;
+    }
+
+    // KPI 4 : Taux de visite OneDoc = onedoc_click_count / visitor_count
+    public static function getOnedocVisitRate(Collection $collection): ?float
+    {
+        if (!$collection->visitor_count || $collection->visitor_count === 0) {
+            return null;
+        }
+
+        return $collection->onedoc_click_count / $collection->visitor_count;
+    }
+
+    // Tous les KPIs pour toutes les collectes d'une entreprise
+    public static function getAllKpisForCompany(Company $company): array
+    {
+        return $company->collections()
+            ->orderBy('day_start')
+            ->get()
+            ->map(fn($collection) => [
+                'collection_id'     => $collection->id,
+                'occupancy_rate'    => self::getOccupancyRate($collection),
+                'non_eligible_rate' => self::getNonEligibleRate($collection),
+                'cobrand_visit_rate' => self::getCobrandVisitRate($collection),
+                'onedoc_visit_rate' => self::getOnedocVisitRate($collection),
+            ])
+            ->toArray();
+    }
 }
