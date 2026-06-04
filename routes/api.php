@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ApiRewardsController;
 use App\Http\Controllers\Api\ApiCollectionController;
 use App\Http\Controllers\Api\ApiCompanyController;
 use App\Http\Controllers\Api\ApiTrackingController;
+use App\Http\Controllers\Api\ApiMailController;
 
 Route::get('/trophies/{year?}', [ApiRewardsController::class, 'winner']);
 Route::get('/labels/{year?}', [ApiRewardsController::class, 'labelledCompanies']);
@@ -27,3 +28,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware(['web'])->post('/collection/{collection_id}/track-click', [ApiTrackingController::class, 'trackOnedocClick']);
+
+Route::post('/mail', [ApiMailController::class, 'store']);
