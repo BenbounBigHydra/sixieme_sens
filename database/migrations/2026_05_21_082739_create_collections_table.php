@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('nb_registered')->nullable();
             $table->integer('nb_blood_pouch')->nullable();
             $table->string('onedoc_link');
+            $table->integer('visitor_count');
             $table->timestamps();
         });
     }

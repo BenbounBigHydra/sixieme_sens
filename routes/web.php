@@ -5,6 +5,7 @@ use App\Http\Controllers\VitrinController;
 use App\Http\Controllers\CoBrandController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Middleware\TrackCollectionVisit;
 
 // Site vitrine
 Route::get('/', [VitrinController::class, 'home']);
@@ -14,10 +15,12 @@ Route::get('/companies', [VitrinController::class, 'companies']);
 Route::get('/contact', [VitrinController::class, 'contact']);
 
 // Site co-branding
-Route::get('/collection/{company_name}/closed', [CoBrandController::class, 'closed'])->name('cobrand.closed');
-Route::get('/collection/{company_name}/{collection_id}', [CoBrandController::class, 'home']);
-Route::get('/collection/{company_name}/{collection_id}/infos', [CoBrandController::class, 'infos']);
-Route::get('/collection/{company_name}/{collection_id}/quizz', [CoBrandController::class, 'quizz']);
+Route::prefix('/collection/{company_name}')->controller(CoBrandController::class)->middleware(TrackCollectionVisit::class)->group(function () {
+    Route::get('/closed', 'closed')->name('cobrand.closed');
+    Route::get('/{collection_id}', 'home');
+    Route::get('/{collection_id}/infos', 'infos');
+    Route::get('/{collection_id}/quizz', 'quizz');
+});
 
 // Site admin
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
