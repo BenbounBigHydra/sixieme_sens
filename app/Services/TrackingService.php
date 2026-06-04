@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Http\Request;
@@ -20,7 +21,31 @@ class TrackingService
     public function attachCookie(mixed $response, int $collectionId): mixed
     {
         return $response->cookie(
-            $this->cookieKey($collectionId), '1', 60 * 24 * 30, null, null, false, true
+            $this->cookieKey($collectionId),
+            '1',
+            60 * 24 * 30,
+            null,
+            null,
+            false,
+            true
+        );
+    }
+
+    public function isNewOnedocClick(Request $request, int $collectionId): bool
+    {
+        return !$request->cookie('clicked_onedoc_' . $collectionId);
+    }
+
+    public function attachOnedocCookie(mixed $response, int $collectionId): mixed
+    {
+        return $response->cookie(
+            'clicked_onedoc_' . $collectionId,
+            '1',
+            60 * 24 * 30,
+            null,
+            null,
+            false,
+            true
         );
     }
 

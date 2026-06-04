@@ -37,7 +37,6 @@ class Collection extends Model
         static::creating(function ($collection) {
             $collection->day_start = Carbon::parse($collection->day_start)->startOfDay();
             $collection->day_end   = Carbon::parse($collection->day_end)->endOfDay();
-            $collection->visitor_count = 0; // Initialiser le nombre de visiteurs à 0 lors de la création d'une collecte
         });
     }
 }

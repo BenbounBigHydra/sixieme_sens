@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $epfl,
@@ -70,7 +69,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2021 - deux collectes
             [
@@ -87,7 +85,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $epfl,
@@ -103,7 +100,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2022 - deux collectes
             [
@@ -120,7 +116,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $epfl,
@@ -136,7 +131,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2023 - deux collectes, meilleur gold et conviction
             [
@@ -153,7 +147,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $epfl,
@@ -169,7 +162,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // TROU 2024 → casse la série pour ambassador 2025
             // 2025 - deux collectes
@@ -187,7 +179,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $epfl,
@@ -203,7 +194,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2026 clôturée → label
             [
@@ -220,7 +210,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2026 future
             [
@@ -237,7 +226,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
         ]);
 
@@ -277,7 +265,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $heig,
@@ -293,7 +280,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2022 - deux collectes, meilleur gold et conviction
             [
@@ -310,7 +296,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $heig,
@@ -326,7 +311,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2023 - deux collectes
             [
@@ -343,7 +327,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $heig,
@@ -359,7 +342,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2024 - deux collectes
             [
@@ -376,7 +358,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $heig,
@@ -392,7 +373,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2025 - deux collectes, meilleur gold
             [
@@ -409,7 +389,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $heig,
@@ -425,7 +404,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2026 clôturée → label
             [
@@ -442,7 +420,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
         ]);
 
@@ -483,7 +460,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -499,7 +475,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2021 - deux collectes, meilleur gold
             [
@@ -516,7 +491,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -532,7 +506,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2022 - deux collectes
             [
@@ -549,7 +522,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -565,7 +537,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2023 - deux collectes
             [
@@ -582,7 +553,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -598,7 +568,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2024 - deux collectes, meilleur gold et conviction
             [
@@ -615,7 +584,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -631,7 +599,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2025 - deux collectes
             [
@@ -648,7 +615,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             [
                 'company_id'     => $unil,
@@ -664,7 +630,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2026 clôturée → label
             [
@@ -681,7 +646,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
         ]);
 
@@ -720,7 +684,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2024
             [
@@ -737,7 +700,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2025 - meilleur conviction
             [
@@ -754,7 +716,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
             // 2026 clôturée → label
             [
@@ -771,7 +732,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
         ]);
 
@@ -808,7 +768,6 @@ class DatabaseSeeder extends Seeder
             //     'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
             //     'created_at'     => Carbon::now(),
             //     'updated_at'     => Carbon::now(),
-            //     'visitor_count' => 0,
             // ],
             // 2026 passée mais non clôturée → pas de label
             [
@@ -825,7 +784,6 @@ class DatabaseSeeder extends Seeder
                 'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
                 'created_at'     => Carbon::now(),
                 'updated_at'     => Carbon::now(),
-                'visitor_count' => 0,
             ],
         ]);
     }

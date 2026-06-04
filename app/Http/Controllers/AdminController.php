@@ -47,10 +47,20 @@ class AdminController extends Controller
     {
         $year = request()->query('year', Carbon::now()->year);
 
+        $companies = Company::with('collections')->get();
+
+        $kpis = $companies->mapWithKeys(fn($company) => [
+            $company->id => [
+                'name' => $company->name,
+                'kpis' => CompanyStatsService::getAllKpisForCompany($company),
+            ]
+        ]);
+
         $data = [
-            'gold' => CompanyStatsService::getGoldWinnerData($year),
+            'gold'       => CompanyStatsService::getGoldWinnerData($year),
             'ambassador' => CompanyStatsService::getAmbassadorData($year),
             'conviction' => CompanyStatsService::getConvictionData($year),
+            'kpis'       => $kpis,
         ];
 
         return view('admin.leaderboard', ['initialData' => json_encode($data)]);
