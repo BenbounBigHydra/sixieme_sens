@@ -19,7 +19,7 @@ class ApiMailController extends Controller
             'message'   => 'nullable|string|max:1000',
         ]);
 
-        Mail::to('cts@example.com')->send(new CollecteDemandeMail($validated));
+        Mail::to('benoit.jaques@heig-vd.ch')->send(new CollecteDemandeMail($validated));
 
         return response()->json(['success' => true]);
     }
