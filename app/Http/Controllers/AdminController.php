@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Collection;
-use App\services\CompanyStatsService;
-use App\services\AdminService;
+use App\Services\CompanyStatsService;
+use App\Services\AdminService;
 use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
