@@ -71,7 +71,7 @@
                                         class="max-w-[60%] max-h-[60%] object-contain" />
                                 </div>
                                 <div class="flex items-center justify-center w-full" style="height: 30%">
-                                    <p class="font-['Inter'] text-[#0073e6] text-[10px] opacity-70 text-xs text-center leading-tight px-2">
+                                    <p class="font-['Inter'] text-[#0073e6] text-[12px] opacity-70 text-xs text-center leading-tight px-2">
                                         Partenaire du Don · {{ getLabelYears(company.name, selectedYear) }} an{{
                                             getLabelYears(company.name, selectedYear) > 1 ? 's' : '' }}
                                     </p>
@@ -87,12 +87,12 @@
                                         {{ company.name }}
                                     </h3>
                                     <p class="font-['Inter'] text-white text-xs md:text-sm flex flex-col gap-1">
-                                        <span v-if="company.gold">Prix Or {{ selectedYear }}</span>
-                                        <span v-if="company.ambassador">Prix Ambassadeur {{ selectedYear }}</span>
-                                        <span v-if="company.conviction">Prix Conviction {{ selectedYear }}</span>
+                                        <span v-if="company.gold">Or {{ selectedYear }}</span>
+                                        <span v-if="company.ambassador">Ambassadeur {{ selectedYear }}</span>
+                                        <span v-if="company.conviction">Conviction {{ selectedYear }}</span>
                                     </p>
                                 </div>
-                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-white text-[10px] opacity-70 gap-0.5"
+                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-white text-[12px] opacity-70 gap-0.5"
                                     style="height: 30%">
                                     <span v-if="getAwardCounts(company.name, selectedYear).gold > 0">
                                         Prix Or · {{ getAwardCounts(company.name, selectedYear).gold }}
