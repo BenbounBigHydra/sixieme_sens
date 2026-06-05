@@ -266,8 +266,10 @@ const pageData = computed(() => {
 const palmares = computed(() => pageData.value?.palmares || {});
 
 const isFilterOpen = ref(false);
-const availableYears = ref([2025, 2024, 2023, 2022, 2021, 2020]);
-const selectedYear = ref(2025);
+const availableYears = computed(() => Object.keys(palmares.value).map(Number).reverse());;
+const selectedYear = ref(null);
+const defaultYear = availableYears.value[0] ?? null;
+selectedYear.value = defaultYear;
 
 const selectYear = (year) => {
   selectedYear.value = year;

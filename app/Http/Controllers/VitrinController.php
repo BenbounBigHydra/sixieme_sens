@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Collection;
 use App\Services\CompanyStatsService;
-
+use Illuminate\Support\Carbon;
 
 class VitrinController extends Controller
 {
     public function home()
     {
-        $year = \Illuminate\Support\Carbon::now()->subYear()->year;
+        $year = Carbon::now()->subYear()->year;
+
+        $year = (Carbon::now()->month === 1) ? $year - 1 : $year;
 
         $data = [
             'year'           => $year,
@@ -24,12 +26,14 @@ class VitrinController extends Controller
             ],
         ];
 
+
         return view('vitrin.home', ['initialData' => json_encode($data)]);
     }
 
     public function trophies()
     {
-        $years = range(2025, 2020);
+        $years = CompanyStatsService::getTrophiedYears();
+
         $palmares = [];
 
         foreach ($years as $y) {
@@ -49,13 +53,16 @@ class VitrinController extends Controller
 
     public function label()
     {
-        $companies = CompanyStatsService::getLabelledCompanies();
+        $now = Carbon::now();
+
+        $companies = CompanyStatsService::getLabelledCompanies($now->year)
+            ->merge(CompanyStatsService::getLabelledCompanies($now->year - 1))
+            ->unique('name');
 
         $data = $companies->map(fn($company) => [
-            'name'   => $company->name,
-            'logo'   => $company->logo,
-            // 'color'  => $company->color,
-            'awards' => CompanyStatsService::getCompanyAwards($company),
+            'name'   => $company['name'],
+            'logo'   => $company['logo'],
+            // 'awards' => CompanyStatsService::getCompanyAwards($company),
         ]);
 
         return view('vitrin.label', ['initialData' => json_encode($data)]);
@@ -63,14 +70,22 @@ class VitrinController extends Controller
 
     public function companies()
     {
-        $companies = \App\Models\Company::all();
+        $years = CompanyStatsService::getActivesYears();
 
-        $data = $companies->map(fn($company) => [
-            'name'   => $company->name,
-            'logo'   => $company->logo,
-            // 'color'  => $company->color,
-            'awards' => CompanyStatsService::getCompanyAwards($company),
-        ]);
+        $data = [];
+
+        foreach ($years as $year) {
+            $labelled = CompanyStatsService::getLabelledCompanies($year);
+            $hasTrophies = in_array($year, CompanyStatsService::getTrophiedYears());
+
+            $data[$year] = $labelled->map(fn($company) => [
+                'name'       => $company['name'],
+                'logo'       => $company['logo'],
+                'gold'       => $hasTrophies && CompanyStatsService::getGoldWinner($year) === $company['name'],
+                'conviction' => $hasTrophies && CompanyStatsService::getConviction($year) === $company['name'],
+                'ambassador' => $hasTrophies && CompanyStatsService::getAmbassador($year) === $company['name'],
+            ])->values();
+        }
 
         return view('vitrin.companies', ['initialData' => json_encode($data)]);
     }
