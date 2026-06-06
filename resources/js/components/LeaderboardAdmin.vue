@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-[#fffbf1] font-inter">
     <HeaderAdmin />
 
-    <main class="max-w-[1200px] mx-auto py-10 px-4 space-y-12">
+    <main class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-10 space-y-12">
 
       <!-- Section 1: Leaderboard -->
       <section>

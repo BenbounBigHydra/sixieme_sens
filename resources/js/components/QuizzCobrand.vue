@@ -5,15 +5,15 @@
     <div v-if="currentState === 'landing'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
         <!-- Back button -->
-        <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-[#b3d9ff] px-4 py-2 text-[#D5D9ED] font-inter hover:bg-[#fffbf1]/10 transition-colors">
-          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(996%) hue-rotate(193deg) brightness(99%) contrast(93%);" />
-          <span class="text-[#fffbf1] text-sm md:text-base">Retourner à l'accueil</span>
+        <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
+          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
+          <span class="text-inherit text-sm md:text-base">Retourner à l'accueil</span>
         </a>
 
         <!-- Content -->
         <div class="mt-16 md:mt-24 max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
           <h1 class="font-jersey text-[40px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
-            Bienvenue dans<br/>l’aventure de Roby !
+            Vérifier votre éligibilité
           </h1>
 
           <p class="font-inter text-inherit text-sm md:text-base leading-relaxed mb-10">
@@ -21,11 +21,11 @@
           </p>
 
           <button @click="startQuiz" class="inline-block border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all mb-6" :style="activeBtnStyle">
-            Commencer le quizz
+            Commencer le quiz
           </button>
 
           <p class="font-inter text-inherit opacity-80 text-[12px] md:text-sm leading-snug">
-            *Les réponses ne sont pas enregistrées, elles servent<br class="hidden md:block"/> uniquement à vérifier votre éligibilité en temps réel
+            * Les réponses ne sont pas enregistrées, elles servent<br class="hidden md:block"/> uniquement à vérifier votre éligibilité en temps réel.
           </p>
         </div>
       </div>
@@ -43,9 +43,9 @@
     <!-- QUIZ STATE -->
     <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
-        <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-[#b3d9ff] px-4 py-2 text-[#D5D9ED] font-inter hover:bg-[#fffbf1]/10 transition-colors">
-          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(996%) hue-rotate(193deg) brightness(99%) contrast(93%);" />
-          <span class="text-[#fffbf1] text-sm md:text-base">
+        <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
+          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
+          <span class="text-inherit text-sm md:text-base">
             {{ currentQuestionIndex === 0 ? 'Retour à l\'introduction' : 'Question précédente' }}
           </span>
         </button>
@@ -102,20 +102,23 @@
       <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-12">
         <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
           <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-            <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-8">
-              Pas cette fois…
+            <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
+              Pas cette fois...
             </h2>
+            <h3 class="font-jersey text-[32px] md:text-[40px] text-inherit leading-tight mb-8">
+              mais vous pouvez quand même aider
+            </h3>
 
             <p class="font-inter text-inherit text-base md:text-lg leading-relaxed mb-12">
-              Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.
+              Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
               <button @click="continueQuiz" class="bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-6 md:px-8 py-3 md:py-4 text-black font-inter text-base md:text-lg transition-all text-center">
-                Continuer le quizz
+                Partager à un collègue
               </button>
               <a :href="homeLink" class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all text-center inline-block" :style="activeBtnStyle">
-                Retourner à l'accueil
+                Partager à un proche
               </a>
             </div>
           </div>
@@ -131,17 +134,20 @@
     <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
       <div>
         <!-- Back button -->
-        <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-[#b3d9ff] px-4 py-2 text-[#D5D9ED] font-inter hover:bg-[#fffbf1]/10 transition-colors">
-          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(996%) hue-rotate(193deg) brightness(99%) contrast(93%);" />
-          <span class="text-[#fffbf1] text-sm md:text-base">Retourner à l'accueil</span>
+        <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
+          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
+          <span class="text-inherit text-sm md:text-base">Retourner à l'accueil</span>
         </a>
       </div>
 
       <div class="mt-16 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
         <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-          <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-8">
+          <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
             On vous attend !
           </h2>
+          <h3 class="font-jersey text-[32px] md:text-[40px] text-inherit leading-tight mb-8">
+            plus qu'une étape
+          </h3>
 
           <p class="font-inter text-inherit text-base md:text-lg leading-relaxed mb-12">
             La prise de rendez-vous se fait via OneDoc. Vous allez être redirigé vers le calendrier de la collecte {{ company.name || '[entreprise]' }}. Choisissez simplement le créneau qui vous convient et confirmez votre inscription.
@@ -200,7 +206,7 @@ const questions = [
     text: "Avez-vous actuellement une plaie ou avez-vous été opéré récemment ?",
     correct: "Non",
     info: "Une plaie ouverte ou une intervention chirurgicale récente augmente le risque d'infection bactérienne dans le sang. Un délai est nécessaire pour s'assurer que la cicatrisation est complète et sans complication.",
-    bg: "background_space.png", folder: "02_wound", prefix: "wound", hasYes: true, hasNo: true,
+    bg: "Background_spaceship_desktop.png", folder: "02_wound", prefix: "wound", hasYes: true, hasNo: true,
     imageClass: "max-h-[300px] md:max-h-[500px]"
   },
   {
@@ -256,7 +262,7 @@ const questions = [
     text: "Avez-vous bénéficié d’un détartrage dans les 24 dernières heures ou d’un traitement dentaire dans les 7 derniers jours ?",
     correct: "Non",
     info: "Un détartrage ou un traitement dentaire peut libérer des bactéries de la bouche dans la circulation sanguine (bactériémie transitoire). Attendre de 24h à 7 jours permet d'éliminer ce risque d'infection pour le receveur.",
-    bg: "background_lab_desktop.png", folder: "10_dental", prefix: "dental", hasYes: false, hasNo: false,
+    bg: "background_lab_desktop.png", folder: "10_dental", prefix: "dental", hasYes: true, hasNo: true,
     imageClass: "max-h-[300px] md:max-h-[500px] scale-[1.3] md:scale-[1.5] translate-y-12 md:translate-y-24"
   },
   {

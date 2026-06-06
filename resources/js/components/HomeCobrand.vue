@@ -8,7 +8,7 @@
         <img src="/images/Union.png" alt="Union Background" class="w-full h-full object-cover object-right transform scale-90 md:scale-[0.85] origin-right" onerror="this.style.display='none'" />
       </div>
 
-      <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 relative z-10 flex flex-col md:flex-row">
+      <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 relative z-10 flex flex-col md:flex-row">
         <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
@@ -60,7 +60,7 @@
     </section>
 
     <!-- Part 2: Pourquoi donner son sang -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
 
         <!-- Left Column -->
@@ -72,7 +72,7 @@
           <div class="font-['Inter'] text-base md:text-lg text-black space-y-6 mb-10 leading-relaxed text-center lg:text-left">
             <p>Chaque don de sang peut sauver jusqu'à trois vies. Pas trois fois de suite, trois personnes différentes, le même jour, grâce à toi.</p>
             <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient d'accoucher, un accidenté en salle d'opération.</p>
-            <p>Les besoins sont constants. Les stocks, eux, ne durent pas — certains composants sanguins se périment en quelques jours. C'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
+            <p>Les besoins sont constants, c'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
           </div>
 
           <!-- Stats Replacement -->
@@ -169,7 +169,7 @@
     </section>
 
     <!-- Part 3: Ils témoignent -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
@@ -186,7 +186,7 @@
           </div>
           <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
              <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
-             <p class="font-['Inter'] text-[15px] leading-relaxed text-black font-bold mb-4 flex-grow">J'avais toujours repoussé. Là, c'était dans les locaux, pendant la pause — j'ai sauté le pas.</p>
+             <p class="font-['Inter'] text-[15px] leading-relaxed text-black font-bold mb-4 flex-grow">J'avais toujours repoussé. Là, c'était dans les locaux, pendant la pause, j'ai sauté le pas.</p>
              <p class="font-['Inter'] text-sm text-black mt-auto">— Marie-Claire, assistante RH</p>
           </div>
         </div>
@@ -219,7 +219,7 @@
     </section>
 
     <!-- Part 4: Questions fréquentes -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 mb-20 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 mb-20 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">

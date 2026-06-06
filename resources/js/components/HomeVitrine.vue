@@ -3,7 +3,7 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Section principale (Hero) -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
 
       <div class="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
 
@@ -15,8 +15,8 @@
           <!-- Main Title -->
           <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-10 tracking-wide">
             Mobilisez votre équipe<br />
-            pour le don<br />
-            du sang&nbsp;!
+            pour sauver<br />
+            des vies !
           </h1>
 
           <!-- Stats Replacement -->
@@ -27,7 +27,7 @@
             <div class="flex flex-col justify-center text-left mt-1">
               <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
               <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
-                <span><span class="text-[#0073e6]">130</span> vies sauvées.</span>
+                <span><span class="text-[#0073e6]">130</span> entreprises sauvées.</span>
                 <div class="relative group inline-flex ml-1 -mt-3">
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
                     <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
@@ -58,7 +58,7 @@
           <!-- Top Text removed -->
 
           <!-- Desktop Grid Container (Hidden on mobile) -->
-          <div class="hidden lg:block relative w-full lg:w-[95%] ml-auto mb-4">
+          <div class="hidden lg:block relative w-full lg:max-w-[450px] ml-auto mb-4">
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
               <!-- Render 150 Icons using Vue v-for -->
@@ -129,7 +129,7 @@
     </section>
 
     <!-- Section Classement 2025 -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
 
       <!-- Conteneur style fenêtre rétro -->
       <div class="border-[4px] border-black bg-[#fffbf1] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -166,24 +166,24 @@
             <div class="flex flex-col items-center w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ ambassadorWinner }}</p>
               <img src="/images/trophy_conviction (1).png" alt="Trophée Ambassadeur" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur</p>
             </div>
 
             <!-- Trophée 1 : Or -->
             <div class="flex flex-col items-center mb-0 md:-mt-8 w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center leading-tight">{{ goldWinner }}</p>
-              <div class="relative w-[80px] h-[80px] md:w-[260px] md:h-[260px] mb-2 md:mb-4 group cursor-pointer">
+              <div class="relative w-[80px] h-[80px] md:w-[320px] md:h-[320px] mb-2 md:mb-4 group cursor-pointer">
                 <img src="/images/trophy_gold.png" alt="Trophée Or" class="absolute inset-0 w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-300">
                 <img src="/images/trophy_gold_sparks.png" alt="Trophée Or Sparks" class="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               </div>
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or</p>
             </div>
 
             <!-- Trophée 3 : Conviction -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ convictionWinner }}</p>
               <img src="/images/trophy_conviction.png" alt="Trophée Conviction" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction</p>
             </div>
 
           </div>
@@ -192,42 +192,45 @@
     </section>
 
     <!-- Section Avantages du Label -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-20 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-20 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-      <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Une reconnaissance officielle pour votre engagement.</h2>
+      <h2 class="font-['Jersey_20'] font-normal text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Les avantages du Label Partenaire du Don</h2>
       <p class="font-['Inter'] text-base md:text-lg text-black mb-12 max-w-3xl text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement.<br class="hidden md:block"/> Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden md:block"/> et vous positionne sur le leaderboard public.</p>
 
-      <!-- Grille responsive : 1 colonne sur mobile, 2 sur bureau -->
+      <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-
-        <!-- Carte Avantage 1 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">01 — S'inscrire au programme</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève, l'institution de référence en matière de santé publique dans le canton.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 2 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">02 — Organiser une collecte</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Le Label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse, une preuve.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 3 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">03 — Mobiliser ses collaborateurs</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 4 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">04 — Recevoir le label et ses ressources</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l’emploi</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux) tout adapté à votre identité.</p>
           </div>
         </div>
-
       </div>
     </section>
 

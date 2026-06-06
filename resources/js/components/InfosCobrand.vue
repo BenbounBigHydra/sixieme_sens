@@ -9,22 +9,22 @@
       </h1>
     </div>
 
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 flex flex-col md:flex-row gap-12 pb-24">
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 flex flex-col md:flex-row gap-12 pb-24">
 
       <!-- Sidebar -->
       <aside class="w-full md:w-1/4 md:border-r-[3px] md:border-black md:pr-12 lg:pr-16 shrink-0">
-        <div class="mb-12 bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <h3 class="font-['Inter'] font-bold text-lg bg-white px-4 py-2 block text-center border-2 border-black mb-4">Prêt à donner ?</h3>
-          <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quizz. Moins de 5min.</p>
-          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
-        </div>
-
-        <nav class="flex flex-col font-['Jersey_20'] text-[28px] tracking-wide space-y-4">
+        <nav class="flex flex-col font-['Jersey_20'] text-[28px] tracking-wide space-y-4 mb-12">
           <button @click="activeTab = 'processus'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'processus', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'processus'}">Le processus</button>
           <button @click="activeTab = 'types'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'types', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'types'}">Types de don</button>
           <button @click="activeTab = 'faq'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'faq', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'faq'}">FAQ</button>
           <button @click="activeTab = 'eligibility'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'eligibility', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'eligibility'}">Puis-je donner ?</button>
         </nav>
+
+        <div class="bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <h3 class="font-['Inter'] font-bold text-lg bg-white px-4 py-2 block text-center border-2 border-black mb-4">Prêt à donner ?</h3>
+          <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quizz. Moins de 5min.</p>
+          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
+        </div>
       </aside>
 
       <!-- Main Content -->
@@ -35,11 +35,23 @@
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Comment se déroule un don</h2>
           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
             <h3 class="bg-[#ffcc00] font-['Jersey_20'] text-2xl tracking-wide px-4 py-3 border-b-2 border-black">01 Accueil et vérification d'identité</h3>
-            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">À votre arrivée, présentez votre pièce d'identité. Un formulaire médical vous est remis, <a href="https://www.hug.ch/sites/interhug/files/structures/don_du_sang/cts-questionnairedondusangv01fev26.pdf" target="_blank" class="text-[#0073e6] underline hover:opacity-80 transition-opacity">vous pouvez le remplir à l'avance en ligne</a>.</p>
+            <div class="p-4 font-['Inter'] text-sm leading-relaxed text-black">
+              <ul class="list-disc pl-8 space-y-1">
+                <li>Se rendre au lieu de la collecte</li>
+                <li>Présenter sa pièce d'identité</li>
+                <li>Remplir un formulaire médical (disponible en ligne au préalable)</li>
+              </ul>
+            </div>
           </div>
           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
             <h3 class="bg-[#ffcc00] font-['Jersey_20'] text-2xl tracking-wide px-4 py-3 border-b-2 border-black">02 Entretien médical confidentiel</h3>
-            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Un médecin ou infirmier évalue votre état de santé et vérifie votre hémoglobine. Votre éligibilité du jour est confirmée en quelques minutes.</p>
+            <div class="p-4 font-['Inter'] text-sm leading-relaxed text-black">
+              <ul class="list-disc pl-8 space-y-1">
+                <li>Évaluation de votre état de santé par un·e médecin / infirmier·ère</li>
+                <li>Vérification de votre hémoglobine avec une micropiqûre au doigt</li>
+                <li>Confirmation de votre éligibilité du jour</li>
+              </ul>
+            </div>
           </div>
           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
             <h3 class="bg-[#ffcc00] font-['Jersey_20'] text-2xl tracking-wide px-4 py-3 border-b-2 border-black">03 Le don</h3>
@@ -47,7 +59,7 @@
           </div>
           <div class="border-2 border-black bg-[#fffbf1] p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
             <h3 class="bg-[#ffcc00] font-['Jersey_20'] text-2xl tracking-wide px-4 py-3 border-b-2 border-black">04 Collation et repos</h3>
-            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Après le don, une collation vous est offerte. Reposez-vous quelques minutes avant de reprendre vos activités et hydratez-vous bien.</p>
+            <p class="p-4 font-['Inter'] text-sm leading-relaxed text-black">Après le don, une collation vous est offerte. Un temps de repos est recommandé avant de reprendre vos activités. Hydratez-vous bien dans les heures qui suivent.</p>
           </div>
         </div>
 
@@ -56,7 +68,7 @@
           <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Types de don</h2>
 
           <div class="border-[3px] border-black bg-[#fffbf1] p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-bold font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
+            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-normal font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
               <span>Don de sang total</span>
               <span>~45 min</span>
             </div>
@@ -66,7 +78,7 @@
               <div class="border-[1px] border-black p-6 w-full lg:w-auto shrink-0 flex flex-col gap-2 font-['Inter'] text-base md:text-lg bg-[#fffbf1]">
                 <div class="flex justify-between gap-12">
                   <span>Volume</span>
-                  <span>450ml</span>
+                  <span>450 ml</span>
                 </div>
                 <div class="flex justify-between gap-12">
                   <span>Fréquence max.</span>
@@ -75,31 +87,44 @@
               </div>
             </div>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mt-auto">
-              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Jersey_20'] tracking-wide text-2xl border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">Je participe !</a>
+              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Jersey_20'] tracking-wide text-2xl border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">Je participe</a>
               <img src="/images/hug_icon.png" alt="HUG Logo" class="h-8 md:h-10 object-contain" onerror="this.style.display='none'" />
             </div>
           </div>
 
           <div class="border-[3px] border-black bg-[#fffbf1] p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-bold font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
+            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-normal font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
               <span>Don de plaquettes</span>
               <span>~120 min</span>
             </div>
-            <p class="font-['Inter'] text-base md:text-lg text-black mb-12 lg:max-w-[50%]">Les plaquettes sont extraites du sang par aphérèse, le reste étant restitué au donneur. Essentielles aux patients sous chimiothérapie ou atteints de leucémie.</p>
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
+              <p class="font-['Inter'] text-base md:text-lg text-black lg:max-w-[50%]">Les plaquettes sont extraites du sang par aphérèse, le reste étant restitué au donneur. Essentielles aux patients sous chimiothérapie ou atteints de leucémie.</p>
+              
+              <div class="border-[1px] border-black p-6 w-full lg:w-auto shrink-0 flex flex-col gap-2 font-['Inter'] text-base md:text-lg bg-[#fffbf1]">
+                <div class="flex justify-between gap-12">
+                  <span>Volume</span>
+                  <span>450 ml</span>
+                </div>
+                <div class="flex justify-between gap-12">
+                  <span>Fréquence max.</span>
+                  <span>4x/an</span>
+                </div>
+              </div>
+            </div>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mt-auto">
-              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte.</div>
+              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour donner vos plaquettes, contactez directement le CTS.</div>
               <img src="/images/hug_icon.png" alt="HUG Logo" class="h-8 md:h-10 object-contain" onerror="this.style.display='none'" />
             </div>
           </div>
 
           <div class="border-[3px] border-black bg-[#fffbf1] p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-bold font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
+            <div class="bg-[#ffcc00] px-4 md:px-6 py-3 md:py-4 flex justify-between items-center font-normal font-['Jersey_20'] tracking-wide text-2xl md:text-4xl mb-8">
               <span>Don de cellules souches</span>
               <span>Sur demande</span>
             </div>
             <p class="font-['Inter'] text-base md:text-lg text-black mb-12 lg:max-w-[50%]">Le don de cellules souches permet de traiter des maladies du sang graves. L'inscription au registre est ouverte aux 18-60 ans en bonne santé.</p>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mt-auto">
-              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte.</div>
+              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour vous inscrire au registre, rendez-vous sur le site de la Croix-Rouge suisse.</div>
               <img src="/images/CroixRouge.svg" alt="Croix Rouge Logo" class="h-8 md:h-10 object-contain" onerror="this.style.display='none'" />
             </div>
           </div>
@@ -152,11 +177,11 @@
 
         <!-- Puis-je donner Tab -->
         <div v-show="activeTab === 'eligibility'">
-          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Puis-je donner ?</h2>
-          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Vous voulez vérifier votre éligibilité avant le jour J ? Consultez l'ensemble des critères officiels du Centre de Transfusion Sanguine.</p>
+          <h2 class="font-['Jersey_20'] text-4xl md:text-5xl mb-6 text-black tracking-wide">Vérification d’éligibilité</h2>
+          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Vous voulez être certain de votre éligibilité avant de prendre rendez-vous pour donner votre sang ?<br/><br/>Consultez l'ensemble des critères officiels du Centre de Transfusion Sanguine.</p>
           <a href="https://www.hug.ch/don-du-sang/puis-je-donner-mon-sang" target="_blank" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 mb-12 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Consulter les critères</a>
 
-          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Ou répondez à notre quiz en moins de 5 minutes.</p>
+          <p class="font-['Inter'] text-base md:text-lg mb-6 text-black">Ou répondez à notre quiz interactif en moins de 5 minutes.</p>
           <a :href="quizzUrl" class="inline-block bg-[#0073e6] text-white px-8 py-3 font-bold text-base hover:bg-[#0073e6]/90 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Faire le quiz</a>
         </div>
 

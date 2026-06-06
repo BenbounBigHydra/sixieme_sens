@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
 
       <!-- Header text -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
@@ -8,16 +8,15 @@
         <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-4 tracking-wide">
           Organiser une collecte
         </h1>
-        <p class="font-['Inter'] text-sm md:text-base text-black w-full">
-          Prêt à faire la différence ?<br class="hidden md:block" />
-          Laissez-nous vos coordonnées et le CTS vous recontactera rapidement.
+        <p class="font-['Inter'] text-sm md:text-base text-black w-full max-w-4xl leading-relaxed">
+          Pour accueillir une collecte en entreprise, deux conditions sont requises : disposer d'un espace d'au moins 100 m² et pouvoir mobiliser un minimum de 500 collaborateurs éligibles (ou avoir réuni plus de 50 promesses de don). La planification doit être initiée au moins 3 mois à l'avance. Remplissez le formulaire ci-dessous et le CTS vous recontactera pour établir le planning ensemble.
         </p>
       </div>
 
       <!-- Success Message -->
       <div v-if="isSubmitted" class="bg-[#caefb2] text-black font-['Inter'] px-6 py-4 flex items-center gap-4 mb-8 w-full">
         <img src="/images/BlackCheck.svg" alt="Check" class="w-6 h-6 flex-shrink-0" />
-        <span class="text-base md:text-lg font-bold">Merci pour votre demande ! Nous vous contacterons au plus vite.</span>
+        <span class="text-base md:text-lg font-bold">Merci ! Votre demande a bien été transmise.</span>
       </div>
 
       <!-- Form -->
@@ -42,7 +41,7 @@
               <input type="text" v-model="form.employes" class="flex-1 bg-transparent focus:outline-none w-full" />
               <span class="text-red-500 font-bold ml-2 flex-shrink-0">*</span>
             </div>
-            <span class="text-xs text-gray-600 mt-1">Minimum 1'000</span>
+            <span class="text-xs text-gray-600 mt-1">Minimum 500</span>
           </div>
         </div>
 
@@ -74,7 +73,6 @@
           <div class="w-full border-[2px] border-black px-4 bg-[#fffbf1] shadow-[8px_8px_0px_0px_#0073e6] flex justify-between items-center h-[60px] focus-within:ring-2 focus-within:ring-[#0073e6] transition-shadow">
             <input type="text" v-model="form.message" placeholder="Vos questions ou précisions" class="flex-1 bg-transparent focus:outline-none w-full placeholder-gray-400" />
           </div>
-          <span class="text-xs text-gray-600 mt-1">Précisions</span>
         </div>
 
         <!-- Submit Button -->
@@ -119,7 +117,7 @@ const showEmailError = computed(() => {
 });
 
 const isFormValid = computed(() => {
-  const isEmployesValid = form.value.employes.trim() !== '' && !isNaN(form.value.employes) && parseInt(form.value.employes) >= 1000;
+  const isEmployesValid = form.value.employes.trim() !== '' && !isNaN(form.value.employes) && parseInt(form.value.employes) >= 500;
   return form.value.nom.trim() !== '' &&
          isEmployesValid &&
          form.value.mail.trim() !== '' &&

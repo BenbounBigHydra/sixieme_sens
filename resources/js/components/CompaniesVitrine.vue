@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-8">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-8">
 
       <!-- Titre de la page -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
