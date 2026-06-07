@@ -164,15 +164,15 @@
 
             <!-- Trophée 2 : Ambassadeur -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ ambassadorWinner }}</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-6 relative z-10 text-center">{{ ambassadorWinner }}</p>
               <img src="/images/trophy_conviction (1).png" alt="Trophée Ambassadeur" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
               <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur</p>
             </div>
 
             <!-- Trophée 1 : Or -->
             <div class="flex flex-col items-center mb-0 md:-mt-8 w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center leading-tight">{{ goldWinner }}</p>
-              <div class="relative w-[80px] h-[80px] md:w-[320px] md:h-[320px] mb-2 md:mb-4 group cursor-pointer">
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-8 relative z-10 text-center leading-tight">{{ goldWinner }}</p>
+              <div class="relative w-[80px] h-[80px] md:w-[320px] md:h-[320px] mb-2 md:mb-4 group cursor-pointer md:translate-y-6 lg:translate-y-8">
                 <img src="/images/trophy_gold.png" alt="Trophée Or" class="absolute inset-0 w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-300">
                 <img src="/images/trophy_gold_sparks.png" alt="Trophée Or Sparks" class="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               </div>
@@ -181,7 +181,7 @@
 
             <!-- Trophée 3 : Conviction -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ convictionWinner }}</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-6 relative z-10 text-center">{{ convictionWinner }}</p>
               <img src="/images/trophy_conviction.png" alt="Trophée Conviction" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
               <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction</p>
             </div>

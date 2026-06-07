@@ -54,7 +54,7 @@
         <!-- Or -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Or</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Or</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">
@@ -69,7 +69,7 @@
         <!-- Ambassadeur -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Ambassadeur</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Ambassadeur</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">
@@ -84,7 +84,7 @@
         <!-- Conviction -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Conviction</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Conviction</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">

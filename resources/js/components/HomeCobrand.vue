@@ -182,7 +182,7 @@
         <!-- Block 1 -->
         <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img src="/images/dono_smiling.png" alt="Robot" class="w-24 h-24 object-contain" onerror="this.style.display='none'" />
+             <img :src="marieClaireImage || '/images/dono_smiling.png'" alt="Marie-Claire" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
           </div>
           <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
              <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
@@ -194,7 +194,7 @@
         <!-- Block 2 -->
         <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img src="/images/dono_smiling.png" alt="Robot" class="w-24 h-24 object-contain" onerror="this.style.display='none'" />
+             <img :src="thomasImage || '/images/dono_smiling.png'" alt="Thomas" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
           </div>
           <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
              <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
@@ -206,7 +206,7 @@
         <!-- Block 3 -->
         <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img src="/images/dono_smiling.png" alt="Robot" class="w-24 h-24 object-contain" onerror="this.style.display='none'" />
+             <img :src="anoukImage || '/images/dono_smiling.png'" alt="Anouk" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
           </div>
           <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
              <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
@@ -307,6 +307,22 @@ const desktopRobyIndex = ref(73);
 const mobileRobyIndex = ref(23);
 let robyInterval = null;
 
+const femaleImages = [
+  '/images/littleMen/1_dark_bun_red.png',
+  '/images/littleMen/1_mid_bun_green.png',
+  '/images/littleMen/1_pale_bun_blue.png'
+];
+
+const maleImages = [
+  '/images/littleMen/dark_nobun_red.png',
+  '/images/littleMen/mid_nobun_green.png',
+  '/images/littleMen/pale_nobun_blue.png'
+];
+
+const marieClaireImage = ref('');
+const thomasImage = ref('');
+const anoukImage = ref('');
+
 onMounted(() => {
   const parts = window.location.pathname.split('/');
   companySlug.value = parts[2] || '';
@@ -316,6 +332,13 @@ onMounted(() => {
     desktopRobyIndex.value = Math.floor(Math.random() * 150) + 1;
     mobileRobyIndex.value = Math.floor(Math.random() * 32) + 1;
   }, 5000);
+
+  const shuffledFemales = [...femaleImages].sort(() => 0.5 - Math.random());
+  marieClaireImage.value = shuffledFemales[0];
+  anoukImage.value = shuffledFemales[1];
+
+  const shuffledMales = [...maleImages].sort(() => 0.5 - Math.random());
+  thomasImage.value = shuffledMales[0];
 });
 
 onUnmounted(() => {
