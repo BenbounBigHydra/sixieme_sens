@@ -79,7 +79,11 @@ class CoBrandController extends Controller
             ->orderBy('day_start', 'asc')
             ->first();
 
-        $initialData = json_encode(['url' => $company_name . '/' . $collection->id]);
+        if ($collection) {
+            $initialData = json_encode(['url' => $company_name . '/' . $collection->id]);
+        } else {
+            $initialData = json_encode(['url' => null]);
+        }
 
         return view('cobrand.closed', [
             'companyName' => $company['name'],
