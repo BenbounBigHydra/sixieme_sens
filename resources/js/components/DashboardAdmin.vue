@@ -2,14 +2,14 @@
   <div class="min-h-screen bg-[#fffbf1]">
     <HeaderAdmin />
 
-    <main class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-10 space-y-12">
+    <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
       <!-- FirstPart: Action Buttons -->
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        <a href="/admin/companies" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
+        <a href="/admin/companies?action=new" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
           <div class="h-6 w-6 mr-3 bg-[#fffbf1]" style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
           <span class="font-inter text-lg">Ajouter une entreprise</span>
         </a>
-        <a href="/admin/collections" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
+        <a href="/admin/collections?action=new" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
           <div class="h-6 w-6 mr-3 bg-[#fffbf1]" style="mask-image: url('/images/Group.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Group.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
           <span class="font-inter text-lg">Organiser une collecte</span>
         </a>
@@ -19,7 +19,7 @@
       <section>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 md:gap-0">
           <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à clore</h2>
-          <div class="bg-[#ffb699] flex items-center px-4 py-2 rounded-sm space-x-2">
+          <div class="bg-[#ff9166] flex items-center px-4 py-2 rounded-sm space-x-2">
             <img src="/images/important.svg" alt="Important" class="h-5" />
             <span class="font-inter text-sm text-[#393939] font-medium">Vous avez {{ toClose.length }} collectes à clore.</span>
           </div>
@@ -30,7 +30,7 @@
           <div class="hidden md:grid grid-cols-4 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
             <div class="font-inter font-medium text-[#393939]">Entreprise</div>
             <div class="font-inter font-medium text-[#393939]">Date(s)</div>
-            <div class="font-inter font-medium text-[#393939]">Nb employés</div>
+            <div class="font-inter font-medium text-[#393939]">Total employés</div>
             <div class="font-inter font-medium text-[#393939] text-right">Actions</div>
           </div>
 
@@ -45,7 +45,7 @@
                   <span class="font-inter font-bold text-sm md:text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
                 </div>
                 <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Date(s): </span><span>{{ formatDate(item.day_start) || '02.07.2026' }}</span></div>
-                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Nb employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Total employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
                 <div class="flex items-center justify-start md:justify-end space-x-3 w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100">
                   <button @click="openModal('cloture', item)" class="bg-[#5bb124] text-white flex items-center px-4 py-2 md:py-1.5 rounded-sm hover:bg-green-600 transition-colors w-full md:w-auto justify-center">
                     <img src="/images/whiteCheck.svg" alt="Check" class="h-4 mr-2" />
@@ -70,7 +70,7 @@
       <section>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 md:gap-0">
           <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à venir</h2>
-          <a href="/admin/collections" class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 md:py-2 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+          <a href="/admin/collections?action=new" class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 md:py-2 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
             <div class="h-4 w-4 mr-2 bg-[#fffbf1]" style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
             <span class="font-inter text-sm">Nouvelle collecte</span>
           </a>
@@ -81,7 +81,7 @@
           <div class="hidden md:grid grid-cols-6 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
             <div class="font-inter font-medium text-[#393939]">Entreprise</div>
             <div class="font-inter font-medium text-[#393939]">Dates</div>
-            <div class="font-inter font-medium text-[#393939]">Nb employés</div>
+            <div class="font-inter font-medium text-[#393939]">Total employés</div>
             <div class="font-inter font-medium text-[#393939]">Lien site co-brandé</div>
             <div class="font-inter font-medium text-[#393939]">Lien OneDoc</div>
             <div class="font-inter font-medium text-[#393939] text-right">Actions</div>
@@ -98,7 +98,7 @@
                   <span class="font-inter font-bold text-sm md:text-xs text-[#393939]">{{ item.company?.name || 'Inconnu' }}</span>
                 </div>
                 <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Date(s): </span><span>{{ formatDate(item.day_start) || '02.07.2026' }}</span></div>
-                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Nb employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
+                <div class="font-inter text-[#393939] w-full flex justify-between md:block"><span class="md:hidden font-bold">Total employés: </span><span>{{ item.nb_employee || '0' }}</span></div>
                 
                 <div class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0 rounded-sm overflow-hidden">
                   <span class="md:hidden font-bold text-sm text-[#393939] mr-2 shrink-0">Site:</span>

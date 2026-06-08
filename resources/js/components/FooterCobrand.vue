@@ -1,7 +1,20 @@
 <template>
-  <footer class="relative w-full pt-[350px] pb-16 mt-20" style="background-image: url('/images/Motif_cubique_degradeFooter.png'); background-size: cover; background-position: top;">
+  <footer class="relative w-full pt-[350px] pb-16 mt-20">
+    <div class="absolute inset-0 z-0 pointer-events-none"
+         :style="{
+            backgroundColor: computedCompanyColor,
+            maskImage: 'url(/images/Motif_cubique_degradeFooter.svg)',
+            WebkitMaskImage: 'url(/images/Motif_cubique_degradeFooter.svg)',
+            maskSize: 'cover',
+            WebkitMaskSize: 'cover',
+            maskPosition: 'top',
+            WebkitMaskPosition: 'top',
+            maskRepeat: 'no-repeat',
+            WebkitMaskRepeat: 'no-repeat'
+          }">
+    </div>
 
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8">
+    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 relative z-10">
 
       <div class="bg-[#fffbf1] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-6 md:px-20 py-12 flex flex-col">
 
@@ -74,6 +87,11 @@ const pageData = computed(() => {
 });
 
 const company = computed(() => pageData.value?.company || {});
+
+const computedCompanyColor = computed(() => {
+  if (!company.value?.color) return '#0073e6';
+  return company.value.color.startsWith('#') ? company.value.color : `#${company.value.color}`;
+});
 
 const companySlug = ref('');
 const collectionId = ref('');

@@ -29,6 +29,7 @@ class AdminController extends Controller
     {
         $data = [
             'collections' => AdminService::getCollectionsByStatus(),
+            'companies' => Company::select('id', 'name')->orderBy('name', 'asc')->get(),
         ];
 
         return view('admin.collections', ['initialData' => json_encode($data)]);

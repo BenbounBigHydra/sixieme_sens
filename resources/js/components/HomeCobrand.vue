@@ -3,12 +3,24 @@
 
     <!-- Part 1 -->
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
-      <!-- Background Union.png -->
+      <!-- Background Union.svg -->
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <img src="/images/Union.png" alt="Union Background" class="w-full h-full object-cover object-right transform scale-90 md:scale-[0.85] origin-right" onerror="this.style.display='none'" />
+        <div class="w-full h-full transform scale-90 md:scale-[0.85] origin-right"
+             :style="{
+               backgroundColor: computedCompanyColor,
+               maskImage: 'url(/images/Union.svg)',
+               WebkitMaskImage: 'url(/images/Union.svg)',
+               maskSize: 'cover',
+               WebkitMaskSize: 'cover',
+               maskPosition: 'right',
+               WebkitMaskPosition: 'right',
+               maskRepeat: 'no-repeat',
+               WebkitMaskRepeat: 'no-repeat'
+             }">
+        </div>
       </div>
 
-      <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 relative z-10 flex flex-col md:flex-row">
+      <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 relative z-10 flex flex-col md:flex-row">
         <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
@@ -60,7 +72,7 @@
     </section>
 
     <!-- Part 2: Pourquoi donner son sang -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 relative z-10">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
 
         <!-- Left Column -->
@@ -169,7 +181,7 @@
     </section>
 
     <!-- Part 3: Ils témoignent -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
@@ -219,7 +231,7 @@
     </section>
 
     <!-- Part 4: Questions fréquentes -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 mb-20 relative z-10">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 mb-20 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
         <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
@@ -290,6 +302,11 @@ const parsedData = computed(() => {
 
 const collection = computed(() => parsedData.value.collection);
 const company = computed(() => parsedData.value.company);
+
+const computedCompanyColor = computed(() => {
+  if (!company.value?.color) return '#0073e6';
+  return company.value.color.startsWith('#') ? company.value.color : `#${company.value.color}`;
+});
 
 const formattedDate = computed(() => {
   if (collection.value?.day_start) {
