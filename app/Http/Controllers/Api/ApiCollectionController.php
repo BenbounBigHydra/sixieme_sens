@@ -28,6 +28,7 @@ class ApiCollectionController extends Controller
             'location'       => 'required|string',
             'hour_start'     => 'required|date_format:H:i:s',
             'hour_end'       => 'required|date_format:H:i:s|after:hour_start',
+            'capacity'       => 'required|integer|min:0',
             'nb_employee'    => 'required|integer|min:0',
             'onedoc_link'    => 'required|url',
         ]);
@@ -48,6 +49,7 @@ class ApiCollectionController extends Controller
             'location'       => 'sometimes|string',
             'hour_start'     => 'sometimes|date_format:H:i:s',
             'hour_end'       => 'sometimes|date_format:H:i:s|after:hour_start',
+            'capacity'       => 'sometimes|integer|min:0',
             'nb_employee'    => 'sometimes|integer|min:0',
             'onedoc_link'    => 'sometimes|url',
         ]);

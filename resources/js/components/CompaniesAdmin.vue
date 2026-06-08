@@ -179,28 +179,6 @@
                 <p v-if="errors.logo" class="text-red-500 text-xs mt-1">{{ errors.logo[0] }}</p>
               </div>
 
-              <!-- Secteur -->
-              <div>
-                <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Secteur</label>
-                <input
-                  type="text"
-                  v-model="form.sector"
-                  class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  placeholder="Ex: Finance"
-                />
-              </div>
-
-              <!-- Nombre d'employés -->
-              <div>
-                <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Nombre d'employés</label>
-                <input
-                  type="number"
-                  v-model="form.employee_count"
-                  class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  placeholder="Ex: 1753"
-                />
-              </div>
-
               <!-- Couleur -->
               <div>
                 <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Couleur de la marque</label>
@@ -223,62 +201,6 @@
 
             <!-- Colonne 2 -->
             <div class="space-y-5">
-              <!-- Contact référent -->
-              <div>
-                <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Contact référent</label>
-                <input
-                  type="text"
-                  v-model="form.contact_name"
-                  class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  placeholder="Nom du contact"
-                />
-              </div>
-
-              <!-- Email -->
-              <div>
-                <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Email</label>
-                <input
-                  type="email"
-                  v-model="form.contact_email"
-                  class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  placeholder="contact@email.com"
-                />
-              </div>
-
-              <!-- Téléphone -->
-              <div>
-                <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Téléphone</label>
-                <input
-                  type="text"
-                  v-model="form.contact_phone"
-                  class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  placeholder="+41 78 123 45 67"
-                />
-              </div>
-
-              <div class="flex items-center justify-between">
-                <!-- Labellisée -->
-                <div class="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="is_labelled"
-                    v-model="form.is_labelled"
-                    class="h-4 w-4 text-[#0073e6] focus:ring-[#0073e6] border-gray-400 rounded-sm"
-                  />
-                  <label for="is_labelled" class="font-inter text-sm font-bold text-[#393939] cursor-pointer">Labellisée</label>
-                </div>
-
-                <!-- Trophées totaux -->
-                <div>
-                  <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Trophées totaux</label>
-                  <input
-                    type="number"
-                    v-model="form.trophies_count"
-                    class="w-24 border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
-                  />
-                </div>
-              </div>
-
               <!-- Informations de collecte (Lecture seule, visible uniquement si édition) -->
               <div v-if="editingCompany" class="bg-blue-50 p-4 rounded-sm border border-blue-100 space-y-3 mt-4">
                 <h3 class="font-inter text-sm font-bold text-[#0073e6] mb-2">Statistiques de collectes</h3>
@@ -346,14 +268,7 @@ export default {
       form: {
         name: '',
         color: '#000000',
-        logo: null,
-        sector: '',
-        employee_count: '',
-        contact_name: '',
-        contact_phone: '',
-        contact_email: '',
-        is_labelled: false,
-        trophies_count: 0
+        logo: null
       },
       previewLogo: null,
       errors: {}
@@ -362,6 +277,12 @@ export default {
   created() {
     if (this.initialData && this.initialData.companies) {
       this.companies = this.initialData.companies;
+    }
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'new') {
+      this.openNewCompanyModal();
     }
   },
   computed: {
@@ -407,8 +328,7 @@ export default {
     openNewCompanyModal() {
       this.editingCompany = null;
       this.form = {
-        name: '', color: '#000000', logo: null,
-        sector: '', employee_count: '', contact_name: '', contact_phone: '', contact_email: '', is_labelled: false, trophies_count: 0
+        name: '', color: '#000000', logo: null
       };
       this.previewLogo = null;
       this.errors = {};
@@ -419,14 +339,7 @@ export default {
       this.form = {
         name: company.name || '',
         color: company.color || '#000000',
-        logo: null,
-        sector: company.sector || '',
-        employee_count: company.employee_count || '',
-        contact_name: company.contact_name || '',
-        contact_phone: company.contact_phone || '',
-        contact_email: company.contact_email || '',
-        is_labelled: !!company.is_labelled,
-        trophies_count: company.trophies_count || 0
+        logo: null
       };
       this.previewLogo = null;
       this.errors = {};
@@ -450,13 +363,6 @@ export default {
       formData.append('name', this.form.name);
       if (this.form.color) formData.append('color', this.form.color);
       if (this.form.logo) formData.append('logo', this.form.logo);
-      if (this.form.sector) formData.append('sector', this.form.sector);
-      if (this.form.employee_count !== '') formData.append('employee_count', this.form.employee_count);
-      if (this.form.contact_name) formData.append('contact_name', this.form.contact_name);
-      if (this.form.contact_phone) formData.append('contact_phone', this.form.contact_phone);
-      if (this.form.contact_email) formData.append('contact_email', this.form.contact_email);
-      formData.append('is_labelled', this.form.is_labelled ? '1' : '0');
-      if (this.form.trophies_count !== '') formData.append('trophies_count', this.form.trophies_count);
 
       try {
         let response;

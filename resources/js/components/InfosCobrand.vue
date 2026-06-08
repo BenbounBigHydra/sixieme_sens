@@ -22,8 +22,8 @@
 
         <div class="bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <h3 class="font-['Inter'] font-bold text-lg bg-white px-4 py-2 block text-center border-2 border-black mb-4">Prêt à donner ?</h3>
-          <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quizz. Moins de 5min.</p>
-          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Faire le quizz</a>
+          <p class="font-['Inter'] text-sm text-black mb-6 text-center">Commencez par le quiz. Moins de 5min.</p>
+          <a :href="quizzUrl" class="block text-center bg-[#0073e6] text-white font-['Inter'] font-bold py-3 hover:bg-[#0073e6]/90 transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Faire le quiz</a>
         </div>
       </aside>
 

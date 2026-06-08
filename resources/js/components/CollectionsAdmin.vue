@@ -45,8 +45,12 @@
       </div>
 
       <!-- Title -->
-      <div>
-        <h1 class="font-inter font-bold text-2xl text-black">Collectes</h1>
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mt-4">
+        <h1 class="font-inter font-bold text-3xl text-black">Collectes</h1>
+        <button @click="openNewModal" class="bg-[#0073e6] text-[#fffbf1] flex items-center px-6 py-3 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+          <div class="h-4 w-4 mr-2 bg-[#fffbf1]" style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;"></div>
+          <span class="font-inter text-sm">Organiser une collecte</span>
+        </button>
       </div>
 
       <!-- Collections Table -->
@@ -115,49 +119,80 @@
         <button @click="closeModal" class="absolute top-6 right-6 flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
           <img src="/images/X.svg" alt="Close" class="w-10 h-10" />
         </button>
-        <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte?.company?.name || 'Inconnu' }}</h2>
-        <p class="font-['Jersey_20'] text-2xl text-black mb-6 tracking-wide">Collecte du {{ formatDate(selectedCollecte?.day_start) }}</p>
+        <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte ? (selectedCollecte.company?.name || 'Inconnu') : 'Nouvelle collecte' }}</h2>
+        <p class="font-['Jersey_20'] text-2xl text-black mb-6 tracking-wide" v-if="selectedCollecte">Collecte du {{ formatDate(selectedCollecte?.day_start) }}</p>
 
         <!-- Tabs -->
-        <div class="flex space-x-4 border-b border-gray-300 mb-6 shrink-0">
+        <div class="flex space-x-4 border-b border-gray-300 mb-6 shrink-0" v-if="selectedCollecte">
           <button @click="activeTab = 'modifier'" :class="{'border-b-2 border-[#0073e6] text-[#0073e6] font-bold': activeTab === 'modifier', 'text-gray-500': activeTab !== 'modifier'}" class="pb-2 px-4 font-inter text-lg">Modifier</button>
           <button @click="activeTab = 'cloturer'" :class="{'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer'}" class="pb-2 px-4 font-inter text-lg">Clôturer</button>
           <button @click="activeTab = 'supprimer'" :class="{'border-b-2 border-[#E4534B] text-[#E4534B] font-bold': activeTab === 'supprimer', 'text-gray-500': activeTab !== 'supprimer'}" class="pb-2 px-4 font-inter text-lg">Supprimer</button>
         </div>
 
         <div class="overflow-y-auto overflow-x-hidden flex-grow px-1">
-          <!-- Tab Content: Modifier -->
-          <div v-if="activeTab === 'modifier'" class="space-y-6">
+          <!-- Tab Content: Modifier ou Créer -->
+          <div v-if="activeTab === 'modifier' || activeTab === 'creer'" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+              <div v-if="activeTab === 'creer'" class="col-span-1 md:col-span-2">
+                <label class="block font-inter text-base mb-2">Entreprise</label>
+                <div class="relative">
+                  <select v-model="detailForm.company_id" class="w-full border border-black p-3 font-inter text-sm bg-transparent">
+                    <option disabled value="">Sélectionnez une entreprise</option>
+                    <option v-for="company in companies" :key="company.id" :value="company.id">
+                      {{ company.name }}
+                    </option>
+                  </select>
+                </div>
+                <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id[0] }}</p>
+              </div>
               <div>
                 <label class="block font-inter text-base mb-2">Nombre d'employés</label>
                 <div class="relative">
                   <input type="number" v-model="detailForm.nb_employee" placeholder="Ex: 5000" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                 </div>
+                <p v-if="errors.nb_employee" class="text-red-500 text-xs mt-1">{{ errors.nb_employee[0] }}</p>
               </div>
               <div>
-                <label class="block font-inter text-base mb-2">Date de la collecte</label>
+                <label class="block font-inter text-base mb-2">Capacité de la collecte</label>
+                <div class="relative">
+                  <input type="number" v-model="detailForm.capacity" placeholder="Ex: 500" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                </div>
+                <p v-if="errors.capacity" class="text-red-500 text-xs mt-1">{{ errors.capacity[0] }}</p>
+              </div>
+              <div>
+                <label class="block font-inter text-base mb-2">Date de la collecte (Début)</label>
                 <div class="relative">
                   <input type="date" v-model="detailForm.day_start" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                 </div>
+                <p v-if="errors.day_start" class="text-red-500 text-xs mt-1">{{ errors.day_start[0] }}</p>
+              </div>
+              <div>
+                <label class="block font-inter text-base mb-2">Date de la collecte (Fin)</label>
+                <div class="relative">
+                  <input type="date" v-model="detailForm.day_end" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                </div>
+                <p v-if="errors.day_end" class="text-red-500 text-xs mt-1">{{ errors.day_end[0] }}</p>
               </div>
               <div class="col-span-1 md:col-span-2">
                 <label class="block font-inter text-base mb-2">Lieu</label>
                 <div class="relative">
                   <input type="text" v-model="detailForm.location" placeholder="Ex: Rue de l'entreprise 12" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                 </div>
+                <p v-if="errors.location" class="text-red-500 text-xs mt-1">{{ errors.location[0] }}</p>
               </div>
               <div>
                 <label class="block font-inter text-base mb-2">Heure de début</label>
                 <div class="relative">
                   <input type="time" step="1" v-model="detailForm.hour_start" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                 </div>
+                <p v-if="errors.hour_start" class="text-red-500 text-xs mt-1">{{ errors.hour_start[0] }}</p>
               </div>
               <div>
                 <label class="block font-inter text-base mb-2">Heure de fin</label>
                 <div class="relative">
                   <input type="time" step="1" v-model="detailForm.hour_end" class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                 </div>
+                <p v-if="errors.hour_end" class="text-red-500 text-xs mt-1">{{ errors.hour_end[0] }}</p>
               </div>
             </div>
 
@@ -168,14 +203,15 @@
               </div>
               <div class="flex-grow relative h-[46px]">
                 <input type="url" v-model="detailForm.onedoc_link" placeholder="Lien OneDoc" class="w-full h-full border border-black p-3 font-inter text-sm bg-transparent" />
+                <p v-if="errors.onedoc_link" class="text-red-500 text-xs mt-1">{{ errors.onedoc_link[0] }}</p>
               </div>
             </div>
 
             <div class="flex flex-col md:flex-row justify-end gap-4 md:space-x-4 pt-4">
               <button @click="closeModal" class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-8 py-3 font-inter font-medium hover:bg-gray-50 transition-colors w-full md:w-auto">Annuler</button>
-              <button @click="submitDetail" class="bg-[#0073e6] text-white px-8 py-3 font-inter font-medium hover:bg-blue-600 transition-colors flex items-center justify-center w-full md:w-auto">
+              <button @click="activeTab === 'creer' ? submitCreation() : submitDetail()" class="bg-[#0073e6] text-white px-8 py-3 font-inter font-medium hover:bg-blue-600 transition-colors flex items-center justify-center w-full md:w-auto">
                 <span v-if="isSaving" class="mr-2">...</span>
-                Enregistrer
+                {{ activeTab === 'creer' ? 'Créer' : 'Enregistrer' }}
               </button>
             </div>
           </div>
@@ -259,13 +295,18 @@ export default {
       selectedCollecte: null,
       isSaving: false,
       suppressionInput: '',
+      companies: [],
+      errors: {},
       clotureForm: {
         nb_registered: '',
         nb_blood_pouch: ''
       },
       detailForm: {
+        company_id: '',
         nb_employee: '',
+        capacity: '',
         day_start: '',
+        day_end: '',
         onedoc_link: '',
         location: '',
         hour_start: '',
@@ -274,24 +315,36 @@ export default {
     }
   },
   created() {
-    if (this.initialData && this.initialData.collections) {
-      const collectionsGroups = this.initialData.collections;
-      const all = [];
+    if (this.initialData) {
+      if (this.initialData.companies) {
+        this.companies = this.initialData.companies;
+      }
+      
+      if (this.initialData.collections) {
+        const collectionsGroups = this.initialData.collections;
+        const all = [];
 
-      if (collectionsGroups.ongoing) {
-        collectionsGroups.ongoing.forEach(c => all.push({ ...c, statusKey: 'ongoing' }));
-      }
-      if (collectionsGroups.to_come) {
-        collectionsGroups.to_come.forEach(c => all.push({ ...c, statusKey: 'to_come' }));
-      }
-      if (collectionsGroups.past) {
-        collectionsGroups.past.forEach(c => all.push({ ...c, statusKey: 'past' }));
-      }
-      if (collectionsGroups.to_close) {
-        collectionsGroups.to_close.forEach(c => all.push({ ...c, statusKey: 'to_close' }));
-      }
+        if (collectionsGroups.ongoing) {
+          collectionsGroups.ongoing.forEach(c => all.push({ ...c, statusKey: 'ongoing' }));
+        }
+        if (collectionsGroups.to_come) {
+          collectionsGroups.to_come.forEach(c => all.push({ ...c, statusKey: 'to_come' }));
+        }
+        if (collectionsGroups.past) {
+          collectionsGroups.past.forEach(c => all.push({ ...c, statusKey: 'past' }));
+        }
+        if (collectionsGroups.to_close) {
+          collectionsGroups.to_close.forEach(c => all.push({ ...c, statusKey: 'to_close' }));
+        }
 
-      this.allCollections = all;
+        this.allCollections = all;
+      }
+    }
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'new') {
+      this.openNewModal();
     }
   },
   computed: {
@@ -359,16 +412,36 @@ export default {
       };
       return colors[key] || 'bg-gray-500';
     },
+    openNewModal() {
+      this.selectedCollecte = null;
+      this.activeTab = 'creer';
+      this.activeModal = 'options';
+      
+      this.errors = {};
+      this.detailForm.company_id = '';
+      this.detailForm.nb_employee = '';
+      this.detailForm.capacity = '';
+      this.detailForm.day_start = '';
+      this.detailForm.day_end = '';
+      this.detailForm.onedoc_link = '';
+      this.detailForm.location = '';
+      this.detailForm.hour_start = '';
+      this.detailForm.hour_end = '';
+    },
     openEditModal(collection) {
       this.selectedCollecte = collection;
       this.activeTab = 'modifier';
       this.activeModal = 'options';
       
+      this.errors = {};
       this.clotureForm.nb_registered = collection?.nb_registered || '';
       this.clotureForm.nb_blood_pouch = collection?.nb_blood_pouch || '';
       
+      this.detailForm.company_id = collection?.company_id || '';
       this.detailForm.nb_employee = collection?.nb_employee || '';
+      this.detailForm.capacity = collection?.capacity || '';
       this.detailForm.day_start = collection?.day_start ? collection.day_start.split(' ')[0] : '';
+      this.detailForm.day_end = collection?.day_end ? collection.day_end.split(' ')[0] : '';
       this.detailForm.onedoc_link = collection?.onedoc_link || '';
       this.detailForm.location = collection?.location || '';
       this.detailForm.hour_start = collection?.hour_start || '';
@@ -405,16 +478,52 @@ export default {
       }
       return headers;
     },
+    async submitCreation() {
+      if (this.isSaving) return;
+      this.isSaving = true;
+      this.errors = {};
+      try {
+        const response = await fetch(`/api/collection`, {
+          method: 'POST',
+          headers: this.getCsrfHeaders(),
+          body: JSON.stringify(this.detailForm)
+        });
+        
+        if (!response.ok) {
+          const data = await response.json();
+          if (response.status === 422) {
+            this.errors = data.errors || {};
+            return;
+          }
+          throw new Error("API Error");
+        }
+        window.location.reload();
+      } catch (err) {
+        console.error(err);
+        alert("Erreur lors de la création.");
+      } finally {
+        this.isSaving = false;
+      }
+    },
     async submitDetail() {
       if (this.isSaving) return;
       this.isSaving = true;
+      this.errors = {};
       try {
         const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
           method: 'PUT',
           headers: this.getCsrfHeaders(),
           body: JSON.stringify(this.detailForm)
         });
-        if (!response.ok) throw new Error("API Error");
+        
+        if (!response.ok) {
+          const data = await response.json();
+          if (response.status === 422) {
+            this.errors = data.errors || {};
+            return;
+          }
+          throw new Error("API Error");
+        }
         window.location.reload();
       } catch (err) {
         console.error(err);
