@@ -12,6 +12,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Nettoyage préalable pour éviter les duplications
+        DB::table('collections')->truncate();
+        DB::table('companies')->truncate();
+        DB::table('users')->truncate();
+
         DB::table('users')->insert([
             'email'      => 'admin@hug.ch',
             'password'   => Hash::make('password'),
@@ -19,784 +24,292 @@ class DatabaseSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        // =====================================================================
-        // EPFL
-        // - Ambassador jusqu'en 2023 : gagnant (2020→2023 = 4 ans consécutifs)
-        // - Ambassador jusqu'en 2025 : battu par HEIG-VD (trou en 2024)
-        // - Gold 2023 : gagnant
-        // - Gold 2025 : battu par HEIG-VD
-        // - Conviction 2023 : gagnant
-        // - Label 2026 : oui
-        // =====================================================================
-        $epflSlug = Str::slug('EPFL');
-        $epfl = DB::table('companies')->insertGetId([
-            'name'       => 'EPFL',
-            'slug'       => $epflSlug,
-            'logo'       => "images/companies_logo/{$epflSlug}.png",
-            'color'      => 'FF0000',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
-        DB::table('collections')->insert([
-            // 2020 - deux collectes
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2020, 2, 5)->startOfDay(),
-                'day_end'            => Carbon::create(2020, 2, 5)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 900,
-                'capacity' => 300,
-                'nb_registered'  => 250,
-                'nb_blood_pouch' => 200,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2020, 9, 15)->startOfDay(),
-                'day_end'            => Carbon::create(2020, 9, 15)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Bâtiment BC',
-                'nb_employee'    => 910,
-                'capacity' => 310,
-                'nb_registered'  => 240,
-                'nb_blood_pouch' => 195,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2021 - deux collectes
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2021, 3, 18)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 3, 18)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 950,
-                'capacity' => 320,
-                'nb_registered'  => 270,
-                'nb_blood_pouch' => 220,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2021, 10, 6)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 10, 6)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Bâtiment BC',
-                'nb_employee'    => 960,
-                'capacity' => 330,
-                'nb_registered'  => 260,
-                'nb_blood_pouch' => 215,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2022 - deux collectes
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2022, 4, 7)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 4, 7)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 980,
-                'capacity' => 340,
-                'nb_registered'  => 290,
-                'nb_blood_pouch' => 245,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2022, 11, 3)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 11, 3)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Bâtiment BC',
-                'nb_employee'    => 990,
-                'capacity' => 350,
-                'nb_registered'  => 280,
-                'nb_blood_pouch' => 240,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2023 - deux collectes, meilleur gold et conviction
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2023, 3, 14)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 3, 14)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 1000,
-                'capacity' => 500,
-                'nb_registered'  => 430,
-                'nb_blood_pouch' => 420, // gold 420/1000=0.42, conviction 420/430=0.977 → gagnants 2023
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2023, 9, 20)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 9, 20)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Bâtiment BC',
-                'nb_employee'    => 1010,
-                'capacity' => 510,
-                'nb_registered'  => 380,
-                'nb_blood_pouch' => 350,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // TROU 2024 → casse la série pour ambassador 2025
-            // 2025 - deux collectes
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2025, 4, 20)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 4, 20)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 1100,
-                'capacity' => 600,
-                'nb_registered'  => 400,
-                'nb_blood_pouch' => 300, // gold 300/1100=0.27 → battu par HEIG-VD
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2025, 10, 8)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 10, 8)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Bâtiment BC',
-                'nb_employee'    => 1110,
-                'capacity' => 400,
-                'nb_registered'  => 380,
-                'nb_blood_pouch' => 290,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2026 clôturée → label
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::create(2026, 2, 10)->startOfDay(),
-                'day_end'            => Carbon::create(2026, 2, 10)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 1100,
-                'capacity' => 410,
-                'nb_registered'  => 350,
-                'nb_blood_pouch' => 290,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2026 future
-            [
-                'company_id'     => $epfl,
-                'day_start'          => Carbon::now()->addMonths(2)->startOfDay(),
-                'day_end'            => Carbon::now()->addMonths(2)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Rolex Learning Center',
-                'nb_employee'    => 1200,
-                'capacity' => 420,
-                'nb_registered'  => null,
-                'nb_blood_pouch' => null,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-        ]);
-
+        $onedoc = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D';
 
         // =====================================================================
-        // HEIG-VD
-        // - Ambassador jusqu'en 2023 : battu par EPFL (2021→2023 = 3 ans vs 4)
-        // - Ambassador jusqu'en 2025 : gagnant (2021→2025 = 5 ans consécutifs)
-        // - Gold 2022 : gagnant
-        // - Gold 2025 : gagnant
-        // - Conviction 2022 : gagnant
-        // - Label 2026 : oui
+        // DEFINITION DES ENTREPRISES (Toutes configurées à min. 1000 employés)
         // =====================================================================
-        $heigSlug = Str::slug('HEIG-VD');
-        $heig = DB::table('companies')->insertGetId([
-            'name'       => 'HEIG-VD',
-            'slug'       => $heigSlug,
-            'logo'       => "images/companies_logo/{$heigSlug}.png",
-            'color'      => '0000FF',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
-        DB::table('collections')->insert([
-            // 2021 - deux collectes
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2021, 5, 12)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 5, 12)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 700,
-                'capacity' => 300,
-                'nb_registered'  => 180,
-                'nb_blood_pouch' => 140,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2021, 11, 24)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 11, 24)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Salle polyvalente',
-                'nb_employee'    => 710,
-                'capacity' => 300,
-                'nb_registered'  => 170,
-                'nb_blood_pouch' => 135,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2022 - deux collectes, meilleur gold et conviction
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2022, 4, 6)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 4, 6)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 740,
-                'capacity' => 400,
-                'nb_registered'  => 380,
-                'nb_blood_pouch' => 370, // gold 370/740=0.5, conviction 370/380=0.974 → gagnants 2022
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2022, 10, 19)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 10, 19)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Salle polyvalente',
-                'nb_employee'    => 750,
-                'capacity' => 450,
-                'nb_registered'  => 360,
-                'nb_blood_pouch' => 340,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2023 - deux collectes
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2023, 4, 19)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 4, 19)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 800,
-                'capacity' => 300,
-                'nb_registered'  => 210,
-                'nb_blood_pouch' => 175, // battu par EPFL en gold 2023
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2023, 10, 11)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 10, 11)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Salle polyvalente',
-                'nb_employee'    => 810,
-                'capacity' => 300,
-                'nb_registered'  => 200,
-                'nb_blood_pouch' => 165,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2024 - deux collectes
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2024, 3, 14)->startOfDay(),
-                'day_end'            => Carbon::create(2024, 3, 14)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 830,
-                'capacity' => 300,
-                'nb_registered'  => 220,
-                'nb_blood_pouch' => 190,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2024, 10, 3)->startOfDay(),
-                'day_end'            => Carbon::create(2024, 10, 3)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Salle polyvalente',
-                'nb_employee'    => 840,
-                'capacity' => 300,
-                'nb_registered'  => 230,
-                'nb_blood_pouch' => 200,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2025 - deux collectes, meilleur gold
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2025, 5, 22)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 5, 22)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 850,
-                'capacity' => 400,
-                'nb_registered'  => 400,
-                'nb_blood_pouch' => 380, // gold 380/850=0.447 → gagnant 2025
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2025, 11, 6)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 11, 6)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Salle polyvalente',
-                'nb_employee'    => 860,
-                'capacity' => 450,
-                'nb_registered'  => 410,
-                'nb_blood_pouch' => 360,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2026 clôturée → label
-            [
-                'company_id'     => $heig,
-                'day_start'          => Carbon::create(2026, 3, 5)->startOfDay(),
-                'day_end'            => Carbon::create(2026, 3, 5)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus HEIG-VD',
-                'nb_employee'    => 870,
-                'capacity' => 450,
-                'nb_registered'  => 230,
-                'nb_blood_pouch' => 210,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-        ]);
-
+        $companiesData = [
+            'EPFL'        => ['color' => 'FF0000', 'ext' => 'png', 'loc' => 'Rolex Learning Center'],
+            'HEIG-VD'     => ['color' => '0000FF', 'ext' => 'png', 'loc' => 'Campus HEIG-VD'],
+            'UNIL'        => ['color' => '00AA44', 'ext' => 'png', 'loc' => 'Campus Dorigny'],
+            'Nestlé'      => ['color' => 'FFAA00', 'ext' => 'png', 'loc' => 'Nestlé HQ Vevey'],
+            'Swisscom'    => ['color' => '0099CC', 'ext' => 'png', 'loc' => 'Swisscom Campus Berne'],
+            'BCGE'        => ['color' => '1A365D', 'ext' => 'png', 'loc' => 'Siège Genève'],
+            'Benevity'    => ['color' => 'E53E3E', 'ext' => 'png', 'loc' => 'Bureaux Genève'],
+            'Breitling'   => ['color' => 'D69E2E', 'ext' => 'png', 'loc' => 'Ateliers Grenchen'],
+            'Capco'       => ['color' => '000000', 'ext' => 'png', 'loc' => 'Espace Co-working'],
+            'Celanese'    => ['color' => '2B6CB0', 'ext' => 'png', 'loc' => 'Site industriel'],
+            'Coop'        => ['color' => 'DD6B20', 'ext' => 'png', 'loc' => 'Centre Logistique'],
+            'Croix-Rouge' => ['color' => 'E53E3E', 'ext' => 'png', 'loc' => 'Centrale Berne'],
+            'Datatonic'   => ['color' => '319795', 'ext' => 'png', 'loc' => 'Tech Hub'],
+            'Edwards Lifesciences' => ['color' => '4A5568', 'ext' => 'png', 'loc' => 'Campus Nyon'],
+            'Fortil'      => ['color' => '233758', 'ext' => 'png', 'loc' => 'Bureaux Lausanne'],
+            'Migros'      => ['color' => 'ED8936', 'ext' => 'png', 'loc' => 'Administration Centrale'],
+            'Nespresso'   => ['color' => '1A1A1A', 'ext' => 'png', 'loc' => 'Centre Avenches'],
+            'Rolex'       => ['color' => '22543D', 'ext' => 'png', 'loc' => 'Site Acacias'],
+            'Seedstar'    => ['color' => '4C51BF', 'ext' => 'png', 'loc' => 'Espace Innovation'],
+            'Toblerone'   => ['color' => 'ECC94B', 'ext' => 'png', 'loc' => 'Usine Berne'],
+            'UBS'         => ['color' => 'A0AEC0', 'ext' => 'png', 'loc' => 'UBS Centre Zurich'],
+            'Unilabs'     => ['color' => '3182CE', 'ext' => 'png', 'loc' => 'Laboratoire Central'],
+            'Verysell'    => ['color' => '805AD5', 'ext' => 'webp', 'loc' => 'Bureaux Nyon'],
+        ];
 
         // =====================================================================
-        // UNIL
-        // - Ambassador jusqu'en 2025 : battu par HEIG-VD (2022→2025 = 4 ans vs 5)
-        // - Gold 2020 : gagnant
-        // - Gold 2021 : gagnant
-        // - Gold 2024 : gagnant
-        // - Conviction 2020 : gagnant
-        // - Conviction 2024 : gagnant
-        // - Label 2026 : oui
+        // LES COLLECTES MANUELLES REPRISES (Ajustées si incohérences de base)
         // =====================================================================
-        $unilSlug = Str::slug('UNIL');
-        $unil = DB::table('companies')->insertGetId([
-            'name'       => 'UNIL',
-            'slug'       => $unilSlug,
-            'logo'       => "images/companies_logo/{$unilSlug}.png",
-            'color'      => '00AA44',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        $manualCollections = [
+            'EPFL' => [
+                ['date' => '2020-02-05', 'registered' => 250, 'pouches' => 200, 'capacity' => 300],
+                ['date' => '2020-09-15', 'registered' => 240, 'pouches' => 195, 'capacity' => 310],
+                ['date' => '2021-03-18', 'registered' => 270, 'pouches' => 220, 'capacity' => 320],
+                ['date' => '2021-10-06', 'registered' => 260, 'pouches' => 215, 'capacity' => 330],
+                ['date' => '2022-04-07', 'registered' => 290, 'pouches' => 245, 'capacity' => 340],
+                ['date' => '2022-11-03', 'registered' => 280, 'pouches' => 240, 'capacity' => 350],
+                ['date' => '2023-03-14', 'registered' => 430, 'pouches' => 420, 'capacity' => 500],
+                ['date' => '2023-09-20', 'registered' => 380, 'pouches' => 350, 'capacity' => 510],
+                ['date' => '2025-04-20', 'registered' => 400, 'pouches' => 300, 'capacity' => 600],
+                ['date' => '2025-10-08', 'registered' => 380, 'pouches' => 290, 'capacity' => 400],
+                ['date' => '2026-02-10', 'registered' => 350, 'pouches' => 290, 'capacity' => 410],
+            ],
+            'HEIG-VD' => [
+                ['date' => '2021-05-12', 'registered' => 180, 'pouches' => 140, 'capacity' => 300],
+                ['date' => '2021-11-24', 'registered' => 170, 'pouches' => 135, 'capacity' => 300],
+                ['date' => '2022-04-06', 'registered' => 380, 'pouches' => 370, 'capacity' => 400],
+                ['date' => '2022-10-19', 'registered' => 360, 'pouches' => 340, 'capacity' => 450],
+                ['date' => '2023-04-19', 'registered' => 210, 'pouches' => 175, 'capacity' => 300],
+                ['date' => '2023-10-11', 'registered' => 200, 'pouches' => 165, 'capacity' => 300],
+                ['date' => '2024-03-14', 'registered' => 220, 'pouches' => 190, 'capacity' => 300],
+                ['date' => '2024-10-03', 'registered' => 230, 'pouches' => 200, 'capacity' => 300],
+                ['date' => '2025-05-22', 'registered' => 400, 'pouches' => 380, 'capacity' => 400],
+                ['date' => '2025-11-06', 'registered' => 410, 'pouches' => 360, 'capacity' => 450],
+                ['date' => '2026-03-05', 'registered' => 230, 'pouches' => 210, 'capacity' => 450],
+            ],
+            'UNIL' => [
+                ['date' => '2020-03-11', 'registered' => 490, 'pouches' => 480, 'capacity' => 600],
+                ['date' => '2020-10-21', 'registered' => 460, 'pouches' => 430, 'capacity' => 580],
+                ['date' => '2021-04-14', 'registered' => 470, 'pouches' => 460, 'capacity' => 600],
+                ['date' => '2021-11-09', 'registered' => 450, 'pouches' => 410, 'capacity' => 600],
+                ['date' => '2022-05-03', 'registered' => 400, 'pouches' => 280, 'capacity' => 600],
+                ['date' => '2022-11-17', 'registered' => 390, 'pouches' => 270, 'capacity' => 600],
+                ['date' => '2023-06-14', 'registered' => 410, 'pouches' => 290, 'capacity' => 650],
+                ['date' => '2023-11-22', 'registered' => 400, 'pouches' => 280, 'capacity' => 650],
+                ['date' => '2024-04-22', 'registered' => 500, 'pouches' => 490, 'capacity' => 700],
+                ['date' => '2024-11-18', 'registered' => 480, 'pouches' => 420, 'capacity' => 700],
+                ['date' => '2025-03-25', 'registered' => 490, 'pouches' => 320, 'capacity' => 700],
+                ['date' => '2025-09-10', 'registered' => 470, 'pouches' => 310, 'capacity' => 700],
+                ['date' => '2026-04-02', 'registered' => 460, 'pouches' => 400, 'capacity' => 700],
+            ],
+            'Nestlé' => [
+                ['date' => '2021-06-17', 'registered' => 410, 'pouches' => 408, 'capacity' => 500],
+                ['date' => '2024-05-09', 'registered' => 380, 'pouches' => 300, 'capacity' => 400],
+                ['date' => '2025-07-03', 'registered' => 400, 'pouches' => 390, 'capacity' => 500],
+                ['date' => '2026-01-20', 'registered' => 820, 'pouches' => 610, 'capacity' => 1000],
+            ],
+            'Swisscom' => [
+                ['date' => '2026-02-28', 'registered' => null, 'pouches' => null, 'capacity' => 800],
+            ],
+            'BCGE' => [
+                ['date' => '2023-05-10', 'registered' => 120, 'pouches' => 105, 'capacity' => 150],
+                ['date' => '2025-06-12', 'registered' => 140, 'pouches' => 115, 'capacity' => 160],
+            ],
+            'Benevity' => [
+                ['date' => '2024-09-18', 'registered' => 75, 'pouches' => 68, 'capacity' => 80],
+            ],
+            'Breitling' => [
+                ['date' => '2022-10-05', 'registered' => 180, 'pouches' => 160, 'capacity' => 200],
+            ],
+            'Capco' => [
+                ['date' => '2024-03-22', 'registered' => 42, 'pouches' => 38, 'capacity' => 50],
+            ],
+            'Celanese' => [
+                ['date' => '2023-11-14', 'registered' => 95, 'pouches' => 88, 'capacity' => 120],
+            ],
+            'Coop' => [
+                ['date' => '2021-08-24', 'registered' => 710, 'pouches' => 640, 'capacity' => 800],
+                ['date' => '2025-02-17', 'registered' => 820, 'pouches' => 780, 'capacity' => 950],
+            ],
+            'Croix-Rouge' => [
+                ['date' => '2020-06-14', 'registered' => 290, 'pouches' => 285, 'capacity' => 300],
+                ['date' => '2024-06-14', 'registered' => 340, 'pouches' => 332, 'capacity' => 350],
+            ],
+            'Datatonic' => [
+                ['date' => '2025-11-04', 'registered' => 38, 'pouches' => 35, 'capacity' => 40],
+            ],
+            'Edwards Lifesciences' => [
+                ['date' => '2023-03-28', 'registered' => 160, 'pouches' => 142, 'capacity' => 180],
+            ],
+            'Fortil' => [
+                ['date' => '2024-10-24', 'registered' => 39, 'pouches' => 34, 'capacity' => 45],
+            ],
+            'Migros' => [
+                ['date' => '2022-06-21', 'registered' => 810, 'pouches' => 720, 'capacity' => 900],
+                ['date' => '2025-05-14', 'registered' => 880, 'pouches' => 810, 'capacity' => 950],
+            ],
+            'Nespresso' => [
+                ['date' => '2023-11-07', 'registered' => 350, 'pouches' => 310, 'capacity' => 400],
+            ],
+            'Rolex' => [
+                ['date' => '2020-11-19', 'registered' => 460, 'pouches' => 410, 'capacity' => 500],
+                ['date' => '2024-04-16', 'registered' => 510, 'pouches' => 475, 'capacity' => 550],
+            ],
+            'Seedstar' => [
+                ['date' => '2023-07-12', 'registered' => 25, 'pouches' => 22, 'capacity' => 30],
+                ['date' => '2024-07-12', 'registered' => 25, 'pouches' => 22, 'capacity' => 30],
+                ['date' => '2026-07-12', 'registered' => null, 'pouches' => null, 'capacity' => 30],
+            ],
+            'Toblerone' => [
+                ['date' => '2022-03-15', 'registered' => 90, 'pouches' => 84, 'capacity' => 110],
+                ['date' => '2025-03-15', 'registered' => 90, 'pouches' => 84, 'capacity' => 110],
+            ],
+            'UBS' => [
+                ['date' => '2021-10-12', 'registered' => 620, 'pouches' => 540, 'capacity' => 700],
+                ['date' => '2024-11-20', 'registered' => 690, 'pouches' => 615, 'capacity' => 750],
+                ['date' => '2025-11-20', 'registered' => 690, 'pouches' => 615, 'capacity' => 750],
+                ['date' => '2026-11-20', 'registered' => null, 'pouches' => null, 'capacity' => 750], // Fin 2026 -> futur
+            ],
+            'Unilabs' => [
+                ['date' => '2023-09-05', 'registered' => 220, 'pouches' => 205, 'capacity' => 250],
+            ],
+            'Verysell' => [
+                ['date' => '2024-03-11', 'registered' => 21, 'pouches' => 19, 'capacity' => 25],
+                ['date' => '2025-03-11', 'registered' => 21, 'pouches' => 19, 'capacity' => 25],
+                ['date' => '2026-03-11', 'registered' => 21, 'pouches' => 19, 'capacity' => 25],
+            ]
+        ];
 
-        DB::table('collections')->insert([
-            // 2020 - deux collectes, meilleur gold et conviction
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2020, 3, 11)->startOfDay(),
-                'day_end'            => Carbon::create(2020, 3, 11)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 1800,
-                'capacity' => 600,
-                'nb_registered'  => 490,
-                'nb_blood_pouch' => 480, // gold 480/1800=0.267, conviction 480/490=0.98 → gagnants 2020
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2020, 10, 21)->startOfDay(),
-                'day_end'            => Carbon::create(2020, 10, 21)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 1820,
-                'capacity' => 580,
-                'nb_registered'  => 460,
-                'nb_blood_pouch' => 430,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2021 - deux collectes, meilleur gold
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2021, 4, 14)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 4, 14)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 1850,
-                'capacity' => 600,
-                'nb_registered'  => 470,
-                'nb_blood_pouch' => 460, // gold 460/1850=0.249 → gagnant 2021
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2021, 11, 9)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 11, 9)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 1870,
-                'capacity' => 600,
-                'nb_registered'  => 450,
-                'nb_blood_pouch' => 410,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2022 - deux collectes
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2022, 5, 3)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 5, 3)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 2000,
-                'capacity' => 600,
-                'nb_registered'  => 400,
-                'nb_blood_pouch' => 280,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2022, 11, 17)->startOfDay(),
-                'day_end'            => Carbon::create(2022, 11, 17)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 2010,
-                'capacity' => 600,
-                'nb_registered'  => 390,
-                'nb_blood_pouch' => 270,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2023 - deux collectes
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2023, 6, 14)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 6, 14)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 2050,
-                'capacity' => 650,
-                'nb_registered'  => 410,
-                'nb_blood_pouch' => 290,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2023, 11, 22)->startOfDay(),
-                'day_end'            => Carbon::create(2023, 11, 22)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 2060,
-                'capacity' => 650,
-                'nb_registered'  => 400,
-                'nb_blood_pouch' => 280,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2024 - deux collectes, meilleur gold et conviction
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2024, 4, 22)->startOfDay(),
-                'day_end'            => Carbon::create(2024, 4, 22)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 2100,
-                'capacity' => 700,
-                'nb_registered'  => 500,
-                'nb_blood_pouch' => 490, // gold 490/2100=0.233, conviction 490/500=0.98 → gagnants 2024
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2024, 11, 18)->startOfDay(),
-                'day_end'            => Carbon::create(2024, 11, 18)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 2110,
-                'capacity' => 700,
-                'nb_registered'  => 480,
-                'nb_blood_pouch' => 420,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2025 - deux collectes
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2025, 3, 25)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 3, 25)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 2200,
-                'capacity' => 700,
-                'nb_registered'  => 490,
-                'nb_blood_pouch' => 320, // battu par HEIG-VD en gold 2025
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2025, 9, 10)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 9, 10)->endOfDay(),
-                'hour_start'     => '09:00:00',
-                'hour_end'       => '16:00:00',
-                'location'       => 'Amphimax',
-                'nb_employee'    => 2210,
-                'capacity' => 700,
-                'nb_registered'  => 470,
-                'nb_blood_pouch' => 310,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2026 clôturée → label
-            [
-                'company_id'     => $unil,
-                'day_start'          => Carbon::create(2026, 4, 2)->startOfDay(),
-                'day_end'            => Carbon::create(2026, 4, 2)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Campus Dorigny',
-                'nb_employee'    => 2200,
-                'capacity' => 700,
-                'nb_registered'  => 460,
-                'nb_blood_pouch' => 400,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-        ]);
-
+        $now = Carbon::now();
 
         // =====================================================================
-        // NESTLE
-        // - Ambassador : exclu (seulement 2024, 2025 = 2 ans, battu par HEIG-VD)
-        // - Gold 2025 : battu par HEIG-VD
-        // - Conviction 2025 : gagnant (390/400 = 0.975)
-        // - Conviction 2021 : gagnant (départage)
-        // - Label 2026 : oui
+        // BOUCLE D'INSERTION ET GENERATION DYNAMIQUE
         // =====================================================================
-        $nestleSlug = Str::slug('Nestle');
-        $nestle = DB::table('companies')->insertGetId([
-            'name'       => 'Nestlé',
-            'slug'       => $nestleSlug,
-            'logo'       => "images/companies_logo/{$nestleSlug}.png",
-            'color'      => 'FFAA00',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        foreach ($companiesData as $name => $meta) {
+            $slug = Str::slug($name);
 
-        DB::table('collections')->insert([
-            // 2021 - meilleur conviction de l'année (départage)
-            [
-                'company_id'     => $nestle,
-                'day_start'          => Carbon::create(2021, 6, 17)->startOfDay(),
-                'day_end'            => Carbon::create(2021, 6, 17)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Nestlé HQ Vevey',
-                'nb_employee'    => 4800,
-                'capacity' => 500,
-                'nb_registered'  => 410,
-                'nb_blood_pouch' => 408, // conviction 408/410=0.995 → gagnant 2021
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2024
-            [
-                'company_id'     => $nestle,
-                'day_start'          => Carbon::create(2024, 5, 9)->startOfDay(),
-                'day_end'            => Carbon::create(2024, 5, 9)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Nestlé HQ Vevey',
-                'nb_employee'    => 4900,
-                'capacity' => 400,
-                'nb_registered'  => 380,
-                'nb_blood_pouch' => 300,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2025 - meilleur conviction
-            [
-                'company_id'     => $nestle,
-                'day_start'          => Carbon::create(2025, 7, 3)->startOfDay(),
-                'day_end'            => Carbon::create(2025, 7, 3)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Nestlé HQ Vevey',
-                'nb_employee'    => 5000,
-                'capacity' => 500,
-                'nb_registered'  => 400,
-                'nb_blood_pouch' => 390, // conviction 390/400=0.975 → gagnant 2025
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-            // 2026 clôturée → label
-            [
-                'company_id'     => $nestle,
-                'day_start'          => Carbon::create(2026, 1, 20)->startOfDay(),
-                'day_end'            => Carbon::create(2026, 1, 20)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Nestlé HQ Vevey',
-                'nb_employee'    => 5100,
-                'capacity' => 1000,
-                'nb_registered'  => 820,
-                'nb_blood_pouch' => 610,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-        ]);
+            $companyId = DB::table('companies')->insertGetId([
+                'name'       => $name,
+                'slug'       => $slug,
+                'logo'       => "images/companies_logo/{$slug}.{$meta['ext']}",
+                'color'      => $meta['color'],
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
 
+            $insertedDates = [];
+            $hasRecentCollection = false;
 
-        // =====================================================================
-        // SWISSCOM
-        // - Ambassador : exclu (collecte 2026 seulement non clôturée)
-        // - Tous trophées : exclu
-        // - Label 2026 : non → collecte non clôturée
-        // =====================================================================
-        $swisscomSlug = Str::slug('Swisscom');
-        $swisscom = DB::table('companies')->insertGetId([
-            'name'       => 'Swisscom',
-            'slug'       => $swisscomSlug,
-            'logo'       => "images/companies_logo/{$swisscomSlug}.png",
-            'color'      => '0099CC',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+            // 1. Insertion des collectes manuelles prédéfinies
+            if (isset($manualCollections[$name])) {
+                foreach ($manualCollections[$name] as $col) {
+                    $date = Carbon::parse($col['date']);
+                    $insertedDates[] = $date->format('Y-m-d');
 
-        DB::table('collections')->insert([
-            // 2026 en cours → pas de label
-            // [
-            //     'company_id'     => $swisscom,
-            //     'day_start'          => Carbon::create(2026, 6, 2)->startOfDay(),
-            //     'day_end'            => Carbon::create(2026, 6, 4)->endOfDay(),
-            //     'hour_start'     => '08:00:00',
-            //     'hour_end'       => '17:00:00',
-            //     'location'       => 'Swisscom Campus Berne',
-            //     'nb_employee'    => 3100,
-            //     'capacity' => 800,
-            //     'nb_registered'  => null,
-            //     'nb_blood_pouch' => null,
-            //     'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-            //     'created_at'     => Carbon::now(),
-            //     'updated_at'     => Carbon::now(),
-            // ],
-            // 2026 passée mais non clôturée → pas de label
-            [
-                'company_id'     => $swisscom,
-                'day_start'          => Carbon::create(2026, 2, 28)->startOfDay(),
-                'day_end'            => Carbon::create(2026, 2, 28)->endOfDay(),
-                'hour_start'     => '08:00:00',
-                'hour_end'       => '17:00:00',
-                'location'       => 'Swisscom Campus Berne',
-                'nb_employee'    => 3100,
-                'capacity' => 800,
-                'nb_registered'  => null,
-                'nb_blood_pouch' => null,
-                'onedoc_link'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
-                'created_at'     => Carbon::now(),
-                'updated_at'     => Carbon::now(),
-            ],
-        ]);
+                    if ($date->year === 2025 || $date->year === 2026) {
+                        $hasRecentCollection = true;
+                    }
+
+                    // Forcer la cohérence si la date est dans le futur
+                    $isFutureOrCurrent = $date->isAfter($now) || $date->isSameDay($now);
+                    $registered = $isFutureOrCurrent ? rand(10, $col['capacity']) : $col['registered'];
+                    $pouches = $isFutureOrCurrent ? null : $col['pouches'];
+
+                    DB::table('collections')->insert([
+                        'company_id'     => $companyId,
+                        'day_start'      => $date->copy()->startOfDay(),
+                        'day_end'        => $date->copy()->endOfDay(),
+                        'hour_start'     => '08:00:00',
+                        'hour_end'       => '17:00:00',
+                        'location'       => $meta['loc'],
+                        'nb_employee'    => rand(1000, 2500), // Règle : minimum 1000 employés
+                        'capacity'       => $col['capacity'],
+                        'nb_registered'  => $registered,
+                        'nb_blood_pouch' => $pouches,
+                        'onedoc_link'    => $onedoc,
+                        'created_at'     => $now,
+                        'updated_at'     => $now,
+                    ]);
+                }
+            }
+
+            // 2. Sécurité : Garantie d'au moins une collecte en 2025-2026 si manquante
+            if (!$hasRecentCollection) {
+                $forcedYear = rand(2025, 2026);
+                $forcedDate = Carbon::create($forcedYear, rand(1, 12), rand(1, 28));
+                $insertedDates[] = $forcedDate->format('Y-m-d');
+
+                $isFutureOrCurrent = $forcedDate->isAfter($now) || $forcedDate->isSameDay($now);
+                $capacity = rand(150, 400);
+                $registered = rand(50, $capacity);
+
+                DB::table('collections')->insert([
+                    'company_id'     => $companyId,
+                    'day_start'      => $forcedDate->copy()->startOfDay(),
+                    'day_end'        => $forcedDate->copy()->endOfDay(),
+                    'hour_start'     => '08:30:00',
+                    'hour_end'       => '16:30:00',
+                    'location'       => $meta['loc'],
+                    'nb_employee'    => rand(1000, 2000),
+                    'capacity'       => $capacity,
+                    'nb_registered'  => $registered,
+                    'nb_blood_pouch' => $isFutureOrCurrent ? null : rand(20, $registered),
+                    'onedoc_link'    => $onedoc,
+                    'created_at'     => $now,
+                    'updated_at'     => $now,
+                ]);
+            }
+
+            // 3. Compléter automatiquement pour atteindre MINIMUM 10 collectes
+            $currentCount = count($insertedDates);
+            while ($currentCount < 10) {
+                $genYear = rand(2020, 2026);
+                $genDate = Carbon::create($genYear, rand(1, 12), rand(1, 28));
+                $genDateStr = $genDate->format('Y-m-d');
+
+                if (!in_array($genDateStr, $insertedDates)) {
+                    $insertedDates[] = $genDateStr;
+                    $currentCount++;
+
+                    $isFutureOrCurrent = $genDate->isAfter($now) || $genDate->isSameDay($now);
+                    $capacity = rand(200, 500);
+                    $registered = rand(80, $capacity); // Ne peut jamais dépasser la capacité
+                    $pouches = $isFutureOrCurrent ? null : rand(40, $registered); // Jamais supérieur aux inscrits, null si futur
+
+                    DB::table('collections')->insert([
+                        'company_id'     => $companyId,
+                        'day_start'      => $genDate->copy()->startOfDay(),
+                        'day_end'        => $genDate->copy()->endOfDay(),
+                        'hour_start'     => '08:00:00',
+                        'hour_end'       => '17:00:00',
+                        'location'       => $meta['loc'],
+                        'nb_employee'    => rand(1000, 3000),
+                        'capacity'       => $capacity,
+                        'nb_registered'  => $registered,
+                        'nb_blood_pouch' => $pouches,
+                        'onedoc_link'    => $onedoc,
+                        'created_at'     => $now,
+                        'updated_at'     => $now,
+                    ]);
+                }
+            }
+
+            // 4. RAJOUT SPÉCIFIQUE : Collecte en cours à HEIG-VD (08.06.2026 au 12.06.2026)
+            if ($name === 'HEIG-VD') {
+                DB::table('collections')->insert([
+                    'company_id'     => $companyId,
+                    'day_start'      => Carbon::create(2026, 6, 8)->startOfDay(),
+                    'day_end'        => Carbon::create(2026, 6, 12)->endOfDay(),
+                    'hour_start'     => '08:00:00',
+                    'hour_end'       => '17:00:00',
+                    'location'       => 'Aula Campus Cheseaux',
+                    'nb_employee'    => 1200,
+                    'capacity'       => 500,
+                    'nb_registered'  => null,
+                    'nb_blood_pouch' => null,
+                    'onedoc_link'    => $onedoc,
+                    'created_at'     => $now,
+                    'updated_at'     => $now,
+                ]);
+            }
+        }
     }
 }
-
-// =============================================================================
-// Année         Ambassador            Gold                    Conviction
-// 2020          —                     UNIL                    UNIL
-// 2021          —                     UNIL                    Nestlé
-// 2022          UNIL                  HEIG-VD                 HEIG-VD
-// 2023          UNIL                  EPFL                    EPFL
-// 2024          UNIL                  HEIG-VD                 UNIL
-// 2025          UNIL                  HEIG-VD                 Nestlé
-//
-// Label 2026    —                     EPFL, HEIG-VD, UNIL, Nestlé  —
-// =============================================================================
