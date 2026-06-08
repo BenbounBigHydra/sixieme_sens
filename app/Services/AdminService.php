@@ -178,7 +178,8 @@ class AdminService
         $now = Carbon::now();
 
         // 1. Récupération de toutes les entreprises avec le compte ciblé des collectes
-        $companies = Company::withCount([
+        $companies = Company::with('collections')
+            ->withCount([
             'collections as to_come_count' => function ($query) use ($now) {
                 $query->where('day_end', '>', $now);
             },
@@ -198,7 +199,7 @@ class AdminService
             ->get();
 
         // 2. Transformation des données selon le format optimal demandé
-        return $companies->map(function (Company $company) {
+        return $companies->map(function (Company $company) use ($now) {
 
             $awardsData = CompanyStatsService::getCompanyAwards($company);
 
@@ -225,6 +226,24 @@ class AdminService
                 }
             }
 
+            $participation = 0;
+            $rigueur = 0;
+
+            $pastCollections = $company->collections->filter(function($c) {
+                return !is_null($c->nb_registered) && !is_null($c->nb_blood_pouch) && $c->nb_employee > 0;
+            });
+
+            if ($pastCollections->count() > 0) {
+                $participation = $pastCollections->avg(function($c) {
+                    return $c->nb_blood_pouch / $c->nb_employee;
+                });
+                $rigueur = $pastCollections->avg(function($c) {
+                    return $c->nb_registered > 0 ? ($c->nb_blood_pouch / $c->nb_registered) : 0;
+                });
+            }
+
+            $lastCollection = $company->collections->where('day_start', '<', $now)->sortByDesc('day_start')->first();
+
             // Retour du tableau final nettoyé
             return [
                 'id'          => $company->id,
@@ -232,11 +251,22 @@ class AdminService
                 'slug'        => $company->slug,
                 'logo'        => $company->logo,
                 'color'       => $company->color,
+                'sector'      => $company->sector,
+                'employee_count' => $company->employee_count,
+                'contact_name' => $company->contact_name,
+                'contact_phone' => $company->contact_phone,
+                'contact_email' => $company->contact_email,
+                'is_labelled' => $company->is_labelled,
+                'trophies_count' => $company->trophies_count,
+                'last_collection_date' => $lastCollection ? $lastCollection->day_start->format('d.m.Y') : null,
+                'collections_total' => $company->collections->count(),
                 'collections' => [ // Renommé 'stats' en 'collections'
                     'to_come'  => $company->to_come_count,
                     'to_close' => $company->to_close_count,
                     'past'     => $company->past_count,
                 ],
+                'participation' => round($participation, 4),
+                'rigueur'       => round($rigueur, 4),
                 'trophies'    => $trophies, // Objet associatif { "2023": ["gold", "conviction"] }
                 'labels'      => $labels,   // Tableau plat [2020, 2021, 2022]
             ];

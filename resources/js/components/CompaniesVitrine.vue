@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-8">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-8">
 
       <!-- Titre de la page -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
@@ -62,12 +62,12 @@
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
                    :class="activeCompany === company.name ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
                 <h3 class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">{{ company.name }}</h3>
-                <p class="font-['Inter'] text-white text-xs md:text-sm">
+                <div class="font-['Inter'] text-white text-xs md:text-sm flex flex-col items-center gap-1">
                   <span v-if="company.awards[selectedYear]?.gold">Prix Or</span>
-                  <span v-else-if="company.awards[selectedYear]?.ambassador">Prix Ambassadeur</span>
-                  <span v-else-if="company.awards[selectedYear]?.conviction">Prix Conviction</span>
-                  <span v-else-if="company.awards[selectedYear]?.label">Partenaire du Don</span>
-                </p>
+                  <span v-if="company.awards[selectedYear]?.ambassador">Prix Ambassadeur</span>
+                  <span v-if="company.awards[selectedYear]?.conviction">Prix Conviction</span>
+                  <span v-if="company.awards[selectedYear]?.label">Partenaire du Don</span>
+                </div>
               </div>
             </div>
             <!-- Empty placeholders to maintain grid structure -->

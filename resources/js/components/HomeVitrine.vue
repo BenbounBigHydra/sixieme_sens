@@ -3,7 +3,7 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Section principale (Hero) -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-20">
 
       <div class="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
 
@@ -15,19 +15,28 @@
           <!-- Main Title -->
           <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-10 tracking-wide">
             Mobilisez votre équipe<br />
-            pour le don<br />
-            du sang&nbsp;!
+            pour sauver<br />
+            des vies !
           </h1>
 
-          <!-- Stats -->
-          <div class="flex flex-row justify-center lg:justify-start gap-4 lg:gap-12 mb-10 w-full">
-            <div class="flex items-center justify-center gap-2 lg:gap-4 flex-col text-center md:flex-row md:text-left">
-              <span class="font-['Jersey_20'] text-[40px] md:text-[64px] text-[#0073e6] leading-none">142</span>
-              <span class="font-['Inter'] text-xs md:text-sm font-bold text-black leading-tight">Entreprises<br/>mobilisées</span>
+          <!-- Stats Replacement -->
+          <div class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-10 w-full relative">
+            <div class="font-['Jersey_20'] text-[60px] md:text-[80px] text-[#0073e6] leading-none tracking-wide -mt-1">
+              50%
             </div>
-            <div class="flex items-center justify-center gap-2 lg:gap-4 flex-col text-center md:flex-row md:text-left">
-              <span class="font-['Jersey_20'] text-[40px] md:text-[64px] text-[#0073e6] leading-none">1500</span>
-              <span class="font-['Inter'] text-xs md:text-sm font-bold text-black leading-tight">Collectes<br/>organisées</span>
+            <div class="flex flex-col justify-center text-left mt-1">
+              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
+              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
+                <span><span class="text-[#0073e6]">130</span> entreprises sauvées.</span>
+                <div class="relative group inline-flex ml-1 -mt-3">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
+                    <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
+                  </svg>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
+                    Chiffres renseignés sur la base d’une société de 1’000 employés.
+                  </div>
+                </div>
+              </span>
             </div>
           </div>
 
@@ -46,32 +55,28 @@
 
         <!-- Right Column (Grids & Text) -->
         <div class="w-full lg:w-1/2 flex flex-col order-2 lg:order-none">
-          <!-- Top Text (Hidden on mobile) -->
-          <div class="hidden lg:block text-left md:text-right mb-6">
-            <span class="text-black font-bold text-3xl font-['Inter'] tracking-tight">50% de participation,</span>
-          </div>
+          <!-- Top Text removed -->
 
           <!-- Desktop Grid Container (Hidden on mobile) -->
-          <div class="hidden lg:block relative w-full lg:w-[65%] ml-auto mb-4">
+          <div class="hidden lg:block relative w-full lg:max-w-[450px] ml-auto mb-4">
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
               <!-- Render 150 Icons using Vue v-for -->
               <template v-for="i in 150" :key="i">
-                <img v-if="i <= 72" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
-                <div v-else-if="i === 73" class="relative w-full h-full flex items-center justify-center cursor-pointer z-40" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                   <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
                     Tu m'as trouvé !
                   </div>
                 </div>
-                <img v-else-if="i <= 75" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
+                <img v-else-if="i <= blueCountDesktop" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
               </template>
             </div>
 
             <!-- Foreground Overlay Grid (Center White Square) -->
             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
-              <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
+              <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
                 <span class="text-[#0073e6] font-['Jersey_20'] text-[60px] lg:text-[64px] leading-[0.8] mb-0">130</span>
                 <span class="text-[#0073e6] font-['Jersey_20'] text-base leading-tight text-center tracking-wide -mt-1 lg:-mt-1">
                   Potentielles vies<br/>sauvées
@@ -81,24 +86,24 @@
           </div>
 
           <!-- Mobile Grid Container (Hidden on desktop) -->
-          <div class="block lg:hidden relative w-[320px] mx-auto mb-4 mt-4">
+          <div class="block lg:hidden relative w-full max-w-[400px] mx-auto mb-4 mt-4">
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
               <template v-for="i in 32" :key="'mobile-'+i">
-                <img v-if="i <= 22" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
-                <div v-else-if="i === 23" class="relative w-full h-full flex items-center justify-center cursor-pointer z-40" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                   <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
                     Tu m'as trouvé !
                   </div>
                 </div>
+                <img v-else-if="i <= blueCountMobile" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
               </template>
             </div>
 
             <!-- Foreground Overlay Grid Mobile (Center White Square) -->
             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
-              <div class="bg-[#fffbf1] flex flex-col items-center justify-center z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
+              <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
                 <span class="text-[#0073e6] font-['Jersey_20'] text-[40px] leading-[0.8] mb-0 mt-1">130</span>
                 <span class="text-[#0073e6] font-['Jersey_20'] text-[14px] leading-tight text-center tracking-wide mt-1">
                   Potentielles vies<br/>sauvées
@@ -107,10 +112,7 @@
             </div>
           </div>
 
-          <!-- Bottom Text -->
-          <div class="w-[320px] lg:w-[65%] mx-auto lg:ml-auto text-right text-xs text-black font-['Inter'] mt-4 lg:mt-0">
-            Chiffres renseignés sur la base d’une société de 1’000 employés.
-          </div>
+          <!-- Bottom Text removed -->
         </div>
 
         <!-- Action Button & Arrow (Mobile Only) -->
@@ -127,7 +129,7 @@
     </section>
 
     <!-- Section Classement 2025 -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16">
 
       <!-- Conteneur style fenêtre rétro -->
       <div class="border-[4px] border-black bg-[#fffbf1] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -162,26 +164,26 @@
 
             <!-- Trophée 2 : Ambassadeur -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ ambassadorWinner }}</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-6 relative z-10 text-center">{{ ambassadorWinner }}</p>
               <img src="/images/trophy_conviction (1).png" alt="Trophée Ambassadeur" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur</p>
             </div>
 
             <!-- Trophée 1 : Or -->
             <div class="flex flex-col items-center mb-0 md:-mt-8 w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center leading-tight">{{ goldWinner }}</p>
-              <div class="relative w-[80px] h-[80px] md:w-[260px] md:h-[260px] mb-2 md:mb-4 group cursor-pointer">
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-8 relative z-10 text-center leading-tight">{{ goldWinner }}</p>
+              <div class="relative w-[80px] h-[80px] md:w-[320px] md:h-[320px] mb-2 md:mb-4 group cursor-pointer md:translate-y-6 lg:translate-y-8">
                 <img src="/images/trophy_gold.png" alt="Trophée Or" class="absolute inset-0 w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-300">
                 <img src="/images/trophy_gold_sparks.png" alt="Trophée Or Sparks" class="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               </div>
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or</p>
             </div>
 
             <!-- Trophée 3 : Conviction -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
-              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] mb-4 md:mb-8 text-center">{{ convictionWinner }}</p>
+              <p class="font-['Inter'] font-bold text-[14px] md:text-[24px] -mb-2 md:-mb-6 relative z-10 text-center">{{ convictionWinner }}</p>
               <img src="/images/trophy_conviction.png" alt="Trophée Conviction" class="w-[60px] h-[60px] md:w-[200px] md:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction*</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction</p>
             </div>
 
           </div>
@@ -190,42 +192,45 @@
     </section>
 
     <!-- Section Avantages du Label -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-20 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-20 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-      <h2 class="font-['Jersey_20'] font-bold text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Une reconnaissance officielle pour votre engagement.</h2>
+      <h2 class="font-['Jersey_20'] font-normal text-[48px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Les avantages du Label Partenaire du Don</h2>
       <p class="font-['Inter'] text-base md:text-lg text-black mb-12 max-w-3xl text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement.<br class="hidden md:block"/> Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden md:block"/> et vous positionne sur le leaderboard public.</p>
 
-      <!-- Grille responsive : 1 colonne sur mobile, 2 sur bureau -->
+      <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-
-        <!-- Carte Avantage 1 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">01 — S'inscrire au programme</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève, l'institution de référence en matière de santé publique dans le canton.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 2 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">02 — Organiser une collecte</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Le Label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse, une preuve.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 3 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">03 — Mobiliser ses collaborateurs</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
           </div>
         </div>
-
-        <!-- Carte Avantage 4 -->
-        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 flex-1 flex items-center justify-center">
-            <h3 class="font-['Jersey_20'] font-bold text-[32px] text-black leading-tight text-center">04 — Recevoir le label et ses ressources</h3>
+        <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l’emploi</h3>
+          </div>
+          <div class="p-6 text-center md:text-left flex-1">
+            <p class="font-inter text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux) tout adapté à votre identité.</p>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -233,7 +238,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
   initialData: {
@@ -273,4 +278,23 @@ const handleRobotClick = () => {
     isClicked.value = false;
   }, 3000);
 };
+
+const participationRate = 50;
+const blueCountDesktop = Math.round((participationRate / 100) * 150);
+const blueCountMobile = Math.round((participationRate / 100) * 32);
+
+const desktopRobyIndex = ref(73);
+const mobileRobyIndex = ref(23);
+let robyInterval = null;
+
+onMounted(() => {
+  robyInterval = setInterval(() => {
+    desktopRobyIndex.value = Math.floor(Math.random() * 150) + 1;
+    mobileRobyIndex.value = Math.floor(Math.random() * 32) + 1;
+  }, 5000);
+});
+
+onUnmounted(() => {
+  if (robyInterval) clearInterval(robyInterval);
+});
 </script>
