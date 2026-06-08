@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-[#fffbf1]">
     <HeaderAdmin />
 
-    <main class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-10 space-y-12">
+    <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
       <!-- FirstPart: Action Buttons -->
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <a href="/admin/companies?action=new" class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">

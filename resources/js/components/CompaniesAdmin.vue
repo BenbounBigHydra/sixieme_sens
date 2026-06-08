@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-[#fffbf1] font-inter">
     <HeaderAdmin />
 
-    <main class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-10 space-y-12">
+    <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
       <!-- Search Bar -->
       <div class="relative w-full">
         <input
@@ -82,7 +82,7 @@
           <!-- Table Body -->
           <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
             <template v-if="filteredAndSortedCompanies.length > 0">
-              <div v-for="company in filteredAndSortedCompanies" :key="company.id" class="flex flex-col md:grid md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+              <div v-for="company in filteredAndSortedCompanies" :key="company.id" class="flex flex-col md:grid md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0 hover:bg-[#CCE6FF] transition-colors">
                 <!-- Entreprise -->
                 <div class="flex items-center space-x-3">
                   <div class="h-8 w-16 flex items-center justify-start">

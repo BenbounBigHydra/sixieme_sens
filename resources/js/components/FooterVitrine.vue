@@ -1,7 +1,7 @@
 <template>
   <footer class="relative w-full pt-[350px] pb-16 mt-20" style="background-image: url('/images/Motif_cubique_degradeFooter.png'); background-size: cover; background-position: top;">
 
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8">
+    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40">
 
       <div class="bg-[#fffbf1] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-6 md:px-20 py-12 flex flex-col">
 

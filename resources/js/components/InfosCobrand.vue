@@ -1,7 +1,18 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen font-['Inter']">
     <!-- Hero Banner -->
-    <div class="w-full h-[110px] md:h-[180px]" style="background-image: url('/images/unionUpsidedown.png'); background-size: cover; background-position: bottom;">
+    <div class="w-full h-[110px] md:h-[180px]"
+         :style="{
+           backgroundColor: computedCompanyColor,
+           maskImage: 'url(/images/unionUpsidedown.svg)',
+           WebkitMaskImage: 'url(/images/unionUpsidedown.svg)',
+           maskSize: 'cover',
+           WebkitMaskSize: 'cover',
+           maskPosition: 'bottom',
+           WebkitMaskPosition: 'bottom',
+           maskRepeat: 'no-repeat',
+           WebkitMaskRepeat: 'no-repeat'
+         }">
     </div>
     <div class="w-full pt-2 pb-12 mb-12">
       <h1 class="text-center font-['Jersey_20'] text-5xl md:text-6xl text-black">
@@ -9,7 +20,7 @@
       </h1>
     </div>
 
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 flex flex-col md:flex-row gap-12 pb-24">
+    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 flex flex-col md:flex-row gap-12 pb-24">
 
       <!-- Sidebar -->
       <aside class="w-full md:w-1/4 md:border-r-[3px] md:border-black md:pr-12 lg:pr-16 shrink-0">
@@ -200,6 +211,17 @@ const props = defineProps({
   }
 });
 
+const parsedData = computed(() => {
+  if (typeof props.initialData === 'string') {
+    try {
+      return JSON.parse(props.initialData);
+    } catch (e) {
+      return {};
+    }
+  }
+  return props.initialData || {};
+});
+
 const activeTab = ref('processus');
 
 const openFaq = ref(null);
@@ -259,6 +281,13 @@ onMounted(() => {
   const parts = window.location.pathname.split('/');
   companySlug.value = parts[2] || '';
   collectionId.value = parts[3] || '';
+});
+
+const company = computed(() => parsedData.value.company);
+
+const computedCompanyColor = computed(() => {
+  if (!company.value?.color) return '#0073e6';
+  return company.value.color.startsWith('#') ? company.value.color : `#${company.value.color}`;
 });
 
 const quizzUrl = computed(() => {

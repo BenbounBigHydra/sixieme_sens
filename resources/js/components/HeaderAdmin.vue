@@ -1,6 +1,6 @@
 <template>
   <header class="w-full h-24 bg-[#fffbf1] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
       <!-- Logo -->
       <a href="/admin" class="flex items-center h-full cursor-pointer hover:opacity-90 transition-opacity">
         <img src="/images/hug_icon.png" alt="Logo HUG Desktop" class="hidden md:block h-12 w-auto object-contain" />

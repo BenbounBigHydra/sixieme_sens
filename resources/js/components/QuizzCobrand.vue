@@ -266,7 +266,7 @@ const questions = [
     yesText: "Aïe, c’est vraiment des sales bêtes! Pour être sûr qu’elle ne t’ait rien transmis, il va falloir attendre un peu avant de pouvoir donner du sang.",
     noText: "La tique a raté sa cible, zéro souci !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "06_tick", prefix: "tick", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-x-4 md:translate-x-12"
   },
   {
     text: "As-tu fait de l'acupuncture ou un tatouage dans les 4 derniers mois?",
@@ -293,7 +293,7 @@ const questions = [
     yesText: "J’espère que ce n’était rien de grave pour toi. Après une anesthésie, il faut attendre un moment avant de donner son sang. Reviens bientôt!",
     noText: "Analyse terminée, l'alien valide, tout va bien !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "09_gastroscopy", prefix: "gastroscopy", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
+    imageClass: "max-h-[35vh] md:max-h-[60vh] translate-y-8 md:translate-y-16"
   },
   {
     text: "As-tu bénéficié d’un détartrage dans les 24 dernières heures ou d’un traitement dentaire dans les 7 derniers jours ?",
@@ -302,7 +302,7 @@ const questions = [
     yesText: "C’est super pour tes dents, mais le risque d’infection est trop élevé pour donner du sang tout suite. Réessayons plus tard!",
     noText: "Une seule dent au compteur, mais ça passe !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "10_dental", prefix: "dental", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
+    imageClass: "max-h-[35vh] md:max-h-[60vh] translate-y-8 md:translate-y-16"
   },
   {
     text: "Ces quatre dernières semaines, as-tu pris des médicaments ou reçu un vaccin ?",
@@ -320,7 +320,7 @@ const questions = [
     yesText: "Moi aussi! Malheureusement, je viens d’apprendre que pour des raisons de sécurité les receveurs de greffe ne pouvaient pas donner leur sang. Merci d’avoir fait ce voyage avec moi! Invitons d’autres personnes à y aller pour nous!",
     noText: "Génial ! Ton voyage intergalactique touche à sa fin, tu as tous les critères pour sauver des vies !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "12_transplant", prefix: "transplant", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-y-12 md:translate-y-24"
+    imageClass: "max-h-[40vh] md:max-h-[65vh] translate-y-12 md:translate-y-24"
   }
 ];
 
