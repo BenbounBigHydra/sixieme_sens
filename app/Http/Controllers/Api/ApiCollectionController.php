@@ -74,6 +74,7 @@ class ApiCollectionController extends Controller
         }
 
         $validated = $request->validate([
+            'capacity'       => 'required|integer|min:0|gte:nb_employee',
             'nb_registered'  => 'required|integer|min:0',
             'nb_blood_pouch' => 'required|integer|min:0|lte:nb_registered',
         ]);

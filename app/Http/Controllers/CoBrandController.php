@@ -74,21 +74,14 @@ class CoBrandController extends Controller
     {
         $company = Company::where('slug', $company_name)->firstOrFail();
 
-        $initialData = json_encode(['company' =>  $company]);
+        $collection = Collection::where('company_id', $company->id)
+            ->where('day_end', '>', now())
+            ->orderBy('day_start', 'asc')
+            ->first();
+
+        $initialData = json_encode(['url' => $company_name . '/' . $collection->id]);
 
         return view('cobrand.closed', [
-            'companyName' => $company['name'],
-            'initialData' => $initialData,
-        ]);
-    }
-
-    public function missing(string $company_name)
-    {
-        $company = Company::where('slug', $company_name)->firstOrFail();
-
-        $initialData = json_encode(['company' =>  $company]);
-
-        return view('cobrand.missing', [
             'companyName' => $company['name'],
             'initialData' => $initialData,
         ]);

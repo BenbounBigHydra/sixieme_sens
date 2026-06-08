@@ -95,11 +95,11 @@
 import { ref, computed } from 'vue';
 
 const form = ref({
-  nom: '',
-  employes: '',
-  mail: '',
-  telephone: '',
-  message: ''
+    nom: '',
+    employes: '',
+    mail: '',
+    telephone: '',
+    message: ''
 });
 
 const isSubmitted = ref(false);
@@ -107,13 +107,13 @@ const emailTouched = ref(false);
 const isEmailValid = ref(false);
 
 const validateEmail = () => {
-  emailTouched.value = true;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  isEmailValid.value = emailRegex.test(form.value.mail);
+    emailTouched.value = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    isEmailValid.value = emailRegex.test(form.value.mail);
 };
 
 const showEmailError = computed(() => {
-  return emailTouched.value && form.value.mail !== '' && !isEmailValid.value;
+    return emailTouched.value && form.value.mail !== '' && !isEmailValid.value;
 });
 
 const isFormValid = computed(() => {
@@ -124,10 +124,24 @@ const isFormValid = computed(() => {
          isEmailValid.value;
 });
 
-const submitForm = () => {
-  if (isFormValid.value) {
-    // Fake API call / Validation success
-    isSubmitted.value = true;
-  }
+const isLoading = ref(false);
+
+const submitForm = async () => {
+    if (!isFormValid.value) return;
+
+    isLoading.value = true;
+    try {
+        await fetch('/api/mail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(form.value),
+        });
+        isSubmitted.value = true;
+    } catch (error) {
+        console.error('Erreur envoi formulaire', error);
+        // Tu peux afficher un message d'erreur à l'utilisateur ici
+    } finally {
+        isLoading.value = false;
+    }
 };
 </script>

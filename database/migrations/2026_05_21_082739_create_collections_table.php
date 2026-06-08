@@ -22,9 +22,12 @@ return new class extends Migration
             $table->time('hour_start');
             $table->time('hour_end');
             $table->integer('nb_employee');
+            $table->integer('capacity');
             $table->integer('nb_registered')->nullable();
             $table->integer('nb_blood_pouch')->nullable();
             $table->string('onedoc_link');
+            $table->integer('onedoc_click_count')->default(0);
+            $table->integer('visitor_count')->default(0);
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class Collection extends Model
         'location',
         'hour_start',
         'hour_end',
+        'capacity',
         'nb_employee',
         'nb_registered',
         'nb_blood_pouch',

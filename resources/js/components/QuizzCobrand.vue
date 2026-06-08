@@ -37,8 +37,6 @@
             Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
           </p>
         </div>
-      </div>
-    </div>
 
     <!-- QUIZ STATE -->
     <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
@@ -88,13 +86,20 @@
             <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[300px] md:max-h-[500px]', flightClass]" />
           </transition>
         </div>
-      </div>
 
-      <!-- Footer Counter -->
-      <div class="mt-8 font-inter font-bold text-[#b3d9ff] text-sm tracking-widest uppercase">
-        QUESTION {{ currentQuestionIndex + 1 }} / {{ questions.length }}
-      </div>
-    </div>
+        <!-- INELIGIBLE STATE -->
+        <div v-else-if="currentState === 'ineligible'"
+            class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-center flex-grow">
+            <div class="max-w-2xl">
+                <h2 class="font-jersey text-[48px] md:text-[64px] text-[#fffbf1] leading-tight mb-8">
+                    Pas cette fois…
+                </h2>
+
+                <p class="font-inter text-[#fffbf1] text-base md:text-lg leading-relaxed mb-12">
+                    Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les
+                    patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires.
+                    Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.
+                </p>
 
     <!-- INELIGIBLE STATE -->
     <div v-else-if="currentState === 'ineligible'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
@@ -127,8 +132,6 @@
         <div class="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 relative z-10 md:-translate-x-12">
           <img :src="currentImageSrc" class="object-contain" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[300px] md:max-h-[500px]'" />
         </div>
-      </div>
-    </div>
 
     <!-- SUCCESS STATE -->
     <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
@@ -159,38 +162,36 @@
             </a>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
+    </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 
 const props = defineProps({
-  initialData: {
-    type: String,
-    default: '{}'
-  }
+    initialData: {
+        type: String,
+        default: '{}'
+    }
 });
 
 const parsedData = computed(() => {
-  try {
-    return JSON.parse(props.initialData);
-  } catch (e) {
-    return {};
-  }
+    try {
+        return JSON.parse(props.initialData);
+    } catch (e) {
+        return {};
+    }
 });
 
 const company = computed(() => parsedData.value.company || {});
 const collection = computed(() => parsedData.value.collection || {});
 
 const homeLink = computed(() => {
-  if (company.value.slug && collection.value.id) {
-    return `/collection/${company.value.slug}/${collection.value.id}`;
-  }
-  return '/';
+    if (company.value.slug && collection.value.id) {
+        return `/collection/${company.value.slug}/${collection.value.id}`;
+    }
+    return '/';
 });
 
 // Quiz Logic
@@ -333,24 +334,24 @@ const currentImageSrc = computed(() => {
 
 // Load state from local storage on mount
 onMounted(() => {
-  const savedState = localStorage.getItem('quizzState_' + collection.value.id);
-  if (savedState) {
-    const parsed = JSON.parse(savedState);
-    currentState.value = parsed.currentState || 'landing';
-    currentQuestionIndex.value = parsed.currentQuestionIndex || 0;
-    userAnswers.value = parsed.userAnswers || [];
-  }
+    const savedState = localStorage.getItem('quizzState_' + collection.value.id);
+    if (savedState) {
+        const parsed = JSON.parse(savedState);
+        currentState.value = parsed.currentState || 'landing';
+        currentQuestionIndex.value = parsed.currentQuestionIndex || 0;
+        userAnswers.value = parsed.userAnswers || [];
+    }
 });
 
 // Save state to local storage whenever it changes
 watch([currentState, currentQuestionIndex, userAnswers], () => {
-  if (collection.value.id) {
-    localStorage.setItem('quizzState_' + collection.value.id, JSON.stringify({
-      currentState: currentState.value,
-      currentQuestionIndex: currentQuestionIndex.value,
-      userAnswers: userAnswers.value
-    }));
-  }
+    if (collection.value.id) {
+        localStorage.setItem('quizzState_' + collection.value.id, JSON.stringify({
+            currentState: currentState.value,
+            currentQuestionIndex: currentQuestionIndex.value,
+            userAnswers: userAnswers.value
+        }));
+    }
 }, { deep: true });
 
 const startQuiz = () => {
@@ -434,11 +435,40 @@ const proceedToNext = () => {
     if (isAllCorrect) {
       currentState.value = 'success';
     } else {
-      currentState.value = 'ineligible'; // Stay or go back to ineligible if finished with errors
+        // End of quiz
+        // Vérifier si toutes les réponses données sont correctes
+        let isAllCorrect = true;
+        for (let i = 0; i < questions.length; i++) {
+            if (userAnswers.value[i] !== questions[i].correct) {
+                isAllCorrect = false;
+                break;
+            }
+        }
+
+        if (isAllCorrect) {
+            currentState.value = 'success';
+        } else {
+            currentState.value = 'ineligible'; // Stay or go back to ineligible if finished with errors
+        }
     }
-  }
 };
 
+const handleOnedocClick = async () => {
+    try {
+        await fetch(`/api/collection/${collection.value.id}/track-click`, {
+            method: 'POST',
+            headers: {
+                'X-XSRF-TOKEN': decodeURIComponent(
+                    document.cookie.match(/XSRF-TOKEN=([^;]+)/)?.[1] ?? ''
+                ),
+            },
+        });
+    } catch (e) {
+        console.error('Tracking error:', e);
+    } finally {
+        window.location.href = collection._value.onedoc_link;
+    }
+};
 </script>
 
 <style scoped>
