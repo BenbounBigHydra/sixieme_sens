@@ -1,6 +1,6 @@
 <template>
   <header class="w-full h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+    <div class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
 
       <a href="/" class="flex items-center h-full cursor-pointer hover:opacity-90 transition-opacity">
         <!-- Desktop Logo -->
@@ -9,7 +9,7 @@
         <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-12 w-auto object-contain" />
       </a>
 
-      <nav class="hidden md:flex items-center space-x-8 text-2xl">
+      <nav class="hidden md:flex items-center space-x-8 text-[28px]">
         <a href="/" :class="currentPath === '/' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Accueil</a>
         <a href="/trophees" :class="currentPath === '/trophees' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Trophées</a>
         <a href="/label" :class="currentPath === '/label' ? 'text-[#0073E6]' : 'text-[#000000]'" class="hover:text-[#0073E6] transition-colors">Label</a>
