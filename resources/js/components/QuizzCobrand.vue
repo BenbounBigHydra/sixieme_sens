@@ -37,7 +37,8 @@
             Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
           </p>
         </div>
-
+      </div>
+    </div>
     <!-- QUIZ STATE -->
     <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
@@ -86,20 +87,8 @@
             <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[300px] md:max-h-[500px]', flightClass]" />
           </transition>
         </div>
-
-        <!-- INELIGIBLE STATE -->
-        <div v-else-if="currentState === 'ineligible'"
-            class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-center flex-grow">
-            <div class="max-w-2xl">
-                <h2 class="font-jersey text-[48px] md:text-[64px] text-[#fffbf1] leading-tight mb-8">
-                    Pas cette fois…
-                </h2>
-
-                <p class="font-inter text-[#fffbf1] text-base md:text-lg leading-relaxed mb-12">
-                    Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les
-                    patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires.
-                    Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.
-                </p>
+      </div>
+    </div>
 
     <!-- INELIGIBLE STATE -->
     <div v-else-if="currentState === 'ineligible'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
@@ -132,7 +121,8 @@
         <div class="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 relative z-10 md:-translate-x-12">
           <img :src="currentImageSrc" class="object-contain" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[300px] md:max-h-[500px]'" />
         </div>
-
+      </div>
+    </div>
     <!-- SUCCESS STATE -->
     <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
       <div>
@@ -157,13 +147,14 @@
           </p>
 
           <div>
-            <a href="#" class="inline-block border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all" :style="activeBtnStyle">
+            <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all" :style="activeBtnStyle">
               Prendre rendez-vous
             </a>
           </div>
         </div>
-
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -435,22 +426,9 @@ const proceedToNext = () => {
     if (isAllCorrect) {
       currentState.value = 'success';
     } else {
-        // End of quiz
-        // Vérifier si toutes les réponses données sont correctes
-        let isAllCorrect = true;
-        for (let i = 0; i < questions.length; i++) {
-            if (userAnswers.value[i] !== questions[i].correct) {
-                isAllCorrect = false;
-                break;
-            }
-        }
-
-        if (isAllCorrect) {
-            currentState.value = 'success';
-        } else {
-            currentState.value = 'ineligible'; // Stay or go back to ineligible if finished with errors
-        }
+      currentState.value = 'ineligible';
     }
+  }
 };
 
 const handleOnedocClick = async () => {
@@ -466,7 +444,7 @@ const handleOnedocClick = async () => {
     } catch (e) {
         console.error('Tracking error:', e);
     } finally {
-        window.location.href = collection._value.onedoc_link;
+        window.location.href = collection.value.onedoc_link;
     }
 };
 </script>
