@@ -2,7 +2,7 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Part 1: Hero Section -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
       <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto lg:mx-0 h-6 w-auto object-contain mb-6 origin-center lg:origin-left" />
 
@@ -15,7 +15,7 @@
         </p>
 
         <div class="flex lg:hidden w-full justify-center mb-8">
-          <img src="/images/Don.png" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
+          <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
         </div>
 
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10 w-full sm:w-auto">
@@ -33,16 +33,16 @@
       </div>
 
       <div class="hidden lg:flex lg:w-1/2 justify-center lg:justify-end mt-8 lg:mt-0">
-        <img src="/images/Don.png" alt="Label Partenaire du Don" class="w-full max-w-[500px] h-auto object-contain drop-shadow-xl" />
+        <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[350px] lg:max-w-[400px] h-auto object-contain drop-shadow-xl" />
       </div>
     </section>
 
     <!-- Part 2: Carousel -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 pt-16">
       <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-6 text-center md:text-left">
         <div class="w-full md:w-2/3 flex flex-col items-center md:items-start">
           <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-          <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Ils ont déjà fait le pas.</h2>
+          <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Ils ont déjà fait le pas</h2>
           <p class="font-['Inter'] text-sm md:text-base text-black hidden md:block">
             Ces entreprises ont organisé une collecte de sang pour leurs<br class="hidden md:block"/> collaborateurs et reçu la certification officielle des HUG.
           </p>
@@ -56,45 +56,45 @@
           </a>
         </div>
       </div>
+    </section>
 
-      <!-- Carousel Container -->
-      <div class="overflow-hidden relative w-full mt-10">
-        <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
-          <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
-            <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
-              <img :src="'/' + item.logo" :alt="item.name" class="max-w-[80%] max-h-[80%] object-contain" />
-            </div>
+    <!-- Carousel Container Full Width -->
+    <div class="overflow-hidden relative w-full mb-16">
+      <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
+        <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
+          <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
+            <img :src="'/' + item.logo" :alt="item.name" class="max-w-[80%] max-h-[80%] object-contain" />
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Part 3: Avantages -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-      <h2 class="font-['Jersey_20'] font-bold text-[40px] md:text-[56px] text-black mb-12 leading-none text-center md:text-left">Ce que le Label vous<br class="hidden md:block"> apporte.</h2>
+      <h2 class="font-['Jersey_20'] font-normal text-[40px] md:text-[56px] text-black mb-12 leading-none text-center md:text-left">Ce que le Label vous<br class="hidden md:block"> apporte</h2>
 
       <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève — l'institution de référence en matière de santé publique dans le canton.</p>
+            <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève, l'institution de référence en matière de santé publique dans le canton.</p>
           </div>
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Le label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse — une preuve.</p>
+            <p class="font-inter text-sm text-black">Le Label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse, une preuve.</p>
           </div>
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
             <p class="font-inter text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
@@ -102,17 +102,17 @@
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-bold text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de comm' prêt à l'emploi</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l'emploi</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Dès l'obtention du label, vous recevez un kit de communication complet, visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux, tout adapté à votre identité.</p>
+            <p class="font-inter text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux), tout adapté à votre identité.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Part 4: Comment l'obtenir -->
-    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
+    <section class="max-w-desktop mx-auto px-8 md:px-16 lg:px-24 xl:px-8 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Comment l’obtenir ?</h2>
       <p class="font-['Inter'] text-sm md:text-base text-black mb-12">Quatre étapes, pas plus.</p>
@@ -144,7 +144,7 @@
             <h3 class="font-['Inter'] font-bold text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
           </div>
           <div class="p-6">
-            <p class="font-['Inter'] text-black text-sm md:text-base">Un kit de communication clé en main vous est fourni, affiche, newsletter, visuels réseaux, pour maximiser la participation en interne.</p>
+            <p class="font-['Inter'] text-black text-sm md:text-base">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
           </div>
         </div>
 
@@ -228,8 +228,8 @@ onUnmounted(() => {
 
 const itemsPerView = computed(() => {
   if (windowWidth.value < 768) return 3; // Mobile: 3 elements
-  if (windowWidth.value < 1024) return 2; // Tablet: 2 elements
-  return 3; // Desktop: 3 elements
+  if (windowWidth.value < 1024) return 5; // Tablet: 5 elements
+  return 5; // Desktop: 5 elements
 });
 
 const slidePercentage = computed(() => {
