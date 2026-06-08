@@ -1,17 +1,19 @@
 <template>
-  <div class="min-h-screen w-full bg-[#2D2144] bg-cover bg-center bg-fixed flex flex-col justify-between transition-all duration-1000 overflow-x-hidden overflow-y-auto" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
+  <div class="h-[100dvh] w-full bg-[#2D2144] bg-cover bg-center bg-fixed flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
-    <div v-if="currentState === 'landing'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
-      <div>
+    <div v-if="currentState === 'landing'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
+      <div class="flex-shrink-0">
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">Retourner à l'accueil</span>
         </a>
-
+      </div>
+      
+      <div class="mt-4 md:mt-8 flex-grow flex flex-col justify-center min-h-0 items-start md:items-center">
         <!-- Content -->
-        <div class="mt-16 md:mt-24 max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
+        <div class="max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 overflow-y-auto w-full" :style="boxStyle">
           <h1 class="font-jersey text-[40px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
             Vérifier votre éligibilité
           </h1>
@@ -31,7 +33,7 @@
       </div>
 
       <!-- Bottom left text -->
-      <div class="mt-12 flex justify-start">
+      <div class="mt-4 flex justify-start flex-shrink-0">
         <div class="max-w-md text-left">
           <p class="font-inter text-[#D5D9ED] text-[12px] md:text-sm leading-snug">
             Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
@@ -40,8 +42,8 @@
       </div>
     </div>
     <!-- QUIZ STATE -->
-    <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
-      <div>
+    <div v-else-if="currentState === 'quiz'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
+      <div class="flex-shrink-0">
         <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">
@@ -50,9 +52,9 @@
         </button>
       </div>
 
-      <div class="mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-8 md:gap-12 pb-4">
-        <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 flex flex-col justify-between min-h-[300px] md:min-h-[350px]" :style="boxStyle">
+      <div class="mt-4 md:mt-6 flex-grow flex flex-col md:flex-row justify-between items-stretch relative gap-6 md:gap-8 pb-2 min-h-0">
+        <div class="flex flex-col relative z-10 w-full md:w-1/2 flex-1 min-h-0">
+          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 flex flex-col justify-between h-full overflow-y-auto" :style="boxStyle">
             <h2 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-6 whitespace-pre-line relative z-10">
               {{ questions[currentQuestionIndex].text }}&nbsp;<span
                 class="inline-block align-middle cursor-pointer"
@@ -92,15 +94,15 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0 relative z-10 md:-translate-x-12 h-full max-h-[30vh] md:max-h-[50vh]">
+        <div class="w-full md:w-1/2 flex justify-center items-center mt-4 md:mt-0 relative z-10 md:-translate-x-12 flex-1 min-h-0">
           <transition name="fade">
-            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[50vh]', flightClass]" />
+            <img :key="currentImageSrc" :src="currentImageSrc" class="max-h-full max-w-full object-contain" :class="[questions[currentQuestionIndex]?.imageClass, flightClass]" />
           </transition>
         </div>
       </div>
 
       <!-- Bottom left indicator -->
-      <div class="mt-8 flex justify-start">
+      <div class="mt-4 flex justify-start flex-shrink-0">
         <div class="font-inter text-sm md:text-base font-bold px-4 py-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" :style="boxStyle">
           Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}
         </div>
@@ -108,16 +110,16 @@
     </div>
 
     <!-- INELIGIBLE STATE -->
-    <div v-else-if="currentState === 'ineligible'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
-      <div>
+    <div v-else-if="currentState === 'ineligible'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
+      <div class="flex-shrink-0">
         <button @click="correctAnswer" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">Je me suis trompé(e)</span>
         </button>
       </div>
-      <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-12">
-        <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
+      <div class="mt-4 md:mt-6 flex-grow flex flex-col md:flex-row justify-between items-stretch relative gap-6 md:gap-8 pb-2 min-h-0">
+        <div class="flex flex-col justify-center relative z-10 w-full md:w-1/2 flex-1 min-h-0">
+          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 flex flex-col justify-center h-full overflow-y-auto" :style="boxStyle">
             <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
               Pas cette fois...
             </h2>
@@ -148,14 +150,14 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 relative z-10 md:-translate-x-12">
-          <img :src="currentImageSrc" class="object-contain" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[50vh]'" />
+        <div class="w-full md:w-1/2 flex justify-center items-center mt-4 md:mt-0 relative z-10 md:-translate-x-12 flex-1 min-h-0">
+          <img :src="currentImageSrc" class="max-h-full max-w-full object-contain" :class="questions[currentQuestionIndex]?.imageClass" />
         </div>
       </div>
     </div>
     <!-- SUCCESS STATE -->
-    <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
-      <div>
+    <div v-else-if="currentState === 'success'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col flex-grow min-h-0">
+      <div class="flex-shrink-0">
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
@@ -163,8 +165,8 @@
         </a>
       </div>
 
-      <div class="mt-16 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
-        <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
+      <div class="mt-4 md:mt-8 flex-grow flex flex-col justify-center min-h-0 items-start md:items-center">
+        <div class="max-w-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 overflow-y-auto w-full" :style="boxStyle">
           <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
             On vous attend !
           </h2>
