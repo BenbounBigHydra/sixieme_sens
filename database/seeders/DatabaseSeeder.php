@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Nettoyage préalable pour éviter les duplications
-        DB::table('collections')->truncate();
-        DB::table('companies')->truncate();
-        DB::table('users')->truncate();
+        // DB::table('collections')->truncate();
+        // DB::table('companies')->truncate();
+        // DB::table('users')->truncate();
 
         DB::table('users')->insert([
             'email'      => 'admin@hug.ch',
