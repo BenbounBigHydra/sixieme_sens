@@ -57,7 +57,7 @@ Pour chaque modification du code sur le dépôt GitHub, les étapes suivantes do
     - Benoît Jaques pour le back-end
 6. Merger la branche une fois la review validée, puis supprimer la branche
 
-**Ne jamais modifier directement la branche `main`.**
+> **Ne jamais modifier directement la branche `main`.**
 
 ## Pré-requis
 
@@ -72,9 +72,13 @@ Voici les pré-requis nécessaires :
 - Un serveur web (Apache, Nginx, etc.).
 
 [Laravel Herd](https://helm.sh/docs/charts/laravel/) est recommandé pour une installation facile de Laravel et de ses dépendances.
+[Mailtrap](https://mailtrap.io/home) est recommandé pour tester l'envoi de mail durant la partie développement
 
 > Dans l'environnement de développement, le sgdb sera MySQL
 > Il est cependant possible (et recommandé) de développer localement en SQLite
+
+> [!WARNING]
+> Ne pas utiliser de technologie propre à MySQL ou SQLite afin d'éviter tout bugg
 
 ### Développement local
 
@@ -98,25 +102,32 @@ Pour développer et tester le mini-projet en local, voici les étapes à suivre 
     composer install
     ```
 
-3. Installer les dépendances Vue.js
+3. Copier le fichier `.env.example` en `.env`.
+4. Modifier les variables d'environnement si nécessaire (optionnel).
 
-> Aucune installation nécessaire pour le moment
+    ```bash
+    DB_CONNECTION=monTypeDeDB
+    # Ajouter les autres variable de la DB si nécessaire
 
-4. Copier le fichier `.env.example` en `.env`.
-5. Modifier les variables d'environnement si nécessaire (optionnel).
-6. Générer la clé d'application Laravel :
+    MAIL_HOST=sandbox.smtp.mailtrap.io
+    # Ajouter les autres données de mailtrap ou du service mail utilisé 
+
+    
+    ```
+
+5. Générer la clé d'application Laravel :
 
     ```bash
     php artisan key:generate
     ```
 
-7. Créer le lien symbolique pour les fichiers téléversés :
+6. Créer le lien symbolique pour les fichiers téléversés :
 
     ```bash
     php artisan storage:link
     ```
 
-8. Créer la base de donnée, exécuter les migrations et seed :
+7. Créer la base de donnée, exécuter les migrations et seed :
 
     ```bash
     php artisan migrate
@@ -128,33 +139,33 @@ _S'il est nécessaire de réinitialiser la base de données durant le développe
 php artisan migrate:fresh --seed
 ```
 
-9. Démarrer le serveur de développement Laravel :
+8. Démarrer le serveur de développement Laravel :
 
     ```bash
     composer run dev
     ```
 
-L'application sera accessible à l'adresse <http://localhost:8000>.
+L'application sera accessible à l'adresse <http://127.0.0.1:8000>.
 
 ### Déploiement serveur de production
 
 À chaque Merged pull request, le serveur Infomaniak se met à jour.
 
-    ```bash
-    cd ~/sites/sixieme_sens
-
-    git pull origin main
-
-    composer install --no-dev --optimize-autoloader
-
-    php artisan migrate:fresh --seed --force
-
-    php artisan config:cache
-
-    php artisan route:cache
-
-    php artisan view:cache
-    ```
+```bash
+source ~/.bashrc
+cd ~/sites/sixieme_sens
+git config pull.rebase false
+git reset --hard HEAD
+git config pull.rebase false
+git pull origin main
+npm install
+npm run build
+composer install --no-dev --optimize-autoloader
+php artisan migrate:fresh --seed --force
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
 
 > [!CAUTION]
 > Actuellement, la DB est totalement effacée, recréé et seedée à chaques fois. Au moment du déploiement réel, corriger cette fonctionnalité
