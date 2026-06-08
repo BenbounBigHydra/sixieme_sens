@@ -103,16 +103,14 @@ Pour développer et tester le mini-projet en local, voici les étapes à suivre 
     ```
 
 3. Copier le fichier `.env.example` en `.env`.
-4. Modifier les variables d'environnement si nécessaire (optionnel).
+4. Modifier les variables d'environnement si nécessaire.
 
     ```bash
     DB_CONNECTION=monTypeDeDB
     # Ajouter les autres variable de la DB si nécessaire
 
     MAIL_HOST=sandbox.smtp.mailtrap.io
-    # Ajouter les autres données de mailtrap ou du service mail utilisé 
-
-    
+    # Ajouter les autres données de mailtrap ou du service mail utilisé
     ```
 
 5. Générer la clé d'application Laravel :
@@ -169,3 +167,69 @@ php artisan view:cache
 
 > [!CAUTION]
 > Actuellement, la DB est totalement effacée, recréé et seedée à chaques fois. Au moment du déploiement réel, corriger cette fonctionnalité
+
+## Structure du projet
+
+### Model
+
+Les [migrations](database\migrations) définissent la structure de la base de donnée.
+
+Les [Models](\app\Models) définissent le comportement de ces données en tant qu'objet php.
+
+<details>
+<summary>Schéma relationnel</summary>
+
+![Model](doc/schema%20relationnel.png)
+    
+</details><br>
+
+Le model a été fait de manière à éviter toute donnée redondante afin de prévenir au maximum les erreurs. Les données concernant les labels et les trophées ne sont donc jamais directement stockés mais systématiquement calculés sur la base des collectes des entreprises.
+
+### Controller
+
+Quatre controller différents ont été créé pour gérer ce site
+
+- [VitrinController.php](\app\Http\Controllers\VitrinController.php) s'occupe de la gestion du site vitrine
+- [CoBrandController.php](\app\Http\Controllers\CoBrandController.php) s'occupe de la gestion du site co-brandé
+    - La logique est d'avoir des site co-brandé généré dès la création d'une nouvelle collecte et les informations de la collecte sont récupérées dans l'url pour gérer l'affichage
+- [AdminController.php](\app\Http\Controllers\AdminController.php) s'occupe de la gestion du site admin des HUG
+    - [LoginController.php](\app\Http\Controllers\LoginController.php) est un controller dédié au login des admin HUG. La logique a été qu'un seul compte admin était défini (même si plusieurs personnes utilisent le même profil admin).
+
+La logique du traitement des données, étant complexe, a été déléguée dans deux [services](\app\Services) dédiés :
+
+- [CompanyStatsService.php](\app\Services\CompanyStatsService.php) s'occupe du calcul des trophées et des labels attribués aux entreprise et mis en avant sur le site vitrine.
+- [AdminService.php](\app\Services\AdminService.php) s'occupe de toutes les données nécessaire à la gestion par les admins HUG
+- [TrackingService.php](\app\Services\TrackingService.php) s'occupe du traitement des données liées au tracking de performance (KPIs)
+
+Pour gérer les interaction Frontend - Backend, une api a été mise en place avec ses [controller](\app\Http\Controllers\Api) dédiés :
+
+- [ApiCollectionController.php](app/Http/Controllers/Api/ApiCollectionController.php) gère un CRUD complet pour les collectes
+- [ApiCompanyController.php](app/Http/Controllers/Api/ApiCompanyController.php) gère un CRUD complet pour les entreprises
+> Les routes CRUD sont protégées par `auth:sanctum` un token d'authentification est requis.
+- [ApiRewardsController.php](app/Http/Controllers/Api/ApiRewardsController.php) gère la récupération des récompenses des entreprises
+- [ApiMailController.php](app/Http/Controllers/Api/ApiMailController.php) s'occupe de l'envoi de mail depuis le formulaire de contact
+- [ApiTrackingController.php](app/Http/Controllers/Api/ApiTrackingController.php) gère le tracking de l'activité utilisateur afin de mesurer les KPIs
+
+[CollecteDemandeMail.php](app/Mail/CollecteDemandeMail.php) est un fichier spécifiquement conçu uniquement pour l'envoi des mail
+[TrackCollectionVisit.php](app/Http/Controllers/Middleware/TrackCollectionVisit.php) est un middleware gérant la mise en place des cookies afin de mesurer correctement les KPIs
+[web.php](routes/web.php) s'occupe du routage des pages
+[api.php](routes/api.php) s'occupe du routage de l'api
+
+### Vue
+
+Le routage des pages renvoi vers l'un des dossiers suivant :
+
+- [vitrin](resources/views/vitrin) contient les fichiers blade des vues du site vitrine
+- [cobrand](resources/views/cobrand) contient les fichiers blade des vues du site co-brandé
+- [admin](resources/views/admin) contient les fichiers blade des vues du site admin
+
+Ces fichiers ne contiennent que les datas nécessaire à l'affichage de la page. L'ensemble de l'affichage est généré coté front-end par les fichiers [Vue.js](\resources\js\components)
+- `*Vitrine.vue` — composants du site vitrine (HomeVitrine, TropheesVitrine, LabelVitrine, CompaniesVitrine, CollecteVitrine)
+- `*Cobrand.vue` — composants du site co-brandé (HomeCobrand, InfosCobrand, QuizzCobrand, HeaderCobrand, FooterCobrand)
+- `*Admin.vue` — composants de l'interface d'administration (DashboardAdmin, CollectionsAdmin, CompaniesAdmin, LeaderboardAdmin, LoginAdmin, HeaderAdmin)
+
+### Medias
+
+Les fichiers medias de l'application sont directement stockés dans le dossier [public/images](public/images) (comprenant le logo, images du quizz, pictos, ...)
+
+Les logos des entreprise, chargés depuis la console admin HUG, sont stockés dans le sous-dossier [public/images/companies_logo](public/images/companies_logo). Ces logos sont renommé en ajoutant le timestamp d'upload (hormis les logos du seeder) pour garantir l'unicité.
