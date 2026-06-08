@@ -22,7 +22,16 @@ class CompanyStatsService
 
     public static function getGoldWinnerData(int $year = null): ?array
     {
-        $year = $year ?? Carbon::now()->subYear()->year;
+        // $now = Carbon::now();
+
+        // if ($year === null) {
+        //     $offset = $now->month === 1 ? 2 : 1;
+        //     $year = $now->year - $offset;
+        // } elseif ($now->month === 1 && $year === $now->year) {
+        //     throw new \InvalidArgumentException(
+        //         "En janvier, l'année {$year} n'est pas encore disponible."
+        //     );
+        // }
 
         $companies = Company::with(['collections' => function ($query) use ($year) {
             $query->whereYear('day_start', $year)
@@ -56,7 +65,16 @@ class CompanyStatsService
     // Entreprise ayant organisé au moins une collecte le plus d'années consécutives (min 2 ans)
     public static function getAmbassadorData(int $year = null): ?array
     {
-        $year = $year ?? Carbon::now()->subYear()->year;
+        // $now = Carbon::now();
+
+        // if ($year === null) {
+        //     $offset = $now->month === 1 ? 2 : 1;
+        //     $year = $now->year - $offset;
+        // } elseif ($now->month === 1 && $year === $now->year) {
+        //     throw new \InvalidArgumentException(
+        //         "En janvier, l'année {$year} n'est pas encore disponible."
+        //     );
+        // }
 
         $companies = Company::with(['collections' => function ($query) use ($year) {
             $query->where('day_end', '<', now())
@@ -114,7 +132,16 @@ class CompanyStatsService
     // Entreprise avec le meilleur ratio nb_blood_pouch/nb_registered sur une collecte l'année dernière
     public static function getConvictionData(int $year = null): ?array
     {
-        $year = $year ?? Carbon::now()->subYear()->year;
+        // $now = Carbon::now();
+
+        // if ($year === null) {
+        //     $offset = $now->month === 1 ? 2 : 1;
+        //     $year = $now->year - $offset;
+        // } elseif ($now->month === 1 && $year === $now->year) {
+        //     throw new \InvalidArgumentException(
+        //         "En janvier, l'année {$year} n'est pas encore disponible."
+        //     );
+        // }
 
         $collections = Collection::with('company')
             ->whereYear('day_start', $year)
@@ -157,6 +184,8 @@ class CompanyStatsService
 
     public static function getCompanyAwards(Company $company): array
     {
+        $now = Carbon::now();
+
         // Récupère toutes les années où l'entreprise a eu une collecte clôturée
         $years = $company->collections()
             ->where('day_end', '<', now())
@@ -169,6 +198,11 @@ class CompanyStatsService
         $awards = [];
 
         foreach ($years as $year) {
+            if ($now->month === 1 && $year === $now->year) {
+                throw new \InvalidArgumentException(
+                    "En janvier, l'année {$year} n'est pas encore disponible."
+                );
+            }
             $awards[$year] = [
                 'gold'       => self::getGoldWinner($year) === $company->name,
                 'conviction' => self::getConviction($year) === $company->name,
@@ -225,6 +259,38 @@ class CompanyStatsService
                 'cobrand_visit_rate' => self::getCobrandVisitRate($collection),
                 'onedoc_visit_rate' => self::getOnedocVisitRate($collection),
             ])
+            ->toArray();
+    }
+
+    public static function getActivesYears(): array
+    {
+        $now = Carbon::now();
+        $maxYear = $now->year;
+
+        return Collection::distinct()
+            ->whereYear('day_start', '<=', $now->year)
+            ->pluck('day_start')
+            ->map(fn($date) => Carbon::parse($date)->year)
+            ->unique()
+            ->filter(fn($y) => $y <= $maxYear)
+            ->sortDesc()
+            ->values()
+            ->toArray();
+    }
+
+    public static function getTrophiedYears(): array
+    {
+        $now = Carbon::now();
+        $maxYear = $now->month === 1 ? $now->year - 2 : $now->year - 1;
+
+        return Collection::distinct()
+            ->where('day_start', '<', $now->startOfYear())
+            ->pluck('day_start')
+            ->map(fn($date) => Carbon::parse($date)->year)
+            ->unique()
+            ->filter(fn($y) => $y <= $maxYear)
+            ->sortDesc()
+            ->values()
             ->toArray();
     }
 }

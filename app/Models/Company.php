@@ -15,6 +15,13 @@ class Company extends Model
         'name',
         'logo',
         'color',
+        'sector',
+        'employee_count',
+        'contact_name',
+        'contact_phone',
+        'contact_email',
+        'is_labelled',
+        'trophies_count',
     ];
 
     // Une company a plusieurs collectes

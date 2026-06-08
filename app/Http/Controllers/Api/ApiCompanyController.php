@@ -23,9 +23,16 @@ class ApiCompanyController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'  => 'required|string|unique:companies,name',
-            'logo'  => 'nullable|file|mimes:jpg,jpeg,png,svg,webp|max:2048',
-            'color' => 'nullable|string',
+            'name'           => 'required|string|unique:companies,name',
+            'logo'           => 'nullable|file|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'color'          => 'nullable|string',
+            'sector'         => 'nullable|string',
+            'employee_count' => 'nullable|integer',
+            'contact_name'   => 'nullable|string',
+            'contact_phone'  => 'nullable|string',
+            'contact_email'  => 'nullable|email',
+            'is_labelled'    => 'boolean',
+            'trophies_count' => 'nullable|integer',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -48,9 +55,16 @@ class ApiCompanyController extends Controller
         $company = Company::findOrFail($id);
 
         $validated = $request->validate([
-            'name'  => 'sometimes|string|unique:companies,name,' . $id,
-            'logo'  => 'nullable|file|mimes:jpg,jpeg,png,svg,webp|max:2048',
-            'color' => 'nullable|string',
+            'name'           => 'sometimes|string|unique:companies,name,' . $id,
+            'logo'           => 'nullable|file|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'color'          => 'nullable|string',
+            'sector'         => 'nullable|string',
+            'employee_count' => 'nullable|integer',
+            'contact_name'   => 'nullable|string',
+            'contact_phone'  => 'nullable|string',
+            'contact_email'  => 'nullable|email',
+            'is_labelled'    => 'boolean',
+            'trophies_count' => 'nullable|integer',
         ]);
 
         if ($request->hasFile('logo')) {

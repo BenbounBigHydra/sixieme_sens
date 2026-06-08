@@ -15,12 +15,15 @@
     <!-- Conteneur principal de l'application Vue -->
     <div id="app">
         <!-- Composant d'en-tête Co-brand -->
-        <header-cobrand></header-cobrand>
+        <header-cobrand :initial-data="{{ $initialData ?? 'null' }}"></header-cobrand>
         
         <!-- Zone de contenu dynamique injectée par les vues spécifiques -->
         <main>
             @yield('content')
         </main>
+        
+        <!-- Composant de pied de page -->
+        <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
     </div>
 </body>
 </html>
