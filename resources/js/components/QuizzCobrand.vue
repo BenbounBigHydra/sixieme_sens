@@ -1,19 +1,17 @@
 <template>
-  <div class="h-[100dvh] w-full bg-[#2D2144] bg-cover bg-center bg-fixed flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
+  <div class="h-[100dvh] bg-[#2D2144] bg-cover bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
-    <div v-if="currentState === 'landing'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
-      <div class="flex-shrink-0">
+    <div v-if="currentState === 'landing'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+      <div>
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">Retourner à l'accueil</span>
         </a>
-      </div>
-      
-      <div class="mt-4 md:mt-8 flex-grow flex flex-col justify-center min-h-0 items-start md:items-center">
+
         <!-- Content -->
-        <div class="max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 overflow-y-auto w-full" :style="boxStyle">
+        <div class="mt-16 md:mt-24 max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
           <h1 class="font-jersey text-[40px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
             Vérifier votre éligibilité
           </h1>
@@ -33,7 +31,7 @@
       </div>
 
       <!-- Bottom left text -->
-      <div class="mt-4 flex justify-start flex-shrink-0">
+      <div class="mt-12 flex justify-start">
         <div class="max-w-md text-left">
           <p class="font-inter text-[#D5D9ED] text-[12px] md:text-sm leading-snug">
             Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
@@ -42,8 +40,8 @@
       </div>
     </div>
     <!-- QUIZ STATE -->
-    <div v-else-if="currentState === 'quiz'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
-      <div class="flex-shrink-0">
+    <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+      <div>
         <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">
@@ -52,10 +50,10 @@
         </button>
       </div>
 
-      <div class="mt-4 md:mt-6 flex-grow flex flex-col md:flex-row justify-between items-stretch relative gap-6 md:gap-8 pb-2 min-h-0">
-        <div class="flex flex-col relative z-10 w-full md:w-1/2 flex-1 min-h-0">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 flex flex-col justify-between h-full overflow-y-auto" :style="boxStyle">
-            <h2 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-6 whitespace-pre-line relative z-10">
+      <div class="mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-8 md:gap-12 pb-4">
+        <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
+          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
+            <h2 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-8 whitespace-pre-line relative z-10">
               {{ questions[currentQuestionIndex].text }}&nbsp;<span
                 class="inline-block align-middle cursor-pointer"
                 @mouseenter="showTooltip = true"
@@ -73,7 +71,7 @@
               </div>
             </h2>
 
-            <div class="min-h-[60px] md:min-h-[80px] mt-auto flex flex-col justify-end">
+            <div class="min-h-[56px] md:min-h-[64px]">
               <transition name="fade" mode="out-in">
                 <div v-if="!selectedAnswer" class="flex gap-4 md:gap-6">
                   <button @click="answerQuestion('Oui')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-5 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all">
@@ -86,23 +84,20 @@
                 <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-base md:text-lg">
                   <span v-html="questions[currentQuestionIndex].noText"></span>
                 </div>
-                <div v-else-if="selectedAnswer === 'Oui'" class="font-inter text-[#f87171] font-bold text-base md:text-lg">
-                  <span v-html="questions[currentQuestionIndex].yesText"></span>
-                </div>
               </transition>
             </div>
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-4 md:mt-0 relative z-10 md:-translate-x-12 flex-1 min-h-0">
+        <div class="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0 relative z-10 md:-translate-x-12 h-full max-h-[45vh] md:max-h-[75vh]">
           <transition name="fade">
-            <img :key="currentImageSrc" :src="currentImageSrc" class="max-h-full max-w-full object-contain" :class="[questions[currentQuestionIndex]?.imageClass, flightClass]" />
+            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[45vh] md:max-h-[75vh]', flightClass]" />
           </transition>
         </div>
       </div>
 
       <!-- Bottom left indicator -->
-      <div class="mt-4 flex justify-start flex-shrink-0">
+      <div class="mt-8 flex justify-start">
         <div class="font-inter text-sm md:text-base font-bold px-4 py-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" :style="boxStyle">
           Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}
         </div>
@@ -110,39 +105,39 @@
     </div>
 
     <!-- INELIGIBLE STATE -->
-    <div v-else-if="currentState === 'ineligible'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col justify-between flex-grow min-h-0">
-      <div class="flex-shrink-0">
+    <div v-else-if="currentState === 'ineligible'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+      <div>
         <button @click="correctAnswer" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">Je me suis trompé(e)</span>
         </button>
       </div>
-      <div class="mt-4 md:mt-6 flex-grow flex flex-col md:flex-row justify-between items-stretch relative gap-6 md:gap-8 pb-2 min-h-0">
-        <div class="flex flex-col justify-center relative z-10 w-full md:w-1/2 flex-1 min-h-0">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 flex flex-col justify-center h-full overflow-y-auto" :style="boxStyle">
-            <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
+      <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-12">
+        <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
+          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-6" :style="boxStyle">
+            <h2 class="font-jersey text-[36px] md:text-[48px] text-inherit leading-tight mb-1">
               Pas cette fois...
             </h2>
-            <h3 class="font-jersey text-[32px] md:text-[40px] text-inherit leading-tight mb-8">
+            <h3 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-4">
               mais vous pouvez quand même aider
             </h3>
 
-            <p class="font-inter text-inherit text-base md:text-lg leading-relaxed mb-8" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
-            <p class="font-inter text-inherit text-base md:text-lg leading-relaxed mb-12 opacity-80">
+            <p class="font-inter text-[#f87171] font-bold text-sm md:text-base leading-relaxed mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
+            <p class="font-inter text-inherit text-sm md:text-base leading-relaxed mb-6 opacity-80">
               Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-6 md:px-8 py-3 md:py-4 text-black font-inter text-base md:text-lg transition-all text-center relative overflow-hidden group">
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-4 md:px-6 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all text-center relative overflow-hidden group">
                 <span :class="{'opacity-0': isCopied}">Partager à un collègue</span>
                 <span v-if="isCopied" class="absolute inset-0 flex items-center justify-center font-bold text-[#3ca370]">Copié !</span>
               </button>
-              <a :href="homeLink" class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all text-center inline-block" :style="activeBtnStyle">
+              <a :href="homeLink" class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 md:px-6 py-2 md:py-3 font-inter text-sm md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
                 Retourner à l'accueil
               </a>
             </div>
             
-            <div class="mt-8 text-center md:text-left">
+            <div class="mt-4 text-center md:text-left">
               <a href="#" @click.prevent="continueQuiz" class="font-inter text-[#fffbf1] text-sm md:text-base underline hover:text-[#b3d9ff] transition-colors">
                 Continuer le quiz pour le fun
               </a>
@@ -150,14 +145,14 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-4 md:mt-0 relative z-10 md:-translate-x-12 flex-1 min-h-0">
-          <img :src="currentImageSrc" class="max-h-full max-w-full object-contain" :class="questions[currentQuestionIndex]?.imageClass" />
+        <div class="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 relative z-10 md:-translate-x-12">
+          <img :src="currentImageSrc" class="object-contain" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[45vh] md:max-h-[75vh]'" />
         </div>
       </div>
     </div>
     <!-- SUCCESS STATE -->
-    <div v-else-if="currentState === 'success'" class="p-4 md:p-6 lg:p-8 h-full flex flex-col flex-grow min-h-0">
-      <div class="flex-shrink-0">
+    <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
+      <div>
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
@@ -165,8 +160,8 @@
         </a>
       </div>
 
-      <div class="mt-4 md:mt-8 flex-grow flex flex-col justify-center min-h-0 items-start md:items-center">
-        <div class="max-w-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8 overflow-y-auto w-full" :style="boxStyle">
+      <div class="mt-16 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
+        <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
           <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
             On vous attend !
           </h2>
@@ -226,7 +221,7 @@ const questions = [
     yesText: "Aaah dommage. Certains pays présentent des risques sanitaires qui nécessitent un délai d'attente avant de donner son sang. Tu peux vérifier ça grâce à notre travel-check : <a href='https://www.hug.ch/travelcheck' target='_blank' class='underline hover:text-gray-300'>https://www.hug.ch/travelcheck</a>",
     noText: "Accroche ta ceinture, ça risque de secouer !",
     bg: "background_earth_desktop.png", mobileBg: "bkgMobile/background_earth_mobile.png", folder: "01_travel", prefix: "travel", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh] translate-y-12 md:translate-y-20"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-y-12 md:translate-y-20"
   },
   {
     text: "As-tu actuellement une plaie ou as-tu été opéré récemment ?",
@@ -235,7 +230,7 @@ const questions = [
     yesText: "Laisse ton corps se reposer d'abord ! Une plaie ou opération récente peut fragiliser ton organisme.",
     noText: "La comète a dévié, ton corps est intact !",
     bg: "Background_spaceship_desktop.png", mobileBg: "bkgMobile/Background_spaceship_mobile.png", folder: "02_wound", prefix: "wound", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu actuellement des symptômes de refroidissement ou de la fièvre ?",
@@ -244,7 +239,7 @@ const questions = [
     yesText: "Soigne-toi bien et reviens nous voir quand tu seras au top ! Donner pendant une infection pourrait nuire à ta santé.",
     noText: "On est passés proche du soleil, mais on a survécu !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "03_fever", prefix: "fever", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu eu des relations sexuelles avec des partenaires multiples au cours de 12 derniers mois ou avec une nouvelle ou nouveau partenaire ces quatre derniers mois ?",
@@ -253,7 +248,7 @@ const questions = [
     yesText: "Ce critère vise à réduire le risque de transmission de certaines infections par le sang.",
     noText: "On reste safe par ici.",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "04_sex", prefix: "sex", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "Pèses-tu moins de 50 kg ?",
@@ -262,7 +257,7 @@ const questions = [
     yesText: "On a besoin que tu sois bien dans ton corps pour donner ! Un poids minimum est requis pour ta sécurité.",
     noText: "Tu es sur la bonne planète pour donner !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "05_weight", prefix: "weight", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu été piqué par une tique dans les 4 dernières semaines?",
@@ -271,7 +266,7 @@ const questions = [
     yesText: "Aïe, c’est vraiment des sales bêtes! Pour être sûr qu’elle ne t’ait rien transmis, il va falloir attendre un peu avant de pouvoir donner du sang.",
     noText: "La tique a raté sa cible, zéro souci !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "06_tick", prefix: "tick", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu fait de l'acupuncture ou un tatouage dans les 4 derniers mois?",
@@ -280,7 +275,7 @@ const questions = [
     yesText: "Si tu t’es fait piquer récemment, il va falloir attendre un moment avant de pouvoir donner.",
     noText: "Les aliens ont tout géré, tu es sauvé !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "07_acupuncture", prefix: "acupuncture", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh]"
+    imageClass: "max-h-[45vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu ressenti une douleur thoracique ou un essoufflement anormal récemment?",
@@ -289,7 +284,7 @@ const questions = [
     yesText: "Il faudrait peut-être consulter un médecin sur le sujet? Je ne voudrais pas que tu fasses un malaise en donnant ton sang, il faudrait régler ça d’abord!",
     noText: "Ton cœur brille, il est au top !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "08_pain", prefix: "pain", hasYes: true, hasNo: true,
-    imageClass: "max-h-[20vh] md:max-h-[35vh] translate-y-8 md:translate-y-16"
+    imageClass: "max-h-[35vh] md:max-h-[55vh] translate-y-8 md:translate-y-16"
   },
   {
     text: "As-tu eu une gastroscopie ou coloscopie au cours des 4 derniers mois ?",
@@ -298,7 +293,7 @@ const questions = [
     yesText: "J’espère que ce n’était rien de grave pour toi. Après une anesthésie, il faut attendre un moment avant de donner son sang. Reviens bientôt!",
     noText: "Analyse terminée, l'alien valide, tout va bien !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "09_gastroscopy", prefix: "gastroscopy", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
   },
   {
     text: "As-tu bénéficié d’un détartrage dans les 24 dernières heures ou d’un traitement dentaire dans les 7 derniers jours ?",
@@ -307,7 +302,7 @@ const questions = [
     yesText: "C’est super pour tes dents, mais le risque d’infection est trop élevé pour donner du sang tout suite. Réessayons plus tard!",
     noText: "Une seule dent au compteur, mais ça passe !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "10_dental", prefix: "dental", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-4 md:translate-y-8"
   },
   {
     text: "Ces quatre dernières semaines, as-tu pris des médicaments ou reçu un vaccin ?",
@@ -316,7 +311,7 @@ const questions = [
     yesText: "Oups... On ne peut pas risquer de transmettre des produits avec le sang donné, il va falloir attendre qu’ils quittent ton organisme!",
     noText: "Le deuxième alien veille au grain, pas de substance parasite !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "11_medecine", prefix: "medecine", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh] scale-[1.3] md:scale-[1.5] translate-y-12 md:translate-y-24"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-12 md:translate-y-24"
   },
   {
     text: "As-tu déjà reçu une greffe d'organe?",
@@ -325,7 +320,7 @@ const questions = [
     yesText: "Moi aussi! Malheureusement, je viens d’apprendre que pour des raisons de sécurité les receveurs de greffe ne pouvaient pas donner leur sang. Merci d’avoir fait ce voyage avec moi! Invitons d’autres personnes à y aller pour nous!",
     noText: "Génial ! Ton voyage intergalactique touche à sa fin, tu as tous les critères pour sauver des vies !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "12_transplant", prefix: "transplant", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[50vh] translate-y-12 md:translate-y-24"
+    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-y-12 md:translate-y-24"
   }
 ];
 
@@ -445,22 +440,25 @@ const answerQuestion = (answer) => {
   userAnswers.value[currentQuestionIndex.value] = answer;
   isAnimating.value = true;
 
-  if (currentQuestionIndex.value === 0 && answer === 'Non') {
-    flightClass.value = 'fly-up-animation';
-  }
+  const isCorrect = questions[currentQuestionIndex.value].correct === answer;
 
-  setTimeout(() => {
-    isAnimating.value = false;
-    const isCorrect = questions[currentQuestionIndex.value].correct === answer;
-
-    if (!isCorrect) {
+  if (!isCorrect) {
+    setTimeout(() => {
+      isAnimating.value = false;
       currentState.value = 'ineligible';
       flightClass.value = '';
-    } else {
+    }, 300);
+  } else {
+    if (currentQuestionIndex.value === 0 && answer === 'Non') {
+      flightClass.value = 'fly-up-animation';
+    }
+
+    setTimeout(() => {
+      isAnimating.value = false;
       flightClass.value = '';
       proceedToNext();
-    }
-  }, 2200);
+    }, 2860);
+  }
 };
 
 const continueQuiz = () => {
