@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-[#2D2144] bg-cover bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
+  <div class="min-h-screen w-full bg-[#2D2144] bg-cover bg-center bg-fixed flex flex-col justify-between transition-all duration-1000 overflow-x-hidden overflow-y-auto" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
     <div v-if="currentState === 'landing'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
@@ -52,44 +52,40 @@
 
       <div class="mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-8 md:gap-12 pb-4">
         <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-            <transition name="fade" mode="out-in">
-              <h2 :key="selectedAnswer || 'question'" class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-8 whitespace-pre-line relative z-10 min-h-[120px]">
-                <template v-if="!selectedAnswer">
-                  {{ questions[currentQuestionIndex].text }}&nbsp;<span
-                    class="inline-block align-middle cursor-pointer"
-                    @mouseenter="showTooltip = true"
-                    @mouseleave="showTooltip = false"
-                    @click="showTooltip = !showTooltip"
-                  >
-                    <img src="/images/info.svg" alt="Info" class="w-5 h-5 md:w-6 md:h-6" style="filter: brightness(0) invert(1);" />
-                  </span>
-                  <!-- Tooltip Popup -->
-                  <div
-                    v-if="showTooltip"
-                    class="absolute bottom-full left-0 mb-4 w-[calc(100vw-2rem)] md:max-w-[600px] p-4 bg-white text-black font-inter text-sm md:text-base border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-50 font-normal leading-relaxed text-left"
-                  >
-                    {{ questions[currentQuestionIndex].info }}
-                  </div>
-                </template>
-                <template v-else-if="selectedAnswer === 'Oui'">
-                  <span v-html="questions[currentQuestionIndex].yesText"></span>
-                </template>
-                <template v-else-if="selectedAnswer === 'Non'">
-                  <span v-html="questions[currentQuestionIndex].noText"></span>
-                </template>
-              </h2>
-            </transition>
+          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 flex flex-col justify-between min-h-[300px] md:min-h-[350px]" :style="boxStyle">
+            <h2 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-6 whitespace-pre-line relative z-10">
+              {{ questions[currentQuestionIndex].text }}&nbsp;<span
+                class="inline-block align-middle cursor-pointer"
+                @mouseenter="showTooltip = true"
+                @mouseleave="showTooltip = false"
+                @click="showTooltip = !showTooltip"
+              >
+                <img src="/images/info.svg" alt="Info" class="w-5 h-5 md:w-6 md:h-6" style="filter: brightness(0) invert(1);" />
+              </span>
+              <!-- Tooltip Popup -->
+              <div
+                v-if="showTooltip"
+                class="absolute bottom-full left-0 mb-4 w-[calc(100vw-2rem)] md:max-w-[600px] p-4 bg-white text-black font-inter text-sm md:text-base border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-50 font-normal leading-relaxed text-left"
+              >
+                {{ questions[currentQuestionIndex].info }}
+              </div>
+            </h2>
 
-            <div class="min-h-[56px] md:min-h-[64px]">
-              <transition name="fade">
-                <div v-if="!isAnimating" class="flex gap-4 md:gap-6">
+            <div class="min-h-[60px] md:min-h-[80px] mt-auto flex flex-col justify-end">
+              <transition name="fade" mode="out-in">
+                <div v-if="!selectedAnswer" class="flex gap-4 md:gap-6">
                   <button @click="answerQuestion('Oui')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-5 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all">
                     Oui
                   </button>
                   <button @click="answerQuestion('Non')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-5 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all">
                     Non
                   </button>
+                </div>
+                <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-base md:text-lg">
+                  <span v-html="questions[currentQuestionIndex].noText"></span>
+                </div>
+                <div v-else-if="selectedAnswer === 'Oui'" class="font-inter text-[#f87171] font-bold text-base md:text-lg">
+                  <span v-html="questions[currentQuestionIndex].yesText"></span>
                 </div>
               </transition>
             </div>
@@ -462,7 +458,7 @@ const answerQuestion = (answer) => {
       flightClass.value = '';
       proceedToNext();
     }
-  }, 2800);
+  }, 2200);
 };
 
 const continueQuiz = () => {
@@ -542,7 +538,7 @@ const handleOnedocClick = async () => {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
