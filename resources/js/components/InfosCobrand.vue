@@ -181,7 +181,7 @@
               </div>
 
               <!-- Roby -->
-              <img src="/images/dono_smiling.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
+              <img src="/images/roby_smiling_left.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
             </div>
           </div>
         </div>

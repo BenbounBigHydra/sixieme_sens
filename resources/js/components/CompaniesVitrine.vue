@@ -106,24 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Empty placeholders to maintain grid structure -->
-                        <div v-for="i in Math.max(0, itemsPerPage - paginatedCompanies.length)" :key="'empty-' + i"
-                            @click="toggleCompanyInfo('empty-' + i)"
-                            class="relative border-[4px] border-[#0073e6] aspect-square flex items-center justify-center p-4 group cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6]"
-                            :class="activeCompany === 'empty-' + i ? 'bg-[#0073e6]' : 'bg-[#fffbf1]'">
-                            <!-- Default image -->
-                            <img src="/images/BCGE.png" alt="Company placeholder"
-                                class="max-w-[40%] md:max-w-[45%] max-h-[40%] md:max-h-[45%] object-contain transition-opacity duration-300"
-                                :class="activeCompany === 'empty-' + i ? 'opacity-0' : 'md:group-hover:opacity-0'" />
 
-                            <!-- Hover content -->
-                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
-                                :class="activeCompany === 'empty-' + i ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
-                                <h3 class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">
-                                    Company name</h3>
-                                <p class="font-['Inter'] text-white text-xs md:text-sm">Company infos</p>
-                            </div>
-                        </div>
                     </div>
                 </transition>
             </div>

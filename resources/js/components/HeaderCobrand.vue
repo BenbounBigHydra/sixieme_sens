@@ -14,7 +14,7 @@
         <img :src="company.logo ? '/' + company.logo : '/images/HEIG-VD-red.png'" alt="Logo Partenaire" class="h-7 md:h-12 w-auto object-contain shrink-0" />
       </a>
 
-      <nav class="hidden md:flex items-center space-x-8 text-[28px]">
+      <nav v-if="!isClosedPage" class="hidden md:flex items-center space-x-8 text-[28px]">
         <a :href="`/collection/${companySlug}/${collectionId}`"
            class="hover:text-[#0073E6] transition-colors tracking-wide"
            :class="isHomePage ? 'text-[#0073E6]' : 'text-[#000000]'">Accueil</a>
@@ -27,7 +27,7 @@
       </nav>
 
       <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center">
+      <div v-if="!isClosedPage" class="md:hidden flex items-center">
         <button @click="isMenuOpen = !isMenuOpen" class="text-[#0073E6] focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -89,6 +89,7 @@ const companySlug = ref('')
 const collectionId = ref('')
 const isInfosPage = ref(false)
 const isHomePage = ref(false)
+const isClosedPage = ref(false)
 
 onMounted(() => {
   const parts = window.location.pathname.split('/');
@@ -96,5 +97,6 @@ onMounted(() => {
   collectionId.value = parts[3] || '';
   isInfosPage.value = window.location.pathname.endsWith('/infos');
   isHomePage.value = window.location.pathname === `/collection/${companySlug.value}/${collectionId.value}`;
+  isClosedPage.value = window.location.pathname.endsWith('/closed');
 })
 </script>
