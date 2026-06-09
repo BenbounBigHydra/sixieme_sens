@@ -17,6 +17,7 @@ import HeaderCobrand from './components/HeaderCobrand.vue';
 import HomeCobrand from './components/HomeCobrand.vue';
 import InfosCobrand from './components/InfosCobrand.vue';
 import QuizzCobrand from './components/QuizzCobrand.vue';
+import ClosedCobrand from './components/ClosedCobrand.vue';
 
 // Importation des composants Vue de l'admin
 import LoginAdmin from './components/LoginAdmin.vue';
@@ -43,6 +44,7 @@ app.component('header-cobrand', HeaderCobrand);
 app.component('home-cobrand', HomeCobrand);
 app.component('infos-cobrand', InfosCobrand);
 app.component('quizz-cobrand', QuizzCobrand);
+app.component('closed-cobrand', ClosedCobrand);
 
 // Enregistrement global des composants admin
 app.component('login-admin', LoginAdmin);

@@ -23,7 +23,9 @@
         </main>
         
         <!-- Composant de pied de page -->
-        <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
+        @if (!isset($hideFooter) || !$hideFooter)
+            <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
+        @endif
     </div>
 </body>
 </html>

@@ -80,9 +80,9 @@ class CoBrandController extends Controller
             ->first();
 
         if ($collection) {
-            $initialData = json_encode(['url' => $company_name . '/' . $collection->id]);
+            $initialData = json_encode(['url' => $company_name . '/' . $collection->id, 'company' => $company]);
         } else {
-            $initialData = json_encode(['url' => null]);
+            $initialData = json_encode(['url' => null, 'company' => $company]);
         }
 
         return view('cobrand.closed', [
