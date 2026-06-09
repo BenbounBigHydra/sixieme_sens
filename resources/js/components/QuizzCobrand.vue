@@ -2,7 +2,7 @@
   <div class="h-[100dvh] bg-[#2D2144] bg-cover bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
-    <div v-if="currentState === 'landing'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+    <div v-if="currentState === 'landing'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
@@ -11,16 +11,16 @@
         </a>
 
         <!-- Content -->
-        <div class="mt-16 md:mt-24 max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-          <h1 class="font-jersey text-[36px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
+        <div class="mt-12 md:mt-24 max-w-xl border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 md:p-8" :style="boxStyle">
+          <h1 class="font-jersey text-[28px] sm:text-[36px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-4 md:mb-6">
             Vérifier votre éligibilité
           </h1>
 
-          <p class="font-inter text-inherit text-sm md:text-base leading-relaxed mb-10">
+          <p class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-6 md:mb-10">
             Ce quiz interactif pose quelques questions sur votre santé pour vérifier que vous puissiez donner sans risque. C'est rapide, confidentiel*, si vous passez, vous débloquez la prise de RDV.
           </p>
 
-          <button @click="startQuiz" class="inline-block border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all mb-6" :style="activeBtnStyle">
+          <button @click="startQuiz" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all mb-4 md:mb-6" :style="activeBtnStyle">
             Commencer le quiz
           </button>
 
@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- QUIZ STATE -->
-    <div v-else-if="currentState === 'quiz'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+    <div v-else-if="currentState === 'quiz'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
         <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
@@ -50,10 +50,10 @@
         </button>
       </div>
 
-      <div class="mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-8 md:gap-12 pb-4">
+      <div class="mt-6 md:mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-6 md:gap-12 pb-4">
         <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-            <h2 class="font-jersey text-[20px] md:text-[32px] text-inherit leading-tight mb-8 whitespace-pre-line relative z-10">
+          <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 md:p-8" :style="boxStyle">
+            <h2 class="font-jersey text-[18px] sm:text-[20px] md:text-[32px] text-inherit leading-tight mb-4 md:mb-8 whitespace-pre-line relative z-10">
               {{ questions[currentQuestionIndex].text }}&nbsp;<span
                 class="inline-block align-middle cursor-pointer"
                 @mouseenter="showTooltip = true"
@@ -105,34 +105,34 @@
     </div>
 
     <!-- INELIGIBLE STATE -->
-    <div v-else-if="currentState === 'ineligible'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
+    <div v-else-if="currentState === 'ineligible'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
         <button @click="correctAnswer" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
           <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">Je me suis trompé(e)</span>
         </button>
       </div>
-      <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-12">
+      <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-6 md:gap-12">
         <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-6" :style="boxStyle">
-            <h2 class="font-jersey text-[28px] md:text-[48px] text-inherit leading-tight mb-1">
+          <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 md:p-6" :style="boxStyle">
+            <h2 class="font-jersey text-[24px] sm:text-[28px] md:text-[48px] text-inherit leading-tight mb-1">
               Pas cette fois...
             </h2>
-            <h3 class="font-jersey text-[20px] md:text-[32px] text-inherit leading-tight mb-4">
+            <h3 class="font-jersey text-[18px] sm:text-[20px] md:text-[32px] text-inherit leading-tight mb-3 md:mb-4">
               mais vous pouvez quand même aider
             </h3>
 
-            <p class="font-inter text-[#f87171] font-bold text-sm md:text-base leading-relaxed mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
-            <p class="font-inter text-inherit text-sm md:text-base leading-relaxed mb-6 opacity-80">
+            <p class="font-inter text-[#f87171] font-bold text-xs sm:text-sm md:text-base leading-relaxed mb-3 md:mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
+            <p class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-4 md:mb-6 opacity-80">
               Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-4 md:px-6 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all text-center relative overflow-hidden group">
+            <div class="flex flex-col sm:flex-row gap-2 md:gap-4">
+              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-4 md:px-6 py-2 md:py-3 text-black font-inter text-xs sm:text-sm md:text-base transition-all text-center relative overflow-hidden group">
                 <span :class="{'opacity-0': isCopied}">Partager à un collègue</span>
                 <span v-if="isCopied" class="absolute inset-0 flex items-center justify-center font-bold text-[#3ca370]">Copié !</span>
               </button>
-              <a :href="homeLink" class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 md:px-6 py-2 md:py-3 font-inter text-sm md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
+              <a :href="homeLink" class="border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 md:px-6 py-2 md:py-3 font-inter text-xs sm:text-sm md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
                 Retourner à l'accueil
               </a>
             </div>
@@ -151,7 +151,7 @@
       </div>
     </div>
     <!-- SUCCESS STATE -->
-    <div v-else-if="currentState === 'success'" class="p-8 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
+    <div v-else-if="currentState === 'success'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col flex-grow">
       <div>
         <!-- Back button -->
         <a :href="homeLink" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
@@ -160,21 +160,21 @@
         </a>
       </div>
 
-      <div class="mt-16 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
-        <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-          <h2 class="font-jersey text-[36px] md:text-[64px] text-inherit leading-tight mb-2">
+      <div class="mt-12 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
+        <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8" :style="boxStyle">
+          <h2 class="font-jersey text-[32px] sm:text-[36px] md:text-[64px] text-inherit leading-tight mb-1 md:mb-2">
             On vous attend !
           </h2>
-          <h3 class="font-jersey text-[28px] md:text-[40px] text-inherit leading-tight mb-8">
+          <h3 class="font-jersey text-[24px] sm:text-[28px] md:text-[40px] text-inherit leading-tight mb-4 md:mb-8">
             plus qu'une étape
           </h3>
 
-          <p class="font-inter text-inherit text-base md:text-lg leading-relaxed mb-12">
+          <p class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
             La prise de rendez-vous se fait via OneDoc. Vous allez être redirigé vers le calendrier de la collecte {{ company.name || '[entreprise]' }}. Choisissez simplement le créneau qui vous convient et confirmez votre inscription.
           </p>
 
           <div>
-            <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-6 md:px-8 py-3 md:py-4 font-inter text-base md:text-lg transition-all" :style="activeBtnStyle">
+            <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
               Prendre rendez-vous
             </a>
           </div>
