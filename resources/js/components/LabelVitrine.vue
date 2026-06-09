@@ -56,13 +56,13 @@
     <!-- Carousel Container Full Width -->
     <div class="relative w-full mb-16 max-w-desktop mx-auto group">
       <!-- Arrow Left -->
-      <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+      <button @click="prevSlide" class="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M14 6H12v2H10v2H8v4h2v2h2v2h2v-2h-2v-2h-2v-4h2V8h2V6z"/>
         </svg>
       </button>
 
-      <div class="overflow-hidden relative w-full px-16 md:px-24">
+      <div class="overflow-hidden relative w-full px-4 md:px-24">
         <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
           <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
             <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
@@ -73,11 +73,25 @@
       </div>
 
       <!-- Arrow Right -->
-      <button @click="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+      <button @click="nextSlide" class="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M10 6h2v2h2v2h2v4h-2v2h-2v2h-2v-2h2v-2h2v-4h-2V8h-2V6z"/>
         </svg>
       </button>
+
+      <!-- Mobile Arrows Under Carousel -->
+      <div class="flex md:hidden justify-center items-center gap-6 mt-6">
+        <button @click="prevSlide" class="p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 6H12v2H10v2H8v4h2v2h2v2h2v-2h-2v-2h-2v-4h2V8h2V6z"/>
+          </svg>
+        </button>
+        <button @click="nextSlide" class="p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6h2v2h2v2h2v4h-2v2h-2v2h-2v-2h2v-2h2v-4h-2V8h-2V6z"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Part 3: Avantages -->
@@ -131,43 +145,43 @@
       <div class="grid grid-cols-2 gap-4 md:gap-8 w-full">
         <!-- Etape 1 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
             <a href="/contact" class="hover:text-[#0073e6] transition-colors group block w-full">
-              <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight">01 — Prendre contact avec le CTS</h3>
+              <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight">01 — Prendre contact avec le CTS</h3>
             </a>
           </div>
           <div class="p-4 md:p-6 flex-1">
-            <p class="font-['Inter'] text-black text-[12px] md:text-base">Ensemble, vous définissez une date, un format et les modalités logistiques adaptées à votre entreprise.</p>
+            <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Ensemble, vous définissez une date, un format et les modalités logistiques adaptées à votre entreprise.</p>
           </div>
         </div>
 
         <!-- Etape 2 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">02 — Organiser une collecte</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">02 — Organiser une collecte</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
-            <p class="font-['Inter'] text-black text-[12px] md:text-base">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
+            <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
           </div>
         </div>
 
         <!-- Etape 3 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
-            <p class="font-['Inter'] text-black text-[12px] md:text-base">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
+            <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
           </div>
         </div>
 
         <!-- Etape 4 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">04 — Recevoir le label</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">04 — Recevoir le label</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
-            <p class="font-['Inter'] text-black text-[12px] md:text-base">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
+            <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
           </div>
         </div>
       </div>
@@ -217,6 +231,12 @@ const updateWidth = () => {
 onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWidth);
+    
+    // Preload companies page
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = '/companies';
+    document.head.appendChild(link);
   }
 
   // Slide toutes les 2 secondes
