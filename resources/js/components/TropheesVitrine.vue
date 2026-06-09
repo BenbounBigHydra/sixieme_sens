@@ -141,42 +141,42 @@
           <thead>
             <tr class="border-b-[3px] border-[#B3D9FF]">
               <th class="py-2 md:py-4 px-1 md:px-2"></th>
-              <th class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[14px] sm:text-[16px] md:text-[24px] text-black font-normal">Gagnant</th>
-              <th class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[14px] sm:text-[16px] md:text-[24px] text-black font-normal text-center">Total employés</th>
-              <th class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[14px] sm:text-[16px] md:text-[24px] text-black font-normal text-center">Poches collectées</th>
-              <th class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[14px] sm:text-[16px] md:text-[24px] text-black font-normal text-center">Score</th>
+              <th class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[12px] sm:text-[14px] md:text-[24px] text-black font-normal">Gagnant</th>
+              <th class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[12px] sm:text-[14px] md:text-[24px] text-black font-normal text-center leading-tight">Total<br class="block md:hidden">employés</th>
+              <th class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[12px] sm:text-[14px] md:text-[24px] text-black font-normal text-center leading-tight">Poches<br class="block md:hidden">collectées</th>
+              <th class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[12px] sm:text-[14px] md:text-[24px] text-black font-normal text-center">Score</th>
             </tr>
           </thead>
           <tbody>
             <!-- Or -->
             <tr v-if="goldWinner" class="border-b-[3px] border-[#B3D9FF]">
-              <td class="py-2 md:py-4 px-1 md:px-2 w-10 md:w-20">
-                <img src="/images/trophy_gold.png" alt="Or" class="w-10 h-10 md:w-20 md:h-20 object-contain">
+              <td class="py-1 md:py-4 px-0.5 md:px-2 w-6 md:w-20">
+                <img src="/images/trophy_gold.png" alt="Or" class="w-6 h-6 md:w-20 md:h-20 object-contain">
               </td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black">{{ goldWinner.name }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_employee) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_blood_pouch) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ (goldWinner.ratio * 100).toFixed(1) }}%</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black leading-tight">{{ goldWinner.name }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_employee) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_blood_pouch) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ (goldWinner.ratio * 100).toFixed(1) }}%</td>
             </tr>
             <!-- Ambassadeur -->
             <tr v-if="ambassadorWinner" class="border-b-[3px] border-[#B3D9FF]">
-              <td class="py-2 md:py-4 px-1 md:px-2 w-10 md:w-20">
-                <img src="/images/trophy_conviction (1).png" alt="Ambassadeur" class="w-10 h-10 md:w-20 md:h-20 object-contain">
+              <td class="py-1 md:py-4 px-0.5 md:px-2 w-6 md:w-20">
+                <img src="/images/trophy_conviction (1).png" alt="Ambassadeur" class="w-6 h-6 md:w-20 md:h-20 object-contain">
               </td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black">{{ ambassadorWinner.name }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_employee) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_blood_pouch) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ ambassadorWinner.consecutive }} ans</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black leading-tight">{{ ambassadorWinner.name }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_employee) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_blood_pouch) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ ambassadorWinner.consecutive }} ans</td>
             </tr>
             <!-- Conviction -->
             <tr v-if="convictionWinner" class="border-b-[3px] border-[#B3D9FF]">
-              <td class="py-2 md:py-4 px-1 md:px-2 w-10 md:w-20">
-                <img src="/images/trophy_conviction.png" alt="Conviction" class="w-10 h-10 md:w-20 md:h-20 object-contain">
+              <td class="py-1 md:py-4 px-0.5 md:px-2 w-6 md:w-20">
+                <img src="/images/trophy_conviction.png" alt="Conviction" class="w-6 h-6 md:w-20 md:h-20 object-contain">
               </td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black">{{ convictionWinner.name }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_employee) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_blood_pouch) }}</td>
-              <td class="py-2 md:py-4 px-1 md:px-2 font-['Jersey_20'] text-[16px] sm:text-[18px] md:text-[28px] text-black text-center">{{ (convictionWinner.ratio * 100).toFixed(1) }}%</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black leading-tight">{{ convictionWinner.name }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_employee) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_blood_pouch) }}</td>
+              <td class="py-1 md:py-4 px-0.5 md:px-2 font-['Jersey_20'] text-[13px] sm:text-[15px] md:text-[28px] text-black text-center">{{ (convictionWinner.ratio * 100).toFixed(1) }}%</td>
             </tr>
 
             <tr v-if="!goldWinner && !ambassadorWinner && !convictionWinner" class="border-b-[3px] border-[#B3D9FF]">
