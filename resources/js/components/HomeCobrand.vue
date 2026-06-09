@@ -5,7 +5,7 @@
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
       <!-- Background Union.svg -->
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full transform scale-90 md:scale-[0.85] origin-right responsive-mask"
+        <div class="w-full h-full transform scale-100 md:scale-[0.85] origin-right responsive-mask"
              :style="{
                backgroundColor: computedCompanyColor
              }">
@@ -552,8 +552,8 @@ const faqList = [
 .responsive-mask {
   mask-image: url('/images/background_pixel_gradient_radial_square.svg');
   -webkit-mask-image: url('/images/background_pixel_gradient_radial_square.svg');
-  mask-size: 100% auto;
-  -webkit-mask-size: 100% auto;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
   mask-position: center;
   -webkit-mask-position: center;
   mask-repeat: no-repeat;
