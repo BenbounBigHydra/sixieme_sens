@@ -552,10 +552,10 @@ const faqList = [
 .responsive-mask {
   mask-image: url('/images/background_pixel_gradient_radial_square.svg');
   -webkit-mask-image: url('/images/background_pixel_gradient_radial_square.svg');
-  mask-size: cover;
-  -webkit-mask-size: cover;
-  mask-position: right;
-  -webkit-mask-position: right;
+  mask-size: 100% auto;
+  -webkit-mask-size: 100% auto;
+  mask-position: center;
+  -webkit-mask-position: center;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
 }
@@ -564,6 +564,10 @@ const faqList = [
   .responsive-mask {
     mask-image: url('/images/Union.svg');
     -webkit-mask-image: url('/images/Union.svg');
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    mask-position: right;
+    -webkit-mask-position: right;
   }
 }
 </style>
