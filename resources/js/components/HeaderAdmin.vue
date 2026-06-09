@@ -1,10 +1,10 @@
 <template>
-  <header class="w-full h-24 bg-[#fffbf1] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+  <header class="w-full h-20 md:h-24 bg-[#fffbf1] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
+    <div class="max-w-desktop mx-auto px-4 md:px-8 lg:px-20 xl:px-32 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
       <!-- Logo -->
       <a href="/admin" class="flex items-center h-full cursor-pointer hover:opacity-90 transition-opacity">
         <img src="/images/hug_icon.png" alt="Logo HUG Desktop" class="hidden md:block h-12 w-auto object-contain" />
-        <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-12 w-auto object-contain" />
+        <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-10 w-auto object-contain" />
       </a>
 
       <!-- Desktop Navigation -->
@@ -34,7 +34,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div v-show="isMenuOpen" class="absolute top-24 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg border-t border-white/20">
+    <div v-show="isMenuOpen" class="absolute top-20 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg border-t border-white/20">
       <a href="/admin" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5 border-b border-white/30">
           <span :class="{'font-bold': currentPath === '/admin'}">Dashboard</span>

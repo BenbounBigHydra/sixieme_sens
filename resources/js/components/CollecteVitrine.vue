@@ -1,15 +1,15 @@
 <template>
   <div class="w-full bg-[#fffbf1] min-h-screen">
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 pt-12 pb-20">
 
       <!-- Header text -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-4 tracking-wide">
+        <h1 class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-4 tracking-wide">
           Organiser une collecte
         </h1>
         <p class="font-['Inter'] text-sm md:text-base text-black w-full max-w-4xl leading-relaxed">
-          Pour accueillir une collecte en entreprise, deux conditions sont requises : disposer d'un espace d'au moins 100 m² et pouvoir mobiliser un minimum de 500 collaborateurs éligibles (ou avoir réuni plus de 50 promesses de don). La planification doit être initiée au moins 3 mois à l'avance. Remplissez le formulaire ci-dessous et le CTS vous recontactera pour établir le planning ensemble.
+          Pour accueillir une collecte en entreprise, deux conditions sont requises : disposer d'un espace d'au moins 100 m² et avoir réuni plus de 50 promesses de don. La planification doit être initiée au moins 3 mois à l'avance. Remplissez le formulaire ci-dessous et le CTS vous recontactera pour établir le planning ensemble.
         </p>
       </div>
 
@@ -38,10 +38,9 @@
           <div class="flex-1 flex flex-col gap-2">
             <label class="text-sm md:text-base text-left">Nombre d'employés</label>
             <div class="w-full border-[2px] border-black px-4 bg-[#fffbf1] shadow-[8px_8px_0px_0px_#0073e6] flex justify-between items-center h-[60px] focus-within:ring-2 focus-within:ring-[#0073e6] transition-shadow">
-              <input type="text" v-model="form.employes" class="flex-1 bg-transparent focus:outline-none w-full" />
+              <input type="text" v-model="form.employes" @input="form.employes = form.employes.replace(/\D/g, '')" class="flex-1 bg-transparent focus:outline-none w-full" />
               <span class="text-red-500 font-bold ml-2 flex-shrink-0">*</span>
             </div>
-            <span class="text-xs text-gray-600 mt-1">Minimum 500</span>
           </div>
         </div>
 
@@ -62,7 +61,7 @@
           <div class="flex-1 flex flex-col gap-2">
             <label class="text-sm md:text-base text-left">Téléphone</label>
             <div class="w-full border-[2px] border-black px-4 bg-[#fffbf1] shadow-[8px_8px_0px_0px_#0073e6] flex justify-between items-center h-[60px] focus-within:ring-2 focus-within:ring-[#0073e6] transition-shadow">
-              <input type="tel" v-model="form.telephone" class="flex-1 bg-transparent focus:outline-none w-full" />
+              <input type="tel" v-model="form.telephone" @input="form.telephone = form.telephone.replace(/[^\d+]/g, '')" class="flex-1 bg-transparent focus:outline-none w-full" />
             </div>
           </div>
         </div>
@@ -117,7 +116,7 @@ const showEmailError = computed(() => {
 });
 
 const isFormValid = computed(() => {
-  const isEmployesValid = form.value.employes.trim() !== '' && !isNaN(form.value.employes) && parseInt(form.value.employes) >= 500;
+  const isEmployesValid = form.value.employes.trim() !== '' && !isNaN(form.value.employes);
   return form.value.nom.trim() !== '' &&
          isEmployesValid &&
          form.value.mail.trim() !== '' &&

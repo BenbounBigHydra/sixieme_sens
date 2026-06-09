@@ -54,18 +54,27 @@
       </div>
 
       <!-- Collections Table -->
-      <div class="w-full mt-4">
-        <div class="border border-blue-200 rounded-t-sm overflow-hidden">
+      <div class="w-full mt-4 overflow-x-auto pb-4">
+        <div class="border border-blue-200 rounded-t-sm overflow-hidden min-w-[1300px]">
           <!-- Table Header -->
-          <div class="hidden md:grid grid-cols-3 items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
+          <div class="hidden md:grid grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
             <!-- Entreprise -->
             <div class="flex items-center cursor-pointer group" @click="sortBy('companyName')">
               <span class="font-inter text-sm text-[#393939] mr-2">Entreprise</span>
-              <img src="/images/BlueChevron Down.svg" alt="Sort" class="h-4 w-4 transition-transform" :class="{'rotate-180': sortOrder === 'asc'}" />
+              <img src="/images/BlueChevron%20Down.svg" alt="Sort" class="h-4 w-4 transition-transform" :class="{'rotate-180': sortOrder === 'asc'}" />
             </div>
 
+            <!-- Nouvelles colonnes -->
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Date</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Total employés</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Capacité</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Inscrits</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Poches</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">One-Doc</span></div>
+            <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Co-Brand</span></div>
+
             <!-- Statut -->
-            <div class="flex items-center">
+            <div class="flex items-center justify-center">
               <span class="font-inter text-sm text-[#393939] mx-auto">Statut</span>
             </div>
 
@@ -78,7 +87,7 @@
           <!-- Table Body -->
           <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
             <template v-if="filteredAndSortedCollections.length > 0">
-              <div v-for="collection in filteredAndSortedCollections" :key="collection.id" class="flex flex-col md:grid md:grid-cols-3 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+              <div v-for="collection in filteredAndSortedCollections" :key="collection.id" class="flex flex-col md:grid md:grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                 <!-- Entreprise -->
                 <div class="flex items-center space-x-3 w-full">
                   <div class="h-8 w-16 flex items-center justify-start shrink-0">
@@ -87,15 +96,36 @@
                   <span class="font-inter font-bold text-lg md:text-sm text-[#393939]">{{ collection.company?.name || 'Inconnu' }}</span>
                 </div>
 
+                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{ formatDate(collection.day_start) }}</span></div>
+                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{ collection.nb_employee || '-' }}</span></div>
+                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{ collection.capacity || '-' }}</span></div>
+                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{ collection.nb_registered ?? '-' }}</span></div>
+                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{ collection.nb_blood_pouch ?? '-' }}</span></div>
+
+                <!-- One Doc Link -->
+                <div class="flex items-center">
+                  <a v-if="collection.onedoc_link" :href="collection.onedoc_link" target="_blank" class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien One-Doc</a>
+                  <span v-else class="text-gray-400 font-inter text-sm">-</span>
+                </div>
+
+                <!-- Co-Brand Link -->
+                <div class="flex items-center">
+                  <a v-if="collection.statusKey !== 'past' && collection.company?.slug" :href="'/collection/' + collection.company.slug + '/' + collection.id" target="_blank" class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien Co-Brand</a>
+                  <span v-else class="text-gray-400 font-inter text-sm italic">Désactivé</span>
+                </div>
+
                 <!-- Statut -->
-                <div class="flex items-center justify-start md:justify-center w-full">
+                <div class="flex items-center justify-start md:justify-center w-full mt-2 md:mt-0">
                   <div class="px-6 py-1.5 rounded-sm text-white font-inter text-sm text-center min-w-[120px]" :class="getStatusColor(collection.statusKey)">
                     {{ getStatusLabel(collection.statusKey) }}
                   </div>
                 </div>
 
                 <!-- Détails -->
-                <div class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
+                <div class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0 gap-2">
+                  <button v-if="collection.statusKey === 'to_close'" @click="openClotureModal(collection)" class="bg-[#5C629E] text-white p-2 md:p-1.5 rounded-sm hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
+                    <span class="text-sm font-inter">Clore</span>
+                  </button>
                   <button @click="openEditModal(collection)" class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                     <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                     <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
@@ -288,6 +318,7 @@ export default {
     return {
       searchQuery: '',
       activeFilter: null, // null means show all
+      sortKey: 'statusPriority',
       sortOrder: 'asc',
       allCollections: [],
       activeModal: null,
@@ -362,14 +393,22 @@ export default {
         result = result.filter(c => c.company?.name && c.company.name.toLowerCase().includes(query));
       }
 
-      // Sort by company name
+      // Sort by company name or status
       result = result.sort((a, b) => {
-        let valA = (a.company?.name || '').toLowerCase();
-        let valB = (b.company?.name || '').toLowerCase();
+        if (this.sortKey === 'companyName') {
+          let valA = (a.company?.name || '').toLowerCase();
+          let valB = (b.company?.name || '').toLowerCase();
 
-        if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
-        return 0;
+          if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+          if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+          return 0;
+        } else {
+          // Default: statusPriority
+          const statusOrder = { 'to_close': 1, 'ongoing': 2, 'to_come': 3, 'past': 4 };
+          let sA = statusOrder[a.statusKey] || 99;
+          let sB = statusOrder[b.statusKey] || 99;
+          return sA - sB;
+        }
       });
 
       return result;
@@ -391,7 +430,12 @@ export default {
     },
     sortBy(key) {
       if (key === 'companyName') {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+        if (this.sortKey === 'companyName') {
+          this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+          this.sortKey = 'companyName';
+          this.sortOrder = 'asc';
+        }
       }
     },
     getStatusLabel(key) {
@@ -448,6 +492,10 @@ export default {
       this.detailForm.hour_end = collection?.hour_end || '';
       
       this.suppressionInput = '';
+    },
+    openClotureModal(collection) {
+      this.openEditModal(collection);
+      this.activeTab = 'cloturer';
     },
     closeModal() {
       this.activeModal = null;

@@ -12,7 +12,7 @@
 
         <!-- Content -->
         <div class="mt-16 md:mt-24 max-w-xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-          <h1 class="font-jersey text-[40px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
+          <h1 class="font-jersey text-[36px] md:text-[56px] lg:text-[64px] text-inherit leading-[1.1] mb-6">
             Vérifier votre éligibilité
           </h1>
 
@@ -53,7 +53,7 @@
       <div class="mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-8 md:gap-12 pb-4">
         <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
           <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-            <h2 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-8 whitespace-pre-line relative z-10">
+            <h2 class="font-jersey text-[20px] md:text-[32px] text-inherit leading-tight mb-8 whitespace-pre-line relative z-10">
               {{ questions[currentQuestionIndex].text }}&nbsp;<span
                 class="inline-block align-middle cursor-pointer"
                 @mouseenter="showTooltip = true"
@@ -115,10 +115,10 @@
       <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-12">
         <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
           <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-6" :style="boxStyle">
-            <h2 class="font-jersey text-[36px] md:text-[48px] text-inherit leading-tight mb-1">
+            <h2 class="font-jersey text-[28px] md:text-[48px] text-inherit leading-tight mb-1">
               Pas cette fois...
             </h2>
-            <h3 class="font-jersey text-[24px] md:text-[32px] text-inherit leading-tight mb-4">
+            <h3 class="font-jersey text-[20px] md:text-[32px] text-inherit leading-tight mb-4">
               mais vous pouvez quand même aider
             </h3>
 
@@ -162,10 +162,10 @@
 
       <div class="mt-16 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
         <div class="border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8" :style="boxStyle">
-          <h2 class="font-jersey text-[48px] md:text-[64px] text-inherit leading-tight mb-2">
+          <h2 class="font-jersey text-[36px] md:text-[64px] text-inherit leading-tight mb-2">
             On vous attend !
           </h2>
-          <h3 class="font-jersey text-[32px] md:text-[40px] text-inherit leading-tight mb-8">
+          <h3 class="font-jersey text-[28px] md:text-[40px] text-inherit leading-tight mb-8">
             plus qu'une étape
           </h3>
 
