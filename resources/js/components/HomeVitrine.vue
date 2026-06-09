@@ -66,7 +66,7 @@
               <!-- Render 150 Icons using Vue v-for -->
               <template v-for="i in 150" :key="i">
                 <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
-                  <img src="/images/roby.png" 
+                  <img src="/images/dono_default.png" 
                        alt="Robot" 
                        class="w-[80%] h-[80%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
                        :class="{'animate-bounce': !isClicked}" />
@@ -96,8 +96,8 @@
             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
               <template v-for="i in 32" :key="'mobile-'+i">
                 <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'">
-                  <img src="/images/roby.png" 
-                       alt="Roby" 
+                  <img src="/images/dono_default.png" 
+                       alt="Robot" 
                        class="w-[70%] h-[70%] md:w-[60%] md:h-[60%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
                        :class="{'animate-bounce': !isClicked}"
                        @mouseenter="isHovered = true" 
