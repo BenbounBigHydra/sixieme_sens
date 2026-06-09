@@ -22,8 +22,12 @@
           <a href="/contact" class="inline-block bg-[#0073e6] text-white font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-[#0073e6]/90 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
             Organiser une collecte
           </a>
-          <a href="/companies" class="inline-block bg-[#fffbf1] text-[#0073e6] font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-gray-50 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-            Voir les entreprises labellisées
+          <a href="/companies" @click.prevent="goToCompanies" class="inline-flex items-center justify-center bg-[#fffbf1] text-[#0073e6] font-['Inter'] font-semibold text-sm px-6 py-3 border-[2px] border-[#0073e6] hover:bg-gray-50 transition-colors text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-full sm:w-auto">
+            <svg v-if="isLoadingCompanies" class="animate-spin -ml-1 mr-2 h-4 w-4 text-[#0073e6]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            {{ isLoadingCompanies ? 'Chargement...' : 'Voir les entreprises labellisées' }}
           </a>
         </div>
 
@@ -46,8 +50,12 @@
           <p class="font-['Inter'] text-sm md:text-lg text-black mb-12 max-w-full text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement. Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden lg:block"/> et vous positionne sur le leaderboard public.</p>
         </div>
         <div class="w-full md:w-1/3 flex justify-center md:justify-end mt-4 md:mt-0">
-          <a href="/companies" class="inline-block bg-[#0073e6] text-white font-['Inter'] text-sm md:text-base px-6 py-3 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all text-center">
-            Voir toutes les entreprises
+          <a href="/companies" @click.prevent="goToCompanies" class="inline-flex items-center justify-center bg-[#0073e6] text-white font-['Inter'] text-sm md:text-base px-6 py-3 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all text-center w-full sm:w-auto">
+            <svg v-if="isLoadingCompanies" class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            {{ isLoadingCompanies ? 'Chargement...' : 'Voir toutes les entreprises' }}
           </a>
         </div>
       </div>
@@ -147,7 +155,7 @@
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
             <a href="/contact" class="hover:text-[#0073e6] transition-colors group block w-full">
-              <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight">01 — Prendre contact avec le CTS</h3>
+              <h3 class="font-['Inter'] font-bold text-[12px] sm:text-[14px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight leading-snug">01 — Prendre contact<br class="block md:hidden"> avec le CTS</h3>
             </a>
           </div>
           <div class="p-4 md:p-6 flex-1">
@@ -158,7 +166,7 @@
         <!-- Etape 2 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">02 — Organiser une collecte</h3>
+            <h3 class="font-['Inter'] font-bold text-[12px] sm:text-[14px] md:text-[24px] text-black tracking-tight leading-snug">02 — Organiser<br class="block md:hidden"> une collecte</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
@@ -168,7 +176,7 @@
         <!-- Etape 3 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
+            <h3 class="font-['Inter'] font-bold text-[12px] sm:text-[14px] md:text-[24px] text-black tracking-tight leading-snug">03 — Mobiliser<br class="block md:hidden"> ses collaborateurs</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
@@ -178,7 +186,7 @@
         <!-- Etape 4 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] md:text-[24px] text-black tracking-tight">04 — Recevoir le label</h3>
+            <h3 class="font-['Inter'] font-bold text-[12px] sm:text-[14px] md:text-[24px] text-black tracking-tight leading-snug">04 — Recevoir<br class="block md:hidden"> le label</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
@@ -232,16 +240,20 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWidth);
     
-    // Preload companies page
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = '/companies';
-    document.head.appendChild(link);
+    // Try to heavily cache the next page by making a real background fetch
+    fetch('/companies', { priority: 'low' }).catch(() => {});
   }
 
   // Slide toutes les 2 secondes
   resetInterval();
 });
+
+const isLoadingCompanies = ref(false);
+
+const goToCompanies = () => {
+  isLoadingCompanies.value = true;
+  window.location.href = '/companies';
+};
 
 const resetInterval = () => {
   if (autoSlideInterval) clearInterval(autoSlideInterval);

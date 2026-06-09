@@ -29,11 +29,13 @@
               <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
                 <span><span class="text-[#0073e6]">130</span> vies sauvées.</span>
                 <div class="relative group inline-flex ml-1 -mt-3">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
-                    <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer text-black hover:text-[#0073e6] transition-colors">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="8" r="1" fill="currentColor"/>
                   </svg>
-                  <div class="absolute bottom-full left-0 md:left-1/2 md:-translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
-                    Exemple basé sur une entreprise théorique de 1'000 collaborateurs avec un taux de participation moyen.
+                  <div class="absolute bottom-full right-[-20px] md:right-auto md:left-1/2 md:-translate-x-1/2 mb-2 w-[250px] bg-white border-2 border-black p-3 text-sm text-black font-['Inter'] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                    Les 130 vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.
                   </div>
                 </div>
               </span>
@@ -64,8 +66,11 @@
               <!-- Render 150 Icons using Vue v-for -->
               <template v-for="i in 150" :key="i">
                 <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
-                  <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
-                  <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                  <img src="/images/roby.png" 
+                       alt="Robot" 
+                       class="w-[80%] h-[80%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
+                       :class="{'animate-bounce': !isClicked}" />
+                  <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
                     Tu m'as trouvé !
                   </div>
                 </div>
@@ -90,9 +95,26 @@
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
               <template v-for="i in 32" :key="'mobile-'+i">
-                <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
-                  <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
-                  <div v-show="isHovered || isClicked" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-auto md:bottom-full md:left-1/2 md:-translate-y-0 md:-translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
+                <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'">
+                  <img src="/images/roby.png" 
+                       alt="Roby" 
+                       class="w-[70%] h-[70%] md:w-[60%] md:h-[60%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
+                       :class="{'animate-bounce': !isClicked}"
+                       @mouseenter="isHovered = true" 
+                       @mouseleave="isHovered = false"
+                       @click="handleRobotClick" />
+
+                  <!-- Info Bubble -->
+                  <div v-show="isHovered || isClicked" 
+                       class="absolute bottom-full mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-xl md:text-2xl px-2 py-1 md:px-4 md:py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]"
+                       :class="[
+                         // Desktop: always centered
+                         'md:left-1/2 md:-translate-x-1/2 md:right-auto',
+                         // Mobile: align left if on left edge, right if on right edge, otherwise center
+                         (i - 1) % 8 < 3 ? 'max-md:left-0 max-md:translate-x-0' : '',
+                         (i - 1) % 8 > 4 ? 'max-md:right-0 max-md:translate-x-0' : '',
+                         (i - 1) % 8 >= 3 && (i - 1) % 8 <= 4 ? 'max-md:left-1/2 max-md:-translate-x-1/2' : ''
+                       ]">
                     Tu m'as trouvé !
                   </div>
                 </div>
