@@ -24,45 +24,69 @@
         <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
-          <div class="flex flex-col justify-center h-full shrink">
-            <h1 class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
-              Collecte {{ company?.name || 'HEIG-VD' }}
-            </h1>
-            <p class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-[#0073e6] mb-4 md:mb-8 leading-none tracking-wide">
-              {{ formattedDate }}
-            </p>
-            <div class="flex items-center gap-3 mb-6 md:mb-10">
-              <img src="/images/locationBlack.svg" alt="Location" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
-              <span class="font-['Inter'] text-sm md:text-base text-black font-medium leading-tight">
-                {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
-              </span>
+          <div class="flex flex-col w-full h-full">
+            <!-- Mobile Layout: Two columns -->
+            <div class="flex md:hidden flex-row justify-between items-start gap-2 mb-6">
+              <!-- Left Col: Title & Date -->
+              <div class="flex flex-col w-1/2 pr-2">
+                <h1 class="font-['Jersey_20'] text-[24px] sm:text-[32px] text-black leading-none mb-1 tracking-wide">
+                  Collecte<br> {{ company?.name || 'HEIG-VD' }}
+                </h1>
+                <p class="font-['Jersey_20'] text-[24px] sm:text-[32px] text-[#0073e6] leading-none tracking-wide">
+                  {{ formattedDate }}
+                </p>
+              </div>
+              <!-- Right Col: Location & Button -->
+              <div class="flex flex-col w-1/2 items-end text-right">
+                <div class="flex items-center justify-end gap-1 mb-2">
+                  <img src="/images/locationBlack.svg" alt="Location" class="w-4 h-4 object-contain" onerror="this.style.display='none'" />
+                  <span class="font-['Inter'] text-[12px] text-black font-medium leading-tight">
+                    {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
+                  </span>
+                </div>
+                <a :href="quizzUrl" class="bg-[#0073e6] text-white px-3 py-2 font-['Inter'] text-[12px] font-bold border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+                  Je souhaite donner
+                </a>
+              </div>
             </div>
-            <div class="flex mt-auto">
-              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-4 md:px-6 py-2 md:py-3 font-['Inter'] text-xs sm:text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
-                Je souhaite donner
-              </a>
-            </div>
-          </div>
 
-          <!-- Roby Mascot -->
-          <a :href="quizzUrl" class="relative flex items-center justify-center shrink-0 h-full group hover:scale-105 transition-transform origin-bottom mt-16 md:mt-0 pr-[120px] md:pr-0">
-            <img src="/images/dono_smiling.png" alt="Roby" class="h-28 sm:h-32 md:h-64 object-contain" />
-
-            <!-- Speech Bubble -->
-            <div class="absolute bottom-auto top-1/4 left-[45%] md:left-[90%] ml-0 md:ml-6 bg-[#1a81e7] text-white p-2 md:p-4 border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[150px] md:max-w-[280px] z-50">
-              <p class="font-['Jersey_20'] tracking-wide text-[14px] md:text-xl leading-tight text-left">
-                Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
+            <!-- Desktop Layout: Single column -->
+            <div class="hidden md:flex flex-col justify-center h-full">
+              <h1 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
+                Collecte {{ company?.name || 'HEIG-VD' }}
+              </h1>
+              <p class="font-['Jersey_20'] text-[40px] md:text-[56px] text-[#0073e6] mb-8 leading-none tracking-wide">
+                {{ formattedDate }}
               </p>
-
-              <!-- Arrow pointing left (Desktop) -->
-              <div class="hidden md:block absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
-              <div class="hidden md:block absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
-              
-              <!-- Arrow pointing left (Mobile) -->
-              <div class="md:hidden absolute top-4 -left-[10px] w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-black"></div>
-              <div class="md:hidden absolute top-[16px] -left-[7px] w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-[#1a81e7] z-10"></div>
+              <div class="flex items-center gap-3 mb-10">
+                <img src="/images/locationBlack.svg" alt="Location" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
+                <span class="font-['Inter'] text-base text-black font-medium leading-tight">
+                  {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
+                </span>
+              </div>
+              <div class="flex mt-auto">
+                <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-3 font-['Inter'] text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+                  Je souhaite donner
+                </a>
+              </div>
             </div>
-          </a>
+
+            <!-- Roby Mascot & Bubble -->
+            <a :href="quizzUrl" class="flex flex-row md:absolute md:right-[-60px] md:top-1/2 md:-translate-y-1/2 items-center justify-start md:justify-center w-full md:w-auto h-auto group hover:scale-105 transition-transform origin-bottom mt-2 md:mt-0">
+              <img src="/images/dono_smiling.png" alt="Roby" class="w-20 sm:w-24 md:w-48 lg:w-64 h-auto object-contain shrink-0" />
+
+              <!-- Speech Bubble -->
+              <div class="relative ml-4 md:absolute md:bottom-auto md:top-1/4 md:left-[90%] md:ml-6 bg-[#1a81e7] text-white p-2 md:p-4 border-[2px] md:border-[3px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-[200px] md:w-max md:max-w-[280px] z-50">
+                <p class="font-['Jersey_20'] tracking-wide text-[14px] md:text-xl leading-tight text-left break-words">
+                  Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
+                </p>
+
+                <!-- Arrow pointing left -->
+                <div class="absolute top-4 md:top-6 -left-[10px] md:-left-[15px] w-0 h-0 border-y-[8px] md:border-y-[12px] border-y-transparent border-r-[10px] md:border-r-[15px] border-r-black"></div>
+                <div class="absolute top-[16px] md:top-[27px] -left-[7px] md:-left-[10px] w-0 h-0 border-y-[6px] md:border-y-[9px] border-y-transparent border-r-[8px] md:border-r-[12px] border-r-[#1a81e7] z-10"></div>
+              </div>
+            </a>
+          </div>
 
         </div>
       </div>
@@ -97,7 +121,7 @@
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
                     <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
                   </svg>
-                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
+                  <div class="absolute bottom-full right-[-20px] md:right-auto md:left-1/2 md:-translate-x-1/2 mb-2 w-[250px] bg-white border-2 border-black p-3 text-sm text-black font-['Inter'] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                     Chiffres renseignés sur la base du nombre d’employés de la société.
                   </div>
                 </div>
@@ -121,7 +145,7 @@
                <template v-for="i in 150" :key="i">
                  <a :href="quizzUrl" v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
-                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
                      Viens faire le quiz !
                    </div>
                  </a>
@@ -148,7 +172,14 @@
                <template v-for="i in 32" :key="'mobile-'+i">
                  <a :href="quizzUrl" v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClickMobile($event)">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
-                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                   <div v-show="isHovered || isClicked" 
+                        class="absolute bottom-full mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-xl md:text-2xl px-2 py-1 md:px-4 md:py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]"
+                        :class="[
+                          // Mobile: align left if on left edge, right if on right edge, otherwise center
+                          (i - 1) % 8 < 3 ? 'max-md:left-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 > 4 ? 'max-md:right-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 >= 3 && (i - 1) % 8 <= 4 ? 'max-md:left-1/2 max-md:-translate-x-1/2' : ''
+                        ]">
                      Viens faire le quiz !
                    </div>
                  </a>
@@ -415,6 +446,10 @@ const handleRobotHover = (state) => {
 
 const handleRobotClick = () => {
   isClicked.value = true;
+  if (robyInterval) {
+    clearInterval(robyInterval);
+    robyInterval = null;
+  }
   if (clickTimeout) clearTimeout(clickTimeout);
   clickTimeout = setTimeout(() => {
     isClicked.value = false;
@@ -426,6 +461,10 @@ const handleRobotClickMobile = (e) => {
     if (!isClicked.value) {
       e.preventDefault();
       isClicked.value = true;
+      if (robyInterval) {
+        clearInterval(robyInterval);
+        robyInterval = null;
+      }
     }
   } else {
     handleRobotClick();

@@ -155,7 +155,7 @@
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
             <a href="/contact" class="hover:text-[#0073e6] transition-colors group block w-full">
-              <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight leading-snug">01 —<br class="block md:hidden"> Prendre contact<br class="block md:hidden"> avec le CTS</h3>
+              <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight leading-snug text-center md:text-left w-full">01<span class="hidden md:inline"> —</span><br class="block md:hidden"> Prendre contact<br class="block md:hidden"> avec le CTS</h3>
             </a>
           </div>
           <div class="p-4 md:p-6 flex-1">
@@ -166,7 +166,7 @@
         <!-- Etape 2 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug">02 —<br class="block md:hidden"> Organiser<br class="block md:hidden"> une collecte</h3>
+            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug text-center md:text-left w-full">02<span class="hidden md:inline"> —</span><br class="block md:hidden"> Organiser<br class="block md:hidden"> une collecte</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
@@ -176,7 +176,7 @@
         <!-- Etape 3 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug">03 —<br class="block md:hidden"> Mobiliser ses<br class="block md:hidden"> collaborateurs</h3>
+            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug text-center md:text-left w-full">03<span class="hidden md:inline"> —</span><br class="block md:hidden"> Mobiliser ses<br class="block md:hidden"> collaborateurs</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
@@ -186,7 +186,7 @@
         <!-- Etape 4 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[60px] lg:min-h-[120px] flex items-center w-full">
-            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug">04 —<br class="block md:hidden"> Recevoir<br class="block md:hidden"> le label</h3>
+            <h3 class="font-['Inter'] font-bold text-[14px] sm:text-[16px] md:text-[24px] text-black tracking-tight leading-snug text-center md:text-left w-full">04<span class="hidden md:inline"> —</span><br class="block md:hidden"> Recevoir<br class="block md:hidden"> le label</h3>
           </div>
           <div class="p-4 md:p-6 flex-1">
             <p class="font-['Inter'] text-black text-[12px] md:text-base leading-tight md:leading-normal">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
