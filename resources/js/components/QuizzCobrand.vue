@@ -145,8 +145,8 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 min-h-[25vh] max-h-[30vh] md:min-h-0 md:max-h-[75vh]">
-          <img :src="currentImageSrc" class="object-contain absolute inset-0 m-auto h-full" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]'" />
+        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 min-h-[25vh] md:min-h-0">
+          <img :src="currentImageSrc" class="object-contain relative" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]'" />
         </div>
       </div>
     </div>
