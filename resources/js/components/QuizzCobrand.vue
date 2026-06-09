@@ -91,7 +91,7 @@
 
         <div class="w-full md:w-1/2 flex justify-end flex-col items-center relative z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[35vh] md:min-h-0 md:max-h-[75vh]">
           <transition name="fade">
-            <img :key="currentImageSrc" :src="currentImageSrc" class="relative object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
+            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute bottom-0 left-0 right-0 mx-auto object-contain md:inset-0 md:m-auto" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
           </transition>
         </div>
       </div>
@@ -447,7 +447,7 @@ const answerQuestion = (answer) => {
       isAnimating.value = false;
       currentState.value = 'ineligible';
       flightClass.value = '';
-    }, 1800);
+    }, 300);
   } else {
     if (currentQuestionIndex.value === 0 && answer === 'Non') {
       flightClass.value = 'fly-up-animation';
@@ -538,7 +538,7 @@ const handleOnedocClick = async () => {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
