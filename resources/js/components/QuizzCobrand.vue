@@ -447,7 +447,7 @@ const answerQuestion = (answer) => {
       isAnimating.value = false;
       currentState.value = 'ineligible';
       flightClass.value = '';
-    }, 300);
+    }, 1800);
   } else {
     if (currentQuestionIndex.value === 0 && answer === 'Non') {
       flightClass.value = 'fly-up-animation';
@@ -538,7 +538,7 @@ const handleOnedocClick = async () => {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.6s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
