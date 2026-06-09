@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // DB::table('users')->truncate();
 
         DB::table('users')->insert([
-            'email'      => 'admin@hug.ch',
+            'email'      => 'admin@example.ch',
             'password'   => Hash::make('password'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -210,7 +210,7 @@ class DatabaseSeeder extends Seeder
 
                     // Forcer la cohérence si la date est dans le futur
                     $isFutureOrCurrent = $date->isAfter($now) || $date->isSameDay($now);
-                    $registered = $isFutureOrCurrent ? rand(10, $col['capacity']) : $col['registered'];
+                    $registered = $isFutureOrCurrent ? null : $col['registered'];
                     $pouches = $isFutureOrCurrent ? null : $col['pouches'];
 
                     DB::table('collections')->insert([
@@ -239,7 +239,7 @@ class DatabaseSeeder extends Seeder
 
                 $isFutureOrCurrent = $forcedDate->isAfter($now) || $forcedDate->isSameDay($now);
                 $capacity = rand(150, 400);
-                $registered = rand(50, $capacity);
+                $registered = $isFutureOrCurrent ? null : rand(50, $capacity);
 
                 DB::table('collections')->insert([
                     'company_id'     => $companyId,
@@ -271,7 +271,7 @@ class DatabaseSeeder extends Seeder
 
                     $isFutureOrCurrent = $genDate->isAfter($now) || $genDate->isSameDay($now);
                     $capacity = rand(200, 500);
-                    $registered = rand(80, $capacity); // Ne peut jamais dépasser la capacité
+                    $registered = $isFutureOrCurrent ? null : rand(80, $capacity); // Ne peut jamais dépasser la capacité
                     $pouches = $isFutureOrCurrent ? null : rand(40, $registered); // Jamais supérieur aux inscrits, null si futur
 
                     DB::table('collections')->insert([
@@ -311,5 +311,22 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        // 5. COLLECTE FUTURE FIXE à HEIG-VD — données stables pour les tests
+        DB::table('collections')->insert([
+            'company_id'     => 2, // HEIG-VD
+            'day_start'      => Carbon::create(2026, 11, 12)->startOfDay(),
+            'day_end'        => Carbon::create(2026, 11, 12)->endOfDay(),
+            'hour_start'     => '08:00:00',
+            'hour_end'       => '17:00:00',
+            'location'       => 'Aula Campus Cheseaux',
+            'nb_employee'    => 1200,
+            'capacity'       => 500,
+            'nb_registered'  => null,
+            'nb_blood_pouch' => null,
+            'onedoc_link'    => $onedoc,
+            'created_at'     => $now,
+            'updated_at'     => $now,
+        ]);
     }
 }
