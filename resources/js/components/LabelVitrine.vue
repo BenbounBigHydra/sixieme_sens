@@ -138,7 +138,7 @@
             <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l'emploi</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-[13px] md:text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux), tout adapté à votre identité.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Pour l'organisation de votre collecte, vous recevez un kit complet de templates personnalisables : visuels pour LinkedIn et vos réseaux internes, affiches pour vos locaux, emails de mobilisation.</p>
           </div>
         </div>
       </div>
