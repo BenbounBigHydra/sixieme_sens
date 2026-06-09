@@ -89,7 +89,7 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-end flex-col items-center relative z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[35vh] md:min-h-0 md:max-h-[75vh]">
+        <div class="w-full md:w-1/2 flex justify-end flex-col items-center relative z-0 md:z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[35vh] md:min-h-0 md:max-h-[75vh]">
           <transition name="fade">
             <img :key="currentImageSrc" :src="currentImageSrc" class="absolute bottom-0 left-0 right-0 mx-auto object-contain md:inset-0 md:m-auto" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
           </transition>
@@ -124,7 +124,7 @@
 
             <p class="font-inter text-[#f87171] font-bold text-[11px] md:text-base leading-relaxed mb-2 md:mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
             <p class="font-inter text-inherit text-[11px] md:text-base leading-relaxed mb-3 md:mb-6 opacity-80">
-              Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
+              Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous.<span class="hidden md:inline"> Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.</span>
             </p>
 
             <div class="flex flex-row sm:flex-row gap-2 md:gap-4 w-full">
@@ -246,7 +246,7 @@ const questions = [
     correct: "Non",
     info: "Un nouveau partenaire ou des partenaires multiples augmentent le risque d'infections transmissibles par le sang.",
     yesText: "Ce critère vise à réduire le risque de transmission de certaines infections par le sang.",
-    noText: "La sécurité avant tout, c'est parfait !",
+    noText: "C'est noté, on continue !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "04_sex", prefix: "sex", hasYes: true, hasNo: true,
     imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
@@ -255,7 +255,7 @@ const questions = [
     correct: "Non",
     info: "Un poids minimum de 50 kg est requis pour bien tolérer le volume de sang prélevé.",
     yesText: "Le prélèvement d'une poche de sang représente un certain volume. Pour que tu le tolères bien, sans fatigue excessive, un poids minimum de 50 kg est demandé pour te protéger.",
-    noText: "Tu as le gabarit pour donner !",
+    noText: "Tu es sur la bonne planète pour donner !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "05_weight", prefix: "weight", hasYes: true, hasNo: true,
     imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
