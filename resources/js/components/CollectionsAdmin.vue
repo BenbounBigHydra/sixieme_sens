@@ -49,26 +49,36 @@
             </div>
 
             <!-- Collections Table -->
-            <div class="w-full mt-4">
-                <div class="border border-blue-200 rounded-t-sm overflow-hidden">
+            <div class="w-full mt-4 overflow-x-auto pb-4">
+                <div class="border border-blue-200 rounded-t-sm overflow-hidden min-w-[1300px]">
                     <!-- Table Header -->
                     <div
-                        class="hidden md:grid grid-cols-3 items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
+                        class="hidden md:grid grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
                         <!-- Entreprise -->
                         <div class="flex items-center cursor-pointer group" @click="sortBy('companyName')">
                             <span class="font-inter text-sm text-[#393939] mr-2">Entreprise</span>
-                            <img src="/images/BlueChevron Down.svg" alt="Sort" class="h-4 w-4 transition-transform"
+                            <img src="/images/BlueChevron%20Down.svg" alt="Sort" class="h-4 w-4 transition-transform"
                                 :class="{ 'rotate-180': sortOrder === 'asc' }" />
                         </div>
 
-                        <!-- Statut -->
-                        <div class="flex items-center">
-                            <span class="font-inter text-sm text-[#393939] mx-auto">Statut</span>
+                        <!-- Nouvelles colonnes -->
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Date</span></div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Total
+                                employés</span></div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Capacité</span>
+                        </div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Inscrits</span>
+                        </div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Poches</span>
+                        </div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">One-Doc</span>
+                        </div>
+                        <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">Co-Brand</span>
                         </div>
 
-                        <!-- Détails -->
-                        <div class="flex items-center justify-end">
-                            <span class="font-inter text-sm text-[#393939]">Détails</span>
+                        <!-- Statut -->
+                        <div class="flex items-center justify-center">
+                            <span class="font-inter text-sm text-[#393939] mx-auto">Statut</span>
                         </div>
                     </div>
 
@@ -76,7 +86,7 @@
                     <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="filteredAndSortedCollections.length > 0">
                             <div v-for="collection in filteredAndSortedCollections" :key="collection.id"
-                                class="flex flex-col md:grid md:grid-cols-3 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+                                class="flex flex-col md:grid md:grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                                 <!-- Entreprise -->
                                 <div class="flex items-center space-x-3 w-full">
                                     <div class="h-8 w-16 flex items-center justify-start shrink-0">
@@ -87,8 +97,37 @@
                                         collection.company?.name || 'Inconnu' }}</span>
                                 </div>
 
+                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
+                                    formatDate(collection.day_start) }}</span></div>
+                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
+                                    collection.nb_employee || '-' }}</span></div>
+                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
+                                    collection.capacity || '-' }}</span></div>
+                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
+                                    collection.nb_registered ?? '-' }}</span></div>
+                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
+                                    collection.nb_blood_pouch ?? '-' }}</span></div>
+
+                                <!-- One Doc Link -->
+                                <div class="flex items-center">
+                                    <a v-if="collection.onedoc_link" :href="collection.onedoc_link" target="_blank"
+                                        class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien
+                                        One-Doc</a>
+                                    <span v-else class="text-gray-400 font-inter text-sm">-</span>
+                                </div>
+
+                                <!-- Co-Brand Link -->
+                                <div class="flex items-center">
+                                    <a v-if="collection.statusKey !== 'past' && collection.company?.slug"
+                                        :href="'/collection/' + collection.company.slug + '/' + collection.id"
+                                        target="_blank"
+                                        class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien
+                                        Co-Brand</a>
+                                    <span v-else class="text-gray-400 font-inter text-sm italic">Désactivé</span>
+                                </div>
+
                                 <!-- Statut -->
-                                <div class="flex items-center justify-start md:justify-center w-full">
+                                <div class="flex items-center justify-start md:justify-center w-full mt-2 md:mt-0">
                                     <div class="px-6 py-1.5 rounded-sm text-white font-inter text-sm text-center min-w-[120px]"
                                         :class="getStatusColor(collection.statusKey)">
                                         {{ getStatusLabel(collection.statusKey) }}
@@ -97,7 +136,12 @@
 
                                 <!-- Détails -->
                                 <div
-                                    class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
+                                    class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0 gap-2">
+                                    <button v-if="collection.statusKey === 'to_close'"
+                                        @click="openClotureModal(collection)"
+                                        class="bg-[#5C629E] text-white p-2 md:p-1.5 rounded-sm hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
+                                        <span class="text-sm font-inter">Clore</span>
+                                    </button>
                                     <button @click="openEditModal(collection)"
                                         class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                                         <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
@@ -144,172 +188,250 @@
                         class="pb-2 px-4 font-inter text-lg">Supprimer</button>
                 </div>
 
-                <div class="overflow-y-auto overflow-x-hidden flex-grow px-1">
-                    <!-- Tab Content: Modifier ou Créer -->
-                    <div v-if="activeTab === 'modifier' || activeTab === 'creer'" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                            <div v-if="activeTab === 'creer'" class="col-span-1 md:col-span-2">
-                                <label class="block font-inter text-base mb-2">Entreprise</label>
-                                <div class="relative">
-                                    <select v-model="detailForm.company_id"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent">
-                                        <option disabled value="">Sélectionnez une entreprise</option>
-                                        <option v-for="company in companies" :key="company.id" :value="company.id">
-                                            {{ company.name }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id[0] }}
-                                </p>
+                <!-- Détails -->
+                <div class="flex items-center justify-end">
+                    <span class="font-inter text-sm text-[#393939]">Détails</span>
+                </div>
+            </div>
+
+            <!-- Table Body -->
+            <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+                <template v-if="filteredAndSortedCollections.length > 0">
+                    <div v-for="collection in filteredAndSortedCollections" :key="collection.id"
+                        class="flex flex-col md:grid md:grid-cols-3 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+                        <!-- Entreprise -->
+                        <div class="flex items-center space-x-3 w-full">
+                            <div class="h-8 w-16 flex items-center justify-start shrink-0">
+                                <img :src="collection.company?.logo ? '/' + collection.company.logo : '/images/BCGE.png'"
+                                    alt="Logo" class="max-h-full max-w-full object-contain" />
                             </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Nombre d'employés</label>
-                                <div class="relative">
-                                    <input type="number" v-model="detailForm.nb_employee" placeholder="Ex: 5000"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.nb_employee" class="text-red-500 text-xs mt-1">{{ errors.nb_employee[0]
-                                    }}</p>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Capacité de la collecte</label>
-                                <div class="relative">
-                                    <input type="number" v-model="detailForm.capacity" placeholder="Ex: 500"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.capacity" class="text-red-500 text-xs mt-1">{{ errors.capacity[0] }}</p>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Date de la collecte (Début)</label>
-                                <div class="relative">
-                                    <input type="date" v-model="detailForm.day_start"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.day_start" class="text-red-500 text-xs mt-1">{{ errors.day_start[0] }}
-                                </p>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Date de la collecte (Fin)</label>
-                                <div class="relative">
-                                    <input type="date" v-model="detailForm.day_end"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.day_end" class="text-red-500 text-xs mt-1">{{ errors.day_end[0] }}</p>
-                            </div>
-                            <div class="col-span-1 md:col-span-2">
-                                <label class="block font-inter text-base mb-2">Lieu</label>
-                                <div class="relative">
-                                    <input type="text" v-model="detailForm.location"
-                                        placeholder="Ex: Rue de l'entreprise 12"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.location" class="text-red-500 text-xs mt-1">{{ errors.location[0] }}</p>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Heure de début</label>
-                                <div class="relative">
-                                    <input type="time" step="1" v-model="detailForm.hour_start"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.hour_start" class="text-red-500 text-xs mt-1">{{ errors.hour_start[0] }}
-                                </p>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Heure de fin</label>
-                                <div class="relative">
-                                    <input type="time" step="1" v-model="detailForm.hour_end"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                                <p v-if="errors.hour_end" class="text-red-500 text-xs mt-1">{{ errors.hour_end[0] }}</p>
+                            <span class="font-inter font-bold text-lg md:text-sm text-[#393939]">{{
+                                collection.company?.name || 'Inconnu' }}</span>
+                        </div>
+
+                        <!-- Statut -->
+                        <div class="flex items-center justify-start md:justify-center w-full">
+                            <div class="px-6 py-1.5 rounded-sm text-white font-inter text-sm text-center min-w-[120px]"
+                                :class="getStatusColor(collection.statusKey)">
+                                {{ getStatusLabel(collection.statusKey) }}
                             </div>
                         </div>
 
-                        <div class="flex flex-col md:flex-row items-stretch md:items-end gap-4 md:gap-6 mb-8">
-                            <div
-                                class="bg-[#f2faf2] px-6 py-3 flex justify-center items-center space-x-3 w-full md:w-[160px] h-[46px]">
-                                <span class="text-[#3b803b] font-inter font-medium">One-doc</span>
-                                <img src="/images/Edit.svg" alt="Edit" class="h-4" />
-                            </div>
-                            <div class="flex-grow relative h-[46px]">
-                                <input type="url" v-model="detailForm.onedoc_link" placeholder="Lien OneDoc"
-                                    class="w-full h-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                <p v-if="errors.onedoc_link" class="text-red-500 text-xs mt-1">{{ errors.onedoc_link[0]
-                                    }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row justify-end gap-4 md:space-x-4 pt-4">
-                            <button @click="closeModal"
-                                class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-8 py-3 font-inter font-medium hover:bg-gray-50 transition-colors w-full md:w-auto">Annuler</button>
-                            <button @click="activeTab === 'creer' ? submitCreation() : submitDetail()"
-                                class="bg-[#0073e6] text-white px-8 py-3 font-inter font-medium hover:bg-blue-600 transition-colors flex items-center justify-center w-full md:w-auto">
-                                <span v-if="isSaving" class="mr-2">...</span>
-                                {{ activeTab === 'creer' ? 'Créer' : 'Enregistrer' }}
+                        <!-- Détails -->
+                        <div
+                            class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
+                            <button @click="openEditModal(collection)"
+                                class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
+                                <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
+                                <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                             </button>
                         </div>
                     </div>
-
-                    <!-- Tab Content: Clôturer -->
-                    <div v-if="activeTab === 'cloturer'" class="space-y-6">
-                        <div class="space-y-6 mb-8">
-                            <div>
-                                <label class="block font-inter text-base mb-2">Nombre d'inscrits</label>
-                                <div class="relative">
-                                    <input type="number" v-model="clotureForm.nb_registered" placeholder="Ex: 50"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block font-inter text-base mb-2">Nombre de poches collectées</label>
-                                <div class="relative">
-                                    <input type="number" v-model="clotureForm.nb_blood_pouch" placeholder="Ex: 45"
-                                        class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row gap-4 md:space-x-4 pt-4">
-                            <button @click="closeModal"
-                                class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-6 py-2.5 font-inter font-medium w-full md:w-32 hover:bg-gray-50">Annuler</button>
-                            <button @click="submitCloture"
-                                class="bg-[#5bb124] text-white px-6 py-2.5 flex items-center justify-center font-inter font-medium w-full md:w-32 hover:bg-green-600">
-                                <span v-if="isSaving" class="mr-2">...</span>
-                                <img v-else src="/images/whiteCheck.svg" alt="Check" class="h-5 mr-2" /> Clore
-                            </button>
-                        </div>
+                </template>
+                <template v-else>
+                    <div class="py-10 text-center text-gray-500 font-inter">
+                        Aucune collecte trouvée.
                     </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!-- </main> -->
 
-                    <!-- Tab Content: Supprimer -->
-                    <div v-if="activeTab === 'supprimer'" class="space-y-6">
-                        <h2 class="font-['Jersey_20'] text-5xl text-[#E4534B] leading-none mb-6 tracking-wide">Attention
-                        </h2>
-                        <p class="font-inter text-lg text-black mb-8 leading-relaxed">
-                            Vous êtes sur le point de supprimer la collecte de {{ selectedCollecte?.company?.name ||
-                            'Inconnu'
-                            }} du {{ formatDate(selectedCollecte?.day_start) }}.<br />
-                            Êtes-vous sûr de vouloir procéder ?
-                        </p>
+    <!-- Options Modal -->
+    <div v-if="activeModal === 'options'" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+        @click.self="closeModal">
+        <div
+            :class="['bg-[#fffbf1] border-[10px] w-full max-w-[750px] p-8 relative flex flex-col max-h-[90vh]', getModalBorderClass]">
+            <button @click="closeModal"
+                class="absolute top-6 right-6 flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
+                <img src="/images/X.svg" alt="Close" class="w-10 h-10" />
+            </button>
+            <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte ?
+                (selectedCollecte.company?.name || 'Inconnu') : 'Nouvelle collecte' }}</h2>
+            <p class="font-['Jersey_20'] text-2xl text-black mb-6 tracking-wide" v-if="selectedCollecte">Collecte du
+                {{
+                    formatDate(selectedCollecte?.day_start) }}</p>
 
-                        <div class="mb-10">
-                            <label class="block font-inter text-lg mb-2">Inscrire "supprimer" pour procéder</label>
+            <!-- Tabs -->
+            <div class="flex space-x-4 border-b border-gray-300 mb-6 shrink-0" v-if="selectedCollecte">
+                <button @click="activeTab = 'modifier'"
+                    :class="{ 'border-b-2 border-[#0073e6] text-[#0073e6] font-bold': activeTab === 'modifier', 'text-gray-500': activeTab !== 'modifier' }"
+                    class="pb-2 px-4 font-inter text-lg">Modifier</button>
+                <button @click="activeTab = 'cloturer'"
+                    :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer' }"
+                    class="pb-2 px-4 font-inter text-lg">Clôturer</button>
+                <button @click="activeTab = 'supprimer'"
+                    :class="{ 'border-b-2 border-[#E4534B] text-[#E4534B] font-bold': activeTab === 'supprimer', 'text-gray-500': activeTab !== 'supprimer' }"
+                    class="pb-2 px-4 font-inter text-lg">Supprimer</button>
+            </div>
+
+            <div class="overflow-y-auto overflow-x-hidden flex-grow px-1">
+                <!-- Tab Content: Modifier ou Créer -->
+                <div v-if="activeTab === 'modifier' || activeTab === 'creer'" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                        <div v-if="activeTab === 'creer'" class="col-span-1 md:col-span-2">
+                            <label class="block font-inter text-base mb-2">Entreprise</label>
                             <div class="relative">
-                                <input type="text" v-model="suppressionInput" placeholder="supprimer"
+                                <select v-model="detailForm.company_id"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent">
+                                    <option disabled value="">Sélectionnez une entreprise</option>
+                                    <option v-for="company in companies" :key="company.id" :value="company.id">
+                                        {{ company.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id[0] }}
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Nombre d'employés</label>
+                            <div class="relative">
+                                <input type="number" v-model="detailForm.nb_employee" placeholder="Ex: 5000"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.nb_employee" class="text-red-500 text-xs mt-1">{{ errors.nb_employee[0]
+                            }}</p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Capacité de la collecte</label>
+                            <div class="relative">
+                                <input type="number" v-model="detailForm.capacity" placeholder="Ex: 500"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.capacity" class="text-red-500 text-xs mt-1">{{ errors.capacity[0] }}</p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Date de la collecte (Début)</label>
+                            <div class="relative">
+                                <input type="date" v-model="detailForm.day_start"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.day_start" class="text-red-500 text-xs mt-1">{{ errors.day_start[0] }}
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Date de la collecte (Fin)</label>
+                            <div class="relative">
+                                <input type="date" v-model="detailForm.day_end"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.day_end" class="text-red-500 text-xs mt-1">{{ errors.day_end[0] }}</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block font-inter text-base mb-2">Lieu</label>
+                            <div class="relative">
+                                <input type="text" v-model="detailForm.location"
+                                    placeholder="Ex: Rue de l'entreprise 12"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.location" class="text-red-500 text-xs mt-1">{{ errors.location[0] }}</p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Heure de début</label>
+                            <div class="relative">
+                                <input type="time" step="1" v-model="detailForm.hour_start"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.hour_start" class="text-red-500 text-xs mt-1">{{ errors.hour_start[0] }}
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Heure de fin</label>
+                            <div class="relative">
+                                <input type="time" step="1" v-model="detailForm.hour_end"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
+                            <p v-if="errors.hour_end" class="text-red-500 text-xs mt-1">{{ errors.hour_end[0] }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-stretch md:items-end gap-4 md:gap-6 mb-8">
+                        <div
+                            class="bg-[#f2faf2] px-6 py-3 flex justify-center items-center space-x-3 w-full md:w-[160px] h-[46px]">
+                            <span class="text-[#3b803b] font-inter font-medium">One-doc</span>
+                            <img src="/images/Edit.svg" alt="Edit" class="h-4" />
+                        </div>
+                        <div class="flex-grow relative h-[46px]">
+                            <input type="url" v-model="detailForm.onedoc_link" placeholder="Lien OneDoc"
+                                class="w-full h-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            <p v-if="errors.onedoc_link" class="text-red-500 text-xs mt-1">{{ errors.onedoc_link[0]
+                            }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-end gap-4 md:space-x-4 pt-4">
+                        <button @click="closeModal"
+                            class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-8 py-3 font-inter font-medium hover:bg-gray-50 transition-colors w-full md:w-auto">Annuler</button>
+                        <button @click="activeTab === 'creer' ? submitCreation() : submitDetail()"
+                            class="bg-[#0073e6] text-white px-8 py-3 font-inter font-medium hover:bg-blue-600 transition-colors flex items-center justify-center w-full md:w-auto">
+                            <span v-if="isSaving" class="mr-2">...</span>
+                            {{ activeTab === 'creer' ? 'Créer' : 'Enregistrer' }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Clôturer -->
+                <div v-if="activeTab === 'cloturer'" class="space-y-6">
+                    <div class="space-y-6 mb-8">
+                        <div>
+                            <label class="block font-inter text-base mb-2">Nombre d'inscrits</label>
+                            <div class="relative">
+                                <input type="number" v-model="clotureForm.nb_registered" placeholder="Ex: 50"
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
                         </div>
-
-                        <div class="flex justify-end mt-4">
-                            <button @click="submitSuppression"
-                                class="bg-[#E4534B] text-white px-8 py-3 font-inter text-lg font-medium hover:bg-red-600 transition-colors flex items-center">
-                                <span v-if="isSaving" class="mr-2">...</span>
-                                Supprimer
-                            </button>
+                        <div>
+                            <label class="block font-inter text-base mb-2">Nombre de poches collectées</label>
+                            <div class="relative">
+                                <input type="number" v-model="clotureForm.nb_blood_pouch" placeholder="Ex: 45"
+                                    class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4 md:space-x-4 pt-4">
+                        <button @click="closeModal"
+                            class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-6 py-2.5 font-inter font-medium w-full md:w-32 hover:bg-gray-50">Annuler</button>
+                        <button @click="submitCloture"
+                            class="bg-[#5bb124] text-white px-6 py-2.5 flex items-center justify-center font-inter font-medium w-full md:w-32 hover:bg-green-600">
+                            <span v-if="isSaving" class="mr-2">...</span>
+                            <img v-else src="/images/whiteCheck.svg" alt="Check" class="h-5 mr-2" /> Clore
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Supprimer -->
+                <div v-if="activeTab === 'supprimer'" class="space-y-6">
+                    <h2 class="font-['Jersey_20'] text-5xl text-[#E4534B] leading-none mb-6 tracking-wide">Attention
+                    </h2>
+                    <p class="font-inter text-lg text-black mb-8 leading-relaxed">
+                        Vous êtes sur le point de supprimer la collecte de {{ selectedCollecte?.company?.name ||
+                            'Inconnu'
+                        }} du {{ formatDate(selectedCollecte?.day_start) }}.<br />
+                        Êtes-vous sûr de vouloir procéder ?
+                    </p>
+
+                    <div class="mb-10">
+                        <label class="block font-inter text-lg mb-2">Inscrire "supprimer" pour procéder</label>
+                        <div class="relative">
+                            <input type="text" v-model="suppressionInput" placeholder="supprimer"
+                                class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-4">
+                        <button @click="submitSuppression"
+                            class="bg-[#E4534B] text-white px-8 py-3 font-inter text-lg font-medium hover:bg-red-600 transition-colors flex items-center">
+                            <span v-if="isSaving" class="mr-2">...</span>
+                            Supprimer
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -330,6 +452,7 @@ export default {
         return {
             searchQuery: '',
             activeFilter: null, // null means show all
+            sortKey: 'statusPriority',
             sortOrder: 'asc',
             allCollections: [],
             activeModal: null,
@@ -404,14 +527,22 @@ export default {
                 result = result.filter(c => c.company?.name && c.company.name.toLowerCase().includes(query));
             }
 
-            // Sort by company name
+            // Sort by company name or status
             result = result.sort((a, b) => {
-                let valA = (a.company?.name || '').toLowerCase();
-                let valB = (b.company?.name || '').toLowerCase();
+                if (this.sortKey === 'companyName') {
+                    let valA = (a.company?.name || '').toLowerCase();
+                    let valB = (b.company?.name || '').toLowerCase();
 
-                if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
-                if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
-                return 0;
+                    if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+                    if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+                    return 0;
+                } else {
+                    // Default: statusPriority
+                    const statusOrder = { 'to_close': 1, 'ongoing': 2, 'to_come': 3, 'past': 4 };
+                    let sA = statusOrder[a.statusKey] || 99;
+                    let sB = statusOrder[b.statusKey] || 99;
+                    return sA - sB;
+                }
             });
 
             return result;
@@ -433,7 +564,12 @@ export default {
         },
         sortBy(key) {
             if (key === 'companyName') {
-                this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+                if (this.sortKey === 'companyName') {
+                    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+                } else {
+                    this.sortKey = 'companyName';
+                    this.sortOrder = 'asc';
+                }
             }
         },
         getStatusLabel(key) {
@@ -491,6 +627,10 @@ export default {
 
             this.suppressionInput = '';
         },
+        openClotureModal(collection) {
+            this.openEditModal(collection);
+            this.activeTab = 'cloturer';
+        },
         closeModal() {
             this.activeModal = null;
             this.selectedCollecte = null;
@@ -500,118 +640,148 @@ export default {
             const d = new Date(dateStr);
             return d.toLocaleDateString('fr-CH');
         },
-        getCsrfHeaders() {
-            const getCookie = (name) => {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-                return null;
-            };
-
-            const headers = {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            };
-
-            const csrfToken = getCookie('XSRF-TOKEN');
-            if (csrfToken) {
-                headers['X-XSRF-TOKEN'] = csrfToken;
-            }
-            return headers;
-        },
-        async submitCreation() {
-            if (this.isSaving) return;
-            this.isSaving = true;
-            this.errors = {};
-            try {
-                const response = await fetch(`/api/collection`, {
-                    method: 'POST',
-                    headers: this.getCsrfHeaders(),
-                    body: JSON.stringify(this.detailForm)
-                });
-
-                if (!response.ok) {
-                    const data = await response.json();
-                    if (response.status === 422) {
-                        this.errors = data.errors || {};
-                        return;
-                    }
-                    throw new Error("API Error");
+        data() {
+            return {
+                searchQuery: '',
+                activeFilter: null, // null means show all
+                sortOrder: 'asc',
+                allCollections: [],
+                activeModal: null,
+                activeTab: 'modifier',
+                selectedCollecte: null,
+                isSaving: false,
+                suppressionInput: '',
+                companies: [],
+                errors: {},
+                clotureForm: {
+                    nb_registered: '',
+                    nb_blood_pouch: ''
+                },
+                detailForm: {
+                    company_id: '',
+                    nb_employee: '',
+                    capacity: '',
+                    day_start: '',
+                    day_end: '',
+                    onedoc_link: '',
+                    location: '',
+                    hour_start: '',
+                    hour_end: ''
                 }
-                const url = new URL(window.location);
-                url.searchParams.delete('action');
-                window.location.replace(url);
-            } catch (err) {
-                console.error(err);
-                alert("Erreur lors de la création.");
-            } finally {
-                this.isSaving = false;
             }
         },
-        async submitDetail() {
-            if (this.isSaving) return;
-            this.isSaving = true;
-            this.errors = {};
-            try {
-                const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
-                    method: 'PUT',
-                    headers: this.getCsrfHeaders(),
-                    body: JSON.stringify(this.detailForm)
-                });
+            getCsrfHeaders() {
+                const getCookie = (name) => {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+                    return null;
+                };
 
-                if (!response.ok) {
-                    const data = await response.json();
-                    if (response.status === 422) {
-                        this.errors = data.errors || {};
-                        return;
-                    }
-                    throw new Error("API Error");
+                const headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                };
+
+                const csrfToken = getCookie('XSRF-TOKEN');
+                if (csrfToken) {
+                    headers['X-XSRF-TOKEN'] = csrfToken;
                 }
-                window.location.reload();
-            } catch (err) {
-                console.error(err);
-                alert("Erreur lors de l'enregistrement.");
-            } finally {
-                this.isSaving = false;
+                return headers;
+            },
+            async submitCreation() {
+                if (this.isSaving) return;
+                this.isSaving = true;
+                this.errors = {};
+                try {
+                    const response = await fetch(`/api/collection`, {
+                        method: 'POST',
+                        headers: this.getCsrfHeaders(),
+                        body: JSON.stringify(this.detailForm)
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        if (response.status === 422) {
+                            this.errors = data.errors || {};
+                            return;
+                        }
+                        throw new Error("API Error");
+                    }
+                    const url = new URL(window.location);
+                    url.searchParams.delete('action');
+                    window.location.replace(url);
+                } catch (err) {
+                    console.error(err);
+                    alert("Erreur lors de la création.");
+                } finally {
+                    this.isSaving = false;
+                }
+            },
+            async submitDetail() {
+                if (this.isSaving) return;
+                this.isSaving = true;
+                this.errors = {};
+                try {
+                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
+                        method: 'PUT',
+                        headers: this.getCsrfHeaders(),
+                        body: JSON.stringify(this.detailForm)
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        if (response.status === 422) {
+                            this.errors = data.errors || {};
+                            return;
+                        }
+                        throw new Error("API Error");
+                    }
+                    window.location.reload();
+                } catch (err) {
+                    console.error(err);
+                    alert("Erreur lors de l'enregistrement.");
+                } finally {
+                    this.isSaving = false;
+                }
+            },
+            async submitCloture() {
+                if (this.isSaving) return;
+                this.isSaving = true;
+                try {
+                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}/close`, {
+                        method: 'PATCH',
+                        headers: this.getCsrfHeaders(),
+                        body: JSON.stringify(this.clotureForm)
+                    });
+                    if (!response.ok) throw new Error("API Error");
+                    window.location.reload();
+                } catch (err) {
+                    console.error(err);
+                    // alert("Erreur lors de la clôture.");
+                } finally {
+                    this.isSaving = false;
+                }
+            },
+            async submitSuppression() {
+                if (this.suppressionInput.toLowerCase() !== 'supprimer') return;
+                if (this.isSaving) return;
+                this.isSaving = true;
+                try {
+                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
+                        method: 'DELETE',
+                        headers: this.getCsrfHeaders()
+                    });
+                    if (!response.ok) throw new Error("API Error");
+                    window.location.reload();
+                } catch (err) {
+                    console.error(err);
+                    alert("Erreur lors de la suppression.");
+                } finally {
+                    this.isSaving = false;
+                }
             }
-        },
-        async submitCloture() {
-            if (this.isSaving) return;
-            this.isSaving = true;
-            try {
-                const response = await fetch(`/api/collection/${this.selectedCollecte.id}/close`, {
-                    method: 'PATCH',
-                    headers: this.getCsrfHeaders(),
-                    body: JSON.stringify(this.clotureForm)
-                });
-                if (!response.ok) throw new Error("API Error");
-                window.location.reload();
-            } catch (err) {
-                console.error(err);
-                alert("Erreur lors de la clôture.");
-            } finally {
-                this.isSaving = false;
-            }
-        },
-        async submitSuppression() {
-            if (this.suppressionInput.toLowerCase() !== 'supprimer') return;
-            if (this.isSaving) return;
-            this.isSaving = true;
-            try {
-                const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
-                    method: 'DELETE',
-                    headers: this.getCsrfHeaders()
-                });
-                if (!response.ok) throw new Error("API Error");
-                window.location.reload();
-            } catch (err) {
-                console.error(err);
-                alert("Erreur lors de la suppression.");
-            } finally {
-                this.isSaving = false;
-            }
-        }
     }
 }
 </script>

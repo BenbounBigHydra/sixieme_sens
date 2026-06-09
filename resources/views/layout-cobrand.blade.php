@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Jersey+20&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/dono_smiling_square.png">
 </head>
 <body class="bg-[#fffbf1] text-hugDark font-inter">
     <!-- Conteneur principal de l'application Vue -->
@@ -23,7 +24,9 @@
         </main>
         
         <!-- Composant de pied de page -->
-        <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
+        @if (!isset($hideFooter) || !$hideFooter)
+            <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
+        @endif
     </div>
 </body>
 </html>

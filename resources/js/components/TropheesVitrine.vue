@@ -2,14 +2,14 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Part 1: Hero Section -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-12 pb-20">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 pt-12 pb-16">
       <div class="flex flex-col lg:flex-row justify-between items-center gap-2 lg:gap-20">
 
         <!-- Left Column -->
         <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1 mt-6 lg:mt-0">
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-8 origin-center lg:origin-left" />
 
-          <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
+          <h1 class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
             Trois trophées pour une<br class="hidden md:block" /> mission commune
           </h1>
 
@@ -54,7 +54,7 @@
         <!-- Or -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Or</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black">Trophée Or</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">
@@ -69,7 +69,7 @@
         <!-- Ambassadeur -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Ambassadeur</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black">Trophée Ambassadeur</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">
@@ -84,7 +84,7 @@
         <!-- Conviction -->
         <div class="bg-[#fffbf1] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
           <div class="bg-[#ffd012] p-4 border-b-[4px] border-black">
-            <h2 class="font-['Jersey_20'] font-normal text-[32px] text-black">Trophée Conviction</h2>
+            <h2 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black">Trophée Conviction</h2>
           </div>
           <div class="p-6 flex flex-row items-center gap-6 flex-1">
             <div class="w-24 shrink-0">
@@ -105,7 +105,7 @@
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left self-center md:self-start" />
 
         <div class="flex flex-col md:flex-row md:justify-between w-full items-center md:items-end">
-          <h2 class="font-['Jersey_20'] font-normal text-[48px] md:text-[56px] text-black leading-none">Palmarès {{ selectedYear }}</h2>
+          <h2 class="font-['Jersey_20'] font-normal text-[36px] md:text-[56px] text-black leading-none">Palmarès {{ selectedYear }}</h2>
 
           <!-- Desktop Filter Button (Above Score) -->
           <div class="hidden md:block relative">
@@ -151,7 +151,7 @@
             <!-- Or -->
             <tr v-if="goldWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
-                <img src="/images/trophy_gold.png" alt="Or" class="w-12 h-12 object-contain">
+                <img src="/images/trophy_gold.png" alt="Or" class="w-20 h-20 object-contain">
               </td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black">{{ goldWinner.name }}</td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black text-center">{{ formatNumber(goldWinner.nb_employee) }}</td>
@@ -161,7 +161,7 @@
             <!-- Ambassadeur -->
             <tr v-if="ambassadorWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
-                <img src="/images/trophy_conviction (1).png" alt="Ambassadeur" class="w-12 h-12 object-contain">
+                <img src="/images/trophy_conviction (1).png" alt="Ambassadeur" class="w-20 h-20 object-contain">
               </td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black">{{ ambassadorWinner.name }}</td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black text-center">{{ formatNumber(ambassadorWinner.nb_employee) }}</td>
@@ -171,7 +171,7 @@
             <!-- Conviction -->
             <tr v-if="convictionWinner" class="border-b-[3px] border-[#B3D9FF]">
               <td class="py-4 px-2 w-20">
-                <img src="/images/trophy_conviction.png" alt="Conviction" class="w-12 h-12 object-contain">
+                <img src="/images/trophy_conviction.png" alt="Conviction" class="w-20 h-20 object-contain">
               </td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black">{{ convictionWinner.name }}</td>
               <td class="py-4 px-2 font-['Jersey_20'] text-[20px] md:text-[28px] text-black text-center">{{ formatNumber(convictionWinner.nb_employee) }}</td>
@@ -188,16 +188,14 @@
     </section>
 
     <!-- Part 4: Section avantages -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16">
-      <div class="flex flex-col items-center md:items-start mb-12">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h2 class="font-['Jersey_20'] font-normal text-[48px] md:text-[56px] text-black leading-none">Ce que les Trophées distinguent</h2>
-      </div>
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 py-20 flex flex-col items-center md:items-start">
+      <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
+      <h2 class="font-['Jersey_20'] font-normal text-[36px] md:text-[56px] text-black leading-none">Ce que les Trophées distinguent</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
         <!-- Block 1 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 h-[120px] flex items-center justify-center md:justify-start">
             <h3 class="font-['Jersey_20'] font-normal text-[28px] text-black leading-tight text-center md:text-left w-full">La distinction publique</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
@@ -206,7 +204,7 @@
         </div>
         <!-- Block 2 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 h-[120px] flex items-center justify-center md:justify-start">
             <h3 class="font-['Jersey_20'] font-normal text-[28px] text-black leading-tight text-center md:text-left w-full">Un symbole fort</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
@@ -215,7 +213,7 @@
         </div>
         <!-- Block 3 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 h-[120px] flex items-center justify-center md:justify-start">
             <h3 class="font-['Jersey_20'] font-normal text-[28px] text-black leading-tight text-center md:text-left w-full">Une caisse de résonnance</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
@@ -224,7 +222,7 @@
         </div>
         <!-- Block 4 -->
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
-          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
+          <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 h-[120px] flex items-center justify-center md:justify-start">
             <h3 class="font-['Jersey_20'] font-normal text-[28px] text-black leading-tight text-center md:text-left w-full">Une présence permanente</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
@@ -235,47 +233,47 @@
     </section>
 
     <!-- Part 5: Comment participer -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 pb-32">
-      <div class="flex flex-col items-center md:items-start mb-12">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-        <h2 class="font-['Jersey_20'] font-normal text-[48px] md:text-[56px] text-black leading-none">Comment participer ?</h2>
-      </div>
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 py-20 flex flex-col items-center md:items-start pb-32">
+      <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
+      <h2 class="font-['Jersey_20'] font-normal text-[36px] md:text-[56px] text-black leading-none">Comment participer ?</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mt-12 w-full">
         <!-- Block 1 -->
         <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="bg-[#fffbf1] m-2 mb-3 py-2 flex items-center justify-center border-2 border-transparent">
-            <h3 class="font-['Inter'] font-bold text-[20px] text-black leading-tight text-center">01</h3>
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[20px] text-black leading-tight text-center">01</h3>
           </div>
           <div class="px-4 pb-4 flex-1 flex flex-col justify-start">
-            <p class="font-['Inter'] text-sm text-black">Prendre contact avec le CTS.</p>
+            <p class="font-['Inter'] text-[12px] md:text-sm text-black">
+              <a href="/contact" class="underline hover:text-[#0073e6] transition-colors">Prendre contact avec le CTS</a>.
+            </p>
           </div>
         </div>
         <!-- Block 2 -->
         <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="bg-[#fffbf1] m-2 mb-3 py-2 flex items-center justify-center border-2 border-transparent">
-            <h3 class="font-['Inter'] font-bold text-[20px] text-black leading-tight text-center">02</h3>
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[20px] text-black leading-tight text-center">02</h3>
           </div>
           <div class="px-4 pb-4 flex-1 flex flex-col justify-start">
-            <p class="font-['Inter'] text-sm text-black">Organiser une collecte.</p>
+            <p class="font-['Inter'] text-[12px] md:text-sm text-black">Organiser une collecte.</p>
           </div>
         </div>
         <!-- Block 3 -->
         <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="bg-[#fffbf1] m-2 mb-3 py-2 flex items-center justify-center border-2 border-transparent">
-            <h3 class="font-['Inter'] font-bold text-[20px] text-black leading-tight text-center">03</h3>
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[20px] text-black leading-tight text-center">03</h3>
           </div>
           <div class="px-4 pb-4 flex-1 flex flex-col justify-start">
-            <p class="font-['Inter'] text-sm text-black">Mobiliser ses collaborateurs.</p>
+            <p class="font-['Inter'] text-[12px] md:text-sm text-black">Mobiliser ses collaborateurs.</p>
           </div>
         </div>
         <!-- Block 4 -->
         <div class="bg-[#80c0ff] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="bg-[#fffbf1] m-2 mb-3 py-2 flex items-center justify-center border-2 border-transparent">
-            <h3 class="font-['Inter'] font-bold text-[20px] text-black leading-tight text-center">04</h3>
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[20px] text-black leading-tight text-center">04</h3>
           </div>
           <div class="px-4 pb-4 flex-1 flex flex-col justify-start">
-            <p class="font-['Inter'] text-sm text-black">Participer automatiquement<br>aux Trophées HUG.</p>
+            <p class="font-['Inter'] text-[12px] md:text-sm text-black">Participer automatiquement<br>aux Trophées HUG.</p>
           </div>
         </div>
       </div>

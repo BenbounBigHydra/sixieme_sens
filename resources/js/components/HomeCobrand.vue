@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-clip">
+  <div class="w-full bg-[#fffbf1] min-h-screen relative">
 
     <!-- Part 1 -->
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
@@ -45,27 +45,24 @@
           </div>
 
           <!-- Roby Mascot -->
-          <div class="relative flex items-center justify-center shrink-0 h-full"
-               @mouseenter="handleRobyHeroHover(true)"
-               @mouseleave="handleRobyHeroHover(false)"
-               @click="handleRobyHeroClick">
-            <img src="/images/dono_smiling.png" alt="Roby" class="h-28 sm:h-32 md:h-64 object-contain cursor-pointer transition-transform hover:scale-105 origin-bottom" />
+          <a :href="quizzUrl" class="relative flex items-center justify-center shrink-0 h-full group hover:scale-105 transition-transform origin-bottom mt-16 md:mt-0 pr-[120px] md:pr-0">
+            <img src="/images/dono_smiling.png" alt="Roby" class="h-28 sm:h-32 md:h-64 object-contain" />
 
             <!-- Speech Bubble -->
-            <div v-show="isRobyHeroHovered || isRobyHeroClicked"
-                 class="absolute left-[90%] top-0 md:top-1/4 ml-2 md:ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[200px] md:max-w-[280px] z-50 pointer-events-none">
-              <p class="font-['Jersey_20'] tracking-wide text-lg md:text-xl leading-tight text-left">
-                Salut ! Je suis Roby, bienvenue sur le<br/>
-                site {{ company?.name || 'HEIG-VD' }}. J'essaye de<br/>
-                donner mon sang, tout comme toi. On<br/>
-                part en voyage ?
+            <div class="absolute bottom-auto top-1/4 left-[45%] md:left-[90%] ml-0 md:ml-6 bg-[#1a81e7] text-white p-2 md:p-4 border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[150px] md:max-w-[280px] z-50">
+              <p class="font-['Jersey_20'] tracking-wide text-[14px] md:text-xl leading-tight text-left">
+                Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
               </p>
 
-              <!-- Arrow pointing left (for all sizes) -->
-              <div class="absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
-              <div class="absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
+              <!-- Arrow pointing left (Desktop) -->
+              <div class="hidden md:block absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
+              <div class="hidden md:block absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
+              
+              <!-- Arrow pointing left (Mobile) -->
+              <div class="md:hidden absolute top-4 -left-[10px] w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-black"></div>
+              <div class="md:hidden absolute top-[16px] -left-[7px] w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-[#1a81e7] z-10"></div>
             </div>
-          </div>
+          </a>
 
         </div>
       </div>
@@ -81,7 +78,7 @@
           <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black mb-8 leading-none tracking-wide text-center lg:text-left">
             Pourquoi donner son sang ?
           </h2>
-          <div class="font-['Inter'] text-base md:text-lg text-black space-y-6 mb-10 leading-relaxed text-center lg:text-left">
+          <div class="font-['Inter'] text-base md:text-lg text-black space-y-6 mb-10 leading-relaxed text-left">
             <p>Chaque don de sang peut sauver jusqu'à trois vies. Pas trois fois de suite, trois personnes différentes, le même jour, grâce à toi.</p>
             <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient d'accoucher, un accidenté en salle d'opération.</p>
             <p>Les besoins sont constants, c'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
@@ -89,7 +86,7 @@
 
           <!-- Stats Replacement -->
           <div class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-10 w-full relative">
-            <div class="font-['Jersey_20'] text-[60px] md:text-[80px] text-[#0073e6] leading-none tracking-wide -mt-1">
+            <div class="font-['Jersey_20'] text-[48px] md:text-[64px] text-[#0073e6] leading-none tracking-wide -mt-1">
               {{ participationRate }}%
             </div>
             <div class="flex flex-col justify-center text-left mt-1">
@@ -115,21 +112,19 @@
           </div>
         </div>
 
-        <!-- Right Column: Gauge (Same as HomeVitrine) -->
-        <div class="w-full lg:w-1/2 flex flex-col pt-8 lg:pt-0">
+        <!-- Right Column: Gauge -->
+        <div class="w-full lg:w-1/2 flex flex-col pt-8 lg:pt-0 lg:mt-[52px]">
           <!-- Desktop Grid Container -->
           <div class="hidden lg:block relative w-full mb-4">
-             <!-- Top text removed -->
-
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
                <template v-for="i in 150" :key="i">
-                 <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                 <a :href="quizzUrl" v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
                    <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
-                     Tu m'as trouvé !
+                     Viens faire le quiz !
                    </div>
-                 </div>
+                 </a>
                  <img v-else-if="i <= blueCountDesktop" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
                </template>
@@ -138,7 +133,7 @@
              <!-- Foreground Overlay Grid (Center White Square) -->
              <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
-                 <span class="text-[#0073e6] font-['Jersey_20'] text-[60px] lg:text-[64px] leading-[0.8] mb-0">{{ livesSaved }}</span>
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[48px] lg:text-[48px] leading-[0.8] mb-0">{{ livesSaved }}</span>
                  <span class="text-[#0073e6] font-['Jersey_20'] text-base leading-tight text-center tracking-wide -mt-1 lg:-mt-1">
                    Potentielles vies<br/>sauvées
                  </span>
@@ -148,16 +143,15 @@
 
           <!-- Mobile Grid Container -->
           <div class="block lg:hidden relative w-[320px] mx-auto mb-4 mt-4">
-             <!-- Mobile top text removed -->
              <!-- Background Grid (Icons) -->
              <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
                <template v-for="i in 32" :key="'mobile-'+i">
-                 <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                 <a :href="quizzUrl" v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClickMobile($event)">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
                    <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
-                     Tu m'as trouvé !
+                     Viens faire le quiz !
                    </div>
-                 </div>
+                 </a>
                  <img v-else-if="i <= blueCountMobile" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
                  <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
                </template>
@@ -166,15 +160,13 @@
              <!-- Foreground Overlay Grid Mobile -->
              <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
                <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
-                 <span class="text-[#0073e6] font-['Jersey_20'] text-[40px] leading-[0.8] mb-0 mt-1">{{ livesSaved }}</span>
-                 <span class="text-[#0073e6] font-['Jersey_20'] text-[14px] leading-tight text-center tracking-wide mt-1">
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[36px] leading-[0.8] mb-0 mt-1">{{ livesSaved }}</span>
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[12px] leading-tight text-center tracking-wide mt-1">
                    Potentielles vies<br/>sauvées
                  </span>
                </div>
              </div>
           </div>
-
-          <!-- Bottom text removed -->
         </div>
 
       </div>
@@ -184,7 +176,7 @@
     <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
+        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
           Ils témoignent
         </h2>
       </div>
@@ -192,38 +184,38 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Block 1 -->
-        <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
-          <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img :src="marieClaireImage || '/images/dono_smiling.png'" alt="Marie-Claire" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img :src="marieClaireImage || '/images/dono_smiling.png'" alt="Marie-Claire" class="w-20 h-20 md:w-32 md:h-32 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
           </div>
-          <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
-             <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
-             <p class="font-['Inter'] text-[15px] leading-relaxed text-black font-bold mb-4 flex-grow">J'avais toujours repoussé. Là, c'était dans les locaux, pendant la pause, j'ai sauté le pas.</p>
-             <p class="font-['Inter'] text-sm text-black mt-auto">— Marie-Claire, assistante RH</p>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">J'avais toujours repoussé. Là, c'était dans les locaux, pendant la pause, j'ai sauté le pas.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Marie-Claire, assistante RH</p>
           </div>
         </div>
 
         <!-- Block 2 -->
-        <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
-          <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img :src="thomasImage || '/images/dono_smiling.png'" alt="Thomas" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img :src="thomasImage || '/images/dono_smiling.png'" alt="Thomas" class="w-20 h-20 md:w-32 md:h-32 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
           </div>
-          <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
-             <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
-             <p class="font-['Inter'] text-[15px] leading-relaxed text-black font-bold mb-4 flex-grow">Vingt minutes, un peu de jus d'orange, et potentiellement une vie sauvée. Ça remet les choses en perspective.</p>
-             <p class="font-['Inter'] text-sm text-black mt-auto">— Thomas, développeur</p>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">Vingt minutes, un peu de jus d'orange, et potentiellement une vie sauvée. Ça remet les choses en perspective.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Thomas, développeur</p>
           </div>
         </div>
 
         <!-- Block 3 -->
-        <div class="flex flex-col xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
-          <div class="w-full xl:w-1/3 p-4 flex items-center justify-center shrink-0">
-             <img :src="anoukImage || '/images/dono_smiling.png'" alt="Anouk" class="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img src="/images/littleman_blue.png" alt="Anonyme" class="w-16 h-16 md:w-24 md:h-24 xl:w-40 xl:h-40 object-contain scale-[1.2]" onerror="this.style.display='none'" />
           </div>
-          <div class="w-full xl:w-2/3 bg-[#ffd012] p-6 border-t-[3px] xl:border-t-0 xl:border-l-[3px] border-black flex flex-col">
-             <img src="/images/quoteBlack.svg" alt="Quote" class="w-6 h-6 mb-4" onerror="this.style.display='none'" />
-             <p class="font-['Inter'] text-[15px] leading-relaxed text-black font-bold mb-4 flex-grow">Je ne savais pas si j'étais éligible. Le quiz m'a rassuré en deux minutes.</p>
-             <p class="font-['Inter'] text-sm text-black mt-auto">— Anouk, chargée de projets</p>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">Je ne savais pas si j'étais éligible. Le quiz m'a rassuré en deux minutes.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Collaborateur anonyme</p>
           </div>
         </div>
 
@@ -234,7 +226,7 @@
     <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 mb-20 relative z-10">
       <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black leading-none tracking-wide">
+        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
           Questions fréquentes
         </h2>
       </div>
@@ -246,11 +238,31 @@
               <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
                  <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
               </button>
+
+              <!-- Mobile Inline Roby & Answer (Phones only < 768px) -->
+              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-4 py-6 relative">
+                <!-- Speech Bubble -->
+                <div class="relative bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
+                  <div class="font-['Inter'] text-sm leading-relaxed">
+                    <p>{{ faqList[openFaq].a }}</p>
+                    <div v-if="faqList[openFaq].button" class="mt-4">
+                      <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
+                         {{ faqList[openFaq].button }}
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Arrow for mobile (pointing down towards Roby) -->
+                  <div class="absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
+                  <div class="absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
+                </div>
+                <!-- Roby -->
+                <img src="/images/roby_smiling_left.png" alt="Roby" class="h-32 object-contain shrink-0 mt-2" />
+              </div>
            </div>
         </div>
 
-        <!-- Roby & Speech Bubble (Right) -->
-        <div class="w-full lg:w-5/12 flex flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32" ref="robyFaqContainer">
+        <!-- Roby & Speech Bubble (Right - Desktop & Tablet only) -->
+        <div class="hidden md:flex w-full lg:w-5/12 flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32" ref="robyFaqContainer">
           <!-- Speech Bubble -->
           <div class="relative bg-[#1a81e7] text-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-[300px] z-20">
             <div v-if="openFaq === null" class="font-['Jersey_20'] tracking-wide text-[28px] leading-tight text-left">
@@ -275,7 +287,7 @@
           </div>
 
           <!-- Roby -->
-          <img src="/images/dono_smiling.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
+          <img src="/images/roby_smiling_left.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
         </div>
       </div>
     </section>
@@ -365,7 +377,7 @@ onUnmounted(() => {
 const participationRate = computed(() => {
   const emp = collection.value?.nb_employee || company.value?.employee_count;
   const reg = collection.value?.nb_registered;
-  if (emp && reg) {
+  if (emp && reg !== undefined && reg !== null) {
     return Math.round((reg / emp) * 100);
   }
   return 50; // fallback
@@ -381,7 +393,7 @@ const blueCountMobile = computed(() => {
 
 const livesSaved = computed(() => {
   const reg = collection.value?.nb_registered;
-  if (reg) {
+  if (reg !== undefined && reg !== null) {
     return reg * 3;
   }
   return 130; // fallback
@@ -407,6 +419,17 @@ const handleRobotClick = () => {
   clickTimeout = setTimeout(() => {
     isClicked.value = false;
   }, 3000);
+};
+
+const handleRobotClickMobile = (e) => {
+  if (window.innerWidth < 768) {
+    if (!isClicked.value) {
+      e.preventDefault();
+      isClicked.value = true;
+    }
+  } else {
+    handleRobotClick();
+  }
 };
 
 // Roby Hero Logic

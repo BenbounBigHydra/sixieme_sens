@@ -1,6 +1,6 @@
 <template>
-  <header class="w-full h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+  <header class="w-full h-20 md:h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
+    <div class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
 
       <a :href="`/collection/${companySlug}/${collectionId}`" class="flex items-center h-full gap-2 md:gap-4 hover:opacity-90 transition-opacity max-w-[70vw]">
         <!-- Desktop Logo HUG -->
@@ -14,7 +14,7 @@
         <img :src="company.logo ? '/' + company.logo : '/images/HEIG-VD-red.png'" alt="Logo Partenaire" class="h-7 md:h-12 w-auto object-contain shrink-0" />
       </a>
 
-      <nav class="hidden md:flex items-center space-x-8 text-[28px]">
+      <nav v-if="!isClosedPage" class="hidden md:flex items-center space-x-8 text-[28px]">
         <a :href="`/collection/${companySlug}/${collectionId}`"
            class="hover:text-[#0073E6] transition-colors tracking-wide"
            :class="isHomePage ? 'text-[#0073E6]' : 'text-[#000000]'">Accueil</a>
@@ -27,7 +27,7 @@
       </nav>
 
       <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center">
+      <div v-if="!isClosedPage" class="md:hidden flex items-center">
         <button @click="isMenuOpen = !isMenuOpen" class="text-[#0073E6] focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div v-show="isMenuOpen" class="absolute top-24 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg">
+    <div v-show="isMenuOpen" class="absolute top-20 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg">
       <a :href="`/collection/${companySlug}/${collectionId}`" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5 border-b border-white">
           <span>Accueil</span>
@@ -89,6 +89,7 @@ const companySlug = ref('')
 const collectionId = ref('')
 const isInfosPage = ref(false)
 const isHomePage = ref(false)
+const isClosedPage = ref(false)
 
 onMounted(() => {
   const parts = window.location.pathname.split('/');
@@ -96,5 +97,6 @@ onMounted(() => {
   collectionId.value = parts[3] || '';
   isInfosPage.value = window.location.pathname.endsWith('/infos');
   isHomePage.value = window.location.pathname === `/collection/${companySlug.value}/${collectionId.value}`;
+  isClosedPage.value = window.location.pathname.endsWith('/closed');
 })
 </script>

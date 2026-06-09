@@ -14,8 +14,8 @@
            WebkitMaskRepeat: 'no-repeat'
          }">
     </div>
-    <div class="w-full pt-2 pb-12 mb-12">
-      <h1 class="text-center font-['Jersey_20'] text-5xl md:text-6xl text-black">
+    <div class="w-full pt-2 pb-12 mb-12 max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40">
+      <h1 class="text-center md:text-left font-['Jersey_20'] text-5xl md:text-6xl text-black">
         Tout savoir avant de donner
       </h1>
     </div>
@@ -25,10 +25,10 @@
       <!-- Sidebar -->
       <aside class="w-full md:w-1/4 md:border-r-[3px] md:border-black md:pr-12 lg:pr-16 shrink-0">
         <nav class="flex flex-col font-['Jersey_20'] text-[28px] tracking-wide space-y-4 mb-12">
-          <button @click="activeTab = 'processus'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'processus', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'processus'}">Le processus</button>
-          <button @click="activeTab = 'types'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'types', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'types'}">Types de don</button>
-          <button @click="activeTab = 'faq'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'faq', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'faq'}">FAQ</button>
-          <button @click="activeTab = 'eligibility'" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'eligibility', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'eligibility'}">Puis-je donner ?</button>
+          <button @click="setActiveTab('processus')" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'processus', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'processus'}">Le processus</button>
+          <button @click="setActiveTab('types')" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'types', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'types'}">Types de don</button>
+          <button @click="setActiveTab('faq')" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'faq', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'faq'}">FAQ</button>
+          <button @click="setActiveTab('eligibility')" :class="{'bg-[#0073e6] text-white px-4 py-2 text-left': activeTab === 'eligibility', 'text-black hover:text-[#0073e6] text-left': activeTab !== 'eligibility'}">Puis-je donner ?</button>
         </nav>
 
         <div class="bg-[#ffcc00] border-2 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
@@ -39,7 +39,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="w-full md:w-3/4">
+      <main class="w-full md:w-3/4" ref="mainContent">
 
         <!-- Processus Tab -->
         <div v-show="activeTab === 'processus'" class="space-y-6">
@@ -50,7 +50,7 @@
               <ul class="list-disc pl-8 space-y-1">
                 <li>Se rendre au lieu de la collecte</li>
                 <li>Présenter sa pièce d'identité</li>
-                <li>Remplir un formulaire médical (disponible en ligne au préalable)</li>
+                <li>Remplir un formulaire médical (<a href="https://www.hug.ch/sites/interhug/files/structures/don_du_sang/cts-questionnairedondusangv01fev26.pdf" target="_blank" class="underline hover:text-[#0073e6]">disponible en ligne au préalable</a>)</li>
               </ul>
             </div>
           </div>
@@ -123,7 +123,7 @@
               </div>
             </div>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mt-auto">
-              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour donner vos plaquettes, contactez directement le CTS.</div>
+              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour donner vos plaquettes, <a href="https://www.hug.ch/don-du-sang/don-plaquettes" target="_blank" class="underline hover:text-[#0073e6]">contactez directement le CTS</a>.</div>
               <img src="/images/hug_icon.png" alt="HUG Logo" class="h-8 md:h-10 object-contain" onerror="this.style.display='none'" />
             </div>
           </div>
@@ -135,7 +135,7 @@
             </div>
             <p class="font-['Inter'] text-base md:text-lg text-black mb-12 lg:max-w-[50%]">Le don de cellules souches permet de traiter des maladies du sang graves. L'inscription au registre est ouverte aux 18-60 ans en bonne santé.</p>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mt-auto">
-              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour vous inscrire au registre, rendez-vous sur le site de la Croix-Rouge suisse.</div>
+              <div class="bg-[#ffbfa8] px-6 py-3 font-['Inter'] text-base md:text-lg text-black">Non disponible lors de cette collecte. Pour vous inscrire au registre, <a href="https://www.bloodstemcells.ch/fr/" target="_blank" class="underline hover:text-[#0073e6]">rendez-vous sur le site de la Croix-Rouge suisse</a>.</div>
               <img src="/images/CroixRouge.svg" alt="Croix Rouge Logo" class="h-8 md:h-10 object-contain" onerror="this.style.display='none'" />
             </div>
           </div>
@@ -149,14 +149,30 @@
             <!-- FAQ List (Left) -->
             <div class="w-full lg:w-6/12">
                <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
-                  <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
-                     <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
-                  </button>
+                    <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                       <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
+                    </button>
+                    <!-- Mobile Inline Roby & Answer (Phones only < 768px) -->
+                    <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-4 py-6 relative">
+                      <div class="relative bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
+                        <div class="font-['Inter'] text-sm leading-relaxed">
+                          <p>{{ faqList[openFaq].a }}</p>
+                          <div v-if="faqList[openFaq].button" class="mt-4">
+                            <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
+                               {{ faqList[openFaq].button }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[12px] border-x-transparent border-t-[15px] border-t-black"></div>
+                        <div class="absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
+                      </div>
+                      <img src="/images/roby_smiling_left.png" alt="Roby" class="h-32 object-contain shrink-0 mt-2" />
+                    </div>
                </div>
             </div>
 
             <!-- Roby & Speech Bubble (Right) -->
-            <div class="w-full lg:w-6/12 flex flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32" ref="robyFaqContainer">
+            <div class="hidden md:flex w-full lg:w-6/12 flex-col md:flex-row items-center md:items-start justify-center lg:justify-end gap-6 relative mt-8 lg:mt-0 lg:sticky lg:top-32" ref="robyFaqContainer">
               <!-- Speech Bubble -->
               <div class="relative bg-[#1a81e7] text-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-[300px] z-20">
                 <div v-if="openFaq === null" class="font-['Jersey_20'] tracking-wide text-[28px] leading-tight text-left">
@@ -181,7 +197,7 @@
               </div>
 
               <!-- Roby -->
-              <img src="/images/dono_smiling.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
+              <img src="/images/roby_smiling_left.png" alt="Roby" class="h-40 md:h-48 object-contain shrink-0" />
             </div>
           </div>
         </div>
@@ -223,6 +239,16 @@ const parsedData = computed(() => {
 });
 
 const activeTab = ref('processus');
+const mainContent = ref(null);
+
+const setActiveTab = (tab) => {
+  activeTab.value = tab;
+  if (window.innerWidth < 768 && mainContent.value) {
+    setTimeout(() => {
+      mainContent.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
+};
 
 const openFaq = ref(null);
 const robyFaqContainer = ref(null);

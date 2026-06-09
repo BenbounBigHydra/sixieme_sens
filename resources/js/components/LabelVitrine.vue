@@ -2,12 +2,12 @@
   <div class="w-full bg-[#fffbf1] min-h-screen">
 
     <!-- Part 1: Hero Section -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 pt-12 pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
       <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto lg:mx-0 h-6 w-auto object-contain mb-6 origin-center lg:origin-left" />
 
-        <h1 class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
-          Le Label Partenaire du<br class="hidden md:block"/> Don, c’est quoi ?
+        <h1 class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
+          Le Label Partenaire<br/>du Don, c’est quoi ?
         </h1>
 
         <p class="font-['Inter'] text-sm md:text-base text-black mb-8 leading-relaxed">
@@ -15,7 +15,7 @@
         </p>
 
         <div class="flex lg:hidden w-full justify-center mb-8">
-          <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
+          <img src="/images/Don.svg" alt="Label Partenaire du Don" class="w-full max-w-[300px] h-auto object-contain drop-shadow-xl" />
         </div>
 
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10 w-full sm:w-auto">
@@ -33,22 +33,17 @@
       </div>
 
       <div class="hidden lg:flex lg:w-1/2 justify-center lg:justify-end mt-8 lg:mt-0">
-        <img src="/images/don.svg" alt="Label Partenaire du Don" class="w-full max-w-[350px] lg:max-w-[400px] h-auto object-contain drop-shadow-xl" />
+        <img src="/images/Don.svg" alt="Label Partenaire du Don" class="w-full max-w-[350px] lg:max-w-[400px] h-auto object-contain drop-shadow-xl" />
       </div>
     </section>
 
     <!-- Part 2: Carousel -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-16">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 pt-16">
       <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-6 text-center md:text-left">
         <div class="w-full md:w-2/3 flex flex-col items-center md:items-start">
           <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-          <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Ils ont déjà fait le pas</h2>
-          <p class="font-['Inter'] text-sm md:text-base text-black hidden md:block">
-            Ces entreprises ont organisé une collecte de sang pour leurs<br class="hidden md:block"/> collaborateurs et reçu la certification officielle des HUG.
-          </p>
-          <p class="font-['Inter'] text-sm text-black md:hidden">
-            Ces entreprises ont organisé une collecte de<br/> sang pour leurs collaborateurs et reçu la<br/> certification officielle des HUG.
-          </p>
+          <h2 class="font-['Jersey_20'] text-[36px] md:text-[56px] text-black leading-none mb-4">Ils ont déjà fait le pas</h2>
+          <p class="font-['Inter'] text-sm md:text-lg text-black mb-12 max-w-full text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement. Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden lg:block"/> et vous positionne sur le leaderboard public.</p>
         </div>
         <div class="w-full md:w-1/3 flex justify-center md:justify-end mt-4 md:mt-0">
           <a href="/companies" class="inline-block bg-[#0073e6] text-white font-['Inter'] text-sm md:text-base px-6 py-3 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all text-center">
@@ -59,102 +54,120 @@
     </section>
 
     <!-- Carousel Container Full Width -->
-    <div class="overflow-hidden relative w-full mb-16">
-      <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
-        <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
-          <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
-            <img :src="'/' + item.logo" :alt="item.name" class="max-w-[80%] max-h-[80%] object-contain" />
+    <div class="relative w-full mb-16 max-w-desktop mx-auto group">
+      <!-- Arrow Left -->
+      <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 6H12v2H10v2H8v4h2v2h2v2h2v-2h-2v-2h-2v-4h2V8h2V6z"/>
+        </svg>
+      </button>
+
+      <div class="overflow-hidden relative w-full px-16 md:px-24">
+        <div class="flex transition-transform duration-700 ease-in-out gap-6" :style="{ transform: `translateX(-${currentSlide * slidePercentage}%)` }">
+          <div v-for="(item, index) in carouselItems" :key="index" class="flex-shrink-0" :style="{ width: `calc(${slidePercentage}% - ${(gapSize * (itemsPerView - 1)) / itemsPerView}px)` }">
+            <div class="border-[4px] border-[#0073e6] bg-[#fffbf1] flex items-center justify-center p-2 md:p-6 aspect-square w-full h-full">
+              <img :src="'/' + item.logo" :alt="item.name" class="max-w-[80%] max-h-[80%] object-contain" />
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Arrow Right -->
+      <button @click="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 text-[#0073e6] hover:scale-125 transition-transform bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 6h2v2h2v2h2v4h-2v2h-2v2h-2v-2h2v-2h2v-4h-2V8h-2V6z"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Part 3: Avantages -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 flex flex-col items-center md:items-start">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 py-16 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-      <h2 class="font-['Jersey_20'] font-normal text-[40px] md:text-[56px] text-black mb-12 leading-none text-center md:text-left">Ce que le Label vous<br class="hidden md:block"> apporte</h2>
+      <h2 class="font-['Jersey_20'] font-normal text-[36px] md:text-[56px] text-black mb-12 leading-none text-center md:text-left">Ce que le Label vous<br class="hidden md:block"> apporte</h2>
 
       <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Une reconnaissance officielle</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève, l'institution de référence en matière de santé publique dans le canton.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Votre démarche est certifiée par les Hôpitaux Universitaires de Genève, l'institution de référence en matière de santé publique dans le canton.</p>
           </div>
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un actif RSE concret</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Le Label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse, une preuve.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Le Label s'intègre directement dans vos rapports et communications de responsabilité sociale. Pas une promesse, une preuve.</p>
           </div>
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">De la visibilité</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Votre entreprise apparaît dans la liste des Partenaires du Don sur ce site, consultée par d'autres entreprises, par les médias et par le grand public.</p>
           </div>
         </div>
         <div class="bg-[#ffd012] border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col h-full">
           <div class="border-b-[4px] border-black bg-[#fffbf1] p-4 min-h-[96px] flex items-center justify-center md:justify-start">
-            <h3 class="font-['Jersey_20'] font-normal text-[28px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l'emploi</h3>
+            <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l'emploi</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux), tout adapté à votre identité.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux), tout adapté à votre identité.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Part 4: Comment l'obtenir -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
+    <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 py-16 mb-12 flex flex-col items-center md:items-start text-center md:text-left">
       <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-      <h2 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-4">Comment l’obtenir ?</h2>
+      <h2 class="font-['Jersey_20'] text-[36px] md:text-[56px] text-black leading-none mb-4">Comment l’obtenir ?</h2>
       <p class="font-['Inter'] text-sm md:text-base text-black mb-12">Quatre étapes, pas plus.</p>
 
-      <div class="flex flex-col gap-8 w-full">
+      <div class="grid grid-cols-2 gap-4 md:gap-8 w-full">
         <!-- Etape 1 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-6 py-4 border-b-[4px] border-black">
-            <h3 class="font-['Inter'] font-bold text-[24px] text-black tracking-tight">01 — Prendre contact avec le CTS</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
+            <a href="/contact" class="hover:text-[#0073e6] transition-colors group block w-full">
+              <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black group-hover:text-[#0073e6] tracking-tight">01 — Prendre contact avec le CTS</h3>
+            </a>
           </div>
-          <div class="p-6">
-            <p class="font-['Inter'] text-black text-sm md:text-base">Ensemble, vous définissez une date, un format et les modalités logistiques adaptées à votre entreprise.</p>
+          <div class="p-4 md:p-6 flex-1">
+            <p class="font-['Inter'] text-black text-[12px] md:text-base">Ensemble, vous définissez une date, un format et les modalités logistiques adaptées à votre entreprise.</p>
           </div>
         </div>
 
         <!-- Etape 2 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-6 py-4 border-b-[4px] border-black">
-            <h3 class="font-['Inter'] font-bold text-[24px] text-black tracking-tight">02 — Organiser une collecte</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">02 — Organiser une collecte</h3>
           </div>
-          <div class="p-6">
-            <p class="font-['Inter'] text-black text-sm md:text-base">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
+          <div class="p-4 md:p-6 flex-1">
+            <p class="font-['Inter'] text-black text-[12px] md:text-base">Le CTS prend en charge tout le volet médical. Vous mettez à disposition un espace et des plages horaires pour vos collaborateurs.</p>
           </div>
         </div>
 
         <!-- Etape 3 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-6 py-4 border-b-[4px] border-black">
-            <h3 class="font-['Inter'] font-bold text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">03 — Mobiliser ses collaborateurs</h3>
           </div>
-          <div class="p-6">
-            <p class="font-['Inter'] text-black text-sm md:text-base">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
+          <div class="p-4 md:p-6 flex-1">
+            <p class="font-['Inter'] text-black text-[12px] md:text-base">Un kit de communication clé en main vous est fourni (affiche, newsletter, visuels réseaux), pour maximiser la participation en interne.</p>
           </div>
         </div>
 
         <!-- Etape 4 -->
         <div class="border-[4px] border-black bg-[#8bc6ff] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-          <div class="bg-[#fffbf1] px-6 py-4 border-b-[4px] border-black">
-            <h3 class="font-['Inter'] font-bold text-[24px] text-black tracking-tight">04 — Recevoir le label</h3>
+          <div class="bg-[#fffbf1] px-4 md:px-6 py-4 border-b-[4px] border-black min-h-[80px] lg:min-h-[120px] flex items-center w-full">
+            <h3 class="font-['Inter'] font-bold text-[16px] md:text-[24px] text-black tracking-tight">04 — Recevoir le label</h3>
           </div>
-          <div class="p-6">
-            <p class="font-['Inter'] text-black text-sm md:text-base">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
+          <div class="p-4 md:p-6 flex-1">
+            <p class="font-['Inter'] text-black text-[12px] md:text-base">Une fois la collecte réalisée, le Label Partenaire du Don vous est officiellement décerné par les HUG.</p>
           </div>
         </div>
       </div>
@@ -207,15 +220,33 @@ onMounted(() => {
   }
 
   // Slide toutes les 2 secondes
-  autoSlideInterval = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % (carouselItems.value.length - itemsPerView.value + 1);
-
-    // Si on arrive à la fin, on retourne au début après un petit délai
-    if (currentSlide.value >= carouselItems.value.length - itemsPerView.value + 1) {
-      currentSlide.value = 0;
-    }
-  }, 2000);
+  resetInterval();
 });
+
+const resetInterval = () => {
+  if (autoSlideInterval) clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(() => {
+    nextSlide();
+  }, 2000);
+};
+
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % (carouselItems.value.length - itemsPerView.value + 1);
+  if (currentSlide.value >= carouselItems.value.length - itemsPerView.value + 1) {
+    currentSlide.value = 0;
+  }
+};
+
+const prevSlide = () => {
+  let maxSlide = carouselItems.value.length - itemsPerView.value;
+  currentSlide.value = (currentSlide.value - 1 + maxSlide + 1) % (maxSlide + 1);
+  resetInterval();
+};
+
+const nextSlideManual = () => {
+  nextSlide();
+  resetInterval();
+};
 
 onUnmounted(() => {
   if (typeof window !== 'undefined') {
