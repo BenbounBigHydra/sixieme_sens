@@ -33,6 +33,27 @@ class ApiCompanyController extends Controller
             'contact_email'  => 'nullable|email',
             'is_labelled'    => 'boolean',
             'trophies_count' => 'nullable|integer',
+        ], [
+            'name.required'          => 'Le nom de l\'entreprise est obligatoire.',
+            'name.string'            => 'Le nom de l\'entreprise doit être une chaîne de caractères.',
+            'name.unique'            => 'Ce nom d\'entreprise est déjà utilisé.',
+
+            'logo.file'              => 'Le logo doit être un fichier.',
+            'logo.mimes'             => 'Le logo doit être au format JPG, JPEG, PNG, SVG ou WEBP.',
+            'logo.max'               => 'Le logo ne doit pas dépasser 2 Mo.',
+
+            'color.string'           => 'La couleur doit être une chaîne de caractères.',
+            'sector.string'          => 'Le secteur doit être une chaîne de caractères.',
+
+            'employee_count.integer' => 'Le nombre d\'employés doit être un nombre entier.',
+
+            'contact_name.string'    => 'Le nom du contact doit être une chaîne de caractères.',
+            'contact_phone.string'   => 'Le numéro de téléphone doit être une chaîne de caractères.',
+            'contact_email.email'    => 'L\'adresse email du contact n\'est pas valide.',
+
+            'is_labelled.boolean'    => 'Le champ "labellisé" doit être vrai ou faux.',
+
+            'trophies_count.integer' => 'Le nombre de trophées doit être un nombre entier.',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -65,6 +86,26 @@ class ApiCompanyController extends Controller
             'contact_email'  => 'nullable|email',
             'is_labelled'    => 'boolean',
             'trophies_count' => 'nullable|integer',
+        ], [
+            'name.string'            => 'Le nom de l\'entreprise doit être une chaîne de caractères.',
+            'name.unique'            => 'Ce nom d\'entreprise est déjà utilisé par une autre entreprise.',
+
+            'logo.file'              => 'Le logo doit être un fichier.',
+            'logo.mimes'             => 'Le logo doit être au format JPG, JPEG, PNG, SVG ou WEBP.',
+            'logo.max'               => 'Le logo ne doit pas dépasser 2 Mo.',
+
+            'color.string'           => 'La couleur doit être une chaîne de caractères.',
+            'sector.string'          => 'Le secteur doit être une chaîne de caractères.',
+
+            'employee_count.integer' => 'Le nombre d\'employés doit être un nombre entier.',
+
+            'contact_name.string'    => 'Le nom du contact doit être une chaîne de caractères.',
+            'contact_phone.string'   => 'Le numéro de téléphone doit être une chaîne de caractères.',
+            'contact_email.email'    => 'L\'adresse email du contact n\'est pas valide.',
+
+            'is_labelled.boolean'    => 'Le champ "labellisé" doit être vrai ou faux.',
+
+            'trophies_count.integer' => 'Le nombre de trophées doit être un nombre entier.',
         ]);
 
         if ($request->hasFile('logo')) {
