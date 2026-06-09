@@ -227,7 +227,7 @@
                         <div class="p-4">
                             <h4 class="font-inter text-xl font-bold text-black mb-2">{{
                                 computedMonthsData[hoveredMonthIndex].label
-                            }}</h4>
+                                }}</h4>
 
                             <div v-if="computedMonthsData[hoveredMonthIndex].collections.length === 0"
                                 class="text-sm font-inter text-gray-500 py-4">
@@ -387,7 +387,7 @@
                             <span class="absolute right-3 top-1/2 -translate-y-1/2">*</span>
                         </div>
                     </div>
-                    <p v-if="clotureError" class="text-red-600 font-inter text-sm">{{ clotureError }}</p>
+                    <p v-if="errors" class="text-red-600 font-inter text-sm">{{ errors }}</p>
                 </div>
 
                 <div class="flex space-x-4">
@@ -476,7 +476,9 @@
                         <span class="absolute right-3 top-1/2 -translate-y-1/2">*</span>
                     </div>
                 </div>
-
+                <ul v-if="errors.length">
+                    <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                </ul>
                 <div class="flex justify-between items-center">
                     <button @click="activeModal = 'suppression'"
                         class="bg-[#E4534B] text-white px-8 py-3 font-inter font-medium hover:bg-red-600 transition-colors">Supprimer
@@ -544,7 +546,7 @@ export default {
                 nb_registered: '',
                 nb_blood_pouch: ''
             },
-            clotureError: null,
+            errors: [],
             detailForm: {
                 nb_employee: '',
                 day_start: '',
@@ -613,9 +615,10 @@ export default {
         closeModal() {
             this.activeModal = null;
             this.selectedCollecte = null;
+            this.errors = null;
         },
         async submitCloture() {
-            this.clotureError = null;
+            this.errors = [];
             try {
                 const xsrfToken = decodeURIComponent(
                     document.cookie
@@ -640,17 +643,23 @@ export default {
 
                 if (!response.ok) {
                     const data = await response.json();
-                    this.clotureError = data.error || data.message || 'Une erreur est survenue.';
+                    if (data.errors) {
+                        // Aplatit toutes les erreurs de chaque champ en un tableau
+                        this.errors = Object.values(data.errors).flat();
+                    } else {
+                        this.errors = [data.message || 'Une erreur est survenue.'];
+                    }
                     return;
                 }
 
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                this.clotureError = 'Erreur réseau lors de la clôture.';
+                this.errors = 'Erreur réseau lors de la clôture.';
             }
         },
         async submitDetail() {
+            this.errors = [];
             try {
                 const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
                     method: 'PUT',
@@ -664,7 +673,12 @@ export default {
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                alert("Erreur lors de l'enregistrement.");
+                if (data.errors) {
+                    // Aplatit toutes les erreurs de chaque champ en un tableau
+                    this.errors = Object.values(data.errors).flat();
+                } else {
+                    this.errors = [data.message || 'Une erreur est survenue.'];
+                }
             }
         },
         async submitSuppression() {
@@ -680,7 +694,12 @@ export default {
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                alert("Erreur lors de la suppression.");
+                if (data.errors) {
+                    // Aplatit toutes les erreurs de chaque champ en un tableau
+                    this.errors = Object.values(data.errors).flat();
+                } else {
+                    this.errors = [data.message || 'Une erreur est survenue.'];
+                }
             }
         }
     },
