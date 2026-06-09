@@ -1,5 +1,5 @@
 <?php
-$user = App\Models\User::where('email', 'admin@hug.ch')->first();
+$user = App\Models\User::where('email', 'admin@example.ch')->first();
 if ($user) {
     $user->password = bcrypt('password');
     $user->save();
