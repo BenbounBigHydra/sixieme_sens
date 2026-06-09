@@ -249,7 +249,7 @@
         <!-- Block 3 -->
         <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
           <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
-             <img src="/images/littleman_blue.png" alt="Anonyme" class="w-16 h-16 md:w-24 md:h-24 xl:w-40 xl:h-40 object-contain scale-[1.2]" onerror="this.style.display='none'" />
+             <img :src="anonymeImage || '/images/littleman_blue.png'" alt="Anonyme" class="w-16 h-16 md:w-24 md:h-24 xl:w-40 xl:h-40 object-contain" onerror="this.style.display='none'" />
           </div>
           <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
              <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
@@ -375,21 +375,24 @@ const desktopRobyIndex = ref(73);
 const mobileRobyIndex = ref(23);
 let robyInterval = null;
 
-const femaleImages = [
-  '/images/littleMen/1_dark_bun_red.png',
-  '/images/littleMen/1_mid_bun_green.png',
-  '/images/littleMen/1_pale_bun_blue.png'
-];
-
-const maleImages = [
-  '/images/littleMen/dark_nobun_red.png',
-  '/images/littleMen/mid_nobun_green.png',
-  '/images/littleMen/pale_nobun_blue.png'
+const littleMenImages = [
+  '1_dark_bun_red.png',
+  '1_dark_bun_yellow.png',
+  '1_mid_bun_green.png',
+  '1_mid_bun_purple.png',
+  '1_pale_bun_blue.png',
+  '1_pale_bun_yellow.png',
+  'dark_nobun_purple.png',
+  'dark_nobun_red.png',
+  'mid_nobun_green.png',
+  'mid_nobun_yellow.png',
+  'pale_nobun_blue.png',
+  'pale_nobun_purple.png'
 ];
 
 const marieClaireImage = ref('');
 const thomasImage = ref('');
-const anoukImage = ref('');
+const anonymeImage = ref('');
 
 onMounted(() => {
   const parts = window.location.pathname.split('/');
@@ -401,12 +404,20 @@ onMounted(() => {
     mobileRobyIndex.value = Math.floor(Math.random() * 32) + 1;
   }, 5000);
 
-  const shuffledFemales = [...femaleImages].sort(() => 0.5 - Math.random());
-  marieClaireImage.value = shuffledFemales[0];
-  anoukImage.value = shuffledFemales[1];
+  const randomEl = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  
+  const marieList = littleMenImages.filter(img => img.startsWith('1_'));
+  const thomasList = littleMenImages.filter(img => !img.startsWith('1_'));
+  
+  const marie = randomEl(marieList);
+  const thomas = randomEl(thomasList);
+  
+  const remainingList = littleMenImages.filter(img => img !== marie && img !== thomas);
+  const anonyme = randomEl(remainingList);
 
-  const shuffledMales = [...maleImages].sort(() => 0.5 - Math.random());
-  thomasImage.value = shuffledMales[0];
+  marieClaireImage.value = `/images/littleMen/${marie}`;
+  thomasImage.value = `/images/littleMen/${thomas}`;
+  anonymeImage.value = `/images/littleMen/${anonyme}`;
 });
 
 onUnmounted(() => {
