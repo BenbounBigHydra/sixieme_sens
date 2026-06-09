@@ -31,10 +31,10 @@
       </div>
 
       <!-- Bottom left text -->
-      <div class="mt-12 flex justify-start">
+      <div class="mt-8 flex justify-start">
         <div class="max-w-md text-left">
-          <p class="font-inter text-[#D5D9ED] text-[12px] md:text-sm leading-snug">
-            Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
+          <p class="font-inter text-[#D5D9ED] text-[10px] md:text-sm leading-snug">
+            Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" @click.prevent="handleOnedocClick" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
           </p>
         </div>
       </div>
@@ -42,46 +42,46 @@
     <!-- QUIZ STATE -->
     <div v-else-if="currentState === 'quiz'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
-        <button @click="goBackQuestion" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
-          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
+        <button @click="goBackQuestion" class="inline-flex items-center gap-1 md:gap-2 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-2 md:px-4 py-1 md:py-2 font-inter transition-all" :style="boxStyle">
+          <img src="/images/Angle Left.svg" alt="Back" class="w-3 h-3 md:w-4 md:h-4" style="filter: brightness(0) invert(1);" />
           <span class="text-inherit text-sm md:text-base">
             {{ currentQuestionIndex === 0 ? 'Retour à l\'introduction' : 'Question précédente' }}
           </span>
         </button>
       </div>
 
-      <div class="mt-6 md:mt-8 flex-grow flex flex-col md:flex-row justify-between items-end relative gap-6 md:gap-12 pb-4">
+      <div class="mt-2 md:mt-8 flex-grow flex flex-col-reverse md:flex-row justify-between items-center md:items-end relative gap-4 md:gap-12 pb-2 md:pb-4">
         <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 md:p-8" :style="boxStyle">
-            <h2 class="font-jersey text-[18px] sm:text-[20px] md:text-[32px] text-inherit leading-tight mb-4 md:mb-8 whitespace-pre-line relative z-10">
+          <div class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4 md:p-8" :style="boxStyle">
+            <h2 class="font-jersey text-[16px] sm:text-[18px] md:text-[32px] text-inherit leading-tight mb-3 md:mb-8 whitespace-pre-line relative z-10">
               {{ questions[currentQuestionIndex].text }}&nbsp;<span
                 class="inline-block align-middle cursor-pointer"
                 @mouseenter="showTooltip = true"
                 @mouseleave="showTooltip = false"
                 @click="showTooltip = !showTooltip"
               >
-                <img src="/images/info.svg" alt="Info" class="w-5 h-5 md:w-6 md:h-6" style="filter: brightness(0) invert(1);" />
+                <img src="/images/info.svg" alt="Info" class="w-4 h-4 md:w-6 md:h-6" style="filter: brightness(0) invert(1);" />
               </span>
               <!-- Tooltip Popup -->
               <div
                 v-if="showTooltip"
-                class="absolute bottom-full left-0 mb-4 w-[calc(100vw-2rem)] md:max-w-[600px] p-4 bg-white text-black font-inter text-sm md:text-base border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-50 font-normal leading-relaxed text-left"
+                class="absolute bottom-full -left-2 md:left-0 mb-2 md:mb-4 w-max max-w-[240px] md:max-w-[600px] p-2 md:p-4 bg-white text-black font-inter text-[11px] md:text-base border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-50 font-normal leading-snug md:leading-relaxed text-left"
               >
                 {{ questions[currentQuestionIndex].info }}
               </div>
             </h2>
 
-            <div class="min-h-[56px] md:min-h-[64px]">
+            <div class="min-h-[40px] md:min-h-[64px]">
               <transition name="fade" mode="out-in">
-                <div v-if="!selectedAnswer" class="flex gap-4 md:gap-6">
-                  <button @click="answerQuestion('Oui')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-5 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all">
+                <div v-if="!selectedAnswer" class="flex gap-2 md:gap-6">
+                  <button @click="answerQuestion('Oui')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 md:px-5 py-1.5 md:py-3 text-black font-inter text-[13px] md:text-base transition-all">
                     Oui
                   </button>
-                  <button @click="answerQuestion('Non')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-5 py-2 md:py-3 text-black font-inter text-sm md:text-base transition-all">
+                  <button @click="answerQuestion('Non')" class="flex-1 max-w-[200px] bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 md:px-5 py-1.5 md:py-3 text-black font-inter text-[13px] md:text-base transition-all">
                     Non
                   </button>
                 </div>
-                <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-base md:text-lg">
+                <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-[13px] md:text-lg">
                   <span v-html="questions[currentQuestionIndex].noText"></span>
                 </div>
               </transition>
@@ -89,16 +89,16 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0 relative z-10 md:-translate-x-12 h-full max-h-[45vh] md:max-h-[75vh]">
+        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[30vh] md:min-h-0 md:max-h-[75vh]">
           <transition name="fade">
-            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[45vh] md:max-h-[75vh]', flightClass]" />
+            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
           </transition>
         </div>
       </div>
 
       <!-- Bottom left indicator -->
-      <div class="mt-8 flex justify-start">
-        <div class="font-inter text-sm md:text-base font-bold px-4 py-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" :style="boxStyle">
+      <div class="mt-4 md:mt-8 flex justify-start">
+        <div class="font-inter text-[11px] md:text-base font-bold px-2 md:px-4 py-1 md:py-2 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" :style="boxStyle">
           Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}
         </div>
       </div>
@@ -107,46 +107,46 @@
     <!-- INELIGIBLE STATE -->
     <div v-else-if="currentState === 'ineligible'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
       <div>
-        <button @click="correctAnswer" class="inline-flex items-center gap-2 border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 py-2 font-inter transition-all" :style="boxStyle">
-          <img src="/images/Angle Left.svg" alt="Back" class="w-4 h-4" style="filter: brightness(0) invert(1);" />
-          <span class="text-inherit text-sm md:text-base">Je me suis trompé(e)</span>
+        <button @click="correctAnswer" class="inline-flex items-center gap-1 md:gap-2 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-2 md:px-4 py-1 md:py-2 font-inter transition-all" :style="boxStyle">
+          <img src="/images/Angle Left.svg" alt="Back" class="w-3 h-3 md:w-4 md:h-4" style="filter: brightness(0) invert(1);" />
+          <span class="text-inherit text-[11px] md:text-base">Je me suis trompé(e)</span>
         </button>
       </div>
-      <div class="flex-grow flex flex-col md:flex-row justify-between items-center relative gap-6 md:gap-12">
+      <div class="flex-grow flex flex-col-reverse md:flex-row justify-between items-center relative gap-4 md:gap-12">
         <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
-          <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 md:p-6" :style="boxStyle">
-            <h2 class="font-jersey text-[24px] sm:text-[28px] md:text-[48px] text-inherit leading-tight mb-1">
+          <div class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 md:p-6" :style="boxStyle">
+            <h2 class="font-jersey text-[20px] sm:text-[24px] md:text-[48px] text-inherit leading-tight mb-1">
               Pas cette fois...
             </h2>
-            <h3 class="font-jersey text-[18px] sm:text-[20px] md:text-[32px] text-inherit leading-tight mb-3 md:mb-4">
+            <h3 class="font-jersey text-[16px] sm:text-[18px] md:text-[32px] text-inherit leading-tight mb-2 md:mb-4">
               mais vous pouvez quand même aider
             </h3>
 
-            <p class="font-inter text-[#f87171] font-bold text-xs sm:text-sm md:text-base leading-relaxed mb-3 md:mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
-            <p class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-4 md:mb-6 opacity-80">
+            <p class="font-inter text-[#f87171] font-bold text-[11px] md:text-base leading-relaxed mb-2 md:mb-4" v-if="questions[currentQuestionIndex]?.yesText" v-html="questions[currentQuestionIndex].yesText"></p>
+            <p class="font-inter text-inherit text-[11px] md:text-base leading-relaxed mb-3 md:mb-6 opacity-80">
               Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-2 md:gap-4">
-              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-4 md:px-6 py-2 md:py-3 text-black font-inter text-xs sm:text-sm md:text-base transition-all text-center relative overflow-hidden group">
+              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[11px] md:text-base transition-all text-center relative overflow-hidden group">
                 <span :class="{'opacity-0': isCopied}">Partager à un collègue</span>
                 <span v-if="isCopied" class="absolute inset-0 flex items-center justify-center font-bold text-[#3ca370]">Copié !</span>
               </button>
-              <a :href="homeLink" class="border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-4 md:px-6 py-2 md:py-3 font-inter text-xs sm:text-sm md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
+              <a :href="homeLink" class="border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-3 md:px-6 py-1.5 md:py-3 font-inter text-[11px] md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
                 Retourner à l'accueil
               </a>
             </div>
             
-            <div class="mt-4 text-center md:text-left">
-              <a href="#" @click.prevent="continueQuiz" class="font-inter text-[#fffbf1] text-sm md:text-base underline hover:text-[#b3d9ff] transition-colors">
+            <div class="mt-3 md:mt-4 text-center md:text-left">
+              <a href="#" @click.prevent="continueQuiz" class="font-inter text-[#fffbf1] text-[11px] md:text-base underline hover:text-[#b3d9ff] transition-colors">
                 Continuer le quiz pour le fun
               </a>
             </div>
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 relative z-10 md:-translate-x-12">
-          <img :src="currentImageSrc" class="object-contain" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[45vh] md:max-h-[75vh]'" />
+        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 min-h-[25vh] max-h-[30vh] md:min-h-0 md:max-h-[75vh]">
+          <img :src="currentImageSrc" class="object-contain absolute inset-0 m-auto h-full" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]'" />
         </div>
       </div>
     </div>
@@ -221,7 +221,7 @@ const questions = [
     yesText: "Aaah dommage. Certains pays présentent des risques sanitaires qui nécessitent un délai d'attente avant de donner son sang. Tu peux vérifier ça grâce à notre travel-check : <a href='https://www.hug.ch/travelcheck' target='_blank' class='underline hover:text-gray-300'>https://www.hug.ch/travelcheck</a>",
     noText: "Accroche ta ceinture, ça risque de secouer !",
     bg: "background_earth_desktop.png", mobileBg: "bkgMobile/background_earth_mobile.png", folder: "01_travel", prefix: "travel", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-y-12 md:translate-y-20"
+    imageClass: "max-h-[30vh] md:max-h-[75vh] translate-y-8 md:translate-y-20"
   },
   {
     text: "As-tu actuellement une plaie ou as-tu été opéré récemment ?",
@@ -230,7 +230,7 @@ const questions = [
     yesText: "Laisse ton corps se reposer d'abord ! Une plaie ou opération récente peut fragiliser ton organisme.",
     noText: "La comète a dévié, ton corps est intact !",
     bg: "Background_spaceship_desktop.png", mobileBg: "bkgMobile/Background_spaceship_mobile.png", folder: "02_wound", prefix: "wound", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu actuellement des symptômes de refroidissement ou de la fièvre ?",
@@ -239,7 +239,7 @@ const questions = [
     yesText: "Soigne-toi bien et reviens nous voir quand tu seras au top ! Donner pendant une infection pourrait nuire à ta santé.",
     noText: "On est passés proche du soleil, mais on a survécu !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "03_fever", prefix: "fever", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu eu des relations sexuelles avec des partenaires multiples au cours de 12 derniers mois ou avec une nouvelle ou nouveau partenaire ces quatre derniers mois ?",
@@ -248,7 +248,7 @@ const questions = [
     yesText: "Ce critère vise à réduire le risque de transmission de certaines infections par le sang.",
     noText: "On reste safe par ici.",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "04_sex", prefix: "sex", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
   {
     text: "Pèses-tu moins de 50 kg ?",
@@ -257,7 +257,7 @@ const questions = [
     yesText: "On a besoin que tu sois bien dans ton corps pour donner ! Un poids minimum est requis pour ta sécurité.",
     noText: "Tu es sur la bonne planète pour donner !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "05_weight", prefix: "weight", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu été piqué par une tique dans les 4 dernières semaines?",
@@ -266,7 +266,7 @@ const questions = [
     yesText: "Aïe, c’est vraiment des sales bêtes! Pour être sûr qu’elle ne t’ait rien transmis, il va falloir attendre un peu avant de pouvoir donner du sang.",
     noText: "La tique a raté sa cible, zéro souci !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "06_tick", prefix: "tick", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] translate-x-4 md:translate-x-12"
+    imageClass: "max-h-[30vh] md:max-h-[75vh] translate-x-4 md:translate-x-12"
   },
   {
     text: "As-tu fait de l'acupuncture ou un tatouage dans les 4 derniers mois?",
@@ -275,7 +275,7 @@ const questions = [
     yesText: "Si tu t’es fait piquer récemment, il va falloir attendre un moment avant de pouvoir donner.",
     noText: "Les aliens ont tout géré, tu es sauvé !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "07_acupuncture", prefix: "acupuncture", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
   {
     text: "As-tu ressenti une douleur thoracique ou un essoufflement anormal récemment?",
@@ -284,7 +284,7 @@ const questions = [
     yesText: "Il faudrait peut-être consulter un médecin sur le sujet? Je ne voudrais pas que tu fasses un malaise en donnant ton sang, il faudrait régler ça d’abord!",
     noText: "Ton cœur brille, il est au top !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "08_pain", prefix: "pain", hasYes: true, hasNo: true,
-    imageClass: "max-h-[35vh] md:max-h-[55vh] translate-y-8 md:translate-y-16"
+    imageClass: "max-h-[25vh] md:max-h-[55vh] translate-y-6 md:translate-y-16"
   },
   {
     text: "As-tu eu une gastroscopie ou coloscopie au cours des 4 derniers mois ?",
@@ -293,7 +293,7 @@ const questions = [
     yesText: "J’espère que ce n’était rien de grave pour toi. Après une anesthésie, il faut attendre un moment avant de donner son sang. Reviens bientôt!",
     noText: "Analyse terminée, l'alien valide, tout va bien !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "09_gastroscopy", prefix: "gastroscopy", hasYes: true, hasNo: true,
-    imageClass: "max-h-[35vh] md:max-h-[60vh] translate-y-8 md:translate-y-16"
+    imageClass: "max-h-[25vh] md:max-h-[60vh] translate-y-6 md:translate-y-16"
   },
   {
     text: "As-tu bénéficié d’un détartrage dans les 24 dernières heures ou d’un traitement dentaire dans les 7 derniers jours ?",
@@ -302,7 +302,7 @@ const questions = [
     yesText: "C’est super pour tes dents, mais le risque d’infection est trop élevé pour donner du sang tout suite. Réessayons plus tard!",
     noText: "Une seule dent au compteur, mais ça passe !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "10_dental", prefix: "dental", hasYes: true, hasNo: true,
-    imageClass: "max-h-[35vh] md:max-h-[60vh] translate-y-8 md:translate-y-16"
+    imageClass: "max-h-[25vh] md:max-h-[60vh] translate-y-6 md:translate-y-16"
   },
   {
     text: "Ces quatre dernières semaines, as-tu pris des médicaments ou reçu un vaccin ?",
@@ -311,7 +311,7 @@ const questions = [
     yesText: "Oups... On ne peut pas risquer de transmettre des produits avec le sang donné, il va falloir attendre qu’ils quittent ton organisme!",
     noText: "Le deuxième alien veille au grain, pas de substance parasite !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "11_medecine", prefix: "medecine", hasYes: true, hasNo: true,
-    imageClass: "max-h-[45vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-12 md:translate-y-24"
+    imageClass: "max-h-[30vh] md:max-h-[75vh] scale-[1.3] md:scale-[1.5] translate-y-8 md:translate-y-24"
   },
   {
     text: "As-tu déjà reçu une greffe d'organe?",
@@ -320,7 +320,7 @@ const questions = [
     yesText: "Moi aussi! Malheureusement, je viens d’apprendre que pour des raisons de sécurité les receveurs de greffe ne pouvaient pas donner leur sang. Merci d’avoir fait ce voyage avec moi! Invitons d’autres personnes à y aller pour nous!",
     noText: "Génial ! Ton voyage intergalactique touche à sa fin, tu as tous les critères pour sauver des vies !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "12_transplant", prefix: "transplant", hasYes: true, hasNo: true,
-    imageClass: "max-h-[40vh] md:max-h-[65vh] translate-y-12 md:translate-y-24"
+    imageClass: "max-h-[25vh] md:max-h-[65vh] translate-y-8 md:translate-y-24"
   }
 ];
 
