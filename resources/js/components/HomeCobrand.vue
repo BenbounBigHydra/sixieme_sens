@@ -5,17 +5,9 @@
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
       <!-- Background Union.svg -->
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full transform scale-90 md:scale-[0.85] origin-right"
+        <div class="w-full h-full transform scale-90 md:scale-[0.85] origin-right responsive-mask"
              :style="{
-               backgroundColor: computedCompanyColor,
-               maskImage: 'url(/images/Union.svg)',
-               WebkitMaskImage: 'url(/images/Union.svg)',
-               maskSize: 'cover',
-               WebkitMaskSize: 'cover',
-               maskPosition: 'right',
-               WebkitMaskPosition: 'right',
-               maskRepeat: 'no-repeat',
-               WebkitMaskRepeat: 'no-repeat'
+               backgroundColor: computedCompanyColor
              }">
         </div>
       </div>
@@ -555,3 +547,23 @@ const faqList = [
   }
 ];
 </script>
+
+<style scoped>
+.responsive-mask {
+  mask-image: url('/images/background_pixel_gradient_radial_square.svg');
+  -webkit-mask-image: url('/images/background_pixel_gradient_radial_square.svg');
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-position: right;
+  -webkit-mask-position: right;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .responsive-mask {
+    mask-image: url('/images/Union.svg');
+    -webkit-mask-image: url('/images/Union.svg');
+  }
+}
+</style>
