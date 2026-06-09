@@ -78,7 +78,7 @@
         <div>
           <button type="submit"
             :disabled="!isFormValid"
-            :class="['font-[\'Jersey_20\'] tracking-wide px-20 py-4 transition-colors text-black text-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto min-w-[350px]',
+            :class="['font-[\'Jersey_20\'] tracking-wide px-6 md:px-20 py-3 md:py-4 transition-colors text-black text-xl md:text-2xl border-[2px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full sm:w-auto min-w-0 md:min-w-[350px]',
                      isFormValid ? 'bg-[#0073e6] hover:bg-[#0073e6]/90' : 'bg-[#e5e7eb] cursor-not-allowed']">
             Envoyer ma demande
           </button>

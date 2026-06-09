@@ -1,21 +1,13 @@
 <template>
-  <div class="w-full bg-[#fffbf1] min-h-screen relative">
+  <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-x-hidden">
 
     <!-- Part 1 -->
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
       <!-- Background Union.svg -->
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full transform scale-90 md:scale-[0.85] origin-right"
+        <div class="w-full h-full transform scale-100 md:scale-[0.85] origin-right responsive-mask"
              :style="{
-               backgroundColor: computedCompanyColor,
-               maskImage: 'url(/images/Union.svg)',
-               WebkitMaskImage: 'url(/images/Union.svg)',
-               maskSize: 'cover',
-               WebkitMaskSize: 'cover',
-               maskPosition: 'right',
-               WebkitMaskPosition: 'right',
-               maskRepeat: 'no-repeat',
-               WebkitMaskRepeat: 'no-repeat'
+               backgroundColor: computedCompanyColor
              }">
         </div>
       </div>
@@ -24,43 +16,83 @@
         <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
-          <div class="flex flex-col justify-center h-full shrink">
-            <h1 class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
-              Collecte {{ company?.name || 'HEIG-VD' }}
-            </h1>
-            <p class="font-['Jersey_20'] text-[32px] sm:text-[40px] md:text-[56px] text-[#0073e6] mb-4 md:mb-8 leading-none tracking-wide">
-              {{ formattedDate }}
-            </p>
-            <div class="flex items-center gap-3 mb-6 md:mb-10">
-              <img src="/images/locationBlack.svg" alt="Location" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
-              <span class="font-['Inter'] text-sm md:text-base text-black font-medium leading-tight">
-                {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
-              </span>
+          <div class="flex flex-col w-full h-full flex-1">
+            <!-- Mobile Layout: Two columns -->
+            <div class="flex md:hidden flex-row justify-between items-start gap-2 mb-6">
+              <!-- Left Col: Title & Date -->
+              <div class="flex flex-col w-1/2 pr-2">
+                <h1 class="font-['Jersey_20'] text-[24px] sm:text-[32px] text-black leading-none mb-1 tracking-wide">
+                  Collecte<br> {{ company?.name || 'HEIG-VD' }}
+                </h1>
+                <p class="font-['Jersey_20'] text-[24px] sm:text-[32px] text-[#0073e6] leading-none tracking-wide">
+                  {{ formattedDate }}
+                </p>
+              </div>
+              <!-- Right Col: Location & Button -->
+              <div class="flex flex-col w-1/2 items-end text-right">
+                <div class="flex items-center justify-end gap-1 mb-2">
+                  <span class="font-['Inter'] text-[12px] text-black font-medium leading-tight text-right">
+                    {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
+                  </span>
+                  <img src="/images/locationBlack.svg" alt="Location" class="w-4 h-4 object-contain" onerror="this.style.display='none'" />
+                </div>
+                <a :href="quizzUrl" class="bg-[#0073e6] text-white px-3 py-2 font-['Inter'] text-[12px] font-bold border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+                  Je souhaite donner
+                </a>
+              </div>
             </div>
-            <div class="flex mt-auto">
-              <a :href="quizzUrl" class="bg-[#0073e6] text-white px-4 md:px-6 py-2 md:py-3 font-['Inter'] text-xs sm:text-sm md:text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
-                Je souhaite donner
-              </a>
+
+            <!-- Desktop Layout: Single column -->
+            <div class="hidden md:flex flex-col justify-center h-full">
+              <h1 class="font-['Jersey_20'] text-[40px] md:text-[56px] text-black leading-none mb-2 tracking-wide">
+                Collecte {{ company?.name || 'HEIG-VD' }}
+              </h1>
+              <p class="font-['Jersey_20'] text-[40px] md:text-[56px] text-[#0073e6] mb-8 leading-none tracking-wide">
+                {{ formattedDate }}
+              </p>
+              <div class="flex items-center gap-3 mb-10">
+                <img src="/images/locationBlack.svg" alt="Location" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
+                <span class="font-['Inter'] text-base text-black font-medium leading-tight">
+                  {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
+                </span>
+              </div>
+              <div class="flex mt-auto">
+                <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 py-3 font-['Inter'] text-base font-bold border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+                  Je souhaite donner
+                </a>
+              </div>
             </div>
+
+            <!-- Roby Mascot & Bubble (Mobile Only) -->
+            <a :href="quizzUrl" class="md:hidden flex flex-row items-center justify-start w-full h-auto group hover:scale-105 transition-transform origin-bottom mt-2">
+              <img src="/images/dono_smiling.png" alt="Roby" class="w-20 sm:w-24 h-auto object-contain shrink-0" />
+
+              <!-- Speech Bubble -->
+              <div class="relative ml-4 bg-[#1a81e7] text-white p-2 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-full max-w-[200px] z-50">
+                <p class="font-['Jersey_20'] tracking-wide text-[14px] leading-tight text-left break-words">
+                  Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
+                </p>
+
+                <!-- Arrow pointing left -->
+                <div class="absolute top-4 -left-[10px] w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-black"></div>
+                <div class="absolute top-[16px] -left-[7px] w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-[#1a81e7] z-10"></div>
+              </div>
+            </a>
           </div>
 
-          <!-- Roby Mascot -->
-          <a :href="quizzUrl" class="relative flex items-center justify-center shrink-0 h-full group hover:scale-105 transition-transform origin-bottom mt-16 md:mt-0 pr-[120px] md:pr-0">
-            <img src="/images/dono_smiling.png" alt="Roby" class="h-28 sm:h-32 md:h-64 object-contain" />
+          <!-- Roby Mascot & Bubble (Desktop Only) -->
+          <a :href="quizzUrl" class="hidden md:flex relative items-center justify-center shrink-0 h-full group hover:scale-105 transition-transform origin-bottom mt-0 md:pr-0">
+            <img src="/images/dono_smiling.png" alt="Roby" class="md:h-64 object-contain" />
 
             <!-- Speech Bubble -->
-            <div class="absolute bottom-auto top-1/4 left-[45%] md:left-[90%] ml-0 md:ml-6 bg-[#1a81e7] text-white p-2 md:p-4 border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[150px] md:max-w-[280px] z-50">
-              <p class="font-['Jersey_20'] tracking-wide text-[14px] md:text-xl leading-tight text-left">
+            <div class="absolute bottom-auto top-1/4 left-[90%] ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[280px] z-50">
+              <p class="font-['Jersey_20'] tracking-wide text-xl leading-tight text-left">
                 Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
               </p>
 
-              <!-- Arrow pointing left (Desktop) -->
-              <div class="hidden md:block absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
-              <div class="hidden md:block absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
-              
-              <!-- Arrow pointing left (Mobile) -->
-              <div class="md:hidden absolute top-4 -left-[10px] w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-black"></div>
-              <div class="md:hidden absolute top-[16px] -left-[7px] w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-[#1a81e7] z-10"></div>
+              <!-- Arrow pointing left -->
+              <div class="absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
+              <div class="absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
             </div>
           </a>
 
@@ -73,31 +105,31 @@
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
 
         <!-- Left Column -->
-        <div class="w-full lg:w-1/2 flex flex-col">
-          <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
-          <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black mb-8 leading-none tracking-wide text-center lg:text-left">
+        <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
+          <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
+          <h2 class="font-['Jersey_20'] text-[36px] md:text-[56px] text-black mb-6 md:mb-8 leading-none tracking-wide text-center lg:text-left">
             Pourquoi donner son sang ?
           </h2>
-          <div class="font-['Inter'] text-base md:text-lg text-black space-y-6 mb-10 leading-relaxed text-left">
+          <div class="font-['Inter'] text-sm md:text-lg text-black space-y-4 md:space-y-6 mb-8 md:mb-10 leading-relaxed text-left max-w-[500px] lg:max-w-none">
             <p>Chaque don de sang peut sauver jusqu'à trois vies. Pas trois fois de suite, trois personnes différentes, le même jour, grâce à toi.</p>
             <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient d'accoucher, un accidenté en salle d'opération.</p>
             <p>Les besoins sont constants, c'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
           </div>
 
           <!-- Stats Replacement -->
-          <div class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-10 w-full relative">
-            <div class="font-['Jersey_20'] text-[48px] md:text-[64px] text-[#0073e6] leading-none tracking-wide -mt-1">
+          <div class="flex flex-row items-center justify-center lg:justify-start gap-2 md:gap-3 mb-8 md:mb-10 w-full relative">
+            <div class="font-['Jersey_20'] text-[40px] md:text-[64px] text-[#0073e6] leading-none tracking-wide -mt-1">
               {{ participationRate }}%
             </div>
             <div class="flex flex-col justify-center text-left mt-1">
-              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
-              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
+              <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
+              <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
                 <span><span class="text-[#0073e6]">{{ livesSaved }}</span> vies sauvées.</span>
                 <div class="relative group inline-flex ml-1 -mt-3">
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
                     <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
                   </svg>
-                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
+                  <div class="absolute bottom-full right-[-20px] md:right-auto md:left-1/2 md:-translate-x-1/2 mb-2 w-[250px] bg-white border-2 border-black p-3 text-sm text-black font-['Inter'] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                     Chiffres renseignés sur la base du nombre d’employés de la société.
                   </div>
                 </div>
@@ -105,8 +137,8 @@
             </div>
           </div>
 
-          <div class="flex justify-center lg:justify-start">
-             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Inter'] text-lg font-bold border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+          <div class="flex justify-center lg:justify-start w-full">
+             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 md:px-8 py-2 md:py-3 font-['Inter'] text-sm md:text-lg font-bold border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
                Donner mon sang
              </a>
           </div>
@@ -121,7 +153,7 @@
                <template v-for="i in 150" :key="i">
                  <a :href="quizzUrl" v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
-                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
                      Viens faire le quiz !
                    </div>
                  </a>
@@ -148,7 +180,14 @@
                <template v-for="i in 32" :key="'mobile-'+i">
                  <a :href="quizzUrl" v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClickMobile($event)">
                    <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
-                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                   <div v-show="isHovered || isClicked" 
+                        class="absolute bottom-full mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-xl md:text-2xl px-2 py-1 md:px-4 md:py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]"
+                        :class="[
+                          // Mobile: align left if on left edge, right if on right edge, otherwise center
+                          (i - 1) % 8 < 3 ? 'max-md:left-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 > 4 ? 'max-md:right-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 >= 3 && (i - 1) % 8 <= 4 ? 'max-md:left-1/2 max-md:-translate-x-1/2' : ''
+                        ]">
                      Viens faire le quiz !
                    </div>
                  </a>
@@ -173,10 +212,10 @@
     </section>
 
     <!-- Part 3: Ils témoignent -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 relative z-10">
-      <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
           Ils témoignent
         </h2>
       </div>
@@ -223,27 +262,27 @@
     </section>
 
     <!-- Part 4: Questions fréquentes -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 mb-20 relative z-10">
-      <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 mb-12 md:mb-20 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
           Questions fréquentes
         </h2>
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-8 items-start">
         <!-- FAQ List (Left) -->
         <div class="w-full lg:w-7/12">
            <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
-              <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
-                 <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
+              <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-3 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                 <span class="font-['Inter'] text-sm md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
               </button>
 
               <!-- Mobile Inline Roby & Answer (Phones only < 768px) -->
-              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-4 py-6 relative">
+              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-3 py-4 relative">
                 <!-- Speech Bubble -->
-                <div class="relative bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
-                  <div class="font-['Inter'] text-sm leading-relaxed">
+                <div class="relative bg-[#1a81e7] text-white p-3 border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
+                  <div class="font-['Inter'] text-xs leading-relaxed">
                     <p>{{ faqList[openFaq].a }}</p>
                     <div v-if="faqList[openFaq].button" class="mt-4">
                       <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
@@ -415,6 +454,10 @@ const handleRobotHover = (state) => {
 
 const handleRobotClick = () => {
   isClicked.value = true;
+  if (robyInterval) {
+    clearInterval(robyInterval);
+    robyInterval = null;
+  }
   if (clickTimeout) clearTimeout(clickTimeout);
   clickTimeout = setTimeout(() => {
     isClicked.value = false;
@@ -426,6 +469,10 @@ const handleRobotClickMobile = (e) => {
     if (!isClicked.value) {
       e.preventDefault();
       isClicked.value = true;
+      if (robyInterval) {
+        clearInterval(robyInterval);
+        robyInterval = null;
+      }
     }
   } else {
     handleRobotClick();
@@ -500,3 +547,27 @@ const faqList = [
   }
 ];
 </script>
+
+<style scoped>
+.responsive-mask {
+  mask-image: url('/images/background_pixel_gradient_radial_square.svg');
+  -webkit-mask-image: url('/images/background_pixel_gradient_radial_square.svg');
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .responsive-mask {
+    mask-image: url('/images/Union.svg');
+    -webkit-mask-image: url('/images/Union.svg');
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    mask-position: right;
+    -webkit-mask-position: right;
+  }
+}
+</style>

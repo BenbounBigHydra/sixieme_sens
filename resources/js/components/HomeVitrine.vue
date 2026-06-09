@@ -29,11 +29,13 @@
               <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
                 <span><span class="text-[#0073e6]">130</span> vies sauvées.</span>
                 <div class="relative group inline-flex ml-1 -mt-3">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
-                    <path d="M21 8V6H20V4H19V3H18V2H16V1H14V0H8V1H6V2H4V3H3V4H2V6H1V8H0V14H1V16H2V18H3V19H4V20H6V21H8V22H14V21H16V20H18V19H19V18H20V16H21V14H22V8H21ZM10 5H12V7H10V5ZM9 14H10V9H9V8H12V14H13V16H9V14Z" fill="#1980e7"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer text-black hover:text-[#0073e6] transition-colors">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="8" r="1" fill="currentColor"/>
                   </svg>
-                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 hidden group-hover:block z-50 text-sm font-['Inter'] text-black text-center whitespace-normal">
-                    Exemple basé sur une entreprise théorique de 1'000 collaborateurs avec un taux de participation moyen.
+                  <div class="absolute bottom-full right-[-20px] md:right-auto md:left-1/2 md:-translate-x-1/2 mb-2 w-[250px] bg-white border-2 border-black p-3 text-sm text-black font-['Inter'] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                    Les 130 vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.
                   </div>
                 </div>
               </span>
@@ -58,14 +60,17 @@
           <!-- Top Text removed -->
 
           <!-- Desktop Grid Container (Hidden on mobile) -->
-          <div class="hidden lg:block relative w-full lg:max-w-[450px] ml-auto mb-4">
+          <div class="hidden lg:block relative w-full lg:max-w-[450px] ml-auto mb-4 lg:mt-[56px]">
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
               <!-- Render 150 Icons using Vue v-for -->
               <template v-for="i in 150" :key="i">
                 <div v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
-                  <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
-                  <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                  <img src="/images/dono_default.png" 
+                       alt="Robot" 
+                       class="w-[80%] h-[80%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
+                       :class="{'animate-bounce': !isClicked}" />
+                  <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
                     Tu m'as trouvé !
                   </div>
                 </div>
@@ -90,9 +95,26 @@
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
               <template v-for="i in 32" :key="'mobile-'+i">
-                <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
-                  <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
-                  <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
+                <div v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'">
+                  <img src="/images/dono_default.png" 
+                       alt="Robot" 
+                       class="w-[70%] h-[70%] md:w-[60%] md:h-[60%] object-contain cursor-pointer transform hover:scale-110 transition-transform origin-bottom" 
+                       :class="{'animate-bounce': !isClicked}"
+                       @mouseenter="isHovered = true" 
+                       @mouseleave="isHovered = false"
+                       @click="handleRobotClick" />
+
+                  <!-- Info Bubble -->
+                  <div v-show="isHovered || isClicked" 
+                       class="absolute bottom-full mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-xl md:text-2xl px-2 py-1 md:px-4 md:py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]"
+                       :class="[
+                         // Desktop: always centered
+                         'md:left-1/2 md:-translate-x-1/2 md:right-auto',
+                         // Mobile: align left if on left edge, right if on right edge, otherwise center
+                         (i - 1) % 8 < 3 ? 'max-md:left-0 max-md:translate-x-0' : '',
+                         (i - 1) % 8 > 4 ? 'max-md:right-0 max-md:translate-x-0' : '',
+                         (i - 1) % 8 >= 3 && (i - 1) % 8 <= 4 ? 'max-md:left-1/2 max-md:-translate-x-1/2' : ''
+                       ]">
                     Tu m'as trouvé !
                   </div>
                 </div>
@@ -166,7 +188,7 @@
             <div class="flex flex-col items-center w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[12px] md:text-[24px] mb-2 md:mb-4 relative z-10 text-center">{{ ambassadorWinner }}</p>
               <img src="/images/trophy_conviction (1).png" alt="Trophée Ambassadeur" class="w-[50px] h-[50px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Ambassadeur</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br/>Ambassadeur</p>
             </div>
 
             <!-- Trophée 1 : Or -->
@@ -176,14 +198,14 @@
                 <img src="/images/trophy_gold.png" alt="Trophée Or" class="absolute inset-0 w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-300">
                 <img src="/images/trophy_gold_sparks.png" alt="Trophée Or Sparks" class="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               </div>
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Or</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br/>Or</p>
             </div>
 
             <!-- Trophée 3 : Conviction -->
             <div class="flex flex-col items-center w-1/3 md:w-auto">
               <p class="font-['Inter'] font-bold text-[12px] md:text-[24px] mb-2 md:mb-4 relative z-10 text-center">{{ convictionWinner }}</p>
               <img src="/images/trophy_conviction.png" alt="Trophée Conviction" class="w-[50px] h-[50px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] object-contain mb-2 md:mb-4">
-              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br class="block md:hidden"/>Conviction</p>
+              <p class="font-['Jersey_20'] text-[12px] md:text-[28px] text-black mt-1 md:mt-2 text-center leading-tight">Trophée <br/>Conviction</p>
             </div>
 
           </div>
@@ -195,7 +217,7 @@
     <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 py-20 flex flex-col items-center md:items-start">
       <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
       <h2 class="font-['Jersey_20'] font-normal text-[36px] md:text-[56px] text-black mb-6 leading-none text-center md:text-left">Les avantages du Label Partenaire du Don</h2>
-      <p class="font-['Inter'] text-sm md:text-lg text-black mb-12 max-w-full text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement. Il accompagne votre communication RH, renforce votre marque employeur<br class="hidden lg:block"/> et vous positionne sur le leaderboard public.</p>
+      <p class="font-['Inter'] text-sm md:text-lg text-black mb-12 max-w-[1000px] text-center md:text-left">Le Label Partenaire du Don est décerné à toute entreprise participante au mouvement. Il accompagne votre communication RH, renforce votre marque employeur et vous positionne sur le leaderboard public.</p>
 
       <!-- Grid from HomeVitrine -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
@@ -228,7 +250,7 @@
             <h3 class="font-['Jersey_20'] font-normal text-[20px] md:text-[32px] text-black leading-tight text-center md:text-left w-full">Un kit de communication prêt à l’emploi</h3>
           </div>
           <div class="p-6 text-center md:text-left flex-1">
-            <p class="font-inter text-[13px] md:text-sm text-black">Dès l'obtention du Label, vous recevez un kit de communication complet (visuels pour LinkedIn et vos réseaux internes, modèle de newsletter, affiche pour vos locaux) tout adapté à votre identité.</p>
+            <p class="font-inter text-[13px] md:text-sm text-black">Pour l'organisation de votre collecte, vous recevez un kit complet de templates personnalisables : visuels pour LinkedIn et vos réseaux internes, affiches pour vos locaux, emails de mobilisation.</p>
           </div>
         </div>
       </div>
@@ -273,6 +295,7 @@ const handleRobotHover = (state) => {
 
 const handleRobotClick = () => {
   isClicked.value = true;
+  if (robyInterval) clearInterval(robyInterval); // Stop roby from moving
   if (clickTimeout) clearTimeout(clickTimeout);
   clickTimeout = setTimeout(() => {
     isClicked.value = false;

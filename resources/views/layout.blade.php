@@ -21,9 +21,9 @@
         <!-- Avertissement de projet académique (Global) -->
         <div class="w-full bg-[#fffbf1]">
             <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-12">
-                <div class="bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl text-center py-3 border-2 border-black">
+                <div class="bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-lg sm:text-xl md:text-2xl text-center py-3 px-2 border-2 border-black">
                     <span class="hidden md:inline">Ceci est un projet réalisé dans un cadre académique. N’organisez pas de collecte ;)</span>
-                    <span class="inline md:hidden">Ceci est un projet réalisé dans <br/> un cadre académique.</span>
+                    <span class="inline md:hidden">Ceci est un projet réalisé dans un cadre académique.</span>
                 </div>
             </div>
         </div>

@@ -87,7 +87,7 @@
                             <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
                                 :class="activeCompany === company.name ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
                                 <div class="flex flex-col items-center justify-center w-full" style="height: 70%">
-                                    <h3 class="font-['Jersey_20'] text-[28px] md:text-[32px] leading-none mb-2"
+                                    <h3 class="font-['Jersey_20'] text-[20px] sm:text-[24px] md:text-[28px] leading-tight mb-2"
                                         :class="(company.gold || company.ambassador || company.conviction) ? 'text-black' : 'text-white'">
                                         {{ company.name }}
                                     </h3>
@@ -98,7 +98,7 @@
                                         <span v-if="company.conviction">Conviction {{ selectedYear }}</span>
                                     </p>
                                 </div>
-                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-[12px] opacity-70 gap-0.5"
+                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-[10px] md:text-[12px] leading-snug opacity-70 gap-0.5"
                                     style="height: 30%"
                                     :class="(company.gold || company.ambassador || company.conviction) ? 'text-black' : 'text-white'">
                                     <span v-if="getAwardCounts(company.name, selectedYear).gold > 0">
