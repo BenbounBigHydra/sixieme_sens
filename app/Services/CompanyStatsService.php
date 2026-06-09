@@ -45,6 +45,7 @@ class CompanyStatsService
             $totalEmployee  = $company->collections->sum('nb_employee');
 
             return [
+                'company_id'       => $company->id,
                 'name'             => $company->name,
                 'ratio'            => $totalRatio,
                 'nb_blood_pouch'   => $totalBloodPouch,
@@ -52,9 +53,25 @@ class CompanyStatsService
             ];
         })->filter(fn($s) => $s['ratio'] > 0);
 
-        return $scores->sortByDesc('ratio')
+        $winner = $scores->sortByDesc('ratio')
             ->sortByDesc(fn($s, $key) => [$s['ratio'], $s['nb_blood_pouch']])
             ->first() ?? null;
+
+        if ($winner) {
+            $lastCollection = Collection::where('company_id', $winner['company_id'])
+                ->whereYear('day_start', '<=', $year)
+                ->where('day_end', '<', now())
+                ->orderBy('day_start', 'desc')
+                ->first();
+            $winner['nb_employee'] = $lastCollection ? $lastCollection->nb_employee : null;
+
+            $winner['nb_blood_pouch'] = Collection::where('company_id', $winner['company_id'])
+                ->whereYear('day_start', '<=', $year)
+                ->where('day_end', '<', now())
+                ->sum('nb_blood_pouch');
+        }
+
+        return $winner;
     }
 
     public static function getGoldWinner(int $year = null): ?string
@@ -110,6 +127,7 @@ class CompanyStatsService
             $totalBloodPouch = $company->collections->sum('nb_blood_pouch');
 
             return [
+                'company_id'       => $company->id,
                 'name'             => $company->name,
                 'consecutive'      => $maxConsecutive >= 2 ? $maxConsecutive : 0,
                 'avg_ratio'        => $avgRatio,
@@ -118,10 +136,20 @@ class CompanyStatsService
             ];
         })->filter(fn($s) => $s['consecutive'] >= 2);
 
-        return $scores->sortByDesc('consecutive')
+        $winner = $scores->sortByDesc('consecutive')
             ->sortByDesc('avg_ratio')
             ->sortByDesc('nb_blood_pouch')
             ->first() ?? null;
+
+        if ($winner) {
+            $winner['nb_employee'] = null; // empty for Ambassador
+            $winner['nb_blood_pouch'] = Collection::where('company_id', $winner['company_id'])
+                ->whereYear('day_start', '<=', $year)
+                ->where('day_end', '<', now())
+                ->sum('nb_blood_pouch');
+        }
+
+        return $winner;
     }
 
     public static function getAmbassador(int $year = null): ?string
@@ -154,6 +182,7 @@ class CompanyStatsService
 
         $best = $collections
             ->map(fn($c) => [
+                'company_id' => $c->company_id,
                 'name'  => $c->company->name,
                 'ratio' => $c->nb_blood_pouch / $c->nb_registered,
                 'nb_blood_pouch' => $c->nb_blood_pouch,
@@ -161,6 +190,20 @@ class CompanyStatsService
             ])
             ->sortByDesc('ratio')
             ->first();
+
+        if ($best) {
+            $lastCollectionOfYear = Collection::where('company_id', $best['company_id'])
+                ->whereYear('day_start', $year)
+                ->where('day_end', '<', now())
+                ->orderBy('day_start', 'desc')
+                ->first();
+            $best['nb_employee'] = $lastCollectionOfYear ? $lastCollectionOfYear->nb_employee : null;
+
+            $best['nb_blood_pouch'] = Collection::where('company_id', $best['company_id'])
+                ->whereYear('day_start', $year)
+                ->where('day_end', '<', now())
+                ->sum('nb_blood_pouch');
+        }
 
         return $best ?? null;
     }

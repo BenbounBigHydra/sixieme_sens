@@ -1,13 +1,13 @@
 <template>
     <div class="w-full bg-[#fffbf1] min-h-screen">
-        <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 pt-12 pb-8">
+        <section class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 pt-12 pb-8">
 
             <!-- Titre de la page -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left mb-10">
                 <img src="/images/YellowSquares.png" alt="Squares"
                     class="mx-auto md:mx-0 h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
                 <h1
-                    class="font-['Jersey_20'] text-[48px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
+                    class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
                     Entreprises partenaires
                 </h1>
             </div>
@@ -17,7 +17,7 @@
                 <!-- Filtre Année -->
                 <div class="relative w-full sm:w-auto">
                     <button @click="toggleYear"
-                        class="w-full bg-[#0073e6] text-white font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                        class="w-full bg-[#0073e6] text-white font-['Jersey_20'] text-[20px] md:text-[24px] px-4 md:px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                         <span class="mt-1">{{ selectedYear || '2025' }}</span>
                         <img src="/images/WhiteChevronDown.svg" alt="Chevron Down" class="w-5 h-5 ml-4 mt-1" />
                     </button>
@@ -33,7 +33,7 @@
                 <!-- Filtre Prix -->
                 <div class="relative w-full sm:w-auto">
                     <button @click="togglePrize"
-                        class="w-full bg-[#fffbf1] text-[#0073e6] font-['Jersey_20'] text-[24px] px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                        class="w-full bg-[#fffbf1] text-[#0073e6] font-['Jersey_20'] text-[20px] md:text-[24px] px-4 md:px-6 py-3 border-[2px] border-[#0073e6] flex items-center justify-between min-w-[200px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                         <span class="mt-1">{{ selectedPrize || 'Prix' }}</span>
                         <img src="/images/BlueChevron%20Down.svg" alt="Chevron Down" class="w-5 h-5 ml-4 mt-1" />
                     </button>
@@ -61,8 +61,13 @@
                         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-6 w-full px-4 md:px-0">
                         <div v-for="company in paginatedCompanies" :key="company.name"
                             @click="toggleCompanyInfo(company.name)"
-                            class="relative border-[4px] border-[#0073e6] aspect-square flex items-center justify-center p-4 cursor-pointer overflow-hidden transition-colors duration-300 md:hover:bg-[#0073e6] group"
-                            :class="activeCompany === company.name ? 'bg-[#0073e6]' : 'bg-[#fffbf1]'">
+                            class="relative border-[4px] aspect-square flex items-center justify-center p-4 cursor-pointer overflow-hidden transition-colors duration-300 group"
+                            :class="[
+                                (company.gold || company.ambassador || company.conviction) ? 
+                                    (activeCompany === company.name ? 'bg-[#ffd012]' : 'bg-[#fffbf1] md:hover:bg-[#ffd012]') :
+                                    (activeCompany === company.name ? 'bg-[#0073e6]' : 'bg-[#fffbf1] md:hover:bg-[#0073e6]'),
+                                (company.gold || company.ambassador || company.conviction) ? 'border-[#ffd012]' : 'border-[#0073e6]'
+                            ]">
                             <!-- Default image -->
                             <div class="flex flex-col items-center transition-opacity duration-300 absolute inset-0"
                                 :class="activeCompany === company.name ? 'opacity-0' : 'md:group-hover:opacity-0'">
@@ -82,18 +87,20 @@
                             <div class="absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-300 p-2 pointer-events-none"
                                 :class="activeCompany === company.name ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'">
                                 <div class="flex flex-col items-center justify-center w-full" style="height: 70%">
-                                    <h3
-                                        class="font-['Jersey_20'] text-white text-[28px] md:text-[32px] leading-none mb-2">
+                                    <h3 class="font-['Jersey_20'] text-[28px] md:text-[32px] leading-none mb-2"
+                                        :class="(company.gold || company.ambassador || company.conviction) ? 'text-black' : 'text-white'">
                                         {{ company.name }}
                                     </h3>
-                                    <p class="font-['Inter'] text-white text-xs md:text-sm flex flex-col gap-1">
+                                    <p class="font-['Inter'] text-xs md:text-sm flex flex-col gap-1"
+                                       :class="(company.gold || company.ambassador || company.conviction) ? 'text-black' : 'text-white'">
                                         <span v-if="company.gold">Or {{ selectedYear }}</span>
                                         <span v-if="company.ambassador">Ambassadeur {{ selectedYear }}</span>
                                         <span v-if="company.conviction">Conviction {{ selectedYear }}</span>
                                     </p>
                                 </div>
-                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-white text-[12px] opacity-70 gap-0.5"
-                                    style="height: 30%">
+                                <div class="flex flex-col items-center justify-center w-full font-['Inter'] text-[12px] opacity-70 gap-0.5"
+                                    style="height: 30%"
+                                    :class="(company.gold || company.ambassador || company.conviction) ? 'text-black' : 'text-white'">
                                     <span v-if="getAwardCounts(company.name, selectedYear).gold > 0">
                                         Prix Or · {{ getAwardCounts(company.name, selectedYear).gold }}
                                     </span>
@@ -191,9 +198,11 @@ const itemsPerPage = computed(() => {
 const years = computed(() => Object.keys(companiesByYear.value).map(Number).sort((a, b) => b - a));
 const prizes = ref(['Or', 'Ambassadeur', 'Conviction']);
 
-const selectedYear = ref(years.value[0] || null);
+const selectedYear = ref(null);
 watch(years, (val) => {
-    if (val.length && !selectedYear.value) selectedYear.value = val[0];
+    if (val.length && !selectedYear.value) {
+        selectedYear.value = val.includes(2025) ? 2025 : val[0];
+    }
 }, { immediate: true });
 const selectedPrize = ref(null);
 
@@ -222,6 +231,15 @@ const filteredCompanies = computed(() => {
             return false;
         });
     }
+
+    // Tri pour mettre les gagnants de l'année en haut de la liste
+    list = [...list].sort((a, b) => {
+        const aWinner = a.gold || a.ambassador || a.conviction;
+        const bWinner = b.gold || b.ambassador || b.conviction;
+        if (aWinner && !bWinner) return -1;
+        if (!aWinner && bWinner) return 1;
+        return 0;
+    });
 
     return list;
 });

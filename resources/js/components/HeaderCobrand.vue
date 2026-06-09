@@ -1,6 +1,6 @@
 <template>
-  <header class="w-full h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
-    <div class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
+  <header class="w-full h-20 md:h-24 bg-[#fffbf1] font-['Jersey_20'] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
+    <div class="max-w-desktop mx-auto px-4 md:px-8 lg:px-32 xl:px-40 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
 
       <a :href="`/collection/${companySlug}/${collectionId}`" class="flex items-center h-full gap-2 md:gap-4 hover:opacity-90 transition-opacity max-w-[70vw]">
         <!-- Desktop Logo HUG -->
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div v-show="isMenuOpen" class="absolute top-24 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg">
+    <div v-show="isMenuOpen" class="absolute top-20 left-0 w-full bg-[#0073E6] z-40 md:hidden flex flex-col font-['Inter'] shadow-lg">
       <a :href="`/collection/${companySlug}/${collectionId}`" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5 border-b border-white">
           <span>Accueil</span>
