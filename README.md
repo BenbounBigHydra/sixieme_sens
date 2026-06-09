@@ -168,6 +168,18 @@ php artisan view:cache
 > [!CAUTION]
 > Actuellement, la DB est totalement effacée, recréé et seedée à chaques fois. Au moment du déploiement réel, corriger cette fonctionnalité
 
+### Pages
+
+[donnons.ch](https://donnons.ch/) : Site vitrine
+
+[donnons.ch/collection/{company_name}/{collection_id}](https://donnons.ch/collection/heig-vd/237) : Site co-brandé. Pour les tests ; 
+* company : heig-vd
+* collection : 237
+
+[donnons.ch/admin](https://donnons.ch/admin) : Site admin. Pour les tests ; 
+* email : admin@example.ch
+* psw : password
+
 ## Structure du projet
 
 ### Model
