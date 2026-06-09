@@ -50,7 +50,7 @@
         </button>
       </div>
 
-      <div class="mt-2 md:mt-8 flex-grow flex flex-col-reverse md:flex-row justify-between items-center md:items-end relative gap-4 md:gap-12 pb-2 md:pb-4">
+      <div class="mt-2 md:mt-8 flex-grow flex flex-col-reverse md:flex-row justify-between items-center md:items-end relative gap-0 sm:gap-2 md:gap-12 pb-2 md:pb-4">
         <div class="max-w-2xl flex flex-col justify-end relative z-10 w-full md:w-1/2">
           <div class="border-[2px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4 md:p-8" :style="boxStyle">
             <h2 class="font-jersey text-[16px] sm:text-[18px] md:text-[32px] text-inherit leading-tight mb-3 md:mb-8 whitespace-pre-line relative z-10">
@@ -89,9 +89,9 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[30vh] md:min-h-0 md:max-h-[75vh]">
+        <div class="w-full md:w-1/2 flex justify-end flex-col items-center relative z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[35vh] md:min-h-0 md:max-h-[75vh]">
           <transition name="fade">
-            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute inset-0 m-auto object-contain" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
+            <img :key="currentImageSrc" :src="currentImageSrc" class="absolute bottom-0 left-0 right-0 mx-auto object-contain md:inset-0 md:m-auto" :class="[questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]', flightClass]" />
           </transition>
         </div>
       </div>
@@ -127,17 +127,17 @@
               Les critères d'éligibilité ne sont pas là pour décourager, ils sont là pour protéger. Protéger les patients qui recevront votre sang, mais aussi vous. Certaines contre-indications sont temporaires. Si c'est votre cas aujourd'hui, ça ne le sera peut-être plus lors de la prochaine collecte.<br/><br/>Le don du sang, ça se reporte, ça ne s'abandonne pas.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-2 md:gap-4">
-              <button @click="copyAndRedirect" class="bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[11px] md:text-base transition-all text-center relative overflow-hidden group">
+            <div class="flex flex-row sm:flex-row gap-2 md:gap-4 w-full">
+              <button @click="copyAndRedirect" class="flex-1 bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 sm:px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[10px] sm:text-[11px] md:text-base transition-all text-center relative overflow-hidden group">
                 <span :class="{'opacity-0': isCopied}">Partager à un collègue</span>
                 <span v-if="isCopied" class="absolute inset-0 flex items-center justify-center font-bold text-[#3ca370]">Copié !</span>
               </button>
-              <a :href="homeLink" class="border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-3 md:px-6 py-1.5 md:py-3 font-inter text-[11px] md:text-base transition-all text-center inline-block" :style="activeBtnStyle">
+              <a :href="homeLink" class="flex-1 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-2 sm:px-3 md:px-6 py-1.5 md:py-3 font-inter text-[10px] sm:text-[11px] md:text-base transition-all text-center flex items-center justify-center" :style="activeBtnStyle">
                 Retourner à l'accueil
               </a>
             </div>
             
-            <div class="mt-3 md:mt-4 text-center md:text-left">
+            <div v-if="currentQuestionIndex < questions.length - 1" class="mt-3 md:mt-4 text-center md:text-left">
               <a href="#" @click.prevent="continueQuiz" class="font-inter text-[#fffbf1] text-[11px] md:text-base underline hover:text-[#b3d9ff] transition-colors">
                 Continuer le quiz pour le fun
               </a>
@@ -145,8 +145,8 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 min-h-[25vh] max-h-[30vh] md:min-h-0 md:max-h-[75vh]">
-          <img :src="currentImageSrc" class="object-contain absolute inset-0 m-auto h-full" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]'" />
+        <div class="w-full md:w-1/2 flex justify-center items-center relative z-10 md:-translate-x-12 min-h-[25vh] md:min-h-0">
+          <img :src="currentImageSrc" class="object-contain relative" :class="questions[currentQuestionIndex]?.imageClass || 'max-h-[30vh] md:max-h-[75vh]'" />
         </div>
       </div>
     </div>
@@ -246,7 +246,7 @@ const questions = [
     correct: "Non",
     info: "Un nouveau partenaire ou des partenaires multiples augmentent le risque d'infections transmissibles par le sang.",
     yesText: "Ce critère vise à réduire le risque de transmission de certaines infections par le sang.",
-    noText: "On reste safe par ici.",
+    noText: "La sécurité avant tout, c'est parfait !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "04_sex", prefix: "sex", hasYes: true, hasNo: true,
     imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
@@ -254,8 +254,8 @@ const questions = [
     text: "Pèses-tu moins de 50 kg ?",
     correct: "Non",
     info: "Un poids minimum de 50 kg est requis pour bien tolérer le volume de sang prélevé.",
-    yesText: "On a besoin que tu sois bien dans ton corps pour donner ! Un poids minimum est requis pour ta sécurité.",
-    noText: "Tu es sur la bonne planète pour donner !",
+    yesText: "Le prélèvement d'une poche de sang représente un certain volume. Pour que tu le tolères bien, sans fatigue excessive, un poids minimum de 50 kg est demandé pour te protéger.",
+    noText: "Tu as le gabarit pour donner !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "05_weight", prefix: "weight", hasYes: true, hasNo: true,
     imageClass: "max-h-[30vh] md:max-h-[75vh]"
   },
@@ -293,7 +293,7 @@ const questions = [
     yesText: "J’espère que ce n’était rien de grave pour toi. Après une anesthésie, il faut attendre un moment avant de donner son sang. Reviens bientôt!",
     noText: "Analyse terminée, l'alien valide, tout va bien !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "09_gastroscopy", prefix: "gastroscopy", hasYes: true, hasNo: true,
-    imageClass: "max-h-[25vh] md:max-h-[60vh] translate-y-6 md:translate-y-16"
+    imageClass: "max-h-[35vh] md:max-h-[70vh] translate-y-4 md:translate-y-12"
   },
   {
     text: "As-tu bénéficié d’un détartrage dans les 24 dernières heures ou d’un traitement dentaire dans les 7 derniers jours ?",
@@ -302,7 +302,7 @@ const questions = [
     yesText: "C’est super pour tes dents, mais le risque d’infection est trop élevé pour donner du sang tout suite. Réessayons plus tard!",
     noText: "Une seule dent au compteur, mais ça passe !",
     bg: "background_lab_desktop.png", mobileBg: "bkgMobile/Background_lab_mobile.png", folder: "10_dental", prefix: "dental", hasYes: true, hasNo: true,
-    imageClass: "max-h-[25vh] md:max-h-[60vh] translate-y-6 md:translate-y-16"
+    imageClass: "max-h-[25vh] md:max-h-[60vh] translate-y-6 md:translate-y-12"
   },
   {
     text: "Ces quatre dernières semaines, as-tu pris des médicaments ou reçu un vaccin ?",
@@ -457,7 +457,7 @@ const answerQuestion = (answer) => {
       isAnimating.value = false;
       flightClass.value = '';
       proceedToNext();
-    }, 2860);
+    }, 3800);
   }
 };
 
@@ -538,7 +538,7 @@ const handleOnedocClick = async () => {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
