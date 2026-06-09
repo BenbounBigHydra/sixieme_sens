@@ -227,7 +227,7 @@
                         <div class="p-4">
                             <h4 class="font-inter text-xl font-bold text-black mb-2">{{
                                 computedMonthsData[hoveredMonthIndex].label
-                                }}</h4>
+                            }}</h4>
 
                             <div v-if="computedMonthsData[hoveredMonthIndex].collections.length === 0"
                                 class="text-sm font-inter text-gray-500 py-4">
@@ -387,7 +387,11 @@
                             <span class="absolute right-3 top-1/2 -translate-y-1/2">*</span>
                         </div>
                     </div>
-                    <p v-if="errors" class="text-red-600 font-inter text-sm">{{ errors }}</p>
+                    <ul v-if="errors.length">
+                        <li v-for="(error, index) in errors" :key="index"
+                            class="block font-inter text-base mb-2 text-red-600">
+                            {{ error }}</li>
+                    </ul>
                 </div>
 
                 <div class="flex space-x-4">
@@ -477,7 +481,9 @@
                     </div>
                 </div>
                 <ul v-if="errors.length">
-                    <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    <li v-for="(error, index) in errors" :key="index"
+                        class="block font-inter text-base mb-2 text-red-600">{{
+                        error }}</li>
                 </ul>
                 <div class="flex justify-between items-center">
                     <button @click="activeModal = 'suppression'"
@@ -669,37 +675,47 @@ export default {
                     },
                     body: JSON.stringify(this.detailForm)
                 });
-                if (!response.ok) throw new Error("API Error");
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (data.errors) {
+                        // Aplatit toutes les erreurs de chaque champ en un tableau
+                        this.errors = Object.values(data.errors).flat();
+                    } else {
+                        this.errors = [data.message || 'Une erreur est survenue.'];
+                    }
+                    return;
+                }
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                if (data.errors) {
-                    // Aplatit toutes les erreurs de chaque champ en un tableau
-                    this.errors = Object.values(data.errors).flat();
-                } else {
-                    this.errors = [data.message || 'Une erreur est survenue.'];
-                }
+                this.errors = ['Erreur réseau lors de la mise à jour.'];
             }
         },
         async submitSuppression() {
             if (this.suppressionInput.toLowerCase() !== 'supprimer') return;
+            this.errors = [];
             try {
                 const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
                     method: 'DELETE',
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     }
                 });
-                if (!response.ok) throw new Error("API Error");
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (data.errors) {
+                        // Aplatit toutes les erreurs de chaque champ en un tableau
+                        this.errors = Object.values(data.errors).flat();
+                    } else {
+                        this.errors = [data.message || 'Une erreur est survenue.'];
+                    }
+                    return;
+                }
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                if (data.errors) {
-                    // Aplatit toutes les erreurs de chaque champ en un tableau
-                    this.errors = Object.values(data.errors).flat();
-                } else {
-                    this.errors = [data.message || 'Une erreur est survenue.'];
-                }
+                this.errors = ['Erreur réseau lors de la suppression.'];
             }
         }
     },
