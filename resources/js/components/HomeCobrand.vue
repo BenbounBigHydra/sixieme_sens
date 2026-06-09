@@ -24,7 +24,7 @@
         <div class="w-fit max-w-full bg-[#fffbf1] border-[3px] border-[#0073e6] p-6 md:p-10 relative z-20 flex flex-row items-center justify-start gap-8 md:gap-16 min-h-min md:min-h-[350px]">
 
           <!-- Text Content -->
-          <div class="flex flex-col w-full h-full">
+          <div class="flex flex-col w-full h-full flex-1">
             <!-- Mobile Layout: Two columns -->
             <div class="flex md:hidden flex-row justify-between items-start gap-2 mb-6">
               <!-- Left Col: Title & Date -->
@@ -39,10 +39,10 @@
               <!-- Right Col: Location & Button -->
               <div class="flex flex-col w-1/2 items-end text-right">
                 <div class="flex items-center justify-end gap-1 mb-2">
-                  <img src="/images/locationBlack.svg" alt="Location" class="w-4 h-4 object-contain" onerror="this.style.display='none'" />
-                  <span class="font-['Inter'] text-[12px] text-black font-medium leading-tight">
+                  <span class="font-['Inter'] text-[12px] text-black font-medium leading-tight text-right">
                     {{ collection?.location || 'Av. des Sports 20, 1401 Yverdon-les-Bains' }}
                   </span>
+                  <img src="/images/locationBlack.svg" alt="Location" class="w-4 h-4 object-contain" onerror="this.style.display='none'" />
                 </div>
                 <a :href="quizzUrl" class="bg-[#0073e6] text-white px-3 py-2 font-['Inter'] text-[12px] font-bold border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
                   Je souhaite donner
@@ -71,22 +71,38 @@
               </div>
             </div>
 
-            <!-- Roby Mascot & Bubble -->
-            <a :href="quizzUrl" class="flex flex-row md:absolute md:right-[-60px] md:top-1/2 md:-translate-y-1/2 items-center justify-start md:justify-center w-full md:w-auto h-auto group hover:scale-105 transition-transform origin-bottom mt-2 md:mt-0">
-              <img src="/images/dono_smiling.png" alt="Roby" class="w-20 sm:w-24 md:w-48 lg:w-64 h-auto object-contain shrink-0" />
+            <!-- Roby Mascot & Bubble (Mobile Only) -->
+            <a :href="quizzUrl" class="md:hidden flex flex-row items-center justify-start w-full h-auto group hover:scale-105 transition-transform origin-bottom mt-2">
+              <img src="/images/dono_smiling.png" alt="Roby" class="w-20 sm:w-24 h-auto object-contain shrink-0" />
 
               <!-- Speech Bubble -->
-              <div class="relative ml-4 md:absolute md:bottom-auto md:top-1/4 md:left-[90%] md:ml-6 bg-[#1a81e7] text-white p-2 md:p-4 border-[2px] md:border-[3px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-[200px] md:w-max md:max-w-[280px] z-50">
-                <p class="font-['Jersey_20'] tracking-wide text-[14px] md:text-xl leading-tight text-left break-words">
+              <div class="relative ml-4 bg-[#1a81e7] text-white p-2 border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-full max-w-[200px] z-50">
+                <p class="font-['Jersey_20'] tracking-wide text-[14px] leading-tight text-left break-words">
                   Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
                 </p>
 
                 <!-- Arrow pointing left -->
-                <div class="absolute top-4 md:top-6 -left-[10px] md:-left-[15px] w-0 h-0 border-y-[8px] md:border-y-[12px] border-y-transparent border-r-[10px] md:border-r-[15px] border-r-black"></div>
-                <div class="absolute top-[16px] md:top-[27px] -left-[7px] md:-left-[10px] w-0 h-0 border-y-[6px] md:border-y-[9px] border-y-transparent border-r-[8px] md:border-r-[12px] border-r-[#1a81e7] z-10"></div>
+                <div class="absolute top-4 -left-[10px] w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-black"></div>
+                <div class="absolute top-[16px] -left-[7px] w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-[#1a81e7] z-10"></div>
               </div>
             </a>
           </div>
+
+          <!-- Roby Mascot & Bubble (Desktop Only) -->
+          <a :href="quizzUrl" class="hidden md:flex relative items-center justify-center shrink-0 h-full group hover:scale-105 transition-transform origin-bottom mt-0 md:pr-0">
+            <img src="/images/dono_smiling.png" alt="Roby" class="md:h-64 object-contain" />
+
+            <!-- Speech Bubble -->
+            <div class="absolute bottom-auto top-1/4 left-[90%] ml-6 bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-max max-w-[280px] z-50">
+              <p class="font-['Jersey_20'] tracking-wide text-xl leading-tight text-left">
+                Salut ! Je suis Roby, bienvenue sur le site {{ company?.name || 'HEIG-VD' }}. J'essaye de donner mon sang, tout comme toi. On part en voyage ?
+              </p>
+
+              <!-- Arrow pointing left -->
+              <div class="absolute top-6 -left-[15px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[15px] border-r-black"></div>
+              <div class="absolute top-[27px] -left-[10px] w-0 h-0 border-y-[9px] border-y-transparent border-r-[12px] border-r-[#1a81e7] z-10"></div>
+            </div>
+          </a>
 
         </div>
       </div>
@@ -97,25 +113,25 @@
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
 
         <!-- Left Column -->
-        <div class="w-full lg:w-1/2 flex flex-col">
-          <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
-          <h2 class="font-['Jersey_20'] text-[48px] md:text-[56px] text-black mb-8 leading-none tracking-wide text-center lg:text-left">
+        <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
+          <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center lg:origin-left self-center lg:self-start" onerror="this.style.display='none'" />
+          <h2 class="font-['Jersey_20'] text-[36px] md:text-[56px] text-black mb-6 md:mb-8 leading-none tracking-wide text-center lg:text-left">
             Pourquoi donner son sang ?
           </h2>
-          <div class="font-['Inter'] text-base md:text-lg text-black space-y-6 mb-10 leading-relaxed text-left">
+          <div class="font-['Inter'] text-sm md:text-lg text-black space-y-4 md:space-y-6 mb-8 md:mb-10 leading-relaxed text-left max-w-[500px] lg:max-w-none">
             <p>Chaque don de sang peut sauver jusqu'à trois vies. Pas trois fois de suite, trois personnes différentes, le même jour, grâce à toi.</p>
             <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient d'accoucher, un accidenté en salle d'opération.</p>
             <p>Les besoins sont constants, c'est pourquoi chaque collecte compte, et chaque donneur aussi.</p>
           </div>
 
           <!-- Stats Replacement -->
-          <div class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-10 w-full relative">
-            <div class="font-['Jersey_20'] text-[48px] md:text-[64px] text-[#0073e6] leading-none tracking-wide -mt-1">
+          <div class="flex flex-row items-center justify-center lg:justify-start gap-2 md:gap-3 mb-8 md:mb-10 w-full relative">
+            <div class="font-['Jersey_20'] text-[40px] md:text-[64px] text-[#0073e6] leading-none tracking-wide -mt-1">
               {{ participationRate }}%
             </div>
             <div class="flex flex-col justify-center text-left mt-1">
-              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
-              <span class="font-['Jersey_20'] text-[24px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
+              <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide">de participation,</span>
+              <span class="font-['Jersey_20'] text-[20px] md:text-[32px] font-normal text-black leading-tight tracking-wide flex items-center">
                 <span><span class="text-[#0073e6]">{{ livesSaved }}</span> vies sauvées.</span>
                 <div class="relative group inline-flex ml-1 -mt-3">
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer">
@@ -129,8 +145,8 @@
             </div>
           </div>
 
-          <div class="flex justify-center lg:justify-start">
-             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-8 py-3 font-['Inter'] text-lg font-bold border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+          <div class="flex justify-center lg:justify-start w-full">
+             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 md:px-8 py-2 md:py-3 font-['Inter'] text-sm md:text-lg font-bold border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
                Donner mon sang
              </a>
           </div>
@@ -204,10 +220,10 @@
     </section>
 
     <!-- Part 3: Ils témoignent -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 relative z-10">
-      <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
           Ils témoignent
         </h2>
       </div>
@@ -254,27 +270,27 @@
     </section>
 
     <!-- Part 4: Questions fréquentes -->
-    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-16 mb-20 relative z-10">
-      <div class="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
-        <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
-        <h2 class="font-['Jersey_20'] text-[40px] md:text-[48px] text-black leading-none tracking-wide">
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 mb-12 md:mb-20 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
           Questions fréquentes
         </h2>
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-8 items-start">
         <!-- FAQ List (Left) -->
         <div class="w-full lg:w-7/12">
            <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
-              <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-4 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
-                 <span class="font-['Inter'] text-base md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
+              <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-3 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                 <span class="font-['Inter'] text-sm md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
               </button>
 
               <!-- Mobile Inline Roby & Answer (Phones only < 768px) -->
-              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-4 py-6 relative">
+              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-3 py-4 relative">
                 <!-- Speech Bubble -->
-                <div class="relative bg-[#1a81e7] text-white p-4 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
-                  <div class="font-['Inter'] text-sm leading-relaxed">
+                <div class="relative bg-[#1a81e7] text-white p-3 border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
+                  <div class="font-['Inter'] text-xs leading-relaxed">
                     <p>{{ faqList[openFaq].a }}</p>
                     <div v-if="faqList[openFaq].button" class="mt-4">
                       <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
