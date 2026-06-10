@@ -848,8 +848,14 @@ export default {
                     this.errors = { general: [data.message || 'Erreur lors de la suppression.'] };
                     return;
                 }
-            },
-            nextMobilePage() {
+                window.location.reload();
+            } catch (err) {
+                console.error("Erreur de suppression:", err);
+            } finally {
+                this.isSaving = false;
+            }
+        },
+        nextMobilePage() {
                 if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCollections.length) {
                     this.mobilePage++;
                 }
