@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Leaderboard</title>
+    <title>Admin Résultats</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 </head>
 <body class="bg-[#fffbf1] font-inter">
     <div id="app">
-        <leaderboard-admin :initial-data="{{ $initialData }}"></leaderboard-admin>
+        <result-admin :initial-data="{{ $initialData }}"></result-admin>
     </div>
 </body>
 </html>

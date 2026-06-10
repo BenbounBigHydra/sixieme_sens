@@ -44,7 +44,7 @@ class AdminController extends Controller
         return view('admin.companies', ['initialData' => json_encode($data)]);
     }
 
-    public function leaderboard()
+    public function result()
     {
         $year = request()->query('year', Carbon::now()->year);
 
@@ -53,26 +53,20 @@ class AdminController extends Controller
         $kpis = $companies->mapWithKeys(fn($company) => [
             $company->id => [
                 'name' => $company->name,
-                'kpis' => CompanyStatsService::getAllKpisForCompany($company),
+                'kpis' => CompanyStatsService::getAllKpisForCompany($company, $year),
             ]
         ]);
 
         $data = [
+            'availableYears' => CompanyStatsService::getActivesYears(),
             'gold'       => CompanyStatsService::getGoldWinnerData($year),
             'ambassador' => CompanyStatsService::getAmbassadorData($year),
             'conviction' => CompanyStatsService::getConvictionData($year),
             'kpis'       => $kpis,
         ];
 
-        return view('admin.leaderboard', ['initialData' => json_encode($data)]);
-    }
+        // dd($data);
 
-    public function editorialContent()
-    {
-        $data = [
-            //Todo : Récupérer les données nécessaires pour la page du contenu éditorial
-        ];
-
-        return view('admin.editorialContent', ['initialData' => json_encode($data)]);
+        return view('admin.result', ['initialData' => json_encode($data)]);
     }
 }
