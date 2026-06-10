@@ -13,6 +13,9 @@ Route::get('/trophees', [VitrinController::class, 'trophies']);
 Route::get('/label', [VitrinController::class, 'label']);
 Route::get('/companies', [VitrinController::class, 'companies']);
 Route::get('/contact', [VitrinController::class, 'contact']);
+Route::get('/teapot', function () {
+    abort(418);
+});
 
 // Site co-branding
 Route::prefix('/collection/{company_name}')->controller(CoBrandController::class)->middleware(TrackCollectionVisit::class)->group(function () {
