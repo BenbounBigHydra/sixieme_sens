@@ -266,7 +266,7 @@ const questions = [
     yesText: "Aïe, c’est vraiment des sales bêtes! Pour être sûr qu’elle ne t’ait rien transmis, il va falloir attendre un peu avant de pouvoir donner du sang.",
     noText: "La tique a raté sa cible, zéro souci !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "06_tick", prefix: "tick", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[90vh] md:scale-[1.4] translate-x-4 md:translate-x-[30%]"
+    imageClass: "max-h-[30vh] md:max-h-[75vh] translate-x-4 md:translate-x-[30%]"
   },
   {
     text: "As-tu fait de l'acupuncture ou un tatouage dans les 4 derniers mois?",
