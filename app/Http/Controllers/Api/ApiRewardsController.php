@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\CompanyStatsService;
 use Illuminate\Support\Carbon;
+use App\Models\Company;
 
 class ApiRewardsController extends Controller
 {
@@ -45,6 +46,27 @@ class ApiRewardsController extends Controller
             'logo'   => $company->logo,
             'awards' => CompanyStatsService::getCompanyAwards($company),
         ]);
+
+        return response()->json($data);
+    }
+
+    public function result($year)
+    {
+        $companies = Company::with('collections')->get();
+
+        $kpis = $companies->mapWithKeys(fn($company) => [
+            $company->id => [
+                'name' => $company->name,
+                'kpis' => CompanyStatsService::getAllKpisForCompany($company, $year),
+            ]
+        ]);
+
+        $data = [
+            'gold'       => CompanyStatsService::getGoldWinnerData($year),
+            'ambassador' => CompanyStatsService::getAmbassadorData($year),
+            'conviction' => CompanyStatsService::getConvictionData($year),
+            'kpis'       => $kpis,
+        ];
 
         return response()->json($data);
     }

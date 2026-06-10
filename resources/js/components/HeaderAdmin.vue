@@ -18,8 +18,8 @@
         <a href="/admin/collections" :class="currentPath === '/admin/collections' ? 'text-[#0073e6]' : 'text-[#393939]'" class="font-['Jersey_20'] text-[28px] hover:text-[#0073e6] cursor-pointer transition-colors tracking-wide">
           Collectes
         </a>
-        <a href="/admin/leaderboard" :class="currentPath === '/admin/leaderboard' ? 'text-[#0073e6]' : 'text-[#393939]'" class="font-['Jersey_20'] text-[28px] hover:text-[#0073e6] cursor-pointer transition-colors tracking-wide">
-          Leaderboard
+        <a href="/admin/result" :class="currentPath === '/admin/result' ? 'text-[#0073e6]' : 'text-[#393939]'" class="font-['Jersey_20'] text-[28px] hover:text-[#0073e6] cursor-pointer transition-colors tracking-wide">
+          Résultats
         </a>
       </nav>
 
@@ -53,9 +53,9 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
         </div>
       </a>
-      <a href="/admin/leaderboard" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
+      <a href="/admin/result" class="block px-6 hover:bg-[#fffbf1]/10 transition-colors">
         <div class="flex items-center justify-between text-white text-[17px] py-5">
-          <span :class="{'font-bold': currentPath === '/admin/leaderboard'}">Leaderboard</span>
+          <span :class="{'font-bold': currentPath === '/admin/result'}">Résultats</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
         </div>
       </a>

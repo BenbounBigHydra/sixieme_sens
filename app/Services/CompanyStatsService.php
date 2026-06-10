@@ -290,13 +290,15 @@ class CompanyStatsService
     }
 
     // Tous les KPIs pour toutes les collectes d'une entreprise
-    public static function getAllKpisForCompany(Company $company): array
+    public static function getAllKpisForCompany(Company $company, int $year): array
     {
         return $company->collections()
             ->orderBy('day_start')
+            ->whereYear('day_start', $year)
             ->get()
             ->map(fn($collection) => [
                 'collection_id'     => $collection->id,
+                'collection_day_start' => $collection->day_start->format('Y-m-d'),
                 'occupancy_rate'    => self::getOccupancyRate($collection),
                 'non_eligible_rate' => self::getNonEligibleRate($collection),
                 'cobrand_visit_rate' => self::getCobrandVisitRate($collection),

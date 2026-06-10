@@ -24,7 +24,7 @@ import LoginAdmin from './components/LoginAdmin.vue';
 import DashboardAdmin from './components/DashboardAdmin.vue';
 import CompaniesAdmin from './components/CompaniesAdmin.vue';
 import CollectionsAdmin from './components/CollectionsAdmin.vue';
-import LeaderboardAdmin from './components/LeaderboardAdmin.vue';
+import ResultAdmin from './components/ResultAdmin.vue';
 
 // Initialisation de l'application Vue
 const app = createApp({});
@@ -51,7 +51,7 @@ app.component('login-admin', LoginAdmin);
 app.component('dashboard-admin', DashboardAdmin);
 app.component('companies-admin', CompaniesAdmin);
 app.component('collections-admin', CollectionsAdmin);
-app.component('leaderboard-admin', LeaderboardAdmin);
+app.component('result-admin', ResultAdmin);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');

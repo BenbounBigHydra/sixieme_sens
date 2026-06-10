@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ApiMailController;
 
 Route::get('/trophies/{year?}', [ApiRewardsController::class, 'winner']);
 Route::get('/labels/{year?}', [ApiRewardsController::class, 'labelledCompanies']);
+Route::get('/result/{year}', [ApiRewardsController::class, 'result']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/collection/{id}', [ApiCollectionController::class, 'show']);
