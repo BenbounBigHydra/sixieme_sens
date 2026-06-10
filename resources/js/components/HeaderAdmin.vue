@@ -2,9 +2,9 @@
   <header class="w-full h-20 md:h-24 bg-[#fffbf1] tracking-wide border-b border-gray-100 sticky top-0 z-50 shadow-md">
     <div class="max-w-desktop mx-auto px-4 md:px-8 lg:px-20 xl:px-32 w-full h-full flex items-center justify-between relative bg-[#fffbf1] z-50">
       <!-- Logo -->
-      <a href="/admin" class="flex items-center h-full cursor-pointer hover:opacity-90 transition-opacity">
-        <img src="/images/hug_icon.png" alt="Logo HUG Desktop" class="hidden md:block h-12 w-auto object-contain" />
-        <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-10 w-auto object-contain" />
+      <a href="/admin" class="flex items-center h-full shrink-0 cursor-pointer hover:opacity-90 transition-opacity">
+        <img src="/images/hug_icon.png" alt="Logo HUG Desktop" class="hidden md:block h-12 w-auto object-contain shrink-0" />
+        <img src="/images/hug_icon_Mobile.png" alt="Logo HUG Mobile" class="md:hidden h-10 w-auto object-contain shrink-0" />
       </a>
 
       <!-- Desktop Navigation -->

@@ -6,18 +6,18 @@
             <!-- FirstPart: Action Buttons -->
             <section class="grid grid-cols-2 gap-4 md:gap-6">
                 <a href="/admin/companies?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
-                    <div class="h-4 w-4 md:h-6 md:w-6 mr-2 md:mr-3 shrink-0 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 px-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-4 w-4 md:h-6 md:w-6 mr-1 md:mr-3 shrink-0 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-['Jersey_20'] tracking-wide text-[14px] md:text-2xl text-center leading-none md:leading-normal">Ajouter une entreprise</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[13px] md:text-2xl text-center leading-none md:leading-normal">Ajouter une entreprise</span>
                 </a>
                 <a href="/admin/collections?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
-                    <div class="h-4 w-4 md:h-6 md:w-6 mr-2 md:mr-3 shrink-0 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 px-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-4 w-4 md:h-6 md:w-6 mr-1 md:mr-3 shrink-0 bg-[#fffbf1]"
                         style="mask-image: url('/images/Group.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Group.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-['Jersey_20'] tracking-wide text-[14px] md:text-2xl text-center leading-none md:leading-normal">Organiser une collecte</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[13px] md:text-2xl text-center leading-none md:leading-normal">Organiser une collecte</span>
                 </a>
             </section>
 
@@ -259,9 +259,10 @@
                                     class="absolute bottom-[20px] flex flex-col items-center -translate-x-1/2"
                                     :style="{ left: `${((index + 1) / (computedMonthsData[hoveredMonthIndex].collections.length + 1)) * 100}%` }">
 
-                                    <span class="text-[10px] font-inter text-black absolute whitespace-nowrap"
-                                        :class="index % 2 === 0 ? 'bottom-[55px]' : 'bottom-[85px]'">
-                                        {{ formatDate(col.day_start) }}
+                                    <span class="text-[10px] md:text-[12px] font-inter text-black absolute whitespace-nowrap"
+                                        :class="index % 2 === 0 ? 'bottom-[40px] md:bottom-[55px]' : 'bottom-[70px] md:bottom-[85px]'">
+                                        <span class="md:hidden">{{ formatDateShort(col.day_start) }}</span>
+                                        <span class="hidden md:inline">{{ formatDate(col.day_start) }}</span>
                                     </span>
 
                                     <div class="border border-black bg-white flex items-center justify-center z-10 min-w-[30px] md:min-w-[60px] w-max px-1 md:px-2 h-[16px] md:h-[28px] absolute left-1/2 -translate-x-1/2"
@@ -287,11 +288,11 @@
                 <!-- Taux de participation -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />participation</h3>
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight ml-[16px] md:ml-[32px]">Taux de<br />participation</h3>
                         <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="absolute left-0 md:left-auto md:right-0 top-full mt-2 w-[220px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -325,11 +326,11 @@
                 <!-- Taux de rigueur -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />rigueur</h3>
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight ml-[16px] md:ml-[32px]">Taux de<br />rigueur</h3>
                         <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="absolute right-0 top-full mt-2 w-[220px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -618,6 +619,11 @@ export default {
             if (!dateStr) return '';
             const d = new Date(dateStr);
             return d.toLocaleDateString('fr-CH');
+        },
+        formatDateShort(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('fr-CH', { day: '2-digit', month: '2-digit' });
         },
         openModal(type, item) {
             this.activeModal = type;
