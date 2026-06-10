@@ -172,7 +172,8 @@
                         <div @click="toggleDropdown"
                             class="w-full bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] py-3 px-4 font-inter font-bold text-[#393939] cursor-pointer flex justify-between items-center transition-all hover:bg-gray-50"
                             :class="{ 'translate-y-[2px] translate-x-[2px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]': isDropdownOpen }">
-                            <span class="truncate pr-4">{{ selectedCompanyName }}</span>
+                            <input v-if="isDropdownOpen" ref="searchInput" v-model="searchQuery" @keydown.enter.prevent="selectFirstOption" class="w-full bg-transparent outline-none font-inter font-bold text-[#393939] placeholder-gray-400 truncate pr-4" placeholder="Rechercher..." @click.stop />
+                            <span v-else class="truncate pr-4">{{ selectedCompanyName }}</span>
                             <svg class="fill-current h-5 w-5 flex-shrink-0 transition-transform duration-200"
                                 :class="{ 'rotate-180': isDropdownOpen }" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20">
@@ -182,19 +183,15 @@
 
                         <div v-if="isDropdownOpen" ref="dropdownMenu"
                             class="absolute z-50 w-full mt-3 bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] max-h-[300px] overflow-y-auto">
-                            <div @click="selectCompany('all')"
-                                class="px-4 py-3 font-inter font-bold text-[#393939] hover:bg-[#ffeaa7] hover:text-black cursor-pointer transition-colors border-b-2 border-gray-200 flex items-center">
-                                <div class="w-3 h-3 rounded-full mr-3"
-                                    :class="selectedCompanyKpi === 'all' ? 'bg-[#0073e6]' : 'bg-transparent border border-gray-300'">
-                                </div>
-                                Toutes les entreprises
-                            </div>
-                            <div v-for="(data, companyId) in kpiData" :key="companyId" @click="selectCompany(companyId)"
+                            <div v-for="comp in filteredCompanies" :key="comp.id" @click="selectCompany(comp.id)"
                                 class="px-4 py-3 font-inter font-bold text-[#393939] hover:bg-[#ffeaa7] hover:text-black cursor-pointer transition-colors border-b-2 border-gray-200 last:border-0 flex items-center">
                                 <div class="w-3 h-3 rounded-full mr-3"
-                                    :class="companyId === selectedCompanyKpi ? 'bg-[#0073e6]' : 'bg-transparent border border-gray-300'">
+                                    :class="comp.id === selectedCompanyKpi ? 'bg-[#0073e6]' : 'bg-transparent border border-gray-300'">
                                 </div>
-                                {{ data.name }}
+                                {{ comp.name }}
+                            </div>
+                            <div v-if="filteredCompanies.length === 0" class="px-4 py-3 font-inter font-bold text-gray-500">
+                                Aucun résultat
                             </div>
                         </div>
 
@@ -430,6 +427,7 @@ export default {
 
             selectedCompanyKpi: 'all',
             isDropdownOpen: false,
+            searchQuery: '',
 
             selectedYear: currentYear,
             isLoadingYear: false,
@@ -468,6 +466,29 @@ export default {
                 return this.kpiData[this.selectedCompanyKpi].name;
             }
             return 'Toutes les entreprises';
+        },
+
+        filteredCompanies() {
+            const query = this.searchQuery.toLowerCase();
+            const allOption = { id: 'all', name: 'Toutes les entreprises' };
+            const companiesList = Object.entries(this.kpiData).map(([id, data]) => ({ id, name: data.name }));
+
+            if (!query) {
+                return [allOption, ...companiesList];
+            }
+
+            const result = [];
+            if ('toutes les entreprises'.includes(query)) {
+                result.push(allOption);
+            }
+            
+            companiesList.forEach(comp => {
+                if (comp.name.toLowerCase().includes(query)) {
+                    result.push(comp);
+                }
+            });
+            
+            return result;
         },
 
         /**
@@ -545,11 +566,21 @@ export default {
         toggleDropdown() {
             this.isDropdownOpen = !this.isDropdownOpen;
             if (this.isDropdownOpen) {
+                this.searchQuery = '';
                 this.$nextTick(() => {
+                    if (this.$refs.searchInput) {
+                        this.$refs.searchInput.focus();
+                    }
                     if (this.$refs.dropdownMenu) {
                         this.$refs.dropdownMenu.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
+            }
+        },
+
+        selectFirstOption() {
+            if (this.filteredCompanies.length > 0) {
+                this.selectCompany(this.filteredCompanies[0].id);
             }
         },
 
