@@ -6,7 +6,7 @@
             <!-- Search Bar -->
             <div class="relative w-full">
                 <input type="text" v-model="searchQuery" placeholder="Rechercher"
-                    class="w-full border border-gray-400 rounded-sm py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
+                    class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                     <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
                 </div>
@@ -14,19 +14,19 @@
 
             <!-- Title and Action -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
-                <h1 class="font-inter font-bold text-3xl text-black">Entreprises partenaires</h1>
+                <h1 class="font-inter font-bold text-2xl md:text-3xl text-black">Entreprises partenaires</h1>
                 <button @click="openNewCompanyModal"
-                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-6 py-3 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all w-full md:w-auto justify-center">
                     <div class="h-4 w-4 mr-2 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-inter text-sm">Nouvelle entreprise</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-lg">Nouvelle entreprise</span>
                 </button>
             </div>
 
             <!-- Companies Table -->
             <div class="w-full">
-                <div class="border border-blue-200 rounded-t-sm overflow-hidden">
+                <div class="border border-blue-200  overflow-hidden">
                     <!-- Table Header (Desktop Only) -->
                     <div
                         class="hidden md:grid grid-cols-5 items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
@@ -92,10 +92,11 @@
                     </div>
 
                     <!-- Table Body -->
-                    <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+                    <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="filteredAndSortedCompanies.length > 0">
-                            <div v-for="company in filteredAndSortedCompanies" :key="company.id"
-                                class="flex flex-col md:grid md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0 hover:bg-[#CCE6FF] transition-colors">
+                            <div v-for="(company, index) in filteredAndSortedCompanies" :key="company.id"
+                                :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
+                                class="md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0 hover:bg-[#CCE6FF] transition-colors">
                                 <!-- Entreprise -->
                                 <div class="flex items-center space-x-3">
                                     <div class="h-8 w-16 flex items-center justify-start">
@@ -142,11 +143,20 @@
                                 <div
                                     class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
                                     <button @click="openEditModal(company)"
-                                        class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
+                                        class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                                         <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                                         <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
+                                <button @click="prevMobilePage" :disabled="mobilePage === 0" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&lt;</span>
+                                </button>
+                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{ Math.ceil(filteredAndSortedCompanies.length / 3) || 1 }}</span>
+                                <button @click="nextMobilePage" :disabled="(mobilePage + 1) * 3 >= filteredAndSortedCompanies.length" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&gt;</span>
+                                </button>
                             </div>
                         </template>
                         <template v-else>
@@ -162,7 +172,7 @@
         <!-- Company Modal -->
         <div v-if="isModalOpen" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div
-                class="bg-[#fffbf1] w-full max-w-4xl rounded-sm shadow-xl border border-blue-200 overflow-hidden flex flex-col max-h-[90vh]">
+                class="bg-[#fffbf1] w-full max-w-4xl  shadow-xl border border-blue-200 overflow-hidden flex flex-col max-h-[90vh]">
                 <!-- Modal Header -->
                 <div class="flex justify-between items-center p-6 border-b border-blue-200">
                     <h2 class="font-inter font-bold text-2xl text-black">
@@ -186,7 +196,7 @@
                             <div>
                                 <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Nom *</label>
                                 <input type="text" v-model="form.name"
-                                    class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
+                                    class="w-full border border-gray-400  py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
                                     placeholder="Nom de l'entreprise" />
                                 <p v-if="errors.name" class="text-red-500 text-xs mt-1">{{ errors.name[0] }}</p>
                             </div>
@@ -195,9 +205,9 @@
                             <div>
                                 <label class="block font-inter text-sm font-bold text-[#393939] mb-2">Logo</label>
                                 <input type="file" @change="handleFileUpload" accept="image/*"
-                                    class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#0073e6] hover:file:bg-blue-100" />
+                                    class="w-full border border-gray-400  py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors file:mr-4 file:py-2 file:px-4 file: file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#0073e6] hover:file:bg-blue-100" />
                                 <div v-if="previewLogo || (editingCompany && editingCompany.logo)"
-                                    class="mt-4 border border-gray-200 p-2 rounded-sm inline-block">
+                                    class="mt-4 border border-gray-200 p-2  inline-block">
                                     <img :src="previewLogo || '/' + editingCompany.logo" alt="Logo preview"
                                         class="h-16 object-contain" />
                                 </div>
@@ -212,7 +222,7 @@
                                     <input type="color" v-model="form.color"
                                         class="h-10 w-10 border-0 p-0 cursor-pointer" />
                                     <input type="text" v-model="form.color"
-                                        class="w-full border border-gray-400 rounded-sm py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
+                                        class="w-full border border-gray-400  py-2 px-3 bg-transparent outline-none focus:border-[#0073e6] transition-colors"
                                         placeholder="#000000" />
                                 </div>
                                 <p v-if="errors.color" class="text-red-500 text-xs mt-1">{{ errors.color[0] }}</p>
@@ -223,7 +233,7 @@
                         <div class="space-y-5">
                             <!-- Informations de collecte (Lecture seule, visible uniquement si édition) -->
                             <div v-if="editingCompany"
-                                class="bg-blue-50 p-4 rounded-sm border border-blue-100 space-y-3 mt-4">
+                                class="bg-blue-50 p-4  border border-blue-100 space-y-3 mt-4">
                                 <h3 class="font-inter text-sm font-bold text-[#0073e6] mb-2">Statistiques de collectes
                                 </h3>
                                 <div class="flex justify-between items-center text-sm font-inter text-[#393939]">
@@ -246,7 +256,7 @@
                         Annuler
                     </button>
                     <button @click="saveCompany" :disabled="isSaving || !form.name"
-                        class="bg-[#0073e6] text-[#fffbf1] px-6 py-2.5 rounded-sm hover:bg-blue-600 transition-colors disabled:opacity-50 font-inter text-sm font-bold flex items-center">
+                        class="bg-[#0073e6] text-[#fffbf1] px-6 py-2.5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all disabled:opacity-50 font-['Jersey_20'] tracking-wide text-lg flex items-center">
                         <span v-if="isSaving" class="mr-2">
                             <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24">
@@ -286,6 +296,7 @@ export default {
             sortKey: 'name',
             sortOrder: 'asc',
             companies: [],
+            mobilePage: 0,
             // Modal state
             isModalOpen: false,
             isSaving: false,
@@ -455,6 +466,21 @@ export default {
             } finally {
                 this.isSaving = false;
             }
+        },
+        nextMobilePage() {
+            if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCompanies.length) {
+                this.mobilePage++;
+            }
+        },
+        prevMobilePage() {
+            if (this.mobilePage > 0) {
+                this.mobilePage--;
+            }
+        }
+    },
+    watch: {
+        searchQuery() {
+            this.mobilePage = 0;
         }
     }
 }
