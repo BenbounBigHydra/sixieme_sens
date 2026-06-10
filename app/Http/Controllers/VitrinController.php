@@ -90,6 +90,11 @@ class VitrinController extends Controller
         return view('vitrin.companies', ['initialData' => json_encode($data)]);
     }
 
+    public function quizz()
+    {
+        return view('vitrin.quizz');
+    }
+
     public function contact()
     {
         return view('vitrin.contact');
