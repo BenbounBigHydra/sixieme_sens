@@ -160,25 +160,34 @@
         </a>
       </div>
 
-      <div class="mt-12 md:mt-24 max-w-2xl flex-grow flex flex-col justify-center">
-        <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8" :style="boxStyle">
-          <h2 class="font-jersey text-[32px] sm:text-[36px] md:text-[64px] text-inherit leading-tight mb-1 md:mb-2">
-            On vous attend !
-          </h2>
-          <h3 class="font-jersey text-[24px] sm:text-[28px] md:text-[40px] text-inherit leading-tight mb-4 md:mb-8">
-            plus qu'une étape
-          </h3>
+      <div class="mt-2 md:mt-8 flex-grow flex flex-col-reverse md:flex-row justify-between items-center relative gap-4 md:gap-12 pb-2 md:pb-4">
+        
+        <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
+          <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8" :style="boxStyle">
+            <h2 class="font-jersey text-[32px] sm:text-[36px] md:text-[64px] text-inherit leading-tight mb-1 md:mb-2">
+              On vous attend !
+            </h2>
+            <h3 class="font-jersey text-[24px] sm:text-[28px] md:text-[40px] text-inherit leading-tight mb-4 md:mb-8">
+              plus qu'une étape
+            </h3>
 
-          <p class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
-            La prise de rendez-vous se fait via OneDoc. Vous allez être redirigé vers le calendrier de la collecte {{ company.name || '[entreprise]' }}. Choisissez simplement le créneau qui vous convient et confirmez votre inscription.
-          </p>
+            <p class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
+              La prise de rendez-vous se fait via OneDoc. Vous allez être redirigé vers le calendrier de la collecte {{ company.name || '[entreprise]' }}. Choisissez simplement le créneau qui vous convient et confirmez votre inscription.
+            </p>
 
-          <div>
-            <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
-              Prendre rendez-vous
-            </a>
+            <div>
+              <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
+                Prendre rendez-vous
+              </a>
+            </div>
           </div>
         </div>
+
+        <!-- Image (Roby) -->
+        <div class="w-full md:w-1/2 flex justify-end flex-col items-center relative z-0 md:z-10 md:-translate-x-12 h-full min-h-[25vh] max-h-[35vh] md:min-h-0 md:max-h-[75vh]">
+          <img src="/images/roby_smiling_left.png" alt="Roby Souriant" class="absolute bottom-0 left-0 right-0 mx-auto object-contain md:inset-0 md:m-auto max-h-[30vh] md:max-h-[75vh]" />
+        </div>
+
       </div>
     </div>
   </div>
