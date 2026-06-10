@@ -14,6 +14,9 @@ Route::get('/label', [VitrinController::class, 'label']);
 Route::get('/companies', [VitrinController::class, 'companies']);
 Route::get('/contact', [VitrinController::class, 'contact']);
 Route::get('/quizz', [VitrinController::class, 'quizz']);
+Route::get('/mentions', [VitrinController::class, 'mentions']);
+Route::get('/politique', [VitrinController::class, 'politique']);
+Route::get('/cookies', [VitrinController::class, 'cookies']);
 Route::get('/teapot', function () {
     abort(418);
 });

@@ -16,7 +16,9 @@
     <!-- Conteneur principal de l'application Vue -->
     <div id="app">
         <!-- Composant d'en-tête global -->
-        <header-vitrine></header-vitrine>
+        @if(!isset($hideHeaderFooter) || !$hideHeaderFooter)
+            <header-vitrine></header-vitrine>
+        @endif
         
         <!-- Avertissement de projet académique (Global) -->
         <div class="w-full bg-[#fffbf1]">
@@ -34,7 +36,9 @@
         </main>
 
         <!-- Composant de pied de page global -->
-        <footer-vitrine></footer-vitrine>
+        @if(!isset($hideHeaderFooter) || !$hideHeaderFooter)
+            <footer-vitrine></footer-vitrine>
+        @endif
     </div>
 </body>
 </html>

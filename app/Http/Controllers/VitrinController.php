@@ -99,4 +99,19 @@ class VitrinController extends Controller
     {
         return view('vitrin.contact');
     }
+
+    public function mentions()
+    {
+        return view('vitrin.mentions', ['hideHeaderFooter' => true]);
+    }
+
+    public function politique()
+    {
+        return view('vitrin.politique', ['hideHeaderFooter' => true]);
+    }
+
+    public function cookies()
+    {
+        return view('vitrin.cookies', ['hideHeaderFooter' => true]);
+    }
 }
