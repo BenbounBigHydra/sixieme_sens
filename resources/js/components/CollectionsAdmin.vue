@@ -6,7 +6,7 @@
             <!-- Search Bar -->
             <div class="relative w-full">
                 <input type="text" v-model="searchQuery" placeholder="Rechercher"
-                    class="w-full border border-gray-400 rounded-sm py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
+                    class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                     <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
                 </div>
@@ -16,22 +16,22 @@
             <div class="flex flex-wrap gap-2 md:gap-4 md:space-x-0">
                 <button @click="toggleFilter('ongoing')"
                     :class="activeFilter === 'ongoing' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
-                    class="border px-4 py-2 rounded-sm font-inter text-sm transition-colors w-full md:w-auto">
+                    class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
                     En cours
                 </button>
                 <button @click="toggleFilter('to_come')"
                     :class="activeFilter === 'to_come' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
-                    class="border px-4 py-2 rounded-sm font-inter text-sm transition-colors w-full md:w-auto">
+                    class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
                     À venir
                 </button>
                 <button @click="toggleFilter('past')"
                     :class="activeFilter === 'past' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
-                    class="border px-4 py-2 rounded-sm font-inter text-sm transition-colors w-full md:w-auto">
+                    class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
                     Terminées
                 </button>
                 <button @click="toggleFilter('to_close')"
                     :class="activeFilter === 'to_close' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
-                    class="border px-4 py-2 rounded-sm font-inter text-sm transition-colors w-full md:w-auto">
+                    class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
                     À clore
                 </button>
             </div>
@@ -50,7 +50,7 @@
 
             <!-- Collections Table -->
             <div class="w-full mt-4 overflow-x-auto pb-4">
-                <div class="border border-blue-200 rounded-t-sm overflow-hidden md:min-w-[1300px]">
+                <div class="border border-blue-200  overflow-hidden md:min-w-[1300px]">
                     <!-- Table Header -->
                     <div
                         class="hidden md:grid grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
@@ -83,7 +83,7 @@
                     </div>
 
                     <!-- Table Body -->
-                    <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+                    <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="filteredAndSortedCollections.length > 0">
                             <div v-for="(collection, index) in filteredAndSortedCollections" :key="collection.id"
                                 :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
@@ -141,7 +141,7 @@
 
                                 <!-- Statut -->
                                 <div class="flex items-center justify-start md:justify-center w-full mt-2 md:mt-0">
-                                    <div class="px-6 py-1.5 rounded-sm text-white font-inter text-sm text-center min-w-[120px]"
+                                    <div class="px-6 py-1.5  text-white font-inter text-sm text-center min-w-[120px]"
                                         :class="getStatusColor(collection.statusKey)">
                                         {{ getStatusLabel(collection.statusKey) }}
                                     </div>
@@ -152,11 +152,11 @@
                                     class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0 gap-2">
                                     <button v-if="collection.statusKey === 'to_close'"
                                         @click="openClotureModal(collection)"
-                                        class="bg-[#5C629E] text-white p-2 md:p-1.5 rounded-sm hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
+                                        class="bg-[#5C629E] text-white p-2 md:p-1.5  hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
                                         <span class="text-sm font-inter">Clore</span>
                                     </button>
                                     <button @click="openEditModal(collection)"
-                                        class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
+                                        class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                                         <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                                         <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                                     </button>
@@ -217,7 +217,7 @@
             </div>
 
             <!-- Table Body -->
-            <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+            <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
                 <template v-if="filteredAndSortedCollections.length > 0">
                     <div v-for="collection in filteredAndSortedCollections" :key="collection.id"
                         class="flex flex-col md:grid md:grid-cols-3 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
@@ -233,7 +233,7 @@
 
                         <!-- Statut -->
                         <div class="flex items-center justify-start md:justify-center w-full">
-                            <div class="px-6 py-1.5 rounded-sm text-white font-inter text-sm text-center min-w-[120px]"
+                            <div class="px-6 py-1.5  text-white font-inter text-sm text-center min-w-[120px]"
                                 :class="getStatusColor(collection.statusKey)">
                                 {{ getStatusLabel(collection.statusKey) }}
                             </div>
@@ -243,7 +243,7 @@
                         <div
                             class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
                             <button @click="openEditModal(collection)"
-                                class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
+                                class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                                 <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                                 <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                             </button>

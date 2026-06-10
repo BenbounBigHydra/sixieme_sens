@@ -26,7 +26,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 md:gap-0">
                     <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à clore
                     </h2>
-                    <div class="bg-[#ff9166] flex items-center px-4 py-2 rounded-sm space-x-2">
+                    <div class="bg-[#ff9166] flex items-center px-4 py-2  space-x-2">
                         <img src="/images/important.svg" alt="Important" class="h-5" />
                         <span class="font-inter text-sm text-[#393939] font-medium">Vous avez {{ toClose.length }}
                             collectes à clore.</span>
@@ -35,7 +35,7 @@
 
                 <div class="w-full">
                     <!-- Table Header (Desktop Only) -->
-                    <div class="hidden md:grid grid-cols-4 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
+                    <div class="hidden md:grid grid-cols-4 bg-[#ffeeab] py-3 px-4 ">
                         <div class="font-inter font-medium text-[#393939]">Entreprise</div>
                         <div class="font-inter font-medium text-[#393939]">Date(s)</div>
                         <div class="font-inter font-medium text-[#393939]">Total employés</div>
@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- Table Rows -->
-                    <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+                    <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="toClose.length > 0">
                             <div v-for="(item, index) in toClose" :key="index"
                                 class="flex flex-col md:grid md:grid-cols-4 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
@@ -64,12 +64,12 @@
                                 <div
                                     class="flex items-center justify-start md:justify-end space-x-3 w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100">
                                     <button @click="openModal('cloture', item)"
-                                        class="bg-[#5bb124] text-white flex items-center px-4 py-2 md:py-1.5 rounded-sm hover:bg-green-600 transition-colors w-full md:w-auto justify-center">
+                                        class="bg-[#5bb124] text-white flex items-center px-4 py-2 md:py-1.5  hover:bg-green-600 transition-colors w-full md:w-auto justify-center">
                                         <img src="/images/whiteCheck.svg" alt="Check" class="h-4 mr-2" />
                                         <span class="font-inter text-sm">Clore</span>
                                     </button>
                                     <button @click="openModal('detail', item)"
-                                        class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0">
+                                        class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors shrink-0">
                                         <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                                     </button>
                                 </div>
@@ -100,7 +100,7 @@
 
                 <div class="w-full">
                     <!-- Table Header (Desktop) -->
-                    <div class="hidden md:grid grid-cols-6 bg-[#ffeeab] py-3 px-4 rounded-t-sm">
+                    <div class="hidden md:grid grid-cols-6 bg-[#ffeeab] py-3 px-4 ">
                         <div class="font-inter font-medium text-[#393939]">Entreprise</div>
                         <div class="font-inter font-medium text-[#393939]">Dates</div>
                         <div class="font-inter font-medium text-[#393939]">Total employés</div>
@@ -110,7 +110,7 @@
                     </div>
 
                     <!-- Table Rows -->
-                    <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
+                    <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="toCome.length > 0">
                             <div v-for="(item, index) in toCome" :key="index"
                                 :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
@@ -131,10 +131,10 @@
                                             '0' }}</span></div>
 
                                 <div
-                                    class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0 rounded-sm overflow-hidden">
+                                    class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0  overflow-hidden">
                                     <span class="md:hidden font-bold text-sm text-[#393939] mr-2 shrink-0">Site:</span>
                                     <button @click="copyToClipboard(getCoBrandLink(item))"
-                                        class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0 bg-white">
+                                        class="border border-[#0073e6] p-1.5  hover:bg-blue-50 transition-colors shrink-0 bg-white">
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a :href="getCoBrandLink(item)" target="_blank"
@@ -145,11 +145,11 @@
                                 </div>
 
                                 <div
-                                    class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0 rounded-sm overflow-hidden mt-2 md:mt-0">
+                                    class="flex items-center space-x-2 w-full md:w-auto bg-gray-50 md:bg-transparent p-2 md:p-0  overflow-hidden mt-2 md:mt-0">
                                     <span
                                         class="md:hidden font-bold text-sm text-[#393939] mr-2 shrink-0">OneDoc:</span>
                                     <button @click="copyToClipboard(item.onedoc_link)"
-                                        class="border border-[#0073e6] p-1.5 rounded-sm hover:bg-blue-50 transition-colors shrink-0 bg-white">
+                                        class="border border-[#0073e6] p-1.5  hover:bg-blue-50 transition-colors shrink-0 bg-white">
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank"
@@ -164,7 +164,7 @@
                                 <div
                                     class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
                                     <button @click="openModal('detail', item)"
-                                        class="border border-[#0073e6] p-2 md:p-1.5 rounded-sm hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
+                                        class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
                                         <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
                                         <span class="md:hidden ml-2 text-sm text-[#0073e6]">Modifier</span>
                                     </button>
