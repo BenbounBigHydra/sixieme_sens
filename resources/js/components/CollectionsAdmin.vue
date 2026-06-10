@@ -204,8 +204,8 @@
                     <button @click="activeTab = 'modifier'"
                         :class="{ 'border-b-2 border-[#0073e6] text-[#0073e6] font-bold': activeTab === 'modifier', 'text-gray-500': activeTab !== 'modifier' }"
                         class="pb-2 px-4 font-inter text-lg">Modifier</button>
-                    <button @click="activeTab = 'cloturer'"
-                        :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer' }"
+                    <button @click="canCloseCollection && (activeTab = 'cloturer')" :disabled="!canCloseCollection"
+                        :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer', 'opacity-50 cursor-not-allowed': !canCloseCollection }"
                         class="pb-2 px-4 font-inter text-lg">Clôturer</button>
                     <button @click="activeTab = 'supprimer'"
                         :class="{ 'border-b-2 border-[#E4534B] text-[#E4534B] font-bold': activeTab === 'supprimer', 'text-gray-500': activeTab !== 'supprimer' }"
@@ -315,7 +315,7 @@
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
                             <p v-if="errors.nb_employee" class="text-red-500 text-xs mt-1">{{ errors.nb_employee[0]
-                            }}</p>
+                                }}</p>
                         </div>
                         <div>
                             <label class="block font-inter text-base mb-2">Capacité de la collecte</label>
@@ -380,7 +380,7 @@
                             <input type="url" v-model="detailForm.onedoc_link" placeholder="Lien OneDoc"
                                 class="w-full h-full border border-black p-3 font-inter text-sm bg-transparent" />
                             <p v-if="errors.onedoc_link" class="text-red-500 text-xs mt-1">{{ errors.onedoc_link[0]
-                            }}</p>
+                                }}</p>
                         </div>
                     </div>
 
@@ -404,6 +404,9 @@
                                 <input type="number" v-model="clotureForm.nb_registered" placeholder="Ex: 50"
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
+                            <p v-if="errors.nb_registered" class="text-red-500 text-xs mt-1">{{ errors.nb_registered[0]
+                                }}
+                            </p>
                         </div>
                         <div>
                             <label class="block font-inter text-base mb-2">Nombre de poches collectées</label>
@@ -411,6 +414,9 @@
                                 <input type="number" v-model="clotureForm.nb_blood_pouch" placeholder="Ex: 45"
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
+                            <p v-if="errors.nb_blood_pouch" class="text-red-500 text-xs mt-1">{{
+                                errors.nb_blood_pouch[0] }}
+                            </p>
                         </div>
                     </div>
 
@@ -442,6 +448,10 @@
                             <input type="text" v-model="suppressionInput" placeholder="supprimer"
                                 class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                         </div>
+                    </div>
+
+                    <div v-if="errors.general" class="mb-6">
+                        <p class="text-red-500 text-sm">{{ errors.general[0] }}</p>
                     </div>
 
                     <div class="flex justify-end mt-4">
@@ -577,6 +587,14 @@ export default {
             if (this.activeTab === 'cloturer') return 'border-[#5C629E]';
             if (this.activeTab === 'supprimer') return 'border-[#E4534B]';
             return 'border-[#0073e6]';
+        },
+        canCloseCollection() {
+            if (!this.selectedCollecte?.day_end) return false;
+            const endDate = new Date(this.selectedCollecte.day_end);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            endDate.setHours(0, 0, 0, 0);
+            return endDate <= today;
         }
     },
     methods: {
@@ -585,6 +603,23 @@ export default {
                 this.activeFilter = null; // deselect
             } else {
                 this.activeFilter = filter;
+            }
+        },
+        getCoBrandLink(item) {
+            console.log('Generating co-brand link for item:', item);
+            if (!item || !item.id) return '';
+            const baseUrl = window.location.origin;
+            const slug = item.company?.slug || item.company?.name?.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'inconnu';
+            return `${baseUrl}/collection/${slug}/${item.id}`;
+        },
+        async copyToClipboard(text) {
+            console.log('Copying to clipboard:', text);
+            if (!text) return;
+            try {
+                await navigator.clipboard.writeText(text);
+                alert('Lien copié dans le presse-papiers !');
+            } catch (err) {
+                console.error('Erreur lors de la copie', err);
             }
         },
         sortBy(key) {
@@ -643,8 +678,8 @@ export default {
             this.detailForm.company_id = collection?.company_id || '';
             this.detailForm.nb_employee = collection?.nb_employee || '';
             this.detailForm.capacity = collection?.capacity || '';
-            this.detailForm.day_start = collection?.day_start ? collection.day_start.split(' ')[0] : '';
-            this.detailForm.day_end = collection?.day_end ? collection.day_end.split(' ')[0] : '';
+            this.detailForm.day_start = collection?.day_start ? collection.day_start.split('T')[0].split(' ')[0] : '';
+            this.detailForm.day_end = collection?.day_end ? collection.day_end.split('T')[0].split(' ')[0] : '';
             this.detailForm.onedoc_link = collection?.onedoc_link || '';
             this.detailForm.location = collection?.location || '';
             this.detailForm.hour_start = collection?.hour_start || '';
@@ -695,116 +730,123 @@ export default {
                 }
             }
         },
-            getCsrfHeaders() {
-                const getCookie = (name) => {
-                    const value = `; ${document.cookie}`;
-                    const parts = value.split(`; ${name}=`);
-                    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-                    return null;
-                };
+        getCsrfHeaders() {
+            const getCookie = (name) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+                return null;
+            };
 
-                const headers = {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                };
+            const headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            };
 
-                const csrfToken = getCookie('XSRF-TOKEN');
-                if (csrfToken) {
-                    headers['X-XSRF-TOKEN'] = csrfToken;
-                }
-                return headers;
-            },
-            async submitCreation() {
-                if (this.isSaving) return;
-                this.isSaving = true;
-                this.errors = {};
-                try {
-                    const response = await fetch(`/api/collection`, {
-                        method: 'POST',
-                        headers: this.getCsrfHeaders(),
-                        body: JSON.stringify(this.detailForm)
-                    });
+            const csrfToken = getCookie('XSRF-TOKEN');
+            if (csrfToken) {
+                headers['X-XSRF-TOKEN'] = csrfToken;
+            }
+            return headers;
+        },
+        async submitCreation() {
+            if (this.isSaving) return;
+            this.isSaving = true;
+            this.errors = {};
+            try {
+                const response = await fetch(`/api/collection`, {
+                    method: 'POST',
+                    headers: this.getCsrfHeaders(),
+                    body: JSON.stringify(this.detailForm)
+                });
 
-                    if (!response.ok) {
-                        const data = await response.json();
-                        if (response.status === 422) {
-                            this.errors = data.errors || {};
-                            return;
-                        }
-                        throw new Error("API Error");
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (response.status === 422) {
+                        this.errors = data.errors || {};
+                        return;
                     }
-                    const url = new URL(window.location);
-                    url.searchParams.delete('action');
-                    window.location.replace(url);
-                } catch (err) {
-                    console.error(err);
-                    alert("Erreur lors de la création.");
-                } finally {
-                    this.isSaving = false;
+                    throw new Error("API Error");
                 }
-            },
-            async submitDetail() {
-                if (this.isSaving) return;
-                this.isSaving = true;
-                this.errors = {};
-                try {
-                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
-                        method: 'PUT',
-                        headers: this.getCsrfHeaders(),
-                        body: JSON.stringify(this.detailForm)
-                    });
+                const url = new URL(window.location);
+                url.searchParams.delete('action');
+                window.location.replace(url);
+            } catch (err) {
+                console.error(err);
+                alert("Erreur lors de la création.");
+            } finally {
+                this.isSaving = false;
+            }
+        },
+        async submitDetail() {
+            if (this.isSaving) return;
+            this.isSaving = true;
+            this.errors = {};
+            try {
+                const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
+                    method: 'PUT',
+                    headers: this.getCsrfHeaders(),
+                    body: JSON.stringify(this.detailForm)
+                });
 
-                    if (!response.ok) {
-                        const data = await response.json();
-                        if (response.status === 422) {
-                            this.errors = data.errors || {};
-                            return;
-                        }
-                        throw new Error("API Error");
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (response.status === 422) {
+                        this.errors = data.errors || {};
+                        return;
                     }
-                    window.location.reload();
-                } catch (err) {
-                    console.error(err);
-                    alert("Erreur lors de l'enregistrement.");
-                } finally {
-                    this.isSaving = false;
+                    throw new Error("API Error");
                 }
-            },
-            async submitCloture() {
-                if (this.isSaving) return;
-                this.isSaving = true;
-                try {
-                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}/close`, {
-                        method: 'PATCH',
-                        headers: this.getCsrfHeaders(),
-                        body: JSON.stringify(this.clotureForm)
-                    });
-                    if (!response.ok) throw new Error("API Error");
-                    window.location.reload();
-                } catch (err) {
-                    console.error(err);
-                    // alert("Erreur lors de la clôture.");
-                } finally {
-                    this.isSaving = false;
+                window.location.reload();
+            } catch (err) {
+                console.error(err);
+                alert("Erreur lors de l'enregistrement.");
+            } finally {
+                this.isSaving = false;
+            }
+        },
+        async submitCloture() {
+            if (this.isSaving) return;
+            this.isSaving = true;
+            this.errors = {};
+            try {
+                const response = await fetch(`/api/collection/${this.selectedCollecte.id}/close`, {
+                    method: 'PATCH',
+                    headers: this.getCsrfHeaders(),
+                    body: JSON.stringify(this.clotureForm)
+                });
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (response.status === 422) {
+                        this.errors = data.errors || {};
+                        return;
+                    }
+                    throw new Error("API Error");
                 }
-            },
-            async submitSuppression() {
-                if (this.suppressionInput.toLowerCase() !== 'supprimer') return;
-                if (this.isSaving) return;
-                this.isSaving = true;
-                try {
-                    const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
-                        method: 'DELETE',
-                        headers: this.getCsrfHeaders()
-                    });
-                    if (!response.ok) throw new Error("API Error");
-                    window.location.reload();
-                } catch (err) {
-                    console.error(err);
-                    alert("Erreur lors de la suppression.");
-                } finally {
-                    this.isSaving = false;
+                window.location.reload();
+            } catch (err) {
+                console.error(err);
+                // alert("Erreur lors de la clôture.");
+            } finally {
+                this.isSaving = false;
+            }
+        },
+        async submitSuppression() {
+            if (this.suppressionInput.toLowerCase() !== 'supprimer') return;
+            if (this.isSaving) return;
+            this.isSaving = true;
+            this.errors = {};
+            try {
+                const response = await fetch(`/api/collection/${this.selectedCollecte.id}`, {
+                    method: 'DELETE',
+                    headers: this.getCsrfHeaders()
+                });
+                if (!response.ok) {
+                    const data = await response.json();
+                    // For deletion, we don't expect field-level errors, just store message
+                    this.errors = { general: [data.message || 'Erreur lors de la suppression.'] };
+                    return;
                 }
             },
             nextMobilePage() {
