@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-x-hidden">
+  <div class="w-full bg-[#fffbf1] min-h-screen relative overflow-x-clip">
 
     <!-- Part 1 -->
     <section class="relative w-full -mt-24 pt-[144px] md:pt-[224px] pb-24 md:pb-32">
