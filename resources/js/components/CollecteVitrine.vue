@@ -14,7 +14,7 @@
       </div>
 
       <!-- Success Message -->
-      <div v-if="isSubmitted" class="bg-[#caefb2] text-black font-['Inter'] px-6 py-4 flex items-center gap-4 mb-8 w-full">
+      <div v-if="isSubmitted" ref="successMessageRef" class="bg-[#caefb2] text-black font-['Inter'] px-6 py-4 flex items-center gap-4 mb-8 w-full">
         <img src="/images/BlackCheck.svg" alt="Check" class="w-6 h-6 flex-shrink-0" />
         <span class="text-base md:text-lg font-bold">Merci ! Votre demande a bien été transmise.</span>
       </div>
@@ -91,7 +91,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, nextTick } from 'vue';
+
+const successMessageRef = ref(null);
 
 const form = ref({
     nom: '',
@@ -136,6 +138,11 @@ const submitForm = async () => {
             body: JSON.stringify(form.value),
         });
         isSubmitted.value = true;
+        
+        await nextTick();
+        if (successMessageRef.value) {
+            successMessageRef.value.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     } catch (error) {
         console.error('Erreur envoi formulaire', error);
         // Tu peux afficher un message d'erreur à l'utilisateur ici

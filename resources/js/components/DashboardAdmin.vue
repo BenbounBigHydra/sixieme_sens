@@ -4,20 +4,20 @@
 
         <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
             <!-- FirstPart: Action Buttons -->
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <section class="grid grid-cols-2 gap-4 md:gap-6">
                 <a href="/admin/companies?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
-                    <div class="h-6 w-6 mr-3 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-col md:flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-5 w-5 md:h-6 md:w-6 mb-1 md:mb-0 md:mr-3 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-inter text-lg">Ajouter une entreprise</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[16px] md:text-2xl text-center leading-none md:leading-normal">Ajouter une entreprise</span>
                 </a>
                 <a href="/admin/collections?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex items-center justify-center py-4 rounded-sm hover:bg-blue-600 transition-colors">
-                    <div class="h-6 w-6 mr-3 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-col md:flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-5 w-5 md:h-6 md:w-6 mb-1 md:mb-0 md:mr-3 bg-[#fffbf1]"
                         style="mask-image: url('/images/Group.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Group.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-inter text-lg">Organiser une collecte</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[16px] md:text-2xl text-center leading-none md:leading-normal">Organiser une collecte</span>
                 </a>
             </section>
 
@@ -90,11 +90,11 @@
                     <h2 class="font-jersey text-[32px] md:text-[40px] text-[#393939] leading-none">Collectes à venir
                     </h2>
                     <a href="/admin/collections?action=new"
-                        class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 md:py-2 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+                        class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 md:py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all w-full md:w-auto justify-center">
                         <div class="h-4 w-4 mr-2 bg-[#fffbf1]"
                             style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                         </div>
-                        <span class="font-inter text-sm">Nouvelle collecte</span>
+                        <span class="font-['Jersey_20'] tracking-wide text-lg">Nouvelle collecte</span>
                     </a>
                 </div>
 
@@ -113,7 +113,8 @@
                     <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="toCome.length > 0">
                             <div v-for="(item, index) in toCome" :key="index"
-                                class="flex flex-col md:grid md:grid-cols-6 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+                                :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
+                                class="md:grid-cols-6 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                                 <div class="flex flex-col items-start justify-center">
                                     <div class="h-8 w-16 flex items-center justify-start mb-1">
                                         <img :src="item.company?.logo || '/images/BCGE.png'" alt="Logo"
@@ -168,6 +169,15 @@
                                         <span class="md:hidden ml-2 text-sm text-[#0073e6]">Modifier</span>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
+                                <button @click="prevMobilePage" :disabled="mobilePage === 0" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&lt;</span>
+                                </button>
+                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{ Math.ceil(toCome.length / 3) }}</span>
+                                <button @click="nextMobilePage" :disabled="(mobilePage + 1) * 3 >= toCome.length" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&gt;</span>
+                                </button>
                             </div>
                         </template>
                         <template v-else>
@@ -273,38 +283,38 @@
             </section>
 
             <!-- FifthPart: Statistics -->
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
+            <section class="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-12 mt-8">
                 <!-- Taux de participation -->
                 <div class="border border-black flex flex-col">
-                    <div class="bg-[#ffda45] flex justify-between items-center p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-2xl text-[#393939]">Taux de participation</h3>
+                    <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de participation</h3>
                         <div class="relative group cursor-pointer flex items-center">
-                            <img src="/images/info.svg" alt="Info" class="h-6 w-6" style="filter: brightness(0);" />
+                            <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[260px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
-                                <p class="font-jersey text-[20px] text-black leading-tight">Taux calculé sur l'année en
+                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
-                                <p class="font-inter text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
+                                <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
                                     nombre de
                                     poches de sang récoltées et le nombre total d'employés.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col items-center flex-grow">
-                        <div class="font-jersey text-6xl text-black">{{ participationRatio.globalAverage !== undefined ?
+                    <div class="p-2 md:p-8 flex flex-col items-center flex-grow">
+                        <div class="font-jersey text-3xl md:text-6xl text-black">{{ participationRatio.globalAverage !== undefined ?
                             (participationRatio.globalAverage * 100).toFixed(0) + '%' : '21%' }}</div>
-                        <div class="font-jersey text-sm text-black mb-8">De participation moyenne</div>
+                        <div class="font-jersey text-[10px] md:text-sm text-black mb-4 md:mb-8 text-center leading-none">De participation moyenne</div>
 
-                        <div class="w-full space-y-4 font-inter text-sm">
+                        <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in participationRatio.lowestCompanies || mockParticipationCompanies"
-                                :key="i" class="flex justify-between items-center border-b border-gray-300 pb-2">
-                                <div class="flex items-center space-x-3">
+                                :key="i" class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2">
+                                <div class="flex items-center space-x-1 md:space-x-3 w-3/4">
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-5" />
-                                    <div v-else class="h-5 w-5"></div>
-                                    <span>{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0" />
+                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
+                                    <span class="truncate text-[10px] md:text-sm">{{ item.company?.name || item.name }}</span>
                                 </div>
-                                <div class="font-bold">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
+                                <div class="font-bold text-[10px] md:text-sm">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
                                     item.percentage }}</div>
                             </div>
@@ -314,35 +324,35 @@
 
                 <!-- Taux de rigueur -->
                 <div class="border border-black flex flex-col">
-                    <div class="bg-[#ffda45] flex justify-between items-center p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-2xl text-[#393939]">Taux de rigueur</h3>
+                    <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de rigueur</h3>
                         <div class="relative group cursor-pointer flex items-center">
-                            <img src="/images/info.svg" alt="Info" class="h-6 w-6" style="filter: brightness(0);" />
+                            <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[260px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
-                                <p class="font-jersey text-[20px] text-black leading-tight">Taux calculé sur l'année en
+                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
-                                <p class="font-inter text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
+                                <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
                                     nombre de
                                     poches de sang récoltées et le nombre de personnes inscrites à la collecte.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col items-center flex-grow">
-                        <div class="font-jersey text-6xl text-black">{{ rigorRatio.globalAverage !== undefined ?
+                    <div class="p-2 md:p-8 flex flex-col items-center flex-grow">
+                        <div class="font-jersey text-3xl md:text-6xl text-black">{{ rigorRatio.globalAverage !== undefined ?
                             (rigorRatio.globalAverage * 100).toFixed(0) + '%' : '80%' }}</div>
-                        <div class="font-jersey text-sm text-black mb-8">De rigueur moyenne</div>
+                        <div class="font-jersey text-[10px] md:text-sm text-black mb-4 md:mb-8 text-center leading-none">De rigueur moyenne</div>
 
-                        <div class="w-full space-y-4 font-inter text-sm">
+                        <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in rigorRatio.lowestCompanies || mockRigorCompanies" :key="i"
-                                class="flex justify-between items-center border-b border-gray-300 pb-2">
-                                <div class="flex items-center space-x-3">
+                                class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2">
+                                <div class="flex items-center space-x-1 md:space-x-3 w-3/4">
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-5" />
-                                    <div v-else class="h-5 w-5"></div>
-                                    <span>{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0" />
+                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
+                                    <span class="truncate text-[10px] md:text-sm">{{ item.company?.name || item.name }}</span>
                                 </div>
-                                <div class="font-bold">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
+                                <div class="font-bold text-[10px] md:text-sm">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
                                     item.percentage }}</div>
                             </div>
@@ -539,6 +549,7 @@ export default {
             activeModal: null,
             selectedCollecte: null,
             hoveredMonthIndex: null,
+            mobilePage: 0,
             suppressionInput: '',
             clotureForm: {
                 nb_registered: '',
@@ -583,6 +594,16 @@ export default {
                 alert('Lien copié dans le presse-papiers !');
             } catch (err) {
                 console.error('Erreur lors de la copie', err);
+            }
+        },
+        nextMobilePage() {
+            if ((this.mobilePage + 1) * 3 < this.toCome.length) {
+                this.mobilePage++;
+            }
+        },
+        prevMobilePage() {
+            if (this.mobilePage > 0) {
+                this.mobilePage--;
             }
         },
         formatDate(dateStr) {

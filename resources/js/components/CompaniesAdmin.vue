@@ -14,13 +14,13 @@
 
             <!-- Title and Action -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
-                <h1 class="font-inter font-bold text-3xl text-black">Entreprises partenaires</h1>
+                <h1 class="font-inter font-bold text-2xl md:text-3xl text-black">Entreprises partenaires</h1>
                 <button @click="openNewCompanyModal"
-                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-6 py-3 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all w-full md:w-auto justify-center">
                     <div class="h-4 w-4 mr-2 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-inter text-sm">Nouvelle entreprise</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-lg">Nouvelle entreprise</span>
                 </button>
             </div>
 
@@ -94,8 +94,9 @@
                     <!-- Table Body -->
                     <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="filteredAndSortedCompanies.length > 0">
-                            <div v-for="company in filteredAndSortedCompanies" :key="company.id"
-                                class="flex flex-col md:grid md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0 hover:bg-[#CCE6FF] transition-colors">
+                            <div v-for="(company, index) in filteredAndSortedCompanies" :key="company.id"
+                                :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
+                                class="md:grid-cols-5 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0 hover:bg-[#CCE6FF] transition-colors">
                                 <!-- Entreprise -->
                                 <div class="flex items-center space-x-3">
                                     <div class="h-8 w-16 flex items-center justify-start">
@@ -147,6 +148,15 @@
                                         <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
+                                <button @click="prevMobilePage" :disabled="mobilePage === 0" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&lt;</span>
+                                </button>
+                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{ Math.ceil(filteredAndSortedCompanies.length / 3) || 1 }}</span>
+                                <button @click="nextMobilePage" :disabled="(mobilePage + 1) * 3 >= filteredAndSortedCompanies.length" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&gt;</span>
+                                </button>
                             </div>
                         </template>
                         <template v-else>
@@ -246,7 +256,7 @@
                         Annuler
                     </button>
                     <button @click="saveCompany" :disabled="isSaving || !form.name"
-                        class="bg-[#0073e6] text-[#fffbf1] px-6 py-2.5 rounded-sm hover:bg-blue-600 transition-colors disabled:opacity-50 font-inter text-sm font-bold flex items-center">
+                        class="bg-[#0073e6] text-[#fffbf1] px-6 py-2.5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all disabled:opacity-50 font-['Jersey_20'] tracking-wide text-lg flex items-center">
                         <span v-if="isSaving" class="mr-2">
                             <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24">
@@ -286,6 +296,7 @@ export default {
             sortKey: 'name',
             sortOrder: 'asc',
             companies: [],
+            mobilePage: 0,
             // Modal state
             isModalOpen: false,
             isSaving: false,
@@ -455,6 +466,21 @@ export default {
             } finally {
                 this.isSaving = false;
             }
+        },
+        nextMobilePage() {
+            if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCompanies.length) {
+                this.mobilePage++;
+            }
+        },
+        prevMobilePage() {
+            if (this.mobilePage > 0) {
+                this.mobilePage--;
+            }
+        }
+    },
+    watch: {
+        searchQuery() {
+            this.mobilePage = 0;
         }
     }
 }

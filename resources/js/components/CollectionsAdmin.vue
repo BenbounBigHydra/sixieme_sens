@@ -38,19 +38,19 @@
 
             <!-- Title -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mt-4">
-                <h1 class="font-inter font-bold text-3xl text-black">Collectes</h1>
+                <h1 class="font-inter font-bold text-2xl md:text-3xl text-black">Collectes</h1>
                 <button @click="openNewModal"
-                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-6 py-3 rounded-sm hover:bg-blue-600 transition-colors w-full md:w-auto justify-center">
+                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all w-full md:w-auto justify-center">
                     <div class="h-4 w-4 mr-2 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-inter text-sm">Organiser une collecte</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-lg">Organiser une collecte</span>
                 </button>
             </div>
 
             <!-- Collections Table -->
             <div class="w-full mt-4 overflow-x-auto pb-4">
-                <div class="border border-blue-200 rounded-t-sm overflow-hidden min-w-[1300px]">
+                <div class="border border-blue-200 rounded-t-sm overflow-hidden md:min-w-[1300px]">
                     <!-- Table Header -->
                     <div
                         class="hidden md:grid grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
@@ -85,8 +85,9 @@
                     <!-- Table Body -->
                     <div class="border border-blue-200 rounded-b-sm rounded-t-sm md:rounded-t-none bg-[#fffbf1]">
                         <template v-if="filteredAndSortedCollections.length > 0">
-                            <div v-for="collection in filteredAndSortedCollections" :key="collection.id"
-                                class="flex flex-col md:grid md:grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+                            <div v-for="(collection, index) in filteredAndSortedCollections" :key="collection.id"
+                                :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
+                                class="md:grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                                 <!-- Entreprise -->
                                 <div class="flex items-center space-x-3 w-full">
                                     <div class="h-8 w-16 flex items-center justify-start shrink-0">
@@ -97,19 +98,30 @@
                                         collection.company?.name || 'Inconnu' }}</span>
                                 </div>
 
-                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
-                                    formatDate(collection.day_start) }}</span></div>
-                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
-                                    collection.nb_employee || '-' }}</span></div>
-                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
-                                    collection.capacity || '-' }}</span></div>
-                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
-                                    collection.nb_registered ?? '-' }}</span></div>
-                                <div class="flex items-center"><span class="font-inter text-sm text-[#393939]">{{
-                                    collection.nb_blood_pouch ?? '-' }}</span></div>
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Date :</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ formatDate(collection.day_start) }}</span>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Total employés :</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_employee || '-' }}</span>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Capacité :</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.capacity || '-' }}</span>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Inscrits :</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_registered ?? '-' }}</span>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Poches :</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_blood_pouch ?? '-' }}</span>
+                                </div>
 
                                 <!-- One Doc Link -->
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">One-Doc :</span>
                                     <a v-if="collection.onedoc_link" :href="collection.onedoc_link" target="_blank"
                                         class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien
                                         One-Doc</a>
@@ -117,7 +129,8 @@
                                 </div>
 
                                 <!-- Co-Brand Link -->
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
+                                    <span class="md:hidden font-bold text-sm text-[#393939]">Co-Brand :</span>
                                     <a v-if="collection.statusKey !== 'past' && collection.company?.slug"
                                         :href="'/collection/' + collection.company.slug + '/' + collection.id"
                                         target="_blank"
@@ -148,6 +161,15 @@
                                         <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
+                                <button @click="prevMobilePage" :disabled="mobilePage === 0" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&lt;</span>
+                                </button>
+                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{ Math.ceil(filteredAndSortedCollections.length / 3) || 1 }}</span>
+                                <button @click="nextMobilePage" :disabled="(mobilePage + 1) * 3 >= filteredAndSortedCollections.length" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                    <span class="font-bold">&gt;</span>
+                                </button>
                             </div>
                         </template>
                         <template v-else>
@@ -364,7 +386,7 @@
                         <button @click="closeModal"
                             class="border-[2px] border-[#0073e6] text-[#0073e6] bg-white px-8 py-3 font-inter font-medium hover:bg-gray-50 transition-colors w-full md:w-auto">Annuler</button>
                         <button @click="activeTab === 'creer' ? submitCreation() : submitDetail()"
-                            class="bg-[#0073e6] text-white px-8 py-3 font-inter font-medium hover:bg-blue-600 transition-colors flex items-center justify-center w-full md:w-auto">
+                            class="bg-[#0073e6] text-white px-8 py-2.5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all font-['Jersey_20'] tracking-wide text-xl flex items-center justify-center w-full md:w-auto">
                             <span v-if="isSaving" class="mr-2">...</span>
                             {{ activeTab === 'creer' ? 'Créer' : 'Enregistrer' }}
                         </button>
@@ -460,6 +482,7 @@ export default {
             selectedCollecte: null,
             isSaving: false,
             suppressionInput: '',
+            mobilePage: 0,
             companies: [],
             errors: {},
             clotureForm: {
@@ -781,7 +804,25 @@ export default {
                 } finally {
                     this.isSaving = false;
                 }
+            },
+            nextMobilePage() {
+                if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCollections.length) {
+                    this.mobilePage++;
+                }
+            },
+            prevMobilePage() {
+                if (this.mobilePage > 0) {
+                    this.mobilePage--;
+                }
             }
+    },
+    watch: {
+        searchQuery() {
+            this.mobilePage = 0;
+        },
+        activeFilter() {
+            this.mobilePage = 0;
+        }
     }
 }
 </script>
