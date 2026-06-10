@@ -16,7 +16,10 @@
             Vérifier votre éligibilité
           </h1>
 
-          <p class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-6 md:mb-10">
+          <p v-if="isVitrine" class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-6 md:mb-10">
+            Ce quiz interactif pose quelques questions sur votre santé pour vérifier que vous puissiez donner sans risque. C'est rapide et confidentiel* !
+          </p>
+          <p v-else class="font-inter text-inherit text-xs sm:text-sm md:text-base leading-relaxed mb-6 md:mb-10">
             Ce quiz interactif pose quelques questions sur votre santé pour vérifier que vous puissiez donner sans risque. C'est rapide, confidentiel*, si vous passez, vous débloquez la prise de RDV.
           </p>
 
@@ -31,7 +34,7 @@
       </div>
 
       <!-- Bottom left text -->
-      <div class="mt-8 flex justify-start">
+      <div v-if="!isVitrine" class="mt-8 flex justify-start">
         <div class="max-w-md text-left">
           <p class="font-inter text-[#D5D9ED] text-[10px] md:text-sm leading-snug">
             Si vous êtes un habitué et que vous connaissez les<br class="hidden md:block"/> critères, vous pouvez ignorer le quiz <a href="#" @click.prevent="handleOnedocClick" class="text-[#b3d9ff] hover:text-[#fffbf1] transition-colors underline">en cliquant ici</a>.
@@ -128,7 +131,10 @@
             </p>
 
             <div class="flex flex-row sm:flex-row gap-2 md:gap-4 w-full">
-              <button @click="copyAndRedirect" class="flex-1 bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 sm:px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[10px] sm:text-[11px] md:text-base transition-all text-center relative overflow-hidden group">
+              <a v-if="isVitrine" href="/contact" class="flex-1 bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 sm:px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[10px] sm:text-[11px] md:text-base transition-all text-center relative overflow-hidden group flex items-center justify-center">
+                <span>Prendre contact</span>
+              </a>
+              <button v-else @click="copyAndRedirect" class="flex-1 bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:bg-gray-50 px-2 sm:px-3 md:px-6 py-1.5 md:py-3 text-black font-inter text-[10px] sm:text-[11px] md:text-base transition-all text-center relative overflow-hidden group">
                 <span :class="{'opacity-0': isCopied}">Partager à un collègue</span>
                 <span v-if="isCopied" class="absolute inset-0 flex items-center justify-center font-bold text-[#3ca370]">Copié !</span>
               </button>
@@ -171,12 +177,18 @@
               plus qu'une étape
             </h3>
 
-            <p class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
+            <p v-if="isVitrine" class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
+              Félicitations, vous êtes éligible au don de sang ! Si vous souhaitez organiser une collecte au sein de votre entreprise et rejoindre le mouvement, n'hésitez pas à nous contacter.
+            </p>
+            <p v-else class="font-inter text-inherit text-sm md:text-lg leading-relaxed mb-8 md:mb-12">
               La prise de rendez-vous se fait via OneDoc. Vous allez être redirigé vers le calendrier de la collecte {{ company.name || '[entreprise]' }}. Choisissez simplement le créneau qui vous convient et confirmez votre inscription.
             </p>
 
             <div>
-              <a href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
+              <a v-if="isVitrine" href="/contact" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
+                Prendre contact
+              </a>
+              <a v-else href="#" @click.prevent="handleOnedocClick" class="inline-block border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] px-5 md:px-8 py-2 md:py-4 font-inter text-sm md:text-lg transition-all" :style="activeBtnStyle">
                 Prendre rendez-vous
               </a>
             </div>
@@ -200,6 +212,10 @@ const props = defineProps({
     initialData: {
         type: String,
         default: '{}'
+    },
+    isVitrine: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -215,6 +231,9 @@ const company = computed(() => parsedData.value.company || {});
 const collection = computed(() => parsedData.value.collection || {});
 
 const homeLink = computed(() => {
+    if (props.isVitrine) {
+        return '/';
+    }
     if (company.value.slug && collection.value.id) {
         return `/collection/${company.value.slug}/${collection.value.id}`;
     }

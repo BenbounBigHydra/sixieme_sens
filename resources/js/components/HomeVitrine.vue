@@ -298,8 +298,8 @@ const handleRobotClick = () => {
   if (robyInterval) clearInterval(robyInterval); // Stop roby from moving
   if (clickTimeout) clearTimeout(clickTimeout);
   clickTimeout = setTimeout(() => {
-    isClicked.value = false;
-  }, 3000);
+    window.location.href = '/quizz';
+  }, 1000);
 };
 
 const participationRate = 50;

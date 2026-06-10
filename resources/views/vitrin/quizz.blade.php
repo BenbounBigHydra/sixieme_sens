@@ -12,7 +12,7 @@
 </head>
 <body>
     <div id="app">
-        <quizz-cobrand></quizz-cobrand>
+        <quizz-cobrand :is-vitrine="true"></quizz-cobrand>
     </div>
 </body>
 </html>
