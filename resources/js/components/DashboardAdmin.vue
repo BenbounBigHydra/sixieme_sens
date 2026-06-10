@@ -288,11 +288,11 @@
                 <!-- Taux de participation -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight ml-[16px] md:ml-[32px]">Taux de<br />participation</h3>
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />participation</h3>
                         <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute left-0 md:left-auto md:right-0 top-full mt-2 w-[220px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="fixed left-[5vw] right-[5vw] top-1/2 -translate-y-1/2 md:absolute md:left-auto md:right-0 md:top-full md:translate-y-0 md:mt-2 md:w-[300px] md:max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-[60]">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -309,11 +309,10 @@
                         <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in participationRatio.lowestCompanies || mockParticipationCompanies"
                                 :key="i" class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2 w-full">
-                                <div class="flex items-center space-x-1 md:space-x-3 flex-1 min-w-0 pr-2">
+                                <div class="flex items-center flex-1 min-w-0 pr-2">
+                                    <span class="truncate text-[10px] md:text-sm text-left">{{ item.company?.name || item.name }}</span>
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-3 md:h-5 shrink-0" />
-                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
-                                    <span class="truncate text-[10px] md:text-sm text-left w-full">{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0 ml-1 md:ml-3" />
                                 </div>
                                 <div class="font-bold text-[10px] md:text-sm shrink-0">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
@@ -326,11 +325,11 @@
                 <!-- Taux de rigueur -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight ml-[16px] md:ml-[32px]">Taux de<br />rigueur</h3>
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />rigueur</h3>
                         <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[220px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="fixed left-[5vw] right-[5vw] top-1/2 -translate-y-1/2 md:absolute md:left-auto md:right-0 md:top-full md:translate-y-0 md:mt-2 md:w-[300px] md:max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-[60]">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -347,11 +346,10 @@
                         <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in rigorRatio.lowestCompanies || mockRigorCompanies" :key="i"
                                 class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2 w-full">
-                                <div class="flex items-center space-x-1 md:space-x-3 flex-1 min-w-0 pr-2">
+                                <div class="flex items-center flex-1 min-w-0 pr-2">
+                                    <span class="truncate text-[10px] md:text-sm text-left">{{ item.company?.name || item.name }}</span>
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-3 md:h-5 shrink-0" />
-                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
-                                    <span class="truncate text-[10px] md:text-sm text-left w-full">{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0 ml-1 md:ml-3" />
                                 </div>
                                 <div class="font-bold text-[10px] md:text-sm shrink-0">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
