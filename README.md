@@ -168,6 +168,9 @@ php artisan view:cache
 > [!CAUTION]
 > Actuellement, la DB est totalement effacée, recréé et seedée à chaques fois. Au moment du déploiement réel, corriger cette fonctionnalité
 
+> [!IMPORTANT]
+> 10.06.2026 : auto-seeding enlevé 
+
 ### Pages
 
 [donnons.ch](https://donnons.ch/) : Site vitrine
