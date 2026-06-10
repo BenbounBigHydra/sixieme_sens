@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100dvh] bg-[#2D2144] bg-cover bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
+  <div class="h-[100dvh] bg-[#2D2144] bg-cover md:bg-[length:100%_100%] bg-no-repeat bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
     <div v-if="currentState === 'landing'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
@@ -266,7 +266,7 @@ const questions = [
     yesText: "Aïe, c’est vraiment des sales bêtes! Pour être sûr qu’elle ne t’ait rien transmis, il va falloir attendre un peu avant de pouvoir donner du sang.",
     noText: "La tique a raté sa cible, zéro souci !",
     bg: "background_space.png", mobileBg: "bkgMobile/background_space_mobile.png", folder: "06_tick", prefix: "tick", hasYes: true, hasNo: true,
-    imageClass: "max-h-[30vh] md:max-h-[75vh] translate-x-4 md:translate-x-12"
+    imageClass: "max-h-[30vh] md:max-h-[75vh] translate-x-4 md:translate-x-[30%]"
   },
   {
     text: "As-tu fait de l'acupuncture ou un tatouage dans les 4 derniers mois?",
