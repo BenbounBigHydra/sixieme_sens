@@ -172,9 +172,15 @@ php artisan view:cache
 
 [donnons.ch](https://donnons.ch/) : Site vitrine
 
-[donnons.ch/collection/{company_name}/{collection_id}](https://donnons.ch/collection/heig-vd/237) : Site co-brandé. Pour les tests ; 
+[donnons.ch/collection/{company_name}/{collection_id}](https://donnons.ch/collection/heig-vd/241) : Site co-brandé. Pour les tests ; 
 * company : heig-vd
-* collection : 237
+* collection : 241
+
+* company : bcge
+* collection : 239
+
+* company : coop
+* collection : 240
 
 [donnons.ch/admin](https://donnons.ch/admin) : Site admin. Pour les tests ; 
 * email : admin@example.ch

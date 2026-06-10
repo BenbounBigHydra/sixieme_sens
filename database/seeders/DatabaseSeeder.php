@@ -10,6 +10,32 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Génère onedoc_click_count et visitor_count pour les collectes passées
+     * onedoc_click_count et visitor_count sont entre capacity et nb_employee
+     * onedoc_click_count < visitor_count
+     */
+    private function generateOnedocMetrics($capacity, $nbEmployee, $isPastCollection)
+    {
+        if (!$isPastCollection) {
+            return ['onedoc_click_count' => 0, 'visitor_count' => 0];
+        }
+
+        $min = $capacity;
+        $max = $nbEmployee;
+
+        // Générer visitor_count entre capacity et nb_employee
+        $visitorCount = rand($min, $max);
+
+        // Générer onedoc_click_count inférieur à visitor_count
+        $onedocClickCount = rand($min, min($visitorCount - 1, $max));
+
+        return [
+            'onedoc_click_count' => $onedocClickCount,
+            'visitor_count' => $visitorCount,
+        ];
+    }
+
     public function run(): void
     {
         // Nettoyage préalable pour éviter les duplications
@@ -71,6 +97,7 @@ class DatabaseSeeder extends Seeder
                 ['date' => '2025-04-20', 'registered' => 400, 'pouches' => 300, 'capacity' => 600],
                 ['date' => '2025-10-08', 'registered' => 380, 'pouches' => 290, 'capacity' => 400],
                 ['date' => '2026-02-10', 'registered' => 350, 'pouches' => 290, 'capacity' => 410],
+                ['date' => '2026-03-10', 'registered' => null, 'pouches' => null, 'capacity' => 410],
             ],
             'HEIG-VD' => [
                 ['date' => '2021-05-12', 'registered' => 180, 'pouches' => 140, 'capacity' => 300],
@@ -99,6 +126,7 @@ class DatabaseSeeder extends Seeder
                 ['date' => '2025-03-25', 'registered' => 490, 'pouches' => 320, 'capacity' => 700],
                 ['date' => '2025-09-10', 'registered' => 470, 'pouches' => 310, 'capacity' => 700],
                 ['date' => '2026-04-02', 'registered' => 460, 'pouches' => 400, 'capacity' => 700],
+                ['date' => '2026-02-02', 'registered' => null, 'pouches' => null, 'capacity' => 700],
             ],
             'Nestlé' => [
                 ['date' => '2021-06-17', 'registered' => 410, 'pouches' => 408, 'capacity' => 500],
@@ -118,6 +146,7 @@ class DatabaseSeeder extends Seeder
             ],
             'Breitling' => [
                 ['date' => '2022-10-05', 'registered' => 180, 'pouches' => 160, 'capacity' => 200],
+                ['date' => '2026-03-05', 'registered' => null, 'pouches' => null, 'capacity' => 200],
             ],
             'Capco' => [
                 ['date' => '2024-03-22', 'registered' => 42, 'pouches' => 38, 'capacity' => 50],
@@ -128,6 +157,7 @@ class DatabaseSeeder extends Seeder
             'Coop' => [
                 ['date' => '2021-08-24', 'registered' => 710, 'pouches' => 640, 'capacity' => 800],
                 ['date' => '2025-02-17', 'registered' => 820, 'pouches' => 780, 'capacity' => 950],
+                ['date' => '2026-01-17', 'registered' => null, 'pouches' => null, 'capacity' => 950],
             ],
             'Croix-Rouge' => [
                 ['date' => '2020-06-14', 'registered' => 290, 'pouches' => 285, 'capacity' => 300],
@@ -212,6 +242,8 @@ class DatabaseSeeder extends Seeder
                     $isFutureOrCurrent = $date->isAfter($now) || $date->isSameDay($now);
                     $registered = $isFutureOrCurrent ? null : $col['registered'];
                     $pouches = $isFutureOrCurrent ? null : $col['pouches'];
+                    $nbEmployees = rand(1000, 2500);
+                    $metrics = $this->generateOnedocMetrics($col['capacity'], $nbEmployees, !$isFutureOrCurrent);
 
                     DB::table('collections')->insert([
                         'company_id'     => $companyId,
@@ -220,11 +252,13 @@ class DatabaseSeeder extends Seeder
                         'hour_start'     => '08:00:00',
                         'hour_end'       => '17:00:00',
                         'location'       => $meta['loc'],
-                        'nb_employee'    => rand(1000, 2500), // Règle : minimum 1000 employés
+                        'nb_employee'    => $nbEmployees,
                         'capacity'       => $col['capacity'],
                         'nb_registered'  => $registered,
                         'nb_blood_pouch' => $pouches,
                         'onedoc_link'    => $onedoc,
+                        'onedoc_click_count' => $metrics['onedoc_click_count'],
+                        'visitor_count'  => $metrics['visitor_count'],
                         'created_at'     => $now,
                         'updated_at'     => $now,
                     ]);
@@ -240,6 +274,8 @@ class DatabaseSeeder extends Seeder
                 $isFutureOrCurrent = $forcedDate->isAfter($now) || $forcedDate->isSameDay($now);
                 $capacity = rand(150, 400);
                 $registered = $isFutureOrCurrent ? null : rand(50, $capacity);
+                $nbEmployees = rand(1000, 2000);
+                $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
 
                 DB::table('collections')->insert([
                     'company_id'     => $companyId,
@@ -248,11 +284,13 @@ class DatabaseSeeder extends Seeder
                     'hour_start'     => '08:30:00',
                     'hour_end'       => '16:30:00',
                     'location'       => $meta['loc'],
-                    'nb_employee'    => rand(1000, 2000),
+                    'nb_employee'    => $nbEmployees,
                     'capacity'       => $capacity,
                     'nb_registered'  => $registered,
                     'nb_blood_pouch' => $isFutureOrCurrent ? null : rand(20, $registered),
                     'onedoc_link'    => $onedoc,
+                    'onedoc_click_count' => $metrics['onedoc_click_count'],
+                    'visitor_count'  => $metrics['visitor_count'],
                     'created_at'     => $now,
                     'updated_at'     => $now,
                 ]);
@@ -273,6 +311,8 @@ class DatabaseSeeder extends Seeder
                     $capacity = rand(200, 500);
                     $registered = $isFutureOrCurrent ? null : rand(80, $capacity); // Ne peut jamais dépasser la capacité
                     $pouches = $isFutureOrCurrent ? null : rand(40, $registered); // Jamais supérieur aux inscrits, null si futur
+                    $nbEmployees = rand(1000, 3000);
+                    $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
 
                     DB::table('collections')->insert([
                         'company_id'     => $companyId,
@@ -281,50 +321,119 @@ class DatabaseSeeder extends Seeder
                         'hour_start'     => '08:00:00',
                         'hour_end'       => '17:00:00',
                         'location'       => $meta['loc'],
-                        'nb_employee'    => rand(1000, 3000),
+                        'nb_employee'    => $nbEmployees,
                         'capacity'       => $capacity,
                         'nb_registered'  => $registered,
                         'nb_blood_pouch' => $pouches,
                         'onedoc_link'    => $onedoc,
+                        'onedoc_click_count' => $metrics['onedoc_click_count'],
+                        'visitor_count'  => $metrics['visitor_count'],
                         'created_at'     => $now,
                         'updated_at'     => $now,
                     ]);
                 }
             }
 
-            // 4. RAJOUT SPÉCIFIQUE : Collecte en cours à HEIG-VD (08.06.2026 au 12.06.2026)
+            // 4. RAJOUT SPÉCIFIQUE : Collecte en cours (08.06.2026 au 24.06.2026)
             if ($name === 'HEIG-VD') {
+                $capacity = 500;
+                $nbEmployees = 1200;
+                $collectionDate = Carbon::create(2026, 6, 8);
+                $isFutureOrCurrent = $collectionDate->isAfter($now) || $collectionDate->isSameDay($now);
+                $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
+
                 DB::table('collections')->insert([
                     'company_id'     => $companyId,
-                    'day_start'      => Carbon::create(2026, 6, 8)->startOfDay(),
-                    'day_end'        => Carbon::create(2026, 6, 12)->endOfDay(),
+                    'day_start'      => $collectionDate->startOfDay(),
+                    'day_end'        => Carbon::create(2026, 6, 24)->endOfDay(),
                     'hour_start'     => '08:00:00',
                     'hour_end'       => '17:00:00',
                     'location'       => 'Aula Campus Cheseaux',
-                    'nb_employee'    => 1200,
-                    'capacity'       => 500,
+                    'nb_employee'    => $nbEmployees,
+                    'capacity'       => $capacity,
                     'nb_registered'  => null,
                     'nb_blood_pouch' => null,
                     'onedoc_link'    => $onedoc,
+                    'onedoc_click_count' => $metrics['onedoc_click_count'],
+                    'visitor_count'  => $metrics['visitor_count'],
                     'created_at'     => $now,
                     'updated_at'     => $now,
                 ]);
             }
         }
 
-        // 5. COLLECTE FUTURE FIXE à HEIG-VD — données stables pour les tests
+        // 5. COLLECTES FUTURES
+        // BCGE - Collecte future
+        $capacity = 180;
+        $nbEmployees = 1300;
+        $collectionDate = Carbon::create(2026, 9, 15);
+        $isFutureOrCurrent = $collectionDate->isAfter($now) || $collectionDate->isSameDay($now);
+        $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
+
         DB::table('collections')->insert([
-            'company_id'     => 2, // HEIG-VD
-            'day_start'      => Carbon::create(2026, 11, 12)->startOfDay(),
-            'day_end'        => Carbon::create(2026, 11, 12)->endOfDay(),
+            'company_id'     => 6, // BCGE
+            'day_start'      => $collectionDate->startOfDay(),
+            'day_end'        => $collectionDate->endOfDay(),
             'hour_start'     => '08:00:00',
             'hour_end'       => '17:00:00',
-            'location'       => 'Aula Campus Cheseaux',
-            'nb_employee'    => 1200,
-            'capacity'       => 500,
+            'location'       => 'Siège Genève',
+            'nb_employee'    => $nbEmployees,
+            'capacity'       => $capacity,
             'nb_registered'  => null,
             'nb_blood_pouch' => null,
             'onedoc_link'    => $onedoc,
+            'onedoc_click_count' => $metrics['onedoc_click_count'],
+            'visitor_count'  => $metrics['visitor_count'],
+            'created_at'     => $now,
+            'updated_at'     => $now,
+        ]);
+
+        // Coop - Collecte future
+        $capacity = 600;
+        $nbEmployees = 2200;
+        $collectionDate = Carbon::create(2026, 10, 22);
+        $isFutureOrCurrent = $collectionDate->isAfter($now) || $collectionDate->isSameDay($now);
+        $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
+
+        DB::table('collections')->insert([
+            'company_id'     => 11, // Coop
+            'day_start'      => $collectionDate->startOfDay(),
+            'day_end'        => $collectionDate->endOfDay(),
+            'hour_start'     => '08:00:00',
+            'hour_end'       => '17:00:00',
+            'location'       => 'Centre Logistique',
+            'nb_employee'    => $nbEmployees,
+            'capacity'       => $capacity,
+            'nb_registered'  => null,
+            'nb_blood_pouch' => null,
+            'onedoc_link'    => $onedoc,
+            'onedoc_click_count' => $metrics['onedoc_click_count'],
+            'visitor_count'  => $metrics['visitor_count'],
+            'created_at'     => $now,
+            'updated_at'     => $now,
+        ]);
+
+        // COLLECTE FUTURE FIXE à HEIG-VD — données stables pour les tests
+        $capacity = 500;
+        $nbEmployees = 1200;
+        $collectionDate = Carbon::create(2026, 11, 12);
+        $isFutureOrCurrent = $collectionDate->isAfter($now) || $collectionDate->isSameDay($now);
+        $metrics = $this->generateOnedocMetrics($capacity, $nbEmployees, !$isFutureOrCurrent);
+
+        DB::table('collections')->insert([
+            'company_id'     => 2, // HEIG-VD
+            'day_start'      => $collectionDate->startOfDay(),
+            'day_end'        => $collectionDate->endOfDay(),
+            'hour_start'     => '08:00:00',
+            'hour_end'       => '17:00:00',
+            'location'       => 'Aula Campus Cheseaux',
+            'nb_employee'    => $nbEmployees,
+            'capacity'       => $capacity,
+            'nb_registered'  => null,
+            'nb_blood_pouch' => null,
+            'onedoc_link'    => $onedoc,
+            'onedoc_click_count' => $metrics['onedoc_click_count'],
+            'visitor_count'  => $metrics['visitor_count'],
             'created_at'     => $now,
             'updated_at'     => $now,
         ]);
