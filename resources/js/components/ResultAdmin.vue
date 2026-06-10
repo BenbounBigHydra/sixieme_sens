@@ -364,7 +364,7 @@ const BarChart = {
         },
     },
     template: `
-    <div class="flex items-end h-[220px] border-b-[3px] border-l-[3px] border-black relative ml-8 mb-10 md:mb-7">
+    <div class="flex items-end h-[220px] border-b-[3px] border-l-[3px] border-black relative ml-8 mt-6 mb-10 md:mb-7">
       <!-- Y-axis labels -->
       <div class="absolute -left-12 top-0      text-xs font-bold font-inter text-right w-10">100%</div>
       <div class="absolute -left-12 top-[50%]  text-xs font-bold font-inter text-right w-10">50%</div>
@@ -397,7 +397,7 @@ const BarChart = {
         <!-- Tooltip (only when data exists) -->
         <div
           v-if="slot.hasData"
-          class="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white border-2 border-black text-black font-inter font-bold text-xs px-3 py-1.5 z-10 whitespace-nowrap pointer-events-none"
+          class="absolute bottom-full mb-1 opacity-0 group-hover:opacity-100 transition-opacity bg-white border-2 border-black text-black font-inter font-bold text-xs px-3 py-1.5 z-10 whitespace-nowrap pointer-events-none"
           :style="{ boxShadow: '3px 3px 0px 0px ' + hoverShadow }"
         >
           {{ formatPct(slot.value) }}
