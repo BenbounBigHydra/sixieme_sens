@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100dvh] bg-[#2D2144] bg-cover bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
+  <div class="h-[100dvh] bg-[#2D2144] bg-cover md:bg-[length:100%_100%] bg-no-repeat bg-center flex flex-col justify-between transition-all duration-1000 overflow-hidden" :style="{ backgroundImage: 'url(' + currentBgSrc + ')' }">
 
     <!-- LANDING STATE -->
     <div v-if="currentState === 'landing'" class="p-6 md:p-12 lg:p-16 h-full flex flex-col justify-between flex-grow">
