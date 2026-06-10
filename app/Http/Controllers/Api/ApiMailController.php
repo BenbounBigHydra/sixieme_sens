@@ -13,7 +13,7 @@ class ApiMailController extends Controller
     {
         $validated = $request->validate([
             'nom'       => 'required|string|max:255',
-            'employes'  => 'required|integer|min:1000',
+            'employes'  => 'required|integer',
             'mail'      => 'required|email',
             'telephone' => 'nullable|string|max:30',
             'message'   => 'nullable|string|max:1000',
