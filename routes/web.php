@@ -13,6 +13,7 @@ Route::get('/trophees', [VitrinController::class, 'trophies']);
 Route::get('/label', [VitrinController::class, 'label']);
 Route::get('/companies', [VitrinController::class, 'companies']);
 Route::get('/contact', [VitrinController::class, 'contact']);
+Route::get('/quizz', [VitrinController::class, 'quizz']);
 Route::get('/teapot', function () {
     abort(418);
 });
