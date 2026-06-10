@@ -50,10 +50,10 @@
 
             <!-- Collections Table -->
             <div class="w-full mt-4 overflow-x-auto pb-4">
-                <div class="border border-blue-200  overflow-hidden md:min-w-[1300px]">
+                <div class="border border-blue-200 overflow-hidden md:min-w-[1000px]">
                     <!-- Table Header -->
                     <div
-                        class="hidden md:grid grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-center bg-[#ffeaa7] py-3 px-4 border-b border-blue-200">
+                        class="hidden md:grid grid-cols-[minmax(160px,2fr)_minmax(80px,1fr)_minmax(90px,1fr)_minmax(80px,1fr)_minmax(80px,1fr)_minmax(80px,1fr)_minmax(60px,1fr)_minmax(60px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)] items-center bg-[#ffeaa7] py-3 px-2 border-b border-blue-200">
                         <!-- Entreprise -->
                         <div class="flex items-center cursor-pointer group" @click="sortBy('companyName')">
                             <span class="font-inter text-sm text-[#393939] mr-2">Entreprise</span>
@@ -87,7 +87,7 @@
                         <template v-if="filteredAndSortedCollections.length > 0">
                             <div v-for="(collection, index) in filteredAndSortedCollections" :key="collection.id"
                                 :class="Math.floor(index / 3) !== mobilePage ? 'hidden md:grid' : 'flex flex-col md:grid'"
-                                class="md:grid-cols-[minmax(200px,2fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(120px,1fr)_minmax(150px,1fr)] items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
+                                class="md:grid-cols-[minmax(160px,2fr)_minmax(80px,1fr)_minmax(90px,1fr)_minmax(80px,1fr)_minmax(80px,1fr)_minmax(80px,1fr)_minmax(60px,1fr)_minmax(60px,1fr)_minmax(120px,1fr)_minmax(100px,1fr)] items-start md:items-center py-4 px-2 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
                                 <!-- Entreprise -->
                                 <div class="flex items-center space-x-3 w-full">
                                     <div class="h-8 w-16 flex items-center justify-start shrink-0">
@@ -123,8 +123,9 @@
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">One-Doc :</span>
                                     <a v-if="collection.onedoc_link" :href="collection.onedoc_link" target="_blank"
-                                        class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien
-                                        One-Doc</a>
+                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center" title="Lien One-Doc">
+                                        <img src="/images/Copy.svg" alt="Lien One-Doc" class="w-4 h-4 object-contain" />
+                                    </a>
                                     <span v-else class="text-gray-400 font-inter text-sm">-</span>
                                 </div>
 
@@ -134,9 +135,10 @@
                                     <a v-if="collection.statusKey !== 'past' && collection.company?.slug"
                                         :href="'/collection/' + collection.company.slug + '/' + collection.id"
                                         target="_blank"
-                                        class="text-[#0073e6] underline font-inter text-sm hover:text-blue-800">Lien
-                                        Co-Brand</a>
-                                    <span v-else class="text-gray-400 font-inter text-sm italic">Désactivé</span>
+                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center" title="Lien Co-Brand">
+                                        <img src="/images/Copy.svg" alt="Lien Co-Brand" class="w-4 h-4 object-contain" />
+                                    </a>
+                                    <span v-else class="text-gray-400 font-inter text-sm italic">-</span>
                                 </div>
 
                                 <!-- Statut -->
