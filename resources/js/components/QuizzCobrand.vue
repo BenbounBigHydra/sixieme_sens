@@ -479,9 +479,31 @@ const correctAnswer = () => {
 };
 
 const copyAndRedirect = async () => {
-  const shareText = `Salut ! Notre entreprise organise une collecte de sang. Viens tester ton éligibilité ici : ${window.location.origin}${homeLink.value}`;
+  const shareUrl = `${window.location.origin}${homeLink.value}`;
+  const shareText = `Salut ! Notre entreprise organise une collecte de sang. Viens tester ton éligibilité ici : ${shareUrl}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Collecte de sang',
+        text: 'Salut ! Notre entreprise organise une collecte de sang. Viens tester ton éligibilité ici :',
+        url: shareUrl
+      });
+      window.location.href = homeLink.value;
+    } catch (err) {
+      console.error('Share failed or was cancelled:', err);
+      if (err.name !== 'AbortError') {
+        fallbackCopy(shareText);
+      }
+    }
+  } else {
+    fallbackCopy(shareText);
+  }
+};
+
+const fallbackCopy = async (text) => {
   try {
-    await navigator.clipboard.writeText(shareText);
+    await navigator.clipboard.writeText(text);
     isCopied.value = true;
     setTimeout(() => {
       isCopied.value = false;
@@ -489,7 +511,6 @@ const copyAndRedirect = async () => {
     }, 1500);
   } catch (err) {
     console.error('Failed to copy text: ', err);
-    // Fallback redirect if copy fails
     window.location.href = homeLink.value;
   }
 };
