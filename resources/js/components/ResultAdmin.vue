@@ -7,13 +7,13 @@
             <!-- Section 1: Leaderboard -->
             <section>
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-8 gap-4">
-                    <h1 class="font-jersey font-bold text-4xl md:text-[48px] text-black leading-none">
+                    <h1 class="font-jersey font-bold text-3xl md:text-[48px] text-black leading-none">
                         Leaderboard ({{ selectedYear }})
                     </h1>
 
                     <!-- Year selector -->
                     <div class="mb-10 flex flex-col md:flex-row md:items-center">
-                        <label class="font-jersey text-2xl text-black mr-4 mb-2 md:mb-0">
+                        <label class="font-jersey text-xl md:text-2xl text-black mr-4 mb-2 md:mb-0">
                             Année :
                         </label>
 
@@ -70,19 +70,19 @@
                         <thead>
                             <tr class="border-b-[3px] border-[#B3D9FF]">
                                 <th
-                                    class="py-2 md:py-4 px-1 md:px-2 font-inter font-bold text-xs md:text-sm text-[#034a74] text-center w-16 md:w-24">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-inter font-bold text-[9px] sm:text-xs md:text-sm text-[#034a74] text-center w-12 sm:w-16 md:w-24">
                                 </th>
                                 <th
-                                    class="py-2 md:py-4 px-1 md:px-2 font-inter font-bold text-xs md:text-sm text-[#034a74]">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-inter font-bold text-[9px] sm:text-xs md:text-sm text-[#034a74]">
                                     Leader</th>
                                 <th
-                                    class="py-2 md:py-4 px-1 md:px-2 font-inter font-bold text-xs md:text-sm text-[#034a74] text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-inter font-bold text-[9px] sm:text-xs md:text-sm text-[#034a74] text-center">
                                     Total employés</th>
                                 <th
-                                    class="py-2 md:py-4 px-1 md:px-2 font-inter font-bold text-xs md:text-sm text-[#034a74] text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-inter font-bold text-[9px] sm:text-xs md:text-sm text-[#034a74] text-center">
                                     Poches récoltées</th>
                                 <th
-                                    class="py-2 md:py-4 px-1 md:px-2 font-inter font-bold text-xs md:text-sm text-[#034a74]">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-inter font-bold text-[9px] sm:text-xs md:text-sm text-[#034a74]">
                                     <div class="flex items-center justify-center space-x-1">
                                         <span>Score</span>
                                         <div class="relative group cursor-pointer flex items-center">
@@ -107,16 +107,16 @@
                                     <img src="/images/trophy_gold.png" alt="Or"
                                         class="h-10 md:h-16 w-auto mx-auto object-contain" />
                                 </td>
-                                <td class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black">{{
+                                <td class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black">{{
                                     goldData?.name || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(goldData?.nb_employee) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(goldData?.nb_blood_pouch) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ calculateScore(goldData) }}</td>
                             </tr>
                             <tr class="border-b-[3px] border-[#ffeaa7]">
@@ -124,16 +124,16 @@
                                     <img src="/images/trophy_conviction (1).png" alt="Ambassadeur"
                                         class="h-10 md:h-16 w-auto mx-auto object-contain" />
                                 </td>
-                                <td class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black">{{
+                                <td class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black">{{
                                     ambassadorData?.name || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(ambassadorData?.nb_employee) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(ambassadorData?.nb_blood_pouch) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ ambassadorData?.consecutive ? formatNumber(ambassadorData.consecutive) + " ans" :
                                     '-' }}</td>
                             </tr>
@@ -142,16 +142,16 @@
                                     <img src="/images/trophy_conviction.png" alt="Conviction"
                                         class="h-10 md:h-16 w-auto mx-auto object-contain" />
                                 </td>
-                                <td class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black">{{
+                                <td class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black">{{
                                     convictionData?.name || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(convictionData?.nb_employee) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ formatNumber(convictionData?.nb_blood_pouch) || '-' }}</td>
                                 <td
-                                    class="py-2 md:py-4 px-1 md:px-2 font-jersey text-xl md:text-[32px] text-black text-center">
+                                    class="py-2 md:py-4 px-0.5 sm:px-1 md:px-2 font-jersey text-base sm:text-xl md:text-[32px] text-black text-center">
                                     {{ calculateScore(convictionData) }}</td>
                             </tr>
                         </tbody>
@@ -161,12 +161,12 @@
 
             <!-- Section 2: KPIs -->
             <section class="pt-8">
-                <h2 class="font-jersey font-bold text-4xl md:text-[48px] text-black mb-8 leading-none">
+                <h2 class="font-jersey font-bold text-3xl md:text-[48px] text-black mb-8 leading-none">
                     KPIs — Progression mensuelle
                 </h2>
 
                 <div class="mb-10 flex flex-col md:flex-row md:items-center">
-                    <label class="font-jersey text-2xl text-black mr-4 mb-2 md:mb-0">Sélectionner une entreprise
+                    <label class="font-jersey text-xl md:text-2xl text-black mr-4 mb-2 md:mb-0">Sélectionner une entreprise
                         :</label>
                     <div class="relative w-full md:w-[350px]">
                         <div @click="toggleDropdown"
@@ -226,13 +226,13 @@
                                     class="bg-[#B3D9FF] border-b-2 border-black p-4 flex items-center justify-between relative z-20">
                                     <div class="w-6 hidden md:block"></div>
                                     <h3
-                                        class="font-jersey text-3xl text-black leading-none tracking-wide flex-grow text-center">
+                                        class="font-jersey text-2xl md:text-3xl text-black leading-none tracking-wide flex-grow text-center">
                                         Taux
                                         d'occupation</h3>
                                     <InfoTooltip
                                         text="Proportion de places réservées par rapport à la capacité totale. Moyenne des collectes du mois." />
                                 </div>
-                                <div class="p-8 flex-grow">
+                                <div class="p-4 pt-10 md:p-8 flex-grow">
                                     <BarChart :monthly-kpis="monthlyKpis" field="occupancy_rate" color="#0073e6"
                                         hover-color="#3391ff" hover-shadow="rgba(0,115,230,1)" />
                                 </div>
@@ -245,13 +245,13 @@
                                     class="bg-[#C1F0A8] border-b-2 border-black p-4 flex items-center justify-between relative z-20">
                                     <div class="w-6 hidden md:block"></div>
                                     <h3
-                                        class="font-jersey text-3xl text-black leading-none tracking-wide flex-grow text-center">
+                                        class="font-jersey text-2xl md:text-3xl text-black leading-none tracking-wide flex-grow text-center">
                                         Taux de visite
                                         (Site Co-brandé)</h3>
                                     <InfoTooltip
                                         text="Proportion d'employés ayant visité la page co-brandée. Moyenne des collectes du mois." />
                                 </div>
-                                <div class="p-8 flex-grow">
+                                <div class="p-4 pt-10 md:p-8 flex-grow">
                                     <BarChart :monthly-kpis="monthlyKpis" field="cobrand_visit_rate" color="#5bb124"
                                         hover-color="#72c938" hover-shadow="rgba(91,177,36,1)" />
                                 </div>
@@ -264,13 +264,13 @@
                                     class="bg-[#ffeaa7] border-b-2 border-black p-4 flex items-center justify-between relative z-20">
                                     <div class="w-6 hidden md:block"></div>
                                     <h3
-                                        class="font-jersey text-3xl text-black leading-none tracking-wide flex-grow text-center">
+                                        class="font-jersey text-2xl md:text-3xl text-black leading-none tracking-wide flex-grow text-center">
                                         Conversion
                                         OneDoc</h3>
                                     <InfoTooltip
                                         text="Proportion des visiteurs co-brandés ayant cliqué sur le lien OneDoc. Moyenne des collectes du mois." />
                                 </div>
-                                <div class="p-8 flex-grow">
+                                <div class="p-4 pt-10 md:p-8 flex-grow">
                                     <BarChart :monthly-kpis="monthlyKpis" field="onedoc_visit_rate" color="#ffd012"
                                         hover-color="#ffe35c" hover-shadow="rgba(255,208,18,1)" />
                                 </div>
@@ -283,13 +283,13 @@
                                     class="bg-[#ffb699] border-b-2 border-black p-4 flex items-center justify-between relative z-20">
                                     <div class="w-6 hidden md:block"></div>
                                     <h3
-                                        class="font-jersey text-3xl text-black leading-none tracking-wide flex-grow text-center">
+                                        class="font-jersey text-2xl md:text-3xl text-black leading-none tracking-wide flex-grow text-center">
                                         Inscriptions
                                         Non Éligibles</h3>
                                     <InfoTooltip
                                         text="Proportion d'utilisateurs non éligibles après test. Moyenne des collectes du mois." />
                                 </div>
-                                <div class="p-8 flex-grow">
+                                <div class="p-4 pt-10 md:p-8 flex-grow">
                                     <BarChart :monthly-kpis="monthlyKpis" field="non_eligible_rate" color="#E4534B"
                                         hover-color="#f1716a" hover-shadow="rgba(228,83,75,1)" />
                                 </div>
@@ -364,7 +364,7 @@ const BarChart = {
         },
     },
     template: `
-    <div class="flex items-end h-[220px] border-b-[3px] border-l-[3px] border-black relative ml-8" style="margin-bottom: 1.75rem;">
+    <div class="flex items-end h-[220px] border-b-[3px] border-l-[3px] border-black relative ml-8 mb-10 md:mb-7">
       <!-- Y-axis labels -->
       <div class="absolute -left-12 top-0      text-xs font-bold font-inter text-right w-10">100%</div>
       <div class="absolute -left-12 top-[50%]  text-xs font-bold font-inter text-right w-10">50%</div>
@@ -404,7 +404,7 @@ const BarChart = {
         </div>
 
         <!-- X-axis label -->
-        <div class="absolute top-[105%] text-[10px] font-inter font-bold text-[#393939] whitespace-nowrap">{{ slot.label }}</div>
+        <div class="absolute top-[105%] md:top-[105%] mt-2 md:mt-0 text-[10px] font-inter font-bold text-[#393939] whitespace-nowrap origin-top-left -rotate-90 translate-y-3 md:translate-y-0 md:rotate-0">{{ slot.label }}</div>
       </div>
     </div>
   `,
