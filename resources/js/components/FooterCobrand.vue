@@ -54,6 +54,7 @@
 
           <div class="w-full md:w-1/3 text-center md:text-right mt-4 md:mt-0">
             <p>HUG - Tous droits réservés</p>
+            <a href="/418" class="text-[#0073E6] hover:opacity-80 transition-opacity mt-1 inline-block">Envie d'un bon café ?</a>
           </div>
 
         </div>
