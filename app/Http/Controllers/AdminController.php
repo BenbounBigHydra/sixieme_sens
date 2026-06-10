@@ -28,9 +28,12 @@ class AdminController extends Controller
     public function collections()
     {
         $data = [
+            'availableYears' => CompanyStatsService::getActivesYears(),
             'collections' => AdminService::getCollectionsByStatus(),
             'companies' => Company::select('id', 'name')->orderBy('name', 'asc')->get(),
         ];
+
+        // dd($data);
 
         return view('admin.collections', ['initialData' => json_encode($data)]);
     }
