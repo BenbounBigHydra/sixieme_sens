@@ -6,18 +6,18 @@
             <!-- FirstPart: Action Buttons -->
             <section class="grid grid-cols-2 gap-4 md:gap-6">
                 <a href="/admin/companies?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex flex-col md:flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
-                    <div class="h-5 w-5 md:h-6 md:w-6 mb-1 md:mb-0 md:mr-3 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 px-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-4 w-4 md:h-6 md:w-6 mr-1 md:mr-3 shrink-0 bg-[#fffbf1]"
                         style="mask-image: url('/images/Cross.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Cross.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-['Jersey_20'] tracking-wide text-[16px] md:text-2xl text-center leading-none md:leading-normal">Ajouter une entreprise</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[13px] md:text-2xl text-center leading-none md:leading-normal">Ajouter une entreprise</span>
                 </a>
                 <a href="/admin/collections?action=new"
-                    class="bg-[#0073e6] text-[#fffbf1] flex flex-col md:flex-row items-center justify-center py-2 md:py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
-                    <div class="h-5 w-5 md:h-6 md:w-6 mb-1 md:mb-0 md:mr-3 bg-[#fffbf1]"
+                    class="bg-[#0073e6] text-[#fffbf1] flex flex-row items-center justify-center py-2 md:py-4 px-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] md:hover:translate-y-[4px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all">
+                    <div class="h-4 w-4 md:h-6 md:w-6 mr-1 md:mr-3 shrink-0 bg-[#fffbf1]"
                         style="mask-image: url('/images/Group.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; -webkit-mask-image: url('/images/Group.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;">
                     </div>
-                    <span class="font-['Jersey_20'] tracking-wide text-[16px] md:text-2xl text-center leading-none md:leading-normal">Organiser une collecte</span>
+                    <span class="font-['Jersey_20'] tracking-wide text-[13px] md:text-2xl text-center leading-none md:leading-normal">Organiser une collecte</span>
                 </a>
             </section>
 
@@ -140,7 +140,7 @@
                                     <a :href="getCoBrandLink(item)" target="_blank"
                                         class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
                                         :title="getCoBrandLink(item)">
-                                        {{ getCoBrandLink(item) }}
+                                        <span class="md:hidden">Lien Site</span><span class="hidden md:inline">{{ getCoBrandLink(item) }}</span>
                                     </a>
                                 </div>
 
@@ -155,7 +155,7 @@
                                     <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank"
                                         class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
                                         :title="item.onedoc_link">
-                                        {{ item.onedoc_link }}
+                                        <span class="md:hidden">Lien One-Doc</span><span class="hidden md:inline">{{ item.onedoc_link }}</span>
                                     </a>
                                     <span v-else class="text-xs md:text-[10px] font-inter text-gray-400 italic">Aucun
                                         lien</span>
@@ -195,15 +195,15 @@
                 <div class="flex space-x-6 mb-8">
                     <div class="flex items-center space-x-2">
                         <div class="w-4 h-4 bg-[#0073e6]"></div>
-                        <span class="font-inter text-sm text-[#393939]">Mois terminé</span>
+                        <span class="font-inter text-[10px] md:text-sm text-[#393939] leading-tight">Mois terminé</span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <div class="w-4 h-4 bg-[#cce6ff]"></div>
-                        <span class="font-inter text-sm text-[#393939]">Mois à venir</span>
+                        <span class="font-inter text-[10px] md:text-sm text-[#393939] leading-tight">Mois à venir</span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <div class="w-4 h-4 bg-[#ffd012]"></div>
-                        <span class="font-inter text-sm text-[#393939]">Mois en cours</span>
+                        <span class="font-inter text-[10px] md:text-sm text-[#393939] leading-tight">Mois en cours</span>
                     </div>
                 </div>
 
@@ -220,7 +220,7 @@
                     <!-- Bars -->
                     <div class="absolute inset-0 flex items-end justify-around px-2 md:px-4">
                         <div v-for="(month, i) in computedMonthsData" :key="i"
-                            class="w-6 md:w-16 h-full flex flex-col justify-end items-center relative">
+                            class="w-3 md:w-16 h-full flex flex-col justify-end items-center relative">
                             <div :class="[month.color, 'w-full cursor-pointer']"
                                 :style="{ height: `${(month.value / maxChartValue) * 100}%`, minHeight: month.value > 0 ? '4px' : '0' }"
                                 @mouseenter="hoveredMonthIndex = i" @mouseleave="hoveredMonthIndex = null"></div>
@@ -234,8 +234,8 @@
                     <!-- Hover Tooltip -->
                     <div v-if="hoveredMonthIndex !== null"
                         class="absolute top-0 left-0 w-full bg-[#fffbf1] border border-black z-40 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none">
-                        <div class="p-4">
-                            <h4 class="font-inter text-xl font-bold text-black mb-2">{{
+                        <div class="p-2 md:p-4">
+                            <h4 class="font-inter text-sm md:text-xl font-bold text-black mb-1 md:mb-2">{{
                                 computedMonthsData[hoveredMonthIndex].label
                             }}</h4>
 
@@ -259,14 +259,15 @@
                                     class="absolute bottom-[20px] flex flex-col items-center -translate-x-1/2"
                                     :style="{ left: `${((index + 1) / (computedMonthsData[hoveredMonthIndex].collections.length + 1)) * 100}%` }">
 
-                                    <span class="text-[10px] font-inter text-black absolute whitespace-nowrap"
-                                        :class="index % 2 === 0 ? 'bottom-[55px]' : 'bottom-[85px]'">
-                                        {{ formatDate(col.day_start) }}
+                                    <span class="text-[10px] md:text-[12px] font-inter text-black absolute whitespace-nowrap"
+                                        :class="index % 2 === 0 ? 'bottom-[40px] md:bottom-[55px]' : 'bottom-[70px] md:bottom-[85px]'">
+                                        <span class="md:hidden">{{ formatDateShort(col.day_start) }}</span>
+                                        <span class="hidden md:inline">{{ formatDate(col.day_start) }}</span>
                                     </span>
 
-                                    <div class="border border-black bg-white flex items-center justify-center z-10 min-w-[60px] w-max px-2 h-[28px] absolute left-1/2 -translate-x-1/2"
+                                    <div class="border border-black bg-white flex items-center justify-center z-10 min-w-[30px] md:min-w-[60px] w-max px-1 md:px-2 h-[16px] md:h-[28px] absolute left-1/2 -translate-x-1/2"
                                         :class="index % 2 === 0 ? 'bottom-[25px]' : 'bottom-[55px]'">
-                                        <span class="font-bold text-[12px] whitespace-nowrap"
+                                        <span class="font-bold text-[8px] md:text-[12px] whitespace-nowrap"
                                             :style="{ color: col.company?.color || '#0073e6' }">
                                             {{ col.company?.name || '...' }}
                                         </span>
@@ -287,11 +288,11 @@
                 <!-- Taux de participation -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de participation</h3>
-                        <div class="relative group cursor-pointer flex items-center">
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />participation</h3>
+                        <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="fixed left-[5vw] right-[5vw] top-1/2 -translate-y-1/2 md:absolute md:left-auto md:right-0 md:top-full md:translate-y-0 md:mt-2 md:w-[300px] md:max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-[60]">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -307,14 +308,13 @@
 
                         <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in participationRatio.lowestCompanies || mockParticipationCompanies"
-                                :key="i" class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2">
-                                <div class="flex items-center space-x-1 md:space-x-3 w-3/4">
+                                :key="i" class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2 w-full">
+                                <div class="flex items-center flex-1 min-w-0 pr-2">
+                                    <span class="truncate text-[10px] md:text-sm text-left">{{ item.company?.name || item.name }}</span>
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-3 md:h-5 shrink-0" />
-                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
-                                    <span class="truncate text-[10px] md:text-sm">{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0 ml-1 md:ml-3" />
                                 </div>
-                                <div class="font-bold text-[10px] md:text-sm">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
+                                <div class="font-bold text-[10px] md:text-sm shrink-0">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
                                     item.percentage }}</div>
                             </div>
@@ -325,11 +325,11 @@
                 <!-- Taux de rigueur -->
                 <div class="border border-black flex flex-col">
                     <div class="bg-[#ffda45] flex justify-between items-center p-2 md:p-4 border-b border-black relative">
-                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de rigueur</h3>
-                        <div class="relative group cursor-pointer flex items-center">
+                        <h3 class="font-jersey text-base md:text-2xl text-[#393939] leading-tight">Taux de<br />rigueur</h3>
+                        <div class="relative group cursor-pointer flex items-center shrink-0">
                             <img src="/images/info.svg" alt="Info" class="h-4 w-4 md:h-6 md:w-6" style="filter: brightness(0);" />
                             <div
-                                class="absolute right-0 top-full mt-2 w-[200px] md:w-[300px] max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                class="fixed left-[5vw] right-[5vw] top-1/2 -translate-y-1/2 md:absolute md:left-auto md:right-0 md:top-full md:translate-y-0 md:mt-2 md:w-[300px] md:max-w-[calc(100vw-2rem)] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-[60]">
                                 <p class="font-jersey text-[16px] md:text-[20px] text-black leading-tight">Taux calculé sur l'année en
                                     cours.</p>
                                 <p class="font-inter text-[12px] md:text-[14px] text-black mt-2">Ce taux correspond au ratio entre le
@@ -345,14 +345,13 @@
 
                         <div class="w-full space-y-2 md:space-y-4 font-inter text-sm">
                             <div v-for="(item, i) in rigorRatio.lowestCompanies || mockRigorCompanies" :key="i"
-                                class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2">
-                                <div class="flex items-center space-x-1 md:space-x-3 w-3/4">
+                                class="flex justify-between items-center border-b border-gray-300 pb-1 md:pb-2 w-full">
+                                <div class="flex items-center flex-1 min-w-0 pr-2">
+                                    <span class="truncate text-[10px] md:text-sm text-left">{{ item.company?.name || item.name }}</span>
                                     <img v-if="item.warning" src="/images/importantOrange.svg" alt="Warning"
-                                        class="h-3 md:h-5 shrink-0" />
-                                    <div v-else class="h-3 w-3 md:h-5 md:w-5 shrink-0"></div>
-                                    <span class="truncate text-[10px] md:text-sm">{{ item.company?.name || item.name }}</span>
+                                        class="h-3 md:h-5 shrink-0 ml-1 md:ml-3" />
                                 </div>
-                                <div class="font-bold text-[10px] md:text-sm">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
+                                <div class="font-bold text-[10px] md:text-sm shrink-0">{{ item.ratio !== undefined ? (item.ratio * 100).toFixed(0) + '%'
                                     :
                                     item.percentage }}</div>
                             </div>
@@ -618,6 +617,11 @@ export default {
             if (!dateStr) return '';
             const d = new Date(dateStr);
             return d.toLocaleDateString('fr-CH');
+        },
+        formatDateShort(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('fr-CH', { day: '2-digit', month: '2-digit' });
         },
         openModal(type, item) {
             this.activeModal = type;
