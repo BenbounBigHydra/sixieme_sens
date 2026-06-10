@@ -25,15 +25,12 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
             
             <!-- Roby Teapot -->
-            <img src="/images/roby_teapot.png" alt="Roby Teapot" class="h-32 md:h-40 object-contain shrink-0" />
+            <img src="/images/roby_teapot.png" alt="Roby Teapot" class="h-48 md:h-64 object-contain shrink-0" />
             
             <!-- Speech Bubble (Fixe et petite: w-64 soit 256px) -->
             <div class="relative bg-[#1a81e7] text-white p-5 md:p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-64 z-20">
                 <div class="font-['Jersey_20'] tracking-wide text-4xl leading-none text-left mb-2">
                     418<br/>I'm a teapot
-                </div>
-                <div class="font-['Jersey_20'] tracking-wide text-2xl leading-relaxed">
-                    <p>I am a tea pot!</p>
                 </div>
 
                 <!-- Arrow for desktop (pointing left towards Roby) -->

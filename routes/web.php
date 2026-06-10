@@ -16,6 +16,12 @@ Route::get('/contact', [VitrinController::class, 'contact']);
 Route::get('/teapot', function () {
     abort(418);
 });
+Route::get('/418', function () {
+    abort(418);
+});
+Route::get('/414', function () {
+    abort(418);
+});
 
 // Site co-branding
 Route::prefix('/collection/{company_name}')->controller(CoBrandController::class)->middleware(TrackCollectionVisit::class)->group(function () {
