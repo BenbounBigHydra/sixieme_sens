@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Jersey+20&display=swap" rel="stylesheet">
-    <link rel="icon" href="/images/hug_icon_Mobile.png">
+    <link rel="icon" href="/images/hug_icon_square.png">
 </head>
 <body class="bg-[#fffbf1] m-0 p-0 text-black">
     <div id="app">
