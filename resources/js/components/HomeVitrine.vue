@@ -89,7 +89,7 @@
           </div>
 
           <!-- Mobile Grid Container (Hidden on desktop) -->
-          <div class="block lg:hidden relative w-full max-w-[400px] mx-auto mb-4 mt-4">
+          <div class="block lg:hidden relative w-full max-w-[320px] mx-auto mb-4 mt-4">
             <!-- Background Grid (Icons) -->
             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
               <template v-for="i in 32" :key="'mobile-'+i">
@@ -123,8 +123,8 @@
 
             <!-- Foreground Overlay Grid Mobile (Center White Square) -->
             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
-              <div class="bg-[#fffbf1] ring-8 ring-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
-                <span class="text-[#0073e6] font-['Jersey_20'] text-[32px] leading-[0.8] mb-0 mt-1">130</span>
+              <div class="bg-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
+                <span class="text-[#0073e6] font-['Jersey_20'] text-[36px] leading-[0.8] mb-0 mt-1">130</span>
                 <span class="text-[#0073e6] font-['Jersey_20'] text-[12px] leading-tight text-center tracking-wide mt-1">
                   Potentielles vies<br/>sauvées
                 </span>
