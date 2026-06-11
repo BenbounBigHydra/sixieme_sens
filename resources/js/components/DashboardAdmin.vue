@@ -138,7 +138,7 @@
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a :href="getCoBrandLink(item)" target="_blank"
-                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
+                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate underline"
                                         :title="getCoBrandLink(item)">
                                         Lien Site
                                     </a>
@@ -153,7 +153,7 @@
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank"
-                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
+                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate underline"
                                         :title="item.onedoc_link">
                                         Lien One-Doc
                                     </a>
