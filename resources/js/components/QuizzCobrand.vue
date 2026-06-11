@@ -249,7 +249,7 @@ const questions = [
     yesText: "Aaah dommage. Certains pays présentent des risques sanitaires qui nécessitent un délai d'attente avant de donner son sang. Tu peux vérifier ça grâce à notre travel-check : <a href='https://www.hug.ch/travelcheck' target='_blank' class='underline hover:text-gray-300'>https://www.hug.ch/travelcheck</a>",
     noText: "Accroche ta ceinture, ça risque de secouer !",
     bg: "background_earth_desktop.png", mobileBg: "bkgMobile/background_earth_mobile.png", folder: "01_travel", prefix: "travel", hasYes: true, hasNo: true,
-    imageClass: "max-h-[33vh] md:max-h-[75vh] translate-y-10 md:translate-y-20"
+    imageClass: "max-h-[33vh] md:max-h-[75vh] translate-y-20 md:translate-y-20"
   },
   {
     text: "As-tu actuellement une plaie ou as-tu été opéré récemment ?",
