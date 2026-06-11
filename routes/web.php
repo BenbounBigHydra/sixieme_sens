@@ -38,6 +38,7 @@ Route::prefix('/collection/{company_name}')->controller(CoBrandController::class
 // Site admin
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 Route::middleware('auth')->prefix('admin')->group(function () {
     // Toutes ces routes nécessitent d'être connecté
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');

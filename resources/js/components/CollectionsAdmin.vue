@@ -4,16 +4,26 @@
 
         <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
             <!-- Search Bar -->
-            <div class="relative w-full">
-                <input type="text" v-model="searchQuery" placeholder="Rechercher"
-                    class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
-                <div class="absolute right-4 top-1/2 -translate-y-1/2">
-                    <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
+            <div class="flex gap-3 items-center w-full">
+                <div class="relative flex-1">
+                    <input type="text" v-model="searchQuery" placeholder="Rechercher"
+                        class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
+                    </div>
                 </div>
             </div>
 
             <!-- Filters -->
-            <div class="flex flex-wrap gap-2 md:gap-4 md:space-x-0">
+            <div class="flex flex-wrap gap-2 md:gap-4 md:space-x-0 items-stretch">
+                <!-- Year Filter -->
+                <select v-model="selectedYear" @change="changeYear" :disabled="loadingYear"
+                    class="border border-[#0073e6] px-4 py-2 font-inter text-sm bg-[#fffbf1] text-[#0073e6] transition-colors disabled:opacity-50 w-full md:w-auto">
+                    <option v-for="year in availableYears" :key="year" :value="year">
+                        {{ year }}
+                    </option>
+                </select>
+
                 <button @click="toggleFilter('ongoing')"
                     :class="activeFilter === 'ongoing' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
                     class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
@@ -33,6 +43,10 @@
                     :class="activeFilter === 'to_close' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
                     class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
                     À clore
+                </button>
+                <button @click="resetFilters"
+                    class="bg-[#0073e6] text-[#fffbf1] flex items-center px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all w-full md:w-auto justify-center">
+                    <span class="font-['Jersey_20'] tracking-wide text-lg">Réinitialiser</span>
                 </button>
             </div>
 
@@ -100,30 +114,36 @@
 
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Date :</span>
-                                    <span class="font-inter text-sm text-[#393939]">{{ formatDate(collection.day_start) }}</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ formatDate(collection.day_start)
+                                        }}</span>
                                 </div>
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Total employés :</span>
-                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_employee || '-' }}</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_employee || '-'
+                                        }}</span>
                                 </div>
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Capacité :</span>
-                                    <span class="font-inter text-sm text-[#393939]">{{ collection.capacity || '-' }}</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.capacity || '-'
+                                        }}</span>
                                 </div>
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Inscrits :</span>
-                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_registered ?? '-' }}</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_registered ?? '-'
+                                        }}</span>
                                 </div>
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Poches :</span>
-                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_blood_pouch ?? '-' }}</span>
+                                    <span class="font-inter text-sm text-[#393939]">{{ collection.nb_blood_pouch ?? '-'
+                                        }}</span>
                                 </div>
 
                                 <!-- One Doc Link -->
                                 <div class="flex items-center justify-between md:justify-start w-full md:w-auto">
                                     <span class="md:hidden font-bold text-sm text-[#393939]">One-Doc :</span>
                                     <a v-if="collection.onedoc_link" :href="collection.onedoc_link" target="_blank"
-                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center" title="Lien One-Doc">
+                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center"
+                                        title="Lien One-Doc">
                                         <img src="/images/Copy.svg" alt="Lien One-Doc" class="w-4 h-4 object-contain" />
                                     </a>
                                     <span v-else class="text-gray-400 font-inter text-sm">-</span>
@@ -135,8 +155,10 @@
                                     <a v-if="collection.statusKey !== 'past' && collection.company?.slug"
                                         :href="'/collection/' + collection.company.slug + '/' + collection.id"
                                         target="_blank"
-                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center" title="Lien Co-Brand">
-                                        <img src="/images/Copy.svg" alt="Lien Co-Brand" class="w-4 h-4 object-contain" />
+                                        class="border border-[#0073e6] p-1.5 hover:bg-blue-50 transition-colors bg-white w-8 h-8 flex items-center justify-center"
+                                        title="Lien Co-Brand">
+                                        <img src="/images/Copy.svg" alt="Lien Co-Brand"
+                                            class="w-4 h-4 object-contain" />
                                     </a>
                                     <span v-else class="text-gray-400 font-inter text-sm italic">-</span>
                                 </div>
@@ -154,7 +176,7 @@
                                     class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0 gap-2">
                                     <button v-if="collection.statusKey === 'to_close'"
                                         @click="openClotureModal(collection)"
-                                        class="bg-[#5C629E] text-white p-2 md:p-1.5  hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
+                                        class="bg-[#22c55e] text-white p-2 md:p-1.5  hover:bg-opacity-90 transition-colors w-full md:w-auto flex justify-center">
                                         <span class="text-sm font-inter">Clore</span>
                                     </button>
                                     <button @click="openEditModal(collection)"
@@ -164,12 +186,17 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
-                                <button @click="prevMobilePage" :disabled="mobilePage === 0" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                            <div
+                                class="flex justify-between items-center py-3 px-4 md:hidden border-t border-blue-200 bg-[#ffeeab] sticky bottom-0">
+                                <button @click="prevMobilePage" :disabled="mobilePage === 0"
+                                    class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
                                     <span class="font-bold">&lt;</span>
                                 </button>
-                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{ Math.ceil(filteredAndSortedCollections.length / 3) || 1 }}</span>
-                                <button @click="nextMobilePage" :disabled="(mobilePage + 1) * 3 >= filteredAndSortedCollections.length" class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
+                                <span class="font-inter text-sm font-bold">{{ mobilePage + 1 }} / {{
+                                    Math.ceil(filteredAndSortedCollections.length / 3) || 1 }}</span>
+                                <button @click="nextMobilePage"
+                                    :disabled="(mobilePage + 1) * 3 >= filteredAndSortedCollections.length"
+                                    class="h-10 w-10 disabled:opacity-50 flex items-center justify-center bg-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none">
                                     <span class="font-bold">&gt;</span>
                                 </button>
                             </div>
@@ -183,85 +210,7 @@
                 </div>
             </div>
         </main>
-
-        <!-- Options Modal -->
-        <div v-if="activeModal === 'options'"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="closeModal">
-            <div
-                :class="['bg-[#fffbf1] border-[10px] w-full max-w-[750px] p-8 relative flex flex-col max-h-[90vh]', getModalBorderClass]">
-                <button @click="closeModal"
-                    class="absolute top-6 right-6 flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
-                    <img src="/images/X.svg" alt="Close" class="w-10 h-10" />
-                </button>
-                <h2 class="font-['Jersey_20'] text-5xl text-black leading-none mb-1">{{ selectedCollecte ?
-                    (selectedCollecte.company?.name || 'Inconnu') : 'Nouvelle collecte' }}</h2>
-                <p class="font-['Jersey_20'] text-2xl text-black mb-6 tracking-wide" v-if="selectedCollecte">Collecte du
-                    {{
-                        formatDate(selectedCollecte?.day_start) }}</p>
-
-                <!-- Tabs -->
-                <div class="flex space-x-4 border-b border-gray-300 mb-6 shrink-0" v-if="selectedCollecte">
-                    <button @click="activeTab = 'modifier'"
-                        :class="{ 'border-b-2 border-[#0073e6] text-[#0073e6] font-bold': activeTab === 'modifier', 'text-gray-500': activeTab !== 'modifier' }"
-                        class="pb-2 px-4 font-inter text-lg">Modifier</button>
-                    <button @click="canCloseCollection && (activeTab = 'cloturer')" :disabled="!canCloseCollection"
-                        :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer', 'opacity-50 cursor-not-allowed': !canCloseCollection }"
-                        class="pb-2 px-4 font-inter text-lg">Clôturer</button>
-                    <button @click="activeTab = 'supprimer'"
-                        :class="{ 'border-b-2 border-[#E4534B] text-[#E4534B] font-bold': activeTab === 'supprimer', 'text-gray-500': activeTab !== 'supprimer' }"
-                        class="pb-2 px-4 font-inter text-lg">Supprimer</button>
-                </div>
-
-                <!-- Détails -->
-                <div class="flex items-center justify-end">
-                    <span class="font-inter text-sm text-[#393939]">Détails</span>
-                </div>
-            </div>
-
-            <!-- Table Body -->
-            <div class="border border-blue-200   md:rounded-t-none bg-[#fffbf1]">
-                <template v-if="filteredAndSortedCollections.length > 0">
-                    <div v-for="collection in filteredAndSortedCollections" :key="collection.id"
-                        class="flex flex-col md:grid md:grid-cols-3 items-start md:items-center py-4 px-4 border-b border-blue-200 last:border-0 gap-4 md:gap-0">
-                        <!-- Entreprise -->
-                        <div class="flex items-center space-x-3 w-full">
-                            <div class="h-8 w-16 flex items-center justify-start shrink-0">
-                                <img :src="collection.company?.logo ? '/' + collection.company.logo : '/images/BCGE.png'"
-                                    alt="Logo" class="max-h-full max-w-full object-contain" />
-                            </div>
-                            <span class="font-inter font-bold text-lg md:text-sm text-[#393939]">{{
-                                collection.company?.name || 'Inconnu' }}</span>
-                        </div>
-
-                        <!-- Statut -->
-                        <div class="flex items-center justify-start md:justify-center w-full">
-                            <div class="px-6 py-1.5  text-white font-inter text-sm text-center min-w-[120px]"
-                                :class="getStatusColor(collection.statusKey)">
-                                {{ getStatusLabel(collection.statusKey) }}
-                            </div>
-                        </div>
-
-                        <!-- Détails -->
-                        <div
-                            class="flex items-center justify-start md:justify-end w-full pt-2 md:pt-0 border-t md:border-0 border-gray-100 mt-2 md:mt-0">
-                            <button @click="openEditModal(collection)"
-                                class="border border-[#0073e6] p-2 md:p-1.5  hover:bg-blue-50 transition-colors w-full md:w-auto flex justify-center">
-                                <img src="/images/Edit.svg" alt="Edit" class="h-4 w-4" />
-                                <span class="md:hidden ml-2 text-[#0073e6] text-sm">Modifier</span>
-                            </button>
-                        </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="py-10 text-center text-gray-500 font-inter">
-                        Aucune collecte trouvée.
-                    </div>
-                </template>
-            </div>
-        </div>
     </div>
-    <!-- </main> -->
-
     <!-- Options Modal -->
     <div v-if="activeModal === 'options'" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
         @click.self="closeModal">
@@ -282,8 +231,8 @@
                 <button @click="activeTab = 'modifier'"
                     :class="{ 'border-b-2 border-[#0073e6] text-[#0073e6] font-bold': activeTab === 'modifier', 'text-gray-500': activeTab !== 'modifier' }"
                     class="pb-2 px-4 font-inter text-lg">Modifier</button>
-                <button @click="activeTab = 'cloturer'"
-                    :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer' }"
+                <button @click="canCloseCollection && (activeTab = 'cloturer')" :disabled="!canCloseCollection"
+                    :class="{ 'border-b-2 border-[#5C629E] text-[#5C629E] font-bold': activeTab === 'cloturer', 'text-gray-500': activeTab !== 'cloturer', 'opacity-50 cursor-not-allowed': !canCloseCollection }"
                     class="pb-2 px-4 font-inter text-lg">Clôturer</button>
                 <button @click="activeTab = 'supprimer'"
                     :class="{ 'border-b-2 border-[#E4534B] text-[#E4534B] font-bold': activeTab === 'supprimer', 'text-gray-500': activeTab !== 'supprimer' }"
@@ -315,7 +264,7 @@
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
                             <p v-if="errors.nb_employee" class="text-red-500 text-xs mt-1">{{ errors.nb_employee[0]
-                                }}</p>
+                            }}</p>
                         </div>
                         <div>
                             <label class="block font-inter text-base mb-2">Capacité de la collecte</label>
@@ -380,7 +329,7 @@
                             <input type="url" v-model="detailForm.onedoc_link" placeholder="Lien OneDoc"
                                 class="w-full h-full border border-black p-3 font-inter text-sm bg-transparent" />
                             <p v-if="errors.onedoc_link" class="text-red-500 text-xs mt-1">{{ errors.onedoc_link[0]
-                                }}</p>
+                            }}</p>
                         </div>
                     </div>
 
@@ -405,7 +354,7 @@
                                     class="w-full border border-black p-3 font-inter text-sm bg-transparent" />
                             </div>
                             <p v-if="errors.nb_registered" class="text-red-500 text-xs mt-1">{{ errors.nb_registered[0]
-                                }}
+                            }}
                             </p>
                         </div>
                         <div>
@@ -482,10 +431,11 @@ export default {
             required: true
         }
     },
+    // FUSION ET NETTOYAGE DES DEUX BLOCS DATA() EN UN SEUL
     data() {
         return {
             searchQuery: '',
-            activeFilter: null, // null means show all
+            activeFilter: null, // null signifie "tout afficher"
             sortKey: 'statusPriority',
             sortOrder: 'asc',
             allCollections: [],
@@ -497,6 +447,8 @@ export default {
             mobilePage: 0,
             companies: [],
             errors: {},
+            selectedYear: new Date().getFullYear(),
+            loadingYear: false,
             clotureForm: {
                 nb_registered: '',
                 nb_blood_pouch: ''
@@ -521,23 +473,7 @@ export default {
             }
 
             if (this.initialData.collections) {
-                const collectionsGroups = this.initialData.collections;
-                const all = [];
-
-                if (collectionsGroups.ongoing) {
-                    collectionsGroups.ongoing.forEach(c => all.push({ ...c, statusKey: 'ongoing' }));
-                }
-                if (collectionsGroups.to_come) {
-                    collectionsGroups.to_come.forEach(c => all.push({ ...c, statusKey: 'to_come' }));
-                }
-                if (collectionsGroups.past) {
-                    collectionsGroups.past.forEach(c => all.push({ ...c, statusKey: 'past' }));
-                }
-                if (collectionsGroups.to_close) {
-                    collectionsGroups.to_close.forEach(c => all.push({ ...c, statusKey: 'to_close' }));
-                }
-
-                this.allCollections = all;
+                this.parseAndSetCollections(this.initialData.collections, false);
             }
         }
     },
@@ -551,18 +487,24 @@ export default {
         filteredAndSortedCollections() {
             let result = this.allCollections;
 
-            // Filter by status tab
+            // Filtrer par année sélectionnée
+            result = result.filter(c => {
+                const collectionYear = new Date(c.day_start).getFullYear();
+                return collectionYear === this.selectedYear;
+            });
+
+            // Filtrer par statut (En cours, À venir, etc.)
             if (this.activeFilter) {
                 result = result.filter(c => c.statusKey === this.activeFilter);
             }
 
-            // Filter by search
+            // Filtrer par barre de recherche
             if (this.searchQuery) {
                 const query = this.searchQuery.toLowerCase();
                 result = result.filter(c => c.company?.name && c.company.name.toLowerCase().includes(query));
             }
 
-            // Sort by company name or status
+            // Tri par nom d'entreprise ou par priorité de statut
             result = result.sort((a, b) => {
                 if (this.sortKey === 'companyName') {
                     let valA = (a.company?.name || '').toLowerCase();
@@ -572,7 +514,6 @@ export default {
                     if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
                     return 0;
                 } else {
-                    // Default: statusPriority
                     const statusOrder = { 'to_close': 1, 'ongoing': 2, 'to_come': 3, 'past': 4 };
                     let sA = statusOrder[a.statusKey] || 99;
                     let sB = statusOrder[b.statusKey] || 99;
@@ -582,6 +523,14 @@ export default {
 
             return result;
         },
+        availableYears() {
+            const fromData = this.initialData?.availableYears;
+            if (Array.isArray(fromData) && fromData.length > 0) {
+                return [...fromData].sort((a, b) => b - a);
+            }
+            const y = new Date().getFullYear();
+            return [y, y - 1, y - 2, y - 3];
+        },
         getModalBorderClass() {
             if (this.activeTab === 'modifier') return 'border-[#0073e6]';
             if (this.activeTab === 'cloturer') return 'border-[#5C629E]';
@@ -590,30 +539,90 @@ export default {
         },
         canCloseCollection() {
             if (!this.selectedCollecte?.day_end) return false;
-            const endDate = new Date(this.selectedCollecte.day_end);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            endDate.setHours(0, 0, 0, 0);
-            return endDate <= today;
+            if (this.selectedCollecte.statusKey === 'past' || this.selectedCollecte.statusKey === 'to_come') {
+                return false;
+            } else {
+                return true;
+            }
         }
     },
     methods: {
+        // Méthode centralisée pour transformer les groupes de statuts de l'API en tableau plat réactif
+        parseAndSetCollections(collectionsGroups, isUpdateFromApi = false) {
+            const all = [];
+            if (collectionsGroups.ongoing) {
+                collectionsGroups.ongoing.forEach(c => all.push({ ...c, statusKey: 'ongoing' }));
+            }
+            if (collectionsGroups.to_come) {
+                collectionsGroups.to_come.forEach(c => all.push({ ...c, statusKey: 'to_come' }));
+            }
+            if (collectionsGroups.past) {
+                collectionsGroups.past.forEach(c => all.push({ ...c, statusKey: 'past' }));
+            }
+            if (collectionsGroups.to_close) {
+                collectionsGroups.to_close.forEach(c => all.push({ ...c, statusKey: 'to_close' }));
+            }
+
+            if (isUpdateFromApi) {
+                // Remplace les collectes de l'année concernée pour éviter les doublons ou données obsolètes
+                this.allCollections = [
+                    ...this.allCollections.filter(c => new Date(c.day_start).getFullYear() !== this.selectedYear),
+                    ...all
+                ];
+            } else {
+                this.allCollections = all;
+            }
+        },
         toggleFilter(filter) {
             if (this.activeFilter === filter) {
-                this.activeFilter = null; // deselect
+                this.activeFilter = null;
             } else {
                 this.activeFilter = filter;
             }
         },
+        resetFilters() {
+            this.activeFilter = null;
+            this.searchQuery = '';
+            this.selectedYear = new Date().getFullYear();
+            this.mobilePage = 0;
+        },
+        async changeYear() {
+            this.mobilePage = 0;
+            this.loadingYear = true;
+
+            try {
+                const response = await fetch(`/api/collections/${this.selectedYear}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch collections');
+                }
+                const data = {
+                    collections: await response.json(),
+                };
+
+                if (data.collections) {
+                    // Utilisation de la fonction centralisée pour rafraîchir l'affichage
+                    this.parseAndSetCollections(data.collections, true);
+                }
+            } catch (err) {
+                console.error('Error loading collections for year:', this.selectedYear, err);
+            } finally {
+                this.loadingYear = false;
+            }
+        },
         getCoBrandLink(item) {
-            console.log('Generating co-brand link for item:', item);
             if (!item || !item.id) return '';
             const baseUrl = window.location.origin;
             const slug = item.company?.slug || item.company?.name?.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'inconnu';
             return `${baseUrl}/collection/${slug}/${item.id}`;
         },
         async copyToClipboard(text) {
-            console.log('Copying to clipboard:', text);
             if (!text) return;
             try {
                 await navigator.clipboard.writeText(text);
@@ -643,10 +652,10 @@ export default {
         },
         getStatusColor(key) {
             const colors = {
-                'ongoing': 'bg-[#5b6bb9]',   // Purple-ish blue
-                'to_come': 'bg-[#facc15]',   // Yellow
-                'past': 'bg-[#65a30d]',      // Green
-                'to_close': 'bg-[#f87171]'   // Coral/Red
+                'ongoing': 'bg-[#5b6bb9]',
+                'to_come': 'bg-[#87CEEB]',
+                'past': 'bg-black',
+                'to_close': 'bg-[#f87171]'
             };
             return colors[key] || 'bg-gray-500';
         },
@@ -699,36 +708,6 @@ export default {
             if (!dateStr) return '';
             const d = new Date(dateStr);
             return d.toLocaleDateString('fr-CH');
-        },
-        data() {
-            return {
-                searchQuery: '',
-                activeFilter: null, // null means show all
-                sortOrder: 'asc',
-                allCollections: [],
-                activeModal: null,
-                activeTab: 'modifier',
-                selectedCollecte: null,
-                isSaving: false,
-                suppressionInput: '',
-                companies: [],
-                errors: {},
-                clotureForm: {
-                    nb_registered: '',
-                    nb_blood_pouch: ''
-                },
-                detailForm: {
-                    company_id: '',
-                    nb_employee: '',
-                    capacity: '',
-                    day_start: '',
-                    day_end: '',
-                    onedoc_link: '',
-                    location: '',
-                    hour_start: '',
-                    hour_end: ''
-                }
-            }
         },
         getCsrfHeaders() {
             const getCookie = (name) => {
@@ -827,7 +806,6 @@ export default {
                 window.location.reload();
             } catch (err) {
                 console.error(err);
-                // alert("Erreur lors de la clôture.");
             } finally {
                 this.isSaving = false;
             }
@@ -844,7 +822,6 @@ export default {
                 });
                 if (!response.ok) {
                     const data = await response.json();
-                    // For deletion, we don't expect field-level errors, just store message
                     this.errors = { general: [data.message || 'Erreur lors de la suppression.'] };
                     return;
                 }
@@ -856,15 +833,15 @@ export default {
             }
         },
         nextMobilePage() {
-                if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCollections.length) {
-                    this.mobilePage++;
-                }
-            },
-            prevMobilePage() {
-                if (this.mobilePage > 0) {
-                    this.mobilePage--;
-                }
+            if ((this.mobilePage + 1) * 3 < this.filteredAndSortedCollections.length) {
+                this.mobilePage++;
             }
+        },
+        prevMobilePage() {
+            if (this.mobilePage > 0) {
+                this.mobilePage--;
+            }
+        }
     },
     watch: {
         searchQuery() {

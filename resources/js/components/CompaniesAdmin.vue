@@ -4,12 +4,18 @@
 
         <main class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-10 space-y-12">
             <!-- Search Bar -->
-            <div class="relative w-full">
-                <input type="text" v-model="searchQuery" placeholder="Rechercher"
-                    class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
-                <div class="absolute right-4 top-1/2 -translate-y-1/2">
-                    <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
+            <div class="flex gap-3 items-center w-full">
+                <div class="relative flex-1">
+                    <input type="text" v-model="searchQuery" placeholder="Rechercher"
+                        class="w-full border border-gray-400  py-3 px-4 bg-transparent outline-none focus:border-[#0073e6] transition-colors" />
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <img src="/images/Search.svg" alt="Search" class="h-5 w-5" />
+                    </div>
                 </div>
+                <button @click="resetFilters"
+                    class="bg-gray-500 text-[#fffbf1] px-4 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-600 transition-all font-inter font-semibold whitespace-nowrap">
+                    Réinitialiser
+                </button>
             </div>
 
             <!-- Title and Action -->
@@ -112,10 +118,13 @@
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Collectes:</span>
                                     <div class="flex items-center space-x-2">
                                         <div
-                                            class="h-6 w-6 rounded-full bg-[#95d070] flex items-center justify-center text-white text-xs font-bold">
+                                            class="h-6 w-6 rounded-full bg-[#f87171] flex items-center justify-center text-white text-xs font-bold">
                                             {{ company.collections?.to_close || 0 }}</div>
                                         <div
-                                            class="h-6 w-6 rounded-full bg-[#f39c7f] flex items-center justify-center text-white text-xs font-bold">
+                                            class="h-6 w-6 rounded-full bg-[#5b6bb9] flex items-center justify-center text-white text-xs font-bold">
+                                            {{ company.collections?.ongoing || 0 }}</div>
+                                        <div
+                                            class="h-6 w-6 rounded-full bg-[#87CEEB] flex items-center justify-center text-white text-xs font-bold">
                                             {{ company.collections?.to_come || 0 }}</div>
                                         <div
                                             class="h-6 w-6 rounded-full bg-black flex items-center justify-center text-white text-xs font-bold">
@@ -360,6 +369,10 @@ export default {
                 this.sortKey = key;
                 this.sortOrder = 'asc';
             }
+        },
+        resetFilters() {
+            this.searchQuery = '';
+            this.mobilePage = 0;
         },
         openNewCompanyModal() {
             this.editingCompany = null;
