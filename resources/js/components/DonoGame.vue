@@ -55,7 +55,9 @@ export default {
     
     if (this.isMobile) {
         this.canvas.width = window.innerWidth;
-        this.gameSpeed = 4;
+        this.gameSpeed = 4.5;
+        this.player.gravity = 0.8;
+        this.player.jumpPower = -14.5;
     }
     
     this.ctx = this.canvas.getContext('2d');
@@ -125,7 +127,9 @@ export default {
       this.isGameOver = false;
       this.score = 0;
       this.obstacles = [];
-      this.gameSpeed = this.isMobile ? 4 : 6;
+      this.gameSpeed = this.isMobile ? 4.5 : 6;
+      this.player.gravity = this.isMobile ? 0.8 : 1.2;
+      this.player.jumpPower = this.isMobile ? -14.5 : -18;
       this.player.y = this.canvas.height - this.player.height;
       this.player.vy = 0;
       this.player.isGrounded = true;
@@ -170,10 +174,9 @@ export default {
       if (this.obstacleSpawnTimer <= 0) {
         this.spawnObstacle();
         
-        // Calculate dynamic minimum distance based on jump time to ensure fairness
-        // Jump takes ~30 frames. Distance covered = 30 * gameSpeed.
-        // Add 100px for obstacle width and a small margin.
-        const minDistance = (30 * this.gameSpeed) + 100;
+        // Calculate dynamic minimum distance based on real jump time to ensure fairness
+        const jumpFrames = Math.abs(this.player.jumpPower / this.player.gravity) * 2;
+        const minDistance = (jumpFrames * this.gameSpeed) + 100;
         const maxDistance = minDistance + 400 + (Math.random() * 200);
         
         const distanceToNext = minDistance + Math.random() * (maxDistance - minDistance);

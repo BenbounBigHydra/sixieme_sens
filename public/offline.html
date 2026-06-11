@@ -84,7 +84,7 @@
     let animationFrame;
     let lastTime = performance.now();
     const isMobile = window.innerWidth < 768;
-    let gameSpeed = isMobile ? 4 : 6;
+    let gameSpeed = isMobile ? 4.5 : 6;
     let obstacleSpawnTimer = 0;
     let obstacles = [];
     
@@ -99,7 +99,10 @@
     
     const player = {
       x: 50, y: 0, width: 60, height: 60,
-      vy: 0, gravity: 1.2, jumpPower: -18, isGrounded: true
+      vy: 0, 
+      gravity: isMobile ? 0.8 : 1.2, 
+      jumpPower: isMobile ? -14.5 : -18, 
+      isGrounded: true
     };
     player.y = canvas.height - player.height;
 
@@ -156,7 +159,9 @@
       isGameOver = false;
       score = 0;
       obstacles = [];
-      gameSpeed = isMobile ? 4 : 6;
+      gameSpeed = isMobile ? 4.5 : 6;
+      player.gravity = isMobile ? 0.8 : 1.2;
+      player.jumpPower = isMobile ? -14.5 : -18;
       player.y = canvas.height - player.height;
       player.vy = 0;
       player.isGrounded = true;
@@ -213,7 +218,8 @@
       if (obstacleSpawnTimer <= 0) {
         spawnObstacle();
         
-        const minDistance = (30 * gameSpeed) + 100;
+        const jumpFrames = Math.abs(player.jumpPower / player.gravity) * 2;
+        const minDistance = (jumpFrames * gameSpeed) + 100;
         const maxDistance = minDistance + 400 + (Math.random() * 200);
         
         const distanceToNext = minDistance + Math.random() * (maxDistance - minDistance);
