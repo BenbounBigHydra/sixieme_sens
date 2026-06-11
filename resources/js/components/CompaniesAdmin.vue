@@ -473,6 +473,7 @@ export default {
                 const url = new URL(window.location);
                 url.searchParams.delete('action');
                 window.location.replace(url);
+                window.location.reload;
             } catch (error) {
                 alert("Une erreur s'est produite lors de l'enregistrement de l'entreprise.");
                 console.error(error);
