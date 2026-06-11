@@ -26,8 +26,8 @@ Route::get('/418', function () {
 Route::get('/414', function () {
     abort(418);
 });
-Route::get('/dono-game', function () {
-    return view('vitrin.dono-game', ['hideHeaderFooter' => true, 'hideBanner' => true]);
+Route::get('/roby-game', function () {
+    return view('vitrin.roby-game', ['hideHeaderFooter' => true, 'hideBanner' => true]);
 });
 
 // Site co-branding
