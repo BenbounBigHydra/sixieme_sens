@@ -236,7 +236,7 @@
                     </div>
 
                     <!-- Mobile Grid Container -->
-                    <div class="block lg:hidden relative w-[320px] mx-auto mb-4 mt-4">
+                    <div class="block lg:hidden relative w-full max-w-[320px] mx-auto mb-4 mt-4">
                         <!-- Background Grid (Icons) -->
                         <div
                             style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
