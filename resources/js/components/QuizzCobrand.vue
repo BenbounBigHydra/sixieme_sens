@@ -84,7 +84,7 @@
                     Non
                   </button>
                 </div>
-                <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-[13px] md:text-lg">
+                <div v-else-if="selectedAnswer === 'Non'" class="font-inter text-[#4ade80] font-bold text-[11px] sm:text-[13px] md:text-lg">
                   <span v-html="questions[currentQuestionIndex].noText"></span>
                 </div>
               </transition>
