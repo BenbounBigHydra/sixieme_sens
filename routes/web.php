@@ -23,9 +23,6 @@ Route::get('/teapot', function () {
 Route::get('/418', function () {
     abort(418);
 });
-Route::get('/414', function () {
-    abort(418);
-});
 Route::get('/roby-game', function () {
     return view('vitrin.roby-game', ['hideHeaderFooter' => true, 'hideBanner' => true]);
 });
