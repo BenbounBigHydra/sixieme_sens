@@ -26,6 +26,9 @@ import CompaniesAdmin from './components/CompaniesAdmin.vue';
 import CollectionsAdmin from './components/CollectionsAdmin.vue';
 import ResultAdmin from './components/ResultAdmin.vue';
 
+// Importation du composant Jeu Hors-ligne
+import DonoGame from './components/DonoGame.vue';
+
 // Initialisation de l'application Vue
 const app = createApp({});
 
@@ -52,6 +55,9 @@ app.component('dashboard-admin', DashboardAdmin);
 app.component('companies-admin', CompaniesAdmin);
 app.component('collections-admin', CollectionsAdmin);
 app.component('result-admin', ResultAdmin);
+
+// Enregistrement du composant de jeu
+app.component('dono-game', DonoGame);
 
 // Montage de l'application sur l'élément avec l'ID 'app'
 app.mount('#app');
