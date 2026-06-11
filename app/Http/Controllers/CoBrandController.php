@@ -20,7 +20,17 @@ class CoBrandController extends Controller
             return redirect()->route('cobrand.closed', ['company_name' => $company->slug]);
         }
 
-        $initialData = json_encode(['collection' => $collection, 'company' =>  $company]);
+        $previousCollection = Collection::where('company_id', $company->id)
+            ->where('day_end', '<', $collection->day_end)
+            ->where('nb_registered', '!=', null)
+            ->orderBy('day_end', 'desc')
+            ->first();
+
+        $initialData = json_encode([
+            'collection' => $collection,
+            'company' => $company,
+            'previousCollection' => $previousCollection,
+        ]);
 
         return view('cobrand.home', [
             'companyName' => $company['name'],
