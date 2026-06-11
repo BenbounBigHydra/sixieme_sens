@@ -6,15 +6,15 @@
       <button @mousedown.stop="resetGame" @touchstart.stop="resetGame" class="px-6 py-3 bg-[#0073e6] text-white font-['Jersey_20'] text-2xl md:text-3xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">Rejouer</button>
     </div>
     
-    <div class="absolute top-8 left-1/2 -translate-x-1/2 font-['Jersey_20'] text-5xl md:text-6xl text-black">
+    <div class="absolute top-8 w-full text-center font-['Jersey_20'] text-4xl md:text-6xl text-black">
       Score: {{ Math.floor(score) }}
     </div>
 
     <div class="w-full max-w-4xl px-4 flex flex-col items-center">
       <canvas ref="gameCanvas" width="800" height="300" class="border-b-[3px] border-black max-w-full bg-[#fffbf1]"></canvas>
       
-      <div class="mt-8 text-center text-gray-500 font-['Jersey_20'] text-xl md:text-2xl animate-pulse">
-        Appuyez sur Espace ou Cliquez pour sauter
+      <div class="mt-8 text-center text-gray-500 font-['Jersey_20'] text-xl md:text-2xl animate-pulse px-4">
+        {{ isMobile ? 'Cliquez pour sauter' : 'Appuyez sur Espace pour sauter' }}
       </div>
     </div>
   </div>
@@ -46,10 +46,18 @@ export default {
       gameSpeed: 6,
       obstacleSpawnTimer: 0,
       obsImages: {},
+      isMobile: false,
     };
   },
   mounted() {
+    this.isMobile = window.innerWidth < 768;
     this.canvas = this.$refs.gameCanvas;
+    
+    if (this.isMobile) {
+        this.canvas.width = window.innerWidth;
+        this.gameSpeed = 4;
+    }
+    
     this.ctx = this.canvas.getContext('2d');
     this.player.y = this.canvas.height - this.player.height;
     
@@ -117,7 +125,7 @@ export default {
       this.isGameOver = false;
       this.score = 0;
       this.obstacles = [];
-      this.gameSpeed = 6;
+      this.gameSpeed = this.isMobile ? 4 : 6;
       this.player.y = this.canvas.height - this.player.height;
       this.player.vy = 0;
       this.player.isGrounded = true;
