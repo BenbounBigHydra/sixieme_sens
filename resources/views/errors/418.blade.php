@@ -18,16 +18,18 @@
     </style>
 </head>
 <body class="bg-[#fffbf1] text-black font-inter h-full w-full">
-    
+
     <!-- Conteneur principal qui prend toute la hauteur/largeur et centre son contenu -->
     <div class="h-full w-full flex flex-col items-center justify-center p-4">
-        
+
+        <div class="flex-1"></div>
+
         <!-- Le groupe avec la bulle et le robot -->
-        <div class="flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-8">
-            
+        <div class="flex flex-col-reverse flex-1 md:flex-row items-center justify-center gap-6 md:gap-8">
+
             <!-- Roby Teapot -->
             <img src="/images/roby_teapot.png" alt="Roby Teapot" class="h-48 md:h-64 object-contain shrink-0" />
-            
+
             <!-- Speech Bubble (Fixe et petite: w-64 soit 256px) -->
             <div class="relative bg-[#1a81e7] text-white p-5 md:p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-64 z-20">
                 <div class="font-['Jersey_20'] tracking-wide text-4xl leading-none text-left mb-2">
@@ -43,6 +45,12 @@
                 <div class="block md:hidden absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[9px] border-x-transparent border-t-[12px] border-t-[#1a81e7] z-10"></div>
             </div>
 
+        </div>
+        <!-- Bouton retour -->
+        <div class="flex-1">
+            <button onclick="history.back()" class="inline-block bg-[#0073e6] text-white font-['Jersey_20'] text-2xl tracking-wide px-8 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:bg-[#0073e6]/90 transition-all cursor-pointer mt-20">
+                ← Retour
+            </button>
         </div>
     </div>
 
