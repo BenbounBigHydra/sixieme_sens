@@ -138,9 +138,9 @@
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a :href="getCoBrandLink(item)" target="_blank"
-                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
+                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate underline"
                                         :title="getCoBrandLink(item)">
-                                        <span class="md:hidden">Lien Site</span><span class="hidden md:inline">{{ getCoBrandLink(item) }}</span>
+                                        Lien Site
                                     </a>
                                 </div>
 
@@ -153,9 +153,9 @@
                                         <img src="/images/Copy.svg" alt="Copy" class="h-4 w-4" />
                                     </button>
                                     <a v-if="item.onedoc_link" :href="item.onedoc_link" target="_blank"
-                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate hover:underline"
+                                        class="text-xs md:text-[10px] font-inter text-[#0073e6] truncate underline"
                                         :title="item.onedoc_link">
-                                        <span class="md:hidden">Lien One-Doc</span><span class="hidden md:inline">{{ item.onedoc_link }}</span>
+                                        Lien One-Doc
                                     </a>
                                     <span v-else class="text-xs md:text-[10px] font-inter text-gray-400 italic">Aucun
                                         lien</span>

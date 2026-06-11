@@ -169,7 +169,7 @@
             <!-- Title block on the left -->
             <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
               <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-6 origin-center md:origin-left" />
-              <h2 class="font-['Jersey_20'] text-[32px] md:text-[56px] text-black leading-none m-0">Classement {{ currentYear }}</h2>
+              <h2 class="font-['Jersey_20'] text-[32px] md:text-[56px] text-black leading-none m-0">Trophées</h2>
             </div>
 
             <!-- Text block on the right -->
