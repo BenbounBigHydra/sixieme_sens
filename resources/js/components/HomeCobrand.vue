@@ -318,44 +318,161 @@
                             RH</p>
                     </div>
                 </div>
+              </span>
+            </div>
+          </div>
 
-                <!-- Block 2 -->
-                <div
-                    class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
-                    <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
-                        <img :src="thomasImage || '/images/dono_smiling.png'" alt="Thomas"
-                            class="w-20 h-20 md:w-32 md:h-32 xl:w-48 xl:h-48 object-contain"
-                            onerror="this.style.display='none'" />
-                    </div>
-                    <div
-                        class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
-                        <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4"
-                            onerror="this.style.display='none'" />
-                        <p
-                            class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">
-                            Vingt minutes, un peu de jus d'orange, et potentiellement une vie sauvée. Ça remet les
-                            choses en
-                            perspective.</p>
-                        <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Thomas, développeur</p>
-                    </div>
-                </div>
+          <div class="flex justify-center lg:justify-start w-full">
+             <a :href="quizzUrl" class="bg-[#0073e6] text-white px-6 md:px-8 py-2 md:py-3 font-['Inter'] text-sm md:text-lg font-bold border-[2px] md:border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0073e6]/90 transition-all text-center">
+               Donner mon sang
+             </a>
+          </div>
+        </div>
 
-                <!-- Block 3 -->
-                <div
-                    class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
-                    <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
-                        <img :src="anonymeImage || '/images/littleman_blue.png'" alt="Anonyme"
-                            class="w-16 h-16 md:w-24 md:h-24 xl:w-40 xl:h-40 object-contain"
-                            onerror="this.style.display='none'" />
-                    </div>
-                    <div
-                        class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
-                        <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4"
-                            onerror="this.style.display='none'" />
-                        <p
-                            class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">
-                            Je ne savais pas si j'étais éligible. Le quiz m'a rassuré en deux minutes.</p>
-                        <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Collaborateur anonyme</p>
+        <!-- Right Column: Gauge -->
+        <div class="w-full lg:w-1/2 flex flex-col pt-8 lg:pt-0 lg:mt-[52px]">
+          <!-- Desktop Grid Container -->
+          <div class="hidden lg:block relative w-full mb-4">
+             <!-- Background Grid (Icons) -->
+             <div style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px 2px;">
+               <template v-for="i in 150" :key="i">
+                 <a :href="quizzUrl" v-if="i === desktopRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClick">
+                   <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.8]" />
+                   <div v-show="isHovered || isClicked" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-2xl px-4 py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]">
+                     Viens faire le quiz !
+                   </div>
+                 </a>
+                 <img v-else-if="i <= blueCountDesktop" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[2]" />
+                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[2]" />
+               </template>
+             </div>
+
+             <!-- Foreground Overlay Grid (Center White Square) -->
+             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 6px 2px;">
+               <div class="bg-[#fffbf1] ring-8 ring-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 5 / 12; grid-row: 4 / 7;">
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[48px] lg:text-[48px] leading-[0.8] mb-0">{{ livesSaved }}</span>
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-base leading-tight text-center tracking-wide -mt-1 lg:-mt-1">
+                   Potentielles vies<br/>sauvées
+                 </span>
+               </div>
+             </div>
+          </div>
+
+          <!-- Mobile Grid Container -->
+          <div class="block lg:hidden relative w-full max-w-[400px] mx-auto mb-4 mt-4">
+             <!-- Background Grid (Icons) -->
+             <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0px 0px;">
+               <template v-for="i in 32" :key="'mobile-'+i">
+                 <a :href="quizzUrl" v-if="i === mobileRobyIndex" class="relative w-full h-full flex items-center justify-center cursor-pointer" :class="(isHovered || isClicked) ? 'z-40' : 'z-0'" @mouseenter="handleRobotHover(true)" @mouseleave="handleRobotHover(false)" @click="handleRobotClickMobile($event)">
+                   <img src="/images/dono_default.png" alt="Robot" class="w-full h-full object-contain scale-[0.6]" />
+                   <div v-show="isHovered || isClicked" 
+                        class="absolute bottom-full mb-2 bg-[#0073e6] text-white font-['Jersey_20'] tracking-wide text-xl md:text-2xl px-2 py-1 md:px-4 md:py-2 border-2 border-black whitespace-nowrap shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] pointer-events-none z-[100]"
+                        :class="[
+                          // Mobile: align left if on left edge, right if on right edge, otherwise center
+                          (i - 1) % 8 < 3 ? 'max-md:left-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 > 4 ? 'max-md:right-0 max-md:translate-x-0' : '',
+                          (i - 1) % 8 >= 3 && (i - 1) % 8 <= 4 ? 'max-md:left-1/2 max-md:-translate-x-1/2' : ''
+                        ]">
+                     Viens faire le quiz !
+                   </div>
+                 </a>
+                 <img v-else-if="i <= blueCountMobile" src="/images/littleman_blue.png" alt="Blue Person" class="w-full h-auto object-contain scale-[1.5]" />
+                 <img v-else src="/images/littleman_grey.png" alt="Grey Person" class="w-full h-auto object-contain scale-[1.5]" />
+               </template>
+             </div>
+
+             <!-- Foreground Overlay Grid Mobile -->
+             <div class="absolute inset-0 pointer-events-none" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0px 0px;">
+               <div class="bg-[#fffbf1] ring-8 ring-[#fffbf1] flex flex-col items-center justify-center relative z-10 pointer-events-auto" style="grid-column: 3 / 7; grid-row: 2 / 4;">
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[36px] leading-[0.8] mb-0 mt-1">{{ livesSaved }}</span>
+                 <span class="text-[#0073e6] font-['Jersey_20'] text-[12px] leading-tight text-center tracking-wide mt-1">
+                   Potentielles vies<br/>sauvées
+                 </span>
+               </div>
+             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Part 3: Ils témoignent -->
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
+          Ils témoignent
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Block 1 -->
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img :src="marieClaireImage || '/images/dono_smiling.png'" alt="Marie-Claire" class="w-20 h-20 md:w-32 md:h-32 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
+          </div>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">J'avais toujours repoussé. Là, c'était dans les locaux, pendant la pause, j'ai sauté le pas.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Marie-Claire, assistante RH</p>
+          </div>
+        </div>
+
+        <!-- Block 2 -->
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img :src="thomasImage || '/images/dono_smiling.png'" alt="Thomas" class="w-20 h-20 md:w-32 md:h-32 xl:w-48 xl:h-48 object-contain" onerror="this.style.display='none'" />
+          </div>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">Vingt minutes, un peu de jus d'orange, et potentiellement une vie sauvée. Ça remet les choses en perspective.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Thomas, développeur</p>
+          </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="flex flex-row xl:flex-row border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#fffbf1]">
+          <div class="w-1/3 xl:w-1/3 p-2 md:p-4 flex items-center justify-center shrink-0">
+             <img :src="anonymeImage || '/images/littleman_blue.png'" alt="Anonyme" class="w-16 h-16 md:w-24 md:h-24 xl:w-40 xl:h-40 object-contain" onerror="this.style.display='none'" />
+          </div>
+          <div class="w-2/3 xl:w-2/3 bg-[#ffd012] p-4 md:p-6 border-l-[3px] border-black flex flex-col justify-center">
+             <img src="/images/quoteBlack.svg" alt="Quote" class="w-4 h-4 md:w-6 md:h-6 mb-2 md:mb-4" onerror="this.style.display='none'" />
+             <p class="font-['Inter'] text-[13px] md:text-[15px] leading-relaxed text-black font-bold mb-2 md:mb-4 flex-grow">Je ne savais pas si j'étais éligible. Le quiz m'a rassuré en deux minutes.</p>
+             <p class="font-['Inter'] text-[11px] md:text-sm text-black mt-auto">— Collaborateur anonyme</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Part 4: Questions fréquentes -->
+    <section class="max-w-desktop mx-auto px-8 md:px-20 lg:px-32 xl:px-40 py-12 md:py-16 mb-12 md:mb-20 relative z-10">
+      <div class="mb-8 md:mb-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <img src="/images/YellowSquares.png" alt="Squares" class="h-5 md:h-6 w-auto object-contain mb-4 md:mb-6 origin-center md:origin-left" onerror="this.style.display='none'" />
+        <h2 class="font-['Jersey_20'] text-[36px] md:text-[48px] text-black leading-none tracking-wide">
+          Questions fréquentes
+        </h2>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-8 items-start">
+        <!-- FAQ List (Left) -->
+        <div class="w-full lg:w-7/12">
+           <div v-for="(item, index) in faqList" :key="index" class="border-b-[1px] border-[#0073e6]">
+              <button @click="toggleFaq(index)" class="w-full flex items-center justify-between py-3 md:py-6 text-left hover:bg-black/5 transition-colors focus:outline-none">
+                 <span class="font-['Inter'] text-sm md:text-lg pr-4" :class="openFaq === index ? 'font-bold text-[#0073e6]' : 'text-black'">{{ item.q }}</span>
+              </button>
+
+              <!-- Mobile Inline Roby & Answer (Phones only < 768px) -->
+              <div v-if="openFaq === index" class="block md:hidden w-full flex flex-col items-center justify-center gap-3 py-4 relative">
+                <!-- Speech Bubble -->
+                <div class="relative bg-[#1a81e7] text-white p-3 border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm z-20">
+                  <div class="font-['Inter'] text-xs leading-relaxed">
+                    <p>{{ faqList[openFaq].a }}</p>
+                    <div v-if="faqList[openFaq].button" class="mt-4">
+                      <a :href="quizzUrl" class="inline-block bg-white text-[#0073e6] px-4 py-2 font-bold text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 transition-colors">
+                         {{ faqList[openFaq].button }}
+                      </a>
                     </div>
                 </div>
 
