@@ -142,7 +142,7 @@
                 Retourner à l'accueil
               </a>
             </div>
-            
+
             <div v-if="currentQuestionIndex < questions.length - 1" class="mt-3 md:mt-4 text-center md:text-left">
               <a href="#" @click.prevent="continueQuiz" class="font-inter text-[#fffbf1] text-[11px] md:text-base underline hover:text-[#b3d9ff] transition-colors">
                 Continuer le quiz pour le fun
@@ -167,11 +167,11 @@
       </div>
 
       <div class="mt-2 md:mt-8 flex-grow flex flex-col-reverse md:flex-row justify-between items-center relative gap-4 md:gap-12 pb-2 md:pb-4">
-        
+
         <div class="max-w-2xl flex flex-col justify-center relative z-10 w-full md:w-1/2">
           <div class="border-[2px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-5 md:p-8" :style="boxStyle">
             <h2 class="font-jersey text-[32px] sm:text-[36px] md:text-[64px] text-inherit leading-tight mb-1 md:mb-2">
-              On vous attend !
+              On t'attend !
             </h2>
             <h3 class="font-jersey text-[24px] sm:text-[28px] md:text-[40px] text-inherit leading-tight mb-4 md:mb-8">
               plus qu'une étape
