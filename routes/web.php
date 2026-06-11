@@ -26,6 +26,9 @@ Route::get('/418', function () {
 Route::get('/414', function () {
     abort(418);
 });
+Route::get('/dono-game', function () {
+    return view('vitrin.dono-game', ['hideHeaderFooter' => true, 'hideBanner' => true]);
+});
 
 // Site co-branding
 Route::prefix('/collection/{company_name}')->controller(CoBrandController::class)->middleware(TrackCollectionVisit::class)->group(function () {

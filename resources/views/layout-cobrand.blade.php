@@ -28,5 +28,43 @@
             <footer-cobrand :initial-data="{{ $initialData ?? 'null' }}"></footer-cobrand>
         @endif
     </div>
+
+    <!-- Service Worker et Détection Hors-ligne -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+        // Overlay game immediately when connection is lost
+        window.addEventListener('offline', () => {
+            if (!document.getElementById('offline-iframe')) {
+                const iframe = document.createElement('iframe');
+                iframe.id = 'offline-iframe';
+                iframe.src = '/offline.html';
+                iframe.style.position = 'fixed';
+                iframe.style.top = '0';
+                iframe.style.left = '0';
+                iframe.style.width = '100vw';
+                iframe.style.height = '100vh';
+                iframe.style.border = 'none';
+                iframe.style.zIndex = '99999';
+                document.body.appendChild(iframe);
+            }
+        });
+
+        // Remove game when connection is restored
+        window.addEventListener('online', () => {
+            const iframe = document.getElementById('offline-iframe');
+            if (iframe) {
+                iframe.remove();
+            }
+        });
+    </script>
 </body>
 </html>

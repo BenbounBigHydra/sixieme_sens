@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>No Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jersey+20&display=swap');
+    
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      background-color: #fffbf1;
+      font-family: 'Jersey 20', sans-serif;
+      overflow: hidden;
+    }
+    .game-container {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 100%; height: 100%; position: relative;
+    }
+    .score {
+      position: absolute; top: 2rem; left: 50%; transform: translateX(-50%);
+      font-size: 4rem; color: black;
+    }
+    .game-over {
+      position: absolute; inset: 0;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px); z-index: 10;
+    }
+    .game-over.active { display: flex; }
+    .game-over h2 { font-size: 5rem; margin: 0 0 1rem 0; color: black; }
+    .game-over p { font-size: 3rem; margin: 0 0 2rem 0; color: black; }
+    .btn {
+      padding: 0.75rem 1.5rem; background-color: #0073e6; color: white;
+      font-family: 'Jersey 20', sans-serif; font-size: 2rem;
+      border: 2px solid black; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(2px); box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+    }
+    .canvas-wrapper {
+      width: 100%; max-width: 800px; padding: 0 1rem;
+      display: flex; flex-direction: column; align-items: center; box-sizing: border-box;
+    }
+    canvas {
+      border-bottom: 3px solid black; background-color: #fffbf1; max-width: 100%;
+    }
+    .hint {
+      margin-top: 2rem; text-align: center; color: #6b7280;
+      font-size: 1.5rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+  </style>
+</head>
+<body onmousedown="jump()" ontouchstart="jump(event)">
+  <div class="game-container">
+    <div id="gameOverOverlay" class="game-over">
+      <h2>Game Over</h2>
+      <p>Score: <span id="finalScore">0</span></p>
+      <button class="btn" onmousedown="resetGame(event)" ontouchstart="resetGame(event)">Rejouer</button>
+    </div>
+    
+    <div class="score">Score: <span id="scoreDisplay">0</span></div>
+
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas" width="800" height="300"></canvas>
+      <div class="hint">Vous êtes hors ligne. Appuyez sur Espace ou Cliquez pour sauter</div>
+    </div>
+  </div>
+
+  <script>
+    // Game logic in vanilla JS
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const finalScore = document.getElementById('finalScore');
+    const gameOverOverlay = document.getElementById('gameOverOverlay');
+    
+    let isGameOver = false;
+    let score = 0;
+    let animationFrame;
+    let lastTime = performance.now();
+    let gameSpeed = 6;
+    let obstacleSpawnTimer = 0;
+    let obstacles = [];
+    
+    const player = {
+      x: 50, y: 0, width: 60, height: 60,
+      vy: 0, gravity: 1.2, jumpPower: -18, isGrounded: true
+    };
+    player.y = canvas.height - player.height;
+
+    let obsImages = {};
+    const obsUrls = ['/images/Game/Cactus.svg', '/images/Game/Tree.svg', '/images/Game/Bird.svg', '/images/Game/UFO.svg'];
+    let loadedCount = 0;
+    obsUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+      const name = url.split('/').pop().split('.')[0];
+      obsImages[name] = img;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === obsUrls.length) {
+           checkAllImagesLoaded();
+        }
+      };
+    });
+
+    const donoImg = new Image();
+    donoImg.src = '/images/dono_default.png';
+    donoImg.onload = () => {
+      if (donoImg.naturalHeight) {
+        const aspectRatio = donoImg.naturalWidth / donoImg.naturalHeight;
+        player.width = player.height * aspectRatio;
+      }
+      checkAllImagesLoaded();
+    };
+    // Fallback if image fails to load
+    donoImg.onerror = () => checkAllImagesLoaded();
+
+    function checkAllImagesLoaded() {
+      if (Object.keys(obsImages).length === 4) {
+         if (!animationFrame) {
+             startGame();
+         }
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); jump(); }
+    });
+
+    function jump() {
+      if (isGameOver) return;
+      if (player.isGrounded) {
+        player.vy = player.jumpPower;
+        player.isGrounded = false;
+      }
+    }
+
+    function resetGame(e) {
+      if (e) e.stopPropagation();
+      isGameOver = false;
+      score = 0;
+      obstacles = [];
+      gameSpeed = 6;
+      player.y = canvas.height - player.height;
+      player.vy = 0;
+      player.isGrounded = true;
+      gameOverOverlay.classList.remove('active');
+      startGame();
+    }
+
+    function startGame() {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      lastTime = performance.now();
+      gameLoop(lastTime);
+    }
+
+    function spawnObstacle() {
+      const types = ['Cactus', 'Tree', 'Bird', 'UFO'];
+      const type = types[Math.floor(Math.random() * types.length)];
+      const img = obsImages[type];
+      
+      let width = 80;
+      let height = 80;
+      
+      if (type === 'UFO') {
+          height = 160;
+      }
+      
+      if (img && img.naturalHeight) {
+          width = height * (img.naturalWidth / img.naturalHeight);
+      }
+      
+      let y = canvas.height - height + 15;
+      if (type === 'Bird') {
+          y = canvas.height - 145; 
+      } else if (type === 'UFO') {
+          y = canvas.height - 225;
+      }
+      
+      obstacles.push({ x: canvas.width, y: y, width: width, height: height, type: type, passed: false });
+    }
+
+    function update(deltaTime) {
+      const timeScale = Math.min(deltaTime / 16.66, 2);
+      gameSpeed += 0.002 * timeScale;
+
+      player.vy += player.gravity * timeScale;
+      player.y += player.vy * timeScale;
+
+      if (player.y >= canvas.height - player.height) {
+        player.y = canvas.height - player.height;
+        player.vy = 0;
+        player.isGrounded = true;
+      }
+
+      obstacleSpawnTimer -= timeScale;
+      if (obstacleSpawnTimer <= 0) {
+        spawnObstacle();
+        
+        const minDistance = (30 * gameSpeed) + 100;
+        const maxDistance = minDistance + 400 + (Math.random() * 200);
+        
+        const distanceToNext = minDistance + Math.random() * (maxDistance - minDistance);
+        
+        obstacleSpawnTimer = distanceToNext / gameSpeed;
+      }
+
+      for (let i = 0; i < obstacles.length; i++) {
+        let obs = obstacles[i];
+        obs.x -= gameSpeed * timeScale;
+
+        if (!obs.passed && obs.x + obs.width < player.x) {
+            obs.passed = true;
+            score += 1;
+            scoreDisplay.textContent = score;
+        }
+
+        const pLeft = player.x + 15;
+        const pRight = player.x + player.width - 15;
+        const pTop = player.y + 10;
+        const pBottom = player.y + player.height - 5;
+
+        if (pLeft < obs.x + obs.width && pRight > obs.x && pTop < obs.y + obs.height && pBottom > obs.y) {
+          isGameOver = true;
+          finalScore.textContent = score;
+          gameOverOverlay.classList.add('active');
+        }
+      }
+      obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (donoImg.complete && donoImg.naturalWidth !== 0) {
+        ctx.drawImage(donoImg, player.x, player.y, player.width, player.height);
+      } else {
+        ctx.fillStyle = '#0073e6';
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
+
+      for (let obs of obstacles) {
+        const img = obsImages[obs.type];
+        if (img && img.complete && img.naturalWidth !== 0) {
+           ctx.drawImage(img, obs.x, obs.y, obs.width, obs.height);
+        } else {
+           ctx.fillStyle = '#000000';
+           ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+        }
+      }
+    }
+
+    function gameLoop(time) {
+      if (isGameOver) return;
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      update(deltaTime);
+      draw();
+      animationFrame = requestAnimationFrame(gameLoop);
+    }
+  </script>
+</body>
+</html>
