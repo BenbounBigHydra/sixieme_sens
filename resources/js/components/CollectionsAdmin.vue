@@ -14,18 +14,16 @@
                 </div>
             </div>
 
-            <!-- Year Filter -->
-            <div class="flex flex-wrap gap-2 md:gap-4">
-                <button v-for="year in availableYears" :key="year" @click="changeYear(year)"
-                    :class="selectedYear === year ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
-                    :disabled="loadingYear"
-                    class="border px-4 py-2 font-inter text-sm transition-colors w-full md:w-auto disabled:opacity-50">
-                    {{ year }}
-                </button>
-            </div>
-
             <!-- Filters -->
-            <div class="flex flex-wrap gap-2 md:gap-4 md:space-x-0">
+            <div class="flex flex-wrap gap-2 md:gap-4 md:space-x-0 items-stretch">
+                <!-- Year Filter -->
+                <select v-model="selectedYear" @change="changeYear" :disabled="loadingYear"
+                    class="border border-[#0073e6] px-4 py-2 font-inter text-sm bg-[#fffbf1] text-[#0073e6] transition-colors disabled:opacity-50 w-full md:w-auto">
+                    <option v-for="year in availableYears" :key="year" :value="year">
+                        {{ year }}
+                    </option>
+                </select>
+
                 <button @click="toggleFilter('ongoing')"
                     :class="activeFilter === 'ongoing' ? 'bg-[#0073e6] border-[#0073e6] text-[#fffbf1]' : 'bg-transparent border-[#0073e6] text-[#0073e6]'"
                     class="border px-4 py-2  font-inter text-sm transition-colors w-full md:w-auto">
@@ -585,17 +583,15 @@ export default {
         resetFilters() {
             this.activeFilter = null;
             this.searchQuery = '';
+            this.selectedYear = new Date().getFullYear();
             this.mobilePage = 0;
         },
-        async changeYear(year) {
-            if (this.selectedYear === year || this.loadingYear) return;
-
-            this.selectedYear = year;
+        async changeYear() {
             this.mobilePage = 0;
             this.loadingYear = true;
 
             try {
-                const response = await fetch(`/api/collections/${year}`, {
+                const response = await fetch(`/api/collections/${this.selectedYear}`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -615,7 +611,7 @@ export default {
                     this.parseAndSetCollections(data.collections, true);
                 }
             } catch (err) {
-                console.error('Error loading collections for year:', year, err);
+                console.error('Error loading collections for year:', this.selectedYear, err);
             } finally {
                 this.loadingYear = false;
             }

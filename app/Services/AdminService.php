@@ -180,21 +180,25 @@ class AdminService
         // 1. Récupération de toutes les entreprises avec le compte ciblé des collectes
         $companies = Company::with('collections')
             ->withCount([
-            'collections as to_come_count' => function ($query) use ($now) {
-                $query->where('day_end', '>', $now);
-            },
-            'collections as to_close_count' => function ($query) use ($now) {
-                $query->where('day_end', '<', $now)
-                    ->where(function ($q) {
-                        $q->whereNull('nb_registered')->orWhereNull('nb_blood_pouch');
-                    });
-            },
-            'collections as past_count' => function ($query) use ($now) {
-                $query->where('day_end', '<', $now)
-                    ->whereNotNull('nb_registered')
-                    ->whereNotNull('nb_blood_pouch');
-            }
-        ])
+                'collections as to_come_count' => function ($query) use ($now) {
+                    $query->where('day_start', '>', $now);
+                },
+                'collections as ongoing_count' => function ($query) use ($now) {
+                    $query->where('day_start', '<=', $now)
+                        ->where('day_end', '>=', $now);
+                },
+                'collections as to_close_count' => function ($query) use ($now) {
+                    $query->where('day_end', '<', $now)
+                        ->where(function ($q) {
+                            $q->whereNull('nb_registered')->orWhereNull('nb_blood_pouch');
+                        });
+                },
+                'collections as past_count' => function ($query) use ($now) {
+                    $query->where('day_end', '<', $now)
+                        ->whereNotNull('nb_registered')
+                        ->whereNotNull('nb_blood_pouch');
+                }
+            ])
             ->orderBy('name', 'asc')
             ->get();
 
@@ -229,15 +233,15 @@ class AdminService
             $participation = 0;
             $rigueur = 0;
 
-            $pastCollections = $company->collections->filter(function($c) {
+            $pastCollections = $company->collections->filter(function ($c) {
                 return !is_null($c->nb_registered) && !is_null($c->nb_blood_pouch) && $c->nb_employee > 0;
             });
 
             if ($pastCollections->count() > 0) {
-                $participation = $pastCollections->avg(function($c) {
+                $participation = $pastCollections->avg(function ($c) {
                     return $c->nb_blood_pouch / $c->nb_employee;
                 });
-                $rigueur = $pastCollections->avg(function($c) {
+                $rigueur = $pastCollections->avg(function ($c) {
                     return $c->nb_registered > 0 ? ($c->nb_blood_pouch / $c->nb_registered) : 0;
                 });
             }
@@ -264,6 +268,7 @@ class AdminService
                     'to_come'  => $company->to_come_count,
                     'to_close' => $company->to_close_count,
                     'past'     => $company->past_count,
+                    'ongoing'  => $company->ongoing_count,
                 ],
                 'participation' => round($participation, 4),
                 'rigueur'       => round($rigueur, 4),

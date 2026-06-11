@@ -118,8 +118,11 @@
                                     <span class="md:hidden font-bold text-sm text-[#393939]">Collectes:</span>
                                     <div class="flex items-center space-x-2">
                                         <div
-                                            class="h-6 w-6 rounded-full bg-[#95d070] flex items-center justify-center text-white text-xs font-bold">
+                                            class="h-6 w-6 rounded-full bg-[#f87171] flex items-center justify-center text-white text-xs font-bold">
                                             {{ company.collections?.to_close || 0 }}</div>
+                                        <div
+                                            class="h-6 w-6 rounded-full bg-[#5b6bb9] flex items-center justify-center text-white text-xs font-bold">
+                                            {{ company.collections?.ongoing || 0 }}</div>
                                         <div
                                             class="h-6 w-6 rounded-full bg-[#87CEEB] flex items-center justify-center text-white text-xs font-bold">
                                             {{ company.collections?.to_come || 0 }}</div>
