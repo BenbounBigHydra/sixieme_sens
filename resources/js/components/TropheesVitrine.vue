@@ -10,7 +10,7 @@
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-8 origin-center lg:origin-left" />
 
           <h1 class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
-            Trois trophées pour une<br class="hidden md:block" /> mission commune
+            Trois trophées pour une  mission commune
           </h1>
 
           <p class="font-['Inter'] text-lg text-black mb-0 lg:mb-10 max-w-lg">

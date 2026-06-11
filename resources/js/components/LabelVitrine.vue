@@ -7,7 +7,7 @@
         <img src="/images/YellowSquares.png" alt="Squares" class="mx-auto lg:mx-0 h-6 w-auto object-contain mb-6 origin-center lg:origin-left" />
 
         <h1 class="font-['Jersey_20'] text-[36px] md:text-[64px] leading-[1.1] font-normal text-black mb-6 tracking-wide">
-          Le Label Partenaire<br/>du Don, c’est quoi ?
+          Le Label Partenaire du Don, c’est quoi ?
         </h1>
 
         <p class="font-['Inter'] text-sm md:text-base text-black mb-8 leading-relaxed">
@@ -239,7 +239,7 @@ const updateWidth = () => {
 onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWidth);
-    
+
     // Try to heavily cache the next page by making a real background fetch
     fetch('/companies', { priority: 'low' }).catch(() => {});
   }
