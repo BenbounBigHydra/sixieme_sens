@@ -142,9 +142,6 @@
                         class="font-['Inter'] text-sm md:text-lg text-black space-y-4 md:space-y-6 mb-8 md:mb-10 leading-relaxed text-left max-w-[500px] lg:max-w-none">
                         <p>Chaque don de sang peut sauver jusqu'à trois vies. Pas trois fois de suite, trois personnes
                             différentes, le même jour, grâce à toi.</p>
-                        <p>Ton sang est séparé en plusieurs composants : globules rouges, plaquettes, plasma. Chacun
-                            part là où il est le plus nécessaire : un enfant en chimiothérapie, une femme qui vient
-                            d'accoucher, un accidenté en salle d'opération.</p>
                         <p>Les besoins sont constants, c'est pourquoi chaque collecte compte, et chaque donneur aussi.
                         </p>
                     </div>
