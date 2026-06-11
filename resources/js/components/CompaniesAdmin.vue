@@ -48,10 +48,13 @@
                             <span class="font-inter text-sm text-[#393939] mr-2">Collectes</span>
                             <div class="relative group cursor-pointer flex items-center">
                                 <img src="/images/info.svg" alt="Info" class="h-4 w-4" style="filter: brightness(0);" />
-                                <div
-                                    class="absolute left-0 top-full mt-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
-                                    <p class="font-inter text-xs text-black">Vert: à clore, Orange: à venir, Noir:
-                                        passées</p>
+                                <div class="absolute left-0 top-full mt-2 w-[250px] bg-[#fffbf1] border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hidden group-hover:block z-50">
+                                    <div class="flex flex-col items-start space-y-2">
+                                        <span class="flex items-center gap-2"><span class="h-6 w-6 rounded-full bg-[#f87171] flex items-center justify-center text-white text-xs font-bold">X</span> : à clore</span>
+                                        <span class="flex items-center gap-2"><span class="h-6 w-6 rounded-full bg-[#5b6bb9] flex items-center justify-center text-white text-xs font-bold">X</span> : en cours</span>
+                                        <span class="flex items-center gap-2"><span class="h-6 w-6 rounded-full bg-[#87CEEB] flex items-center justify-center text-white text-xs font-bold">X</span> : à venir</span>
+                                        <span class="flex items-center gap-2"><span class="h-6 w-6 rounded-full bg-black flex items-center justify-center text-white text-xs font-bold">X</span> : terminées</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
