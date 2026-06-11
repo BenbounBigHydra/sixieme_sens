@@ -13,9 +13,8 @@
           <img src="/images/YellowSquares.png" alt="Squares" class="h-6 w-auto object-contain mb-8 origin-center lg:origin-left" />
 
           <!-- Main Title -->
-          <h1 class="font-['Jersey_20'] text-[36px] md:text-[56px] xl:text-[64px] leading-[1.1] font-normal text-black mb-10 tracking-wide">
-            Mobilisez votre équipe<br />
-            pour sauver des vies !
+          <h1 class="font-['Jersey_20'] text-[36px] md:text-[56px] lg:text-[48px] xl:text-[56px] 2xl:text-[64px] leading-[1.1] font-normal text-black mb-10 tracking-wide">
+            Mobilisez votre équipe pour sauver des vies !
           </h1>
 
           <!-- Stats Replacement -->
