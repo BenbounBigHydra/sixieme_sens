@@ -9,7 +9,7 @@
           Organiser une collecte
         </h1>
         <p class="font-['Inter'] text-sm md:text-base text-black w-full max-w-4xl leading-relaxed">
-          Pour accueillir une collecte en entreprise, deux conditions sont requises : disposer d'un espace d'au moins 100 m² et avoir réuni plus de 50 promesses de don. La planification doit être initiée au moins 3 mois à l'avance. Remplissez le formulaire ci-dessous et le CTS vous recontactera pour établir le planning ensemble.
+          Pour accueillir une collecte en entreprise, une condition est requise : avoir réuni plus de 50 promesses de don. La planification doit être initiée au moins 3 mois à l'avance. Remplissez le formulaire ci-dessous et le CTS vous recontactera pour établir le planning ensemble.
         </p>
       </div>
 
